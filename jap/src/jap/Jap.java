@@ -5,6 +5,8 @@
  */
 package jap;
 
+import Formularios.FrmLogin;
+
 /**
  *
  * @author Marco
@@ -15,7 +17,9 @@ public class Jap {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        FrmLogin fl=new FrmLogin();
+        fl.show();
+                
     }
     
 }
