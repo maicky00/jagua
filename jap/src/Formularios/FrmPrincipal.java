@@ -18,9 +18,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal() {
         initComponents();
-         this.setLocationRelativeTo(this);
+        this.setLocationRelativeTo(this);
+        this.setExtendedState(MAXIMIZED_BOTH);
     }
-ControlFormularios cf ;
+    ControlFormularios cf;
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,9 +34,16 @@ ControlFormularios cf ;
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,7 +58,10 @@ ControlFormularios cf ;
             .addGap(0, 354, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Archivo");
+        jMenu3.setText("Archivo");
+        jMenuBar1.add(jMenu3);
+
+        jMenu1.setText("Catalogos");
 
         jMenuItem1.setText("Usuarios Sistema");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -59,10 +71,43 @@ ControlFormularios cf ;
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setText("Usuarios");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Medidor");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        jMenuItem4.setText("Corte");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu4.setText("Procesos");
+        jMenuBar1.add(jMenu4);
+
+        jMenu2.setText("Reportes");
         jMenuBar1.add(jMenu2);
+
+        jMenu5.setText("Manual");
+        jMenuBar1.add(jMenu5);
+
+        jMenu6.setText("Ayuda");
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
@@ -82,9 +127,29 @@ ControlFormularios cf ;
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         FrmUsuarioSistema fs = new FrmUsuarioSistema();
-       cf = new ControlFormularios();
+        cf = new ControlFormularios();
         cf.ControlaInstancia(fs);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FrmUsuario us = new FrmUsuario();
+        cf = new ControlFormularios();
+        cf.ControlaInstancia(us);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        FrmMedidor me = new FrmMedidor();
+        cf = new ControlFormularios();
+        cf.ControlaInstancia(me);
+
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        FrmCorte co = new FrmCorte();
+        cf = new ControlFormularios();
+        cf.ControlaInstancia(co);
+
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -125,7 +190,14 @@ ControlFormularios cf ;
     public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }

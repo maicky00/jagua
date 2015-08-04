@@ -6,6 +6,7 @@
 package jap;
 
 import Formularios.FrmLogin;
+import Formularios.FrmPrincipal;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Jap {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        FrmLogin fl=new FrmLogin();
+        FrmPrincipal fl=new FrmPrincipal();
         fl.show();
                 
     }
