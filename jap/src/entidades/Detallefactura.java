@@ -64,15 +64,9 @@ public class Detallefactura implements Serializable {
     @JoinColumn(name = "IDMEDIDOR", referencedColumnName = "IDMEDIDOR")
     @ManyToOne
     private Medidor idmedidor;
-    @JoinColumn(name = "IDPAGOMINGA", referencedColumnName = "IDPAGOMINGA")
-    @ManyToOne
-    private Pagosmingas idpagominga;
     @JoinColumn(name = "IDTARIFAS", referencedColumnName = "IDTARIFAS")
     @ManyToOne
     private Tarifas idtarifas;
-    @JoinColumn(name = "IDOTPAGOS", referencedColumnName = "IDOTPAGOS")
-    @ManyToOne
-    private Otrospagos idotpagos;
     @OneToMany(mappedBy = "iddetallefac")
     private List<Facturas> facturasList;
 
@@ -155,28 +149,12 @@ public class Detallefactura implements Serializable {
         this.idmedidor = idmedidor;
     }
 
-    public Pagosmingas getIdpagominga() {
-        return idpagominga;
-    }
-
-    public void setIdpagominga(Pagosmingas idpagominga) {
-        this.idpagominga = idpagominga;
-    }
-
     public Tarifas getIdtarifas() {
         return idtarifas;
     }
 
     public void setIdtarifas(Tarifas idtarifas) {
         this.idtarifas = idtarifas;
-    }
-
-    public Otrospagos getIdotpagos() {
-        return idotpagos;
-    }
-
-    public void setIdotpagos(Otrospagos idotpagos) {
-        this.idotpagos = idotpagos;
     }
 
     @XmlTransient

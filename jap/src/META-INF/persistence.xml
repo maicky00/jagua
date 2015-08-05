@@ -2,16 +2,17 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="japPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>entidades.Facturas</class>
-    <class>entidades.Mingas</class>
     <class>entidades.Pagosmingas</class>
     <class>entidades.Login</class>
+    <class>entidades.Medidor</class>
     <class>entidades.Corte</class>
     <class>entidades.Tarifas</class>
-    <class>entidades.Otrospagos</class>
     <class>entidades.Detallefactura</class>
-    <class>entidades.Medidor</class>
+    <class>entidades.Facturas</class>
+    <class>entidades.Mingas</class>
     <class>entidades.Usuarios</class>
+    <class>entidades.Otrospagos</class>
+    <class>entidades.Institucion</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistemaagua?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

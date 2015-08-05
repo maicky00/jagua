@@ -7,7 +7,6 @@ package entidades;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,15 +14,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pagosmingas.findByIdpagominga", query = "SELECT p FROM Pagosmingas p WHERE p.idpagominga = :idpagominga"),
     @NamedQuery(name = "Pagosmingas.findByFechapago", query = "SELECT p FROM Pagosmingas p WHERE p.fechapago = :fechapago"),
     @NamedQuery(name = "Pagosmingas.findByNummingas", query = "SELECT p FROM Pagosmingas p WHERE p.nummingas = :nummingas"),
-    @NamedQuery(name = "Pagosmingas.findByValormingas", query = "SELECT p FROM Pagosmingas p WHERE p.valormingas = :valormingas")})
+    @NamedQuery(name = "Pagosmingas.findByValormingas", query = "SELECT p FROM Pagosmingas p WHERE p.valormingas = :valormingas"),
+    @NamedQuery(name = "Pagosmingas.findByObservacion", query = "SELECT p FROM Pagosmingas p WHERE p.observacion = :observacion")})
 public class Pagosmingas implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,11 +52,14 @@ public class Pagosmingas implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "VALORMINGAS")
     private Float valormingas;
+    @Lob
+    @Column(name = "USUARIOACTUAL")
+    private String usuarioactual;
+    @Column(name = "OBSERVACION")
+    private String observacion;
     @JoinColumn(name = "IDMINGA", referencedColumnName = "IDMINGA")
     @ManyToOne
     private Mingas idminga;
-    @OneToMany(mappedBy = "idpagominga")
-    private List<Detallefactura> detallefacturaList;
 
     public Pagosmingas() {
     }
@@ -98,21 +100,28 @@ public class Pagosmingas implements Serializable {
         this.valormingas = valormingas;
     }
 
+    public String getUsuarioactual() {
+        return usuarioactual;
+    }
+
+    public void setUsuarioactual(String usuarioactual) {
+        this.usuarioactual = usuarioactual;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
     public Mingas getIdminga() {
         return idminga;
     }
 
     public void setIdminga(Mingas idminga) {
         this.idminga = idminga;
-    }
-
-    @XmlTransient
-    public List<Detallefactura> getDetallefacturaList() {
-        return detallefacturaList;
-    }
-
-    public void setDetallefacturaList(List<Detallefactura> detallefacturaList) {
-        this.detallefacturaList = detallefacturaList;
     }
 
     @Override

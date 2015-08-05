@@ -6,7 +6,6 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,13 +13,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,7 +30,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Otrospagos.findAll", query = "SELECT o FROM Otrospagos o"),
     @NamedQuery(name = "Otrospagos.findByIdotpagos", query = "SELECT o FROM Otrospagos o WHERE o.idotpagos = :idotpagos"),
-    @NamedQuery(name = "Otrospagos.findByDerconx", query = "SELECT o FROM Otrospagos o WHERE o.derconx = :derconx"),
     @NamedQuery(name = "Otrospagos.findByMulrecx", query = "SELECT o FROM Otrospagos o WHERE o.mulrecx = :mulrecx"),
     @NamedQuery(name = "Otrospagos.findByMultms", query = "SELECT o FROM Otrospagos o WHERE o.multms = :multms"),
     @NamedQuery(name = "Otrospagos.findByInteres", query = "SELECT o FROM Otrospagos o WHERE o.interes = :interes"),
@@ -44,6 +41,7 @@ public class Otrospagos implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDOTPAGOS")
     private Integer idotpagos;
+    @Lob
     @Column(name = "DERCONX")
     private String derconx;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -58,8 +56,6 @@ public class Otrospagos implements Serializable {
     @JoinColumn(name = "IDCORTE", referencedColumnName = "IDCORTE")
     @ManyToOne
     private Corte idcorte;
-    @OneToMany(mappedBy = "idotpagos")
-    private List<Detallefactura> detallefacturaList;
 
     public Otrospagos() {
     }
@@ -122,15 +118,6 @@ public class Otrospagos implements Serializable {
 
     public void setIdcorte(Corte idcorte) {
         this.idcorte = idcorte;
-    }
-
-    @XmlTransient
-    public List<Detallefactura> getDetallefacturaList() {
-        return detallefacturaList;
-    }
-
-    public void setDetallefacturaList(List<Detallefactura> detallefacturaList) {
-        this.detallefacturaList = detallefacturaList;
     }
 
     @Override

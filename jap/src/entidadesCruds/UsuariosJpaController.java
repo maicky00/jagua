@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import entidades.Institucion;
 import entidades.Medidor;
 import entidades.Usuarios;
 import entidadesCruds.exceptions.NonexistentEntityException;
@@ -41,6 +42,11 @@ public class UsuariosJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Institucion idinstitucion = usuarios.getIdinstitucion();
+            if (idinstitucion != null) {
+                idinstitucion = em.getReference(idinstitucion.getClass(), idinstitucion.getIdinstitucion());
+                usuarios.setIdinstitucion(idinstitucion);
+            }
             List<Medidor> attachedMedidorList = new ArrayList<Medidor>();
             for (Medidor medidorListMedidorToAttach : usuarios.getMedidorList()) {
                 medidorListMedidorToAttach = em.getReference(medidorListMedidorToAttach.getClass(), medidorListMedidorToAttach.getIdmedidor());
@@ -48,6 +54,10 @@ public class UsuariosJpaController implements Serializable {
             }
             usuarios.setMedidorList(attachedMedidorList);
             em.persist(usuarios);
+            if (idinstitucion != null) {
+                idinstitucion.getUsuariosList().add(usuarios);
+                idinstitucion = em.merge(idinstitucion);
+            }
             for (Medidor medidorListMedidor : usuarios.getMedidorList()) {
                 Usuarios oldIdusuarioOfMedidorListMedidor = medidorListMedidor.getIdusuario();
                 medidorListMedidor.setIdusuario(usuarios);
@@ -71,8 +81,14 @@ public class UsuariosJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Usuarios persistentUsuarios = em.find(Usuarios.class, usuarios.getIdusuario());
+            Institucion idinstitucionOld = persistentUsuarios.getIdinstitucion();
+            Institucion idinstitucionNew = usuarios.getIdinstitucion();
             List<Medidor> medidorListOld = persistentUsuarios.getMedidorList();
             List<Medidor> medidorListNew = usuarios.getMedidorList();
+            if (idinstitucionNew != null) {
+                idinstitucionNew = em.getReference(idinstitucionNew.getClass(), idinstitucionNew.getIdinstitucion());
+                usuarios.setIdinstitucion(idinstitucionNew);
+            }
             List<Medidor> attachedMedidorListNew = new ArrayList<Medidor>();
             for (Medidor medidorListNewMedidorToAttach : medidorListNew) {
                 medidorListNewMedidorToAttach = em.getReference(medidorListNewMedidorToAttach.getClass(), medidorListNewMedidorToAttach.getIdmedidor());
@@ -81,6 +97,14 @@ public class UsuariosJpaController implements Serializable {
             medidorListNew = attachedMedidorListNew;
             usuarios.setMedidorList(medidorListNew);
             usuarios = em.merge(usuarios);
+            if (idinstitucionOld != null && !idinstitucionOld.equals(idinstitucionNew)) {
+                idinstitucionOld.getUsuariosList().remove(usuarios);
+                idinstitucionOld = em.merge(idinstitucionOld);
+            }
+            if (idinstitucionNew != null && !idinstitucionNew.equals(idinstitucionOld)) {
+                idinstitucionNew.getUsuariosList().add(usuarios);
+                idinstitucionNew = em.merge(idinstitucionNew);
+            }
             for (Medidor medidorListOldMedidor : medidorListOld) {
                 if (!medidorListNew.contains(medidorListOldMedidor)) {
                     medidorListOldMedidor.setIdusuario(null);
@@ -126,6 +150,11 @@ public class UsuariosJpaController implements Serializable {
                 usuarios.getIdusuario();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The usuarios with id " + id + " no longer exists.", enfe);
+            }
+            Institucion idinstitucion = usuarios.getIdinstitucion();
+            if (idinstitucion != null) {
+                idinstitucion.getUsuariosList().remove(usuarios);
+                idinstitucion = em.merge(idinstitucion);
             }
             List<Medidor> medidorList = usuarios.getMedidorList();
             for (Medidor medidorListMedidor : medidorList) {

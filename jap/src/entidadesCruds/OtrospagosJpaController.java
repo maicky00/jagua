@@ -11,10 +11,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Corte;
-import entidades.Detallefactura;
 import entidades.Otrospagos;
 import entidadesCruds.exceptions.NonexistentEntityException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -35,9 +33,6 @@ public class OtrospagosJpaController implements Serializable {
     }
 
     public void create(Otrospagos otrospagos) {
-        if (otrospagos.getDetallefacturaList() == null) {
-            otrospagos.setDetallefacturaList(new ArrayList<Detallefactura>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -47,25 +42,10 @@ public class OtrospagosJpaController implements Serializable {
                 idcorte = em.getReference(idcorte.getClass(), idcorte.getIdcorte());
                 otrospagos.setIdcorte(idcorte);
             }
-            List<Detallefactura> attachedDetallefacturaList = new ArrayList<Detallefactura>();
-            for (Detallefactura detallefacturaListDetallefacturaToAttach : otrospagos.getDetallefacturaList()) {
-                detallefacturaListDetallefacturaToAttach = em.getReference(detallefacturaListDetallefacturaToAttach.getClass(), detallefacturaListDetallefacturaToAttach.getIddetallefac());
-                attachedDetallefacturaList.add(detallefacturaListDetallefacturaToAttach);
-            }
-            otrospagos.setDetallefacturaList(attachedDetallefacturaList);
             em.persist(otrospagos);
             if (idcorte != null) {
                 idcorte.getOtrospagosList().add(otrospagos);
                 idcorte = em.merge(idcorte);
-            }
-            for (Detallefactura detallefacturaListDetallefactura : otrospagos.getDetallefacturaList()) {
-                Otrospagos oldIdotpagosOfDetallefacturaListDetallefactura = detallefacturaListDetallefactura.getIdotpagos();
-                detallefacturaListDetallefactura.setIdotpagos(otrospagos);
-                detallefacturaListDetallefactura = em.merge(detallefacturaListDetallefactura);
-                if (oldIdotpagosOfDetallefacturaListDetallefactura != null) {
-                    oldIdotpagosOfDetallefacturaListDetallefactura.getDetallefacturaList().remove(detallefacturaListDetallefactura);
-                    oldIdotpagosOfDetallefacturaListDetallefactura = em.merge(oldIdotpagosOfDetallefacturaListDetallefactura);
-                }
             }
             em.getTransaction().commit();
         } finally {
@@ -83,19 +63,10 @@ public class OtrospagosJpaController implements Serializable {
             Otrospagos persistentOtrospagos = em.find(Otrospagos.class, otrospagos.getIdotpagos());
             Corte idcorteOld = persistentOtrospagos.getIdcorte();
             Corte idcorteNew = otrospagos.getIdcorte();
-            List<Detallefactura> detallefacturaListOld = persistentOtrospagos.getDetallefacturaList();
-            List<Detallefactura> detallefacturaListNew = otrospagos.getDetallefacturaList();
             if (idcorteNew != null) {
                 idcorteNew = em.getReference(idcorteNew.getClass(), idcorteNew.getIdcorte());
                 otrospagos.setIdcorte(idcorteNew);
             }
-            List<Detallefactura> attachedDetallefacturaListNew = new ArrayList<Detallefactura>();
-            for (Detallefactura detallefacturaListNewDetallefacturaToAttach : detallefacturaListNew) {
-                detallefacturaListNewDetallefacturaToAttach = em.getReference(detallefacturaListNewDetallefacturaToAttach.getClass(), detallefacturaListNewDetallefacturaToAttach.getIddetallefac());
-                attachedDetallefacturaListNew.add(detallefacturaListNewDetallefacturaToAttach);
-            }
-            detallefacturaListNew = attachedDetallefacturaListNew;
-            otrospagos.setDetallefacturaList(detallefacturaListNew);
             otrospagos = em.merge(otrospagos);
             if (idcorteOld != null && !idcorteOld.equals(idcorteNew)) {
                 idcorteOld.getOtrospagosList().remove(otrospagos);
@@ -104,23 +75,6 @@ public class OtrospagosJpaController implements Serializable {
             if (idcorteNew != null && !idcorteNew.equals(idcorteOld)) {
                 idcorteNew.getOtrospagosList().add(otrospagos);
                 idcorteNew = em.merge(idcorteNew);
-            }
-            for (Detallefactura detallefacturaListOldDetallefactura : detallefacturaListOld) {
-                if (!detallefacturaListNew.contains(detallefacturaListOldDetallefactura)) {
-                    detallefacturaListOldDetallefactura.setIdotpagos(null);
-                    detallefacturaListOldDetallefactura = em.merge(detallefacturaListOldDetallefactura);
-                }
-            }
-            for (Detallefactura detallefacturaListNewDetallefactura : detallefacturaListNew) {
-                if (!detallefacturaListOld.contains(detallefacturaListNewDetallefactura)) {
-                    Otrospagos oldIdotpagosOfDetallefacturaListNewDetallefactura = detallefacturaListNewDetallefactura.getIdotpagos();
-                    detallefacturaListNewDetallefactura.setIdotpagos(otrospagos);
-                    detallefacturaListNewDetallefactura = em.merge(detallefacturaListNewDetallefactura);
-                    if (oldIdotpagosOfDetallefacturaListNewDetallefactura != null && !oldIdotpagosOfDetallefacturaListNewDetallefactura.equals(otrospagos)) {
-                        oldIdotpagosOfDetallefacturaListNewDetallefactura.getDetallefacturaList().remove(detallefacturaListNewDetallefactura);
-                        oldIdotpagosOfDetallefacturaListNewDetallefactura = em.merge(oldIdotpagosOfDetallefacturaListNewDetallefactura);
-                    }
-                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -155,11 +109,6 @@ public class OtrospagosJpaController implements Serializable {
             if (idcorte != null) {
                 idcorte.getOtrospagosList().remove(otrospagos);
                 idcorte = em.merge(idcorte);
-            }
-            List<Detallefactura> detallefacturaList = otrospagos.getDetallefacturaList();
-            for (Detallefactura detallefacturaListDetallefactura : detallefacturaList) {
-                detallefacturaListDetallefactura.setIdotpagos(null);
-                detallefacturaListDetallefactura = em.merge(detallefacturaListDetallefactura);
             }
             em.remove(otrospagos);
             em.getTransaction().commit();

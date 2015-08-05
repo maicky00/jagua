@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -44,6 +45,9 @@ public class Tarifas implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "TARBASE")
     private Float tarbase;
+    @Lob
+    @Column(name = "DESCRIPCION")
+    private String descripcion;
     @OneToMany(mappedBy = "idtarifas")
     private List<Detallefactura> detallefacturaList;
 
@@ -76,6 +80,14 @@ public class Tarifas implements Serializable {
 
     public void setTarbase(Float tarbase) {
         this.tarbase = tarbase;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     @XmlTransient

@@ -11,10 +11,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Mingas;
-import entidades.Detallefactura;
 import entidades.Pagosmingas;
 import entidadesCruds.exceptions.NonexistentEntityException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -35,9 +33,6 @@ public class PagosmingasJpaController implements Serializable {
     }
 
     public void create(Pagosmingas pagosmingas) {
-        if (pagosmingas.getDetallefacturaList() == null) {
-            pagosmingas.setDetallefacturaList(new ArrayList<Detallefactura>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -47,25 +42,10 @@ public class PagosmingasJpaController implements Serializable {
                 idminga = em.getReference(idminga.getClass(), idminga.getIdminga());
                 pagosmingas.setIdminga(idminga);
             }
-            List<Detallefactura> attachedDetallefacturaList = new ArrayList<Detallefactura>();
-            for (Detallefactura detallefacturaListDetallefacturaToAttach : pagosmingas.getDetallefacturaList()) {
-                detallefacturaListDetallefacturaToAttach = em.getReference(detallefacturaListDetallefacturaToAttach.getClass(), detallefacturaListDetallefacturaToAttach.getIddetallefac());
-                attachedDetallefacturaList.add(detallefacturaListDetallefacturaToAttach);
-            }
-            pagosmingas.setDetallefacturaList(attachedDetallefacturaList);
             em.persist(pagosmingas);
             if (idminga != null) {
                 idminga.getPagosmingasList().add(pagosmingas);
                 idminga = em.merge(idminga);
-            }
-            for (Detallefactura detallefacturaListDetallefactura : pagosmingas.getDetallefacturaList()) {
-                Pagosmingas oldIdpagomingaOfDetallefacturaListDetallefactura = detallefacturaListDetallefactura.getIdpagominga();
-                detallefacturaListDetallefactura.setIdpagominga(pagosmingas);
-                detallefacturaListDetallefactura = em.merge(detallefacturaListDetallefactura);
-                if (oldIdpagomingaOfDetallefacturaListDetallefactura != null) {
-                    oldIdpagomingaOfDetallefacturaListDetallefactura.getDetallefacturaList().remove(detallefacturaListDetallefactura);
-                    oldIdpagomingaOfDetallefacturaListDetallefactura = em.merge(oldIdpagomingaOfDetallefacturaListDetallefactura);
-                }
             }
             em.getTransaction().commit();
         } finally {
@@ -83,19 +63,10 @@ public class PagosmingasJpaController implements Serializable {
             Pagosmingas persistentPagosmingas = em.find(Pagosmingas.class, pagosmingas.getIdpagominga());
             Mingas idmingaOld = persistentPagosmingas.getIdminga();
             Mingas idmingaNew = pagosmingas.getIdminga();
-            List<Detallefactura> detallefacturaListOld = persistentPagosmingas.getDetallefacturaList();
-            List<Detallefactura> detallefacturaListNew = pagosmingas.getDetallefacturaList();
             if (idmingaNew != null) {
                 idmingaNew = em.getReference(idmingaNew.getClass(), idmingaNew.getIdminga());
                 pagosmingas.setIdminga(idmingaNew);
             }
-            List<Detallefactura> attachedDetallefacturaListNew = new ArrayList<Detallefactura>();
-            for (Detallefactura detallefacturaListNewDetallefacturaToAttach : detallefacturaListNew) {
-                detallefacturaListNewDetallefacturaToAttach = em.getReference(detallefacturaListNewDetallefacturaToAttach.getClass(), detallefacturaListNewDetallefacturaToAttach.getIddetallefac());
-                attachedDetallefacturaListNew.add(detallefacturaListNewDetallefacturaToAttach);
-            }
-            detallefacturaListNew = attachedDetallefacturaListNew;
-            pagosmingas.setDetallefacturaList(detallefacturaListNew);
             pagosmingas = em.merge(pagosmingas);
             if (idmingaOld != null && !idmingaOld.equals(idmingaNew)) {
                 idmingaOld.getPagosmingasList().remove(pagosmingas);
@@ -104,23 +75,6 @@ public class PagosmingasJpaController implements Serializable {
             if (idmingaNew != null && !idmingaNew.equals(idmingaOld)) {
                 idmingaNew.getPagosmingasList().add(pagosmingas);
                 idmingaNew = em.merge(idmingaNew);
-            }
-            for (Detallefactura detallefacturaListOldDetallefactura : detallefacturaListOld) {
-                if (!detallefacturaListNew.contains(detallefacturaListOldDetallefactura)) {
-                    detallefacturaListOldDetallefactura.setIdpagominga(null);
-                    detallefacturaListOldDetallefactura = em.merge(detallefacturaListOldDetallefactura);
-                }
-            }
-            for (Detallefactura detallefacturaListNewDetallefactura : detallefacturaListNew) {
-                if (!detallefacturaListOld.contains(detallefacturaListNewDetallefactura)) {
-                    Pagosmingas oldIdpagomingaOfDetallefacturaListNewDetallefactura = detallefacturaListNewDetallefactura.getIdpagominga();
-                    detallefacturaListNewDetallefactura.setIdpagominga(pagosmingas);
-                    detallefacturaListNewDetallefactura = em.merge(detallefacturaListNewDetallefactura);
-                    if (oldIdpagomingaOfDetallefacturaListNewDetallefactura != null && !oldIdpagomingaOfDetallefacturaListNewDetallefactura.equals(pagosmingas)) {
-                        oldIdpagomingaOfDetallefacturaListNewDetallefactura.getDetallefacturaList().remove(detallefacturaListNewDetallefactura);
-                        oldIdpagomingaOfDetallefacturaListNewDetallefactura = em.merge(oldIdpagomingaOfDetallefacturaListNewDetallefactura);
-                    }
-                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -155,11 +109,6 @@ public class PagosmingasJpaController implements Serializable {
             if (idminga != null) {
                 idminga.getPagosmingasList().remove(pagosmingas);
                 idminga = em.merge(idminga);
-            }
-            List<Detallefactura> detallefacturaList = pagosmingas.getDetallefacturaList();
-            for (Detallefactura detallefacturaListDetallefactura : detallefacturaList) {
-                detallefacturaListDetallefactura.setIdpagominga(null);
-                detallefacturaListDetallefactura = em.merge(detallefacturaListDetallefactura);
             }
             em.remove(pagosmingas);
             em.getTransaction().commit();

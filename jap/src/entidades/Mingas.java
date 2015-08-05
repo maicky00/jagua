@@ -57,6 +57,9 @@ public class Mingas implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "VALORMULTA")
     private Float valormulta;
+    @Lob
+    @Column(name = "DESCRIPCION")
+    private String descripcion;
     @OneToMany(mappedBy = "idminga")
     private List<Pagosmingas> pagosmingasList;
     @JoinColumn(name = "IDMEDIDOR", referencedColumnName = "IDMEDIDOR")
@@ -108,6 +111,14 @@ public class Mingas implements Serializable {
 
     public void setValormulta(Float valormulta) {
         this.valormulta = valormulta;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     @XmlTransient

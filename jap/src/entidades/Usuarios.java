@@ -13,7 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -35,12 +37,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuarios.findByPrimernombre", query = "SELECT u FROM Usuarios u WHERE u.primernombre = :primernombre"),
     @NamedQuery(name = "Usuarios.findBySegundonombre", query = "SELECT u FROM Usuarios u WHERE u.segundonombre = :segundonombre"),
     @NamedQuery(name = "Usuarios.findByPrimerapellido", query = "SELECT u FROM Usuarios u WHERE u.primerapellido = :primerapellido"),
+    @NamedQuery(name = "Usuarios.findBySegundoapellido", query = "SELECT u FROM Usuarios u WHERE u.segundoapellido = :segundoapellido"),
     @NamedQuery(name = "Usuarios.findByApadosn", query = "SELECT u FROM Usuarios u WHERE u.apadosn = :apadosn"),
-    @NamedQuery(name = "Usuarios.findByDireccion", query = "SELECT u FROM Usuarios u WHERE u.direccion = :direccion"),
     @NamedQuery(name = "Usuarios.findByTelefono", query = "SELECT u FROM Usuarios u WHERE u.telefono = :telefono"),
-    @NamedQuery(name = "Usuarios.findByCelular", query = "SELECT u FROM Usuarios u WHERE u.celular = :celular"),
-    @NamedQuery(name = "Usuarios.findBySector", query = "SELECT u FROM Usuarios u WHERE u.sector = :sector"),
-    @NamedQuery(name = "Usuarios.findByReferencia", query = "SELECT u FROM Usuarios u WHERE u.referencia = :referencia")})
+    @NamedQuery(name = "Usuarios.findByCelular", query = "SELECT u FROM Usuarios u WHERE u.celular = :celular")})
 public class Usuarios implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,16 +56,21 @@ public class Usuarios implements Serializable {
     private String segundonombre;
     @Column(name = "PRIMERAPELLIDO")
     private String primerapellido;
+    @Column(name = "SEGUNDOAPELLIDO")
+    private String segundoapellido;
     @Column(name = "APADOSN")
     private String apadosn;
+    @Lob
     @Column(name = "DIRECCION")
     private String direccion;
     @Column(name = "TELEFONO")
     private String telefono;
     @Column(name = "CELULAR")
     private String celular;
+    @Lob
     @Column(name = "SECTOR")
     private String sector;
+    @Lob
     @Column(name = "REFERENCIA")
     private String referencia;
     @Lob
@@ -76,6 +81,9 @@ public class Usuarios implements Serializable {
     private String observacion;
     @OneToMany(mappedBy = "idusuario")
     private List<Medidor> medidorList;
+    @JoinColumn(name = "IDINSTITUCION", referencedColumnName = "IDINSTITUCION")
+    @ManyToOne
+    private Institucion idinstitucion;
 
     public Usuarios() {
     }
@@ -122,6 +130,14 @@ public class Usuarios implements Serializable {
 
     public void setPrimerapellido(String primerapellido) {
         this.primerapellido = primerapellido;
+    }
+
+    public String getSegundoapellido() {
+        return segundoapellido;
+    }
+
+    public void setSegundoapellido(String segundoapellido) {
+        this.segundoapellido = segundoapellido;
     }
 
     public String getApadosn() {
@@ -195,6 +211,14 @@ public class Usuarios implements Serializable {
 
     public void setMedidorList(List<Medidor> medidorList) {
         this.medidorList = medidorList;
+    }
+
+    public Institucion getIdinstitucion() {
+        return idinstitucion;
+    }
+
+    public void setIdinstitucion(Institucion idinstitucion) {
+        this.idinstitucion = idinstitucion;
     }
 
     @Override
