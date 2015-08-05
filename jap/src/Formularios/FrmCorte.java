@@ -361,10 +361,11 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
     private void txtMultaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMultaKeyTyped
         char c = evt.getKeyChar();
-
+        if (((c == ','))) {
+            evt.consume();
+        }
         if (Character.isLetter(c)) {
             getToolkit().beep();
-
             evt.consume();
 
             mensaje.setText("error de ingreso, ingrese digitos");
