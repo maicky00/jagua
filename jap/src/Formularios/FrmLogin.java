@@ -24,6 +24,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
 
     public FrmLogin() {
         initComponents();
+        cl.cargarTablaLogin(jTable1);
     }
 
     private void mostrar() {
@@ -69,7 +70,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         txtClave.setText("");
 
     }
-    String nombres, apellidos, nombreUsuario, clave, tipo, estado;
+    String nombres, apellidos, cedula,nombreUsuario, clave, tipo, estado;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,6 +96,8 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         txtClave = new javax.swing.JPasswordField();
         comboTipo = new org.edisoncor.gui.comboBox.ComboBoxRect();
         comboEstado = new org.edisoncor.gui.comboBox.ComboBoxRect();
+        txtcedula = new javax.swing.JTextField();
+        lblcedula = new javax.swing.JLabel();
         panelTranslucidoComplete21 = new org.edisoncor.gui.panel.PanelTranslucidoComplete2();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -150,6 +153,11 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         comboEstado.setEnabled(false);
         comboEstado.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
 
+        txtcedula.setEnabled(false);
+
+        lblcedula.setForeground(new java.awt.Color(255, 255, 255));
+        lblcedula.setText("Cedula:");
+
         javax.swing.GroupLayout panelTranslucido1Layout = new javax.swing.GroupLayout(panelTranslucido1);
         panelTranslucido1.setLayout(panelTranslucido1Layout);
         panelTranslucido1Layout.setHorizontalGroup(
@@ -163,9 +171,11 @@ public class FrmLogin extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(lblcedula))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelTranslucido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtcedula)
                     .addComponent(txtnombres)
                     .addComponent(txtApellidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
@@ -192,7 +202,11 @@ public class FrmLogin extends javax.swing.JInternalFrame {
                 .addGroup(panelTranslucido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(3, 3, 3)
+                .addGroup(panelTranslucido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblcedula))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelTranslucido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -208,7 +222,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
                 .addGroup(panelTranslucido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -222,10 +236,26 @@ public class FrmLogin extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Buscar:");
+
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField4KeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelTranslucidoComplete21Layout = new javax.swing.GroupLayout(panelTranslucidoComplete21);
         panelTranslucidoComplete21.setLayout(panelTranslucidoComplete21Layout);
@@ -366,6 +396,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         nombres = txtnombres.getText();
         apellidos = txtApellidos.getText();
+        cedula =txtcedula.getText();
         nombreUsuario = txtUsuario.getText();
         clave = txtClave.getText();
         tipo = comboTipo.getSelectedItem().toString();
@@ -377,7 +408,12 @@ public class FrmLogin extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Seleccione el Estado del Usuario", "Información", 1);
 
         } else {
-            cl.guardarLogin(nombres, apellidos, nombreUsuario, clave, tipo, estado);
+            int i = JOptionPane.showConfirmDialog(this, "Gguardar", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                cl.guardarLogin(nombres, apellidos,cedula, nombreUsuario, clave, tipo, estado);
+                cl.cargarTablaLogin(jTable1);
+            }
+
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -390,6 +426,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         clave = txtClave.getText();
         tipo = comboTipo.getSelectedItem().toString();
         estado = comboEstado.getSelectedItem().toString();
+        cedula =txtcedula.getText();
         if (tipo.equals("Seleccione")) {
             JOptionPane.showMessageDialog(null, "Seleccione un Tipo de Usuario", "Información", 1);
 
@@ -397,14 +434,24 @@ public class FrmLogin extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Seleccione el Estado del Usuario", "Información", 1);
 
         } else {
-            cl.modificarLogin(id, nombres, apellidos, nombreUsuario, clave, tipo, estado);
+            int i = JOptionPane.showConfirmDialog(this, "Guardar", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                cl.modificarLogin(id, nombres, apellidos, cedula,nombreUsuario, clave, tipo, estado);
+                cl.cargarTablaLogin(jTable1);
+            }
+
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
-            int id = Integer.valueOf(lblid.getText());
-            cl.eliminarLogin(id);
+            int i = JOptionPane.showConfirmDialog(this, "Desea Eliminar", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                int id = Integer.valueOf(lblid.getText());
+                cl.eliminarLogin(id);
+                cl.cargarTablaLogin(jTable1);
+            }
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se Puede Eliminar", "Información", 1);
 
@@ -419,6 +466,48 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         limpiar();
         ocultar();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        // TODO add your handling code here:
+        try {
+            int n = jTable1.getSelectedRow();
+            lblid.setText(jTable1.getValueAt(n, 0).toString());
+            txtnombres.setText(jTable1.getValueAt(n, 1).toString());
+            txtApellidos.setText(jTable1.getValueAt(n, 2).toString());
+            txtcedula.setText(jTable1.getValueAt(n, 3).toString());
+            txtUsuario.setText(jTable1.getValueAt(n, 4).toString());
+            txtClave.setText(jTable1.getValueAt(n, 5).toString());
+            comboTipo.setSelectedItem(jTable1.getValueAt(n, 6).toString());
+            comboEstado.setSelectedItem(jTable1.getValueAt(n, 7).toString());
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_jTable1KeyReleased
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        try {
+            int n = jTable1.getSelectedRow();
+            lblid.setText(jTable1.getValueAt(n, 0).toString());
+            txtnombres.setText(jTable1.getValueAt(n, 1).toString());
+            txtApellidos.setText(jTable1.getValueAt(n, 2).toString());
+            txtcedula.setText(jTable1.getValueAt(n, 3).toString());
+            txtUsuario.setText(jTable1.getValueAt(n, 4).toString());
+            txtClave.setText(jTable1.getValueAt(n, 5).toString());
+            comboTipo.setSelectedItem(jTable1.getValueAt(n, 6).toString());
+            comboEstado.setSelectedItem(jTable1.getValueAt(n, 7).toString());
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
+        // TODO add your handling code here:
+        try {
+            cl.BuscarApe();
+        } catch (Exception e) {
+        }
+        
+    }//GEN-LAST:event_jTextField4KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -438,8 +527,9 @@ public class FrmLogin extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField4;
+    public static javax.swing.JTable jTable1;
+    public static javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lblcedula;
     private javax.swing.JLabel lblid;
     private org.edisoncor.gui.panel.PanelReflect panelReflect1;
     private org.edisoncor.gui.panel.PanelTranslucido panelTranslucido1;
@@ -447,6 +537,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JPasswordField txtClave;
     private javax.swing.JTextField txtUsuario;
+    private javax.swing.JTextField txtcedula;
     private javax.swing.JTextField txtnombres;
     // End of variables declaration//GEN-END:variables
 }

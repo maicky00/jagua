@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Login.findByIdlogin", query = "SELECT l FROM Login l WHERE l.idlogin = :idlogin"),
     @NamedQuery(name = "Login.findByNombres", query = "SELECT l FROM Login l WHERE l.nombres = :nombres"),
     @NamedQuery(name = "Login.findByApellidos", query = "SELECT l FROM Login l WHERE l.apellidos = :apellidos"),
+    @NamedQuery(name = "Login.findByCedula", query = "SELECT l FROM Login l WHERE l.cedula = :cedula"),
     @NamedQuery(name = "Login.findByUsuario", query = "SELECT l FROM Login l WHERE l.usuario = :usuario"),
     @NamedQuery(name = "Login.findByClave", query = "SELECT l FROM Login l WHERE l.clave = :clave"),
     @NamedQuery(name = "Login.findByTipo", query = "SELECT l FROM Login l WHERE l.tipo = :tipo"),
@@ -44,6 +45,8 @@ public class Login implements Serializable {
     private String nombres;
     @Column(name = "APELLIDOS")
     private String apellidos;
+    @Column(name = "CEDULA")
+    private String cedula;
     @Column(name = "USUARIO")
     private String usuario;
     @Column(name = "CLAVE")
@@ -82,6 +85,14 @@ public class Login implements Serializable {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public String getUsuario() {

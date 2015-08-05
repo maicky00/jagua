@@ -5,6 +5,7 @@
  */
 package Controladores;
 
+import Formularios.FrmLogin;
 import entidades.Login;
 import entidades.Usuarios;
 import entidadesCruds.LoginJpaController;
@@ -14,6 +15,8 @@ import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,12 +26,13 @@ public class classLogin {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("japPU");
     private LoginJpaController loginJpacontrolador = new LoginJpaController(emf);
+    DefaultTableModel modelo;
 
     public List<Login> getLogin() {
         return loginJpacontrolador.findLoginEntities();
     }
 
-    public void guardarLogin(String nombres, String Apellidos, String nombreUsuario, String clave, String tipoRol, String estadoUsuario) {
+    public void guardarLogin(String nombres, String Apellidos, String cedula, String nombreUsuario, String clave, String tipoRol, String estadoUsuario) {
         int i = 0;
         Login usu = new Login();
         try {
@@ -53,20 +57,21 @@ public class classLogin {
                 Login lg = new Login();
                 lg.setNombres(nombres);
                 lg.setApellidos(Apellidos);
+                lg.setCedula(cedula);
                 lg.setUsuario(nombreUsuario);
                 lg.setClave(clave);
                 lg.setTipo(tipoRol);
                 lg.setEstado(estadoUsuario);
                 loginJpacontrolador.create(lg);
                 JOptionPane.showMessageDialog(null, "Usuario Guardado", "Información", 1);
-                    
+
             }
         } catch (Exception e) {
 
         }
     }
 
-    public boolean modificarLogin(int id, String nombres, String Apellidos, String nombreUsuario, String clave, String tipoRol, String estadoUsuario) {
+    public boolean modificarLogin(int id, String nombres, String Apellidos, String cedula, String nombreUsuario, String clave, String tipoRol, String estadoUsuario) {
         int i = 0;
         Login usu = new Login();
 
@@ -94,6 +99,7 @@ public class classLogin {
                     return false;
                 }
                 dat.setNombres(nombres);
+                dat.setCedula(cedula);
                 dat.setApellidos(Apellidos);
                 dat.setUsuario(nombreUsuario);
                 dat.setClave(clave);
@@ -137,7 +143,8 @@ public class classLogin {
         }
         return null;
     }
-     public Login buscarRol(String nombreUsuario, String pasword) {
+
+    public Login buscarRol(String nombreUsuario, String pasword) {
 
         for (Login lg : loginJpacontrolador.findLoginEntities()) {
             if (lg.getUsuario().equals(nombreUsuario) && lg.getClave().equals(pasword)) {
@@ -153,17 +160,121 @@ public class classLogin {
             JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta!.",
                     "Error de Auntetificación", JOptionPane.ERROR_MESSAGE);
             return null;
-        }else
-        if (BuscarUsu.getClave().equals(password) && BuscarUsu.getUsuario().equals(usuario)
+        } else if (BuscarUsu.getClave().equals(password) && BuscarUsu.getUsuario().equals(usuario)
                 && BuscarUsu.getEstado().equals("ACTIVO")) {
             return BuscarUsu;
-        }else
-        if (BuscarUsu.getClave().equals(password) && BuscarUsu.getUsuario().equals(usuario)
+        } else if (BuscarUsu.getClave().equals(password) && BuscarUsu.getUsuario().equals(usuario)
                 && BuscarUsu.getEstado().equals("INACTIVO")) {
             JOptionPane.showMessageDialog(null, "Usuario Inactivo",
                     "Error", JOptionPane.ERROR_MESSAGE);
             return null;
         }
         return null;
+    }
+
+    public void cargarTablaLogin(JTable tabla) {
+        modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[8];
+        modelo.addColumn("Nro");
+        modelo.addColumn("Nombres");
+        modelo.addColumn("Apellidos");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Clave");
+        modelo.addColumn("Tipo De Usuario");
+        modelo.addColumn("Estado de Cuenta");
+        for (Login u : getLogin()) {
+            fila[0] = u.getIdlogin();
+            fila[1] = u.getNombres();
+            fila[2] = u.getApellidos();
+            fila[3] = u.getCedula();
+            fila[4] = u.getUsuario();
+            fila[5] = u.getClave();
+            fila[6] = u.getTipo();
+            fila[7] = u.getEstado();
+            modelo.addRow(fila);
+        }
+    }
+
+    public String elimiEspacio(String m) {
+        String a[] = m.split(" ");
+        String s = "";
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != " ") {
+                s += a[i];
+            }
+        }
+        return s;
+    }
+
+    public boolean buscarApellidos(String inicio) {
+        Login lg = new Login();
+        if (inicio.isEmpty() || inicio.length() > (lg.getApellidos().length()+2)) {
+            return false;
+        }
+        for (int i = 0; i < inicio.length(); ++i) {
+            String r = elimiEspacio(lg.getApellidos());
+            if (inicio.charAt(i) != (r.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean buscarNombres(String inicio) {
+        Login lg = new Login();
+        if (inicio.isEmpty() || inicio.length() > (lg.getNombres().length() + 2)) {
+            return false;
+        }
+        for (int i = 0; i < inicio.length(); ++i) {
+            String r = elimiEspacio(lg.getNombres());
+            if (inicio.charAt(i) != (r.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean buscarCedula(String inicio) {
+        Login lg = new Login();
+        if (inicio.isEmpty() || inicio.length() > (lg.getCedula().length() + 2)) {
+            return false;
+        }
+        for (int i = 0; i < inicio.length(); ++i) {
+            String r = elimiEspacio(lg.getCedula());
+            if (inicio.charAt(i) != (r.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void BuscarApe() {
+        modelo = new DefaultTableModel();
+        FrmLogin.jTable1.setModel(modelo);
+        Object[] fila = new Object[8];
+        modelo.addColumn("Nro");
+        modelo.addColumn("Nombres");
+        modelo.addColumn("Apellidos");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Clave");
+        modelo.addColumn("Tipo De Usuario");
+        modelo.addColumn("Estado de Cuenta");
+
+        for (Login u : getLogin()) {
+            if (buscarApellidos(elimiEspacio(FrmLogin.jTextField4.getText()))) {
+                fila[0] = u.getIdlogin();
+                fila[1] = u.getNombres();
+                fila[2] = u.getApellidos();
+                fila[3] = u.getCedula();
+                fila[4] = u.getUsuario();
+                fila[5] = u.getClave();
+                fila[6] = u.getTipo();
+                fila[7] = u.getEstado();
+                modelo.addRow(fila);
+            }
+        }
     }
 }
