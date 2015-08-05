@@ -5,7 +5,7 @@
  */
 package jap;
 
-import Formularios.FrmLogin;
+import Formularios.Login;
 import Formularios.FrmPrincipal;
 
 /**
