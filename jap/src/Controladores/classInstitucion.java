@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  * @author JC-PC
  */
 public class classInstitucion {
+
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("japPU");
     public InstitucionJpaController institucionJpacontrolador = new InstitucionJpaController(emf);
 
@@ -26,7 +27,7 @@ public class classInstitucion {
         return institucionJpacontrolador.findInstitucionEntities();
     }
 
-    public void guardarUsuarios(String nombreInstitucion) {
+    public void guardarInstitucion(String nombreInstitucion, String direccion, String telefono, String email, String ruc, String celular) {
         int i = 0;
         Institucion usu = new Institucion();
         try {
@@ -44,6 +45,11 @@ public class classInstitucion {
 
                 Institucion dat = new Institucion();
                 dat.setNombreinst(nombreInstitucion);
+                dat.setDireccion(direccion);
+                dat.setTelefono(telefono);
+                dat.setEmail(email);
+                dat.setRuc(ruc);
+                dat.setCelular(celular);
                 institucionJpacontrolador.create(dat);
             }
         } catch (Exception e) {
@@ -51,20 +57,24 @@ public class classInstitucion {
         }
     }
 
-    public boolean modificarInstitucion(String nombreIntitucion) {
+    public boolean modificarInstitucion(int id,String nombreInstitucion, String direccion, String telefono, String email, String ruc, String celular) {
         int i = 0;
         Institucion usu = new Institucion();
 
         try {
 
-
-                Institucion dat = institucionJpacontrolador.findInstitucion(buscarInstitucionNombre(nombreIntitucion).getIdinstitucion());
-                if (dat == null) {
-                    return false;
-                }
-                dat.setNombreinst(nombreIntitucion);
-                institucionJpacontrolador.edit(dat);
-                JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
+            Institucion dat = institucionJpacontrolador.findInstitucion(id);
+            if (dat == null) {
+                return false;
+            }
+            dat.setNombreinst(nombreInstitucion);
+            dat.setDireccion(direccion);
+            dat.setTelefono(telefono);
+            dat.setEmail(email);
+            dat.setRuc(ruc);
+            dat.setCelular(celular);
+            institucionJpacontrolador.edit(dat);
+            JOptionPane.showMessageDialog(null, "Datos Guardados", "Información", 1);
 
         } catch (Exception e) {
         }
@@ -94,7 +104,7 @@ public class classInstitucion {
     public Institucion buscarIdInstitucion(int idInstitucion) {
 
         for (Institucion dat : getInstitucion()) {
-            if (dat.getNombreinst().equals(idInstitucion)) {
+            if (dat.getIdinstitucion().equals(idInstitucion)) {
                 return dat;
             }
         }

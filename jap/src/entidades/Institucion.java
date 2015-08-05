@@ -30,7 +30,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Institucion.findAll", query = "SELECT i FROM Institucion i"),
-    @NamedQuery(name = "Institucion.findByIdinstitucion", query = "SELECT i FROM Institucion i WHERE i.idinstitucion = :idinstitucion")})
+    @NamedQuery(name = "Institucion.findByIdinstitucion", query = "SELECT i FROM Institucion i WHERE i.idinstitucion = :idinstitucion"),
+    @NamedQuery(name = "Institucion.findByTelefono", query = "SELECT i FROM Institucion i WHERE i.telefono = :telefono"),
+    @NamedQuery(name = "Institucion.findByEmail", query = "SELECT i FROM Institucion i WHERE i.email = :email"),
+    @NamedQuery(name = "Institucion.findByRuc", query = "SELECT i FROM Institucion i WHERE i.ruc = :ruc"),
+    @NamedQuery(name = "Institucion.findByCelular", query = "SELECT i FROM Institucion i WHERE i.celular = :celular")})
 public class Institucion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,6 +45,17 @@ public class Institucion implements Serializable {
     @Lob
     @Column(name = "NOMBREINST")
     private String nombreinst;
+    @Lob
+    @Column(name = "DIRECCION")
+    private String direccion;
+    @Column(name = "TELEFONO")
+    private String telefono;
+    @Column(name = "EMAIL")
+    private String email;
+    @Column(name = "RUC")
+    private String ruc;
+    @Column(name = "CELULAR")
+    private String celular;
     @OneToMany(mappedBy = "idinstitucion")
     private List<Usuarios> usuariosList;
 
@@ -65,6 +80,46 @@ public class Institucion implements Serializable {
 
     public void setNombreinst(String nombreinst) {
         this.nombreinst = nombreinst;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
     @XmlTransient
