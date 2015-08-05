@@ -5,6 +5,8 @@
  */
 package Formularios;
 
+import Controladores.ControlFormularios;
+
 /**
  *
  * @author Marco
@@ -16,9 +18,10 @@ public class FrmFactura extends javax.swing.JInternalFrame {
      */
     public FrmFactura() {
         initComponents();
-         //tabla2.setShowGrid(false);
-    tabla2.setShowVerticalLines(true);
+        //tabla2.setShowGrid(false);
+        tabla2.setShowVerticalLines(true);
     }
+    ControlFormularios cf;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,7 +46,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         jTextField4 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtRuc = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -105,6 +108,12 @@ public class FrmFactura extends javax.swing.JInternalFrame {
 
         jLabel8.setText("MEDIDOR:");
 
+        txtRuc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRucKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -123,7 +132,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField5))
+                        .addComponent(txtRuc))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -142,7 +151,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -287,6 +296,16 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyTyped
+
+        if (txtRuc.getText().equals("")) {
+            FrmBusqueda bu = new FrmBusqueda();
+            bu.setVisible(true);
+        }
+
+
+    }//GEN-LAST:event_txtRucKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -311,9 +330,9 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     javax.swing.JTable tabla2;
+    public static javax.swing.JTextField txtRuc;
     // End of variables declaration//GEN-END:variables
 }

@@ -411,7 +411,7 @@ public class FrmPagosMingas extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel mensaje;
     private javax.swing.JTextField txtFechaPago;
-    private javax.swing.JTextField txtIdMinga;
+    public static javax.swing.JTextField txtIdMinga;
     private javax.swing.JTextField txtMingas;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtValor;
