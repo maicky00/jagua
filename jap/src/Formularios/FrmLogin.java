@@ -419,6 +419,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
+        mostrar();
         int id = Integer.valueOf(lblid.getText());
         nombres = txtnombres.getText();
         apellidos = txtApellidos.getText();

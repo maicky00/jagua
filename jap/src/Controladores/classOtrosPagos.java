@@ -41,6 +41,7 @@ public class classOtrosPagos {
             dat.setInteres(interes);
             dat.setSerie(serie);
             otrospagosJpacontrolador.create(dat);
+            JOptionPane.showMessageDialog(null, "Pago realizado corectamente");
 
         } catch (Exception e) {
 
