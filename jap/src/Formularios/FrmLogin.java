@@ -33,6 +33,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         txtApellidos.setEnabled(true);
         txtUsuario.setEnabled(true);
         txtClave.setEnabled(true);
+        txtcedula.setEnabled(true);
 
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(false);
@@ -51,6 +52,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         txtApellidos.setEnabled(false);
         txtUsuario.setEnabled(false);
         txtClave.setEnabled(false);
+        txtcedula.setEnabled(false);
 
         btnGuardar.setEnabled(false);
         btnEditar.setEnabled(true);
@@ -68,6 +70,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         txtApellidos.setText("");
         txtUsuario.setText("");
         txtClave.setText("");
+        txtcedula.setText("");
 
     }
     String nombres, apellidos, cedula,nombreUsuario, clave, tipo, estado;
@@ -202,11 +205,11 @@ public class FrmLogin extends javax.swing.JInternalFrame {
                 .addGroup(panelTranslucido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelTranslucido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtcedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblcedula))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelTranslucido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -222,7 +225,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
                 .addGroup(panelTranslucido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
