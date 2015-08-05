@@ -58,6 +58,8 @@ public class classLogin {
                 lg.setTipo(tipoRol);
                 lg.setEstado(estadoUsuario);
                 loginJpacontrolador.create(lg);
+                JOptionPane.showMessageDialog(null, "Usuario Guardado", "Información", 1);
+                    
             }
         } catch (Exception e) {
 
