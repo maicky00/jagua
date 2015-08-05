@@ -25,6 +25,50 @@ public class FrmLogin extends javax.swing.JInternalFrame {
     public FrmLogin() {
         initComponents();
     }
+
+    private void mostrar() {
+
+        txtnombres.setEnabled(true);
+        txtApellidos.setEnabled(true);
+        txtUsuario.setEnabled(true);
+        txtClave.setEnabled(true);
+
+        btnGuardar.setEnabled(true);
+        btnEditar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnCancelar.setEnabled(true);
+        comboTipo.setEnabled(true);
+        comboEstado.setEnabled(true);
+        comboTipo.setSelectedIndex(0);
+        comboEstado.setSelectedIndex(0);
+
+    }
+
+    private void ocultar() {
+
+        txtnombres.setEnabled(false);
+        txtApellidos.setEnabled(false);
+        txtUsuario.setEnabled(false);
+        txtClave.setEnabled(false);
+
+        btnGuardar.setEnabled(false);
+        btnEditar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+        btnCancelar.setEnabled(false);
+        comboTipo.setEnabled(false);
+        comboEstado.setEnabled(false);
+        comboTipo.setSelectedIndex(0);
+        comboEstado.setSelectedIndex(0);
+    }
+
+    private void limpiar() {
+        lblid.setText("");
+        txtnombres.setText("");
+        txtApellidos.setText("");
+        txtUsuario.setText("");
+        txtClave.setText("");
+
+    }
     String nombres, apellidos, nombreUsuario, clave, tipo, estado;
 
     /**
@@ -49,19 +93,19 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         txtApellidos = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
         txtClave = new javax.swing.JPasswordField();
-        txtTipo = new org.edisoncor.gui.comboBox.ComboBoxRect();
-        txtEstado = new org.edisoncor.gui.comboBox.ComboBoxRect();
+        comboTipo = new org.edisoncor.gui.comboBox.ComboBoxRect();
+        comboEstado = new org.edisoncor.gui.comboBox.ComboBoxRect();
         panelTranslucidoComplete21 = new org.edisoncor.gui.panel.PanelTranslucidoComplete2();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         panelReflect1 = new org.edisoncor.gui.panel.PanelReflect();
-        buttonAero1 = new org.edisoncor.gui.button.ButtonAero();
-        buttonAero2 = new org.edisoncor.gui.button.ButtonAero();
-        buttonAero3 = new org.edisoncor.gui.button.ButtonAero();
-        buttonAero4 = new org.edisoncor.gui.button.ButtonAero();
-        buttonAero5 = new org.edisoncor.gui.button.ButtonAero();
+        btnNuevo = new org.edisoncor.gui.button.ButtonAero();
+        btnGuardar = new org.edisoncor.gui.button.ButtonAero();
+        btnEditar = new org.edisoncor.gui.button.ButtonAero();
+        btnEliminar = new org.edisoncor.gui.button.ButtonAero();
+        btnCancelar = new org.edisoncor.gui.button.ButtonAero();
 
         setClosable(true);
         setIconifiable(true);
@@ -90,13 +134,21 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Estado");
 
-        txtTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Administrador", "Usuario", "Invitado" }));
-        txtTipo.setEnabled(false);
-        txtTipo.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        txtnombres.setEnabled(false);
 
-        txtEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Activo", "Pasivo" }));
-        txtEstado.setEnabled(false);
-        txtEstado.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        txtApellidos.setEnabled(false);
+
+        txtUsuario.setEnabled(false);
+
+        txtClave.setEnabled(false);
+
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "ADMINISTRADOR", "INVITADO" }));
+        comboTipo.setEnabled(false);
+        comboTipo.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+
+        comboEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "ACTIVO", "INACTIVO" }));
+        comboEstado.setEnabled(false);
+        comboEstado.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
 
         javax.swing.GroupLayout panelTranslucido1Layout = new javax.swing.GroupLayout(panelTranslucido1);
         panelTranslucido1.setLayout(panelTranslucido1Layout);
@@ -118,8 +170,8 @@ public class FrmLogin extends javax.swing.JInternalFrame {
                     .addComponent(txtApellidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                     .addComponent(txtClave)
-                    .addComponent(txtTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtEstado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboEstado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelTranslucido1Layout.createSequentialGroup()
                         .addComponent(lblid, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -151,11 +203,11 @@ public class FrmLogin extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelTranslucido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addGroup(panelTranslucido1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(209, Short.MAX_VALUE))
         );
 
@@ -203,40 +255,52 @@ public class FrmLogin extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        buttonAero1.setBackground(new java.awt.Color(102, 0, 0));
-        buttonAero1.setText("NUEVO");
-        buttonAero1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        buttonAero2.setBackground(new java.awt.Color(102, 0, 0));
-        buttonAero2.setText("GUARDAR");
-        buttonAero2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        buttonAero2.addActionListener(new java.awt.event.ActionListener() {
+        btnNuevo.setBackground(new java.awt.Color(102, 0, 0));
+        btnNuevo.setText("NUEVO");
+        btnNuevo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAero2ActionPerformed(evt);
+                btnNuevoActionPerformed(evt);
             }
         });
 
-        buttonAero3.setBackground(new java.awt.Color(102, 0, 0));
-        buttonAero3.setText("EDITAR");
-        buttonAero3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        buttonAero3.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setBackground(new java.awt.Color(102, 0, 0));
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.setEnabled(false);
+        btnGuardar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAero3ActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
 
-        buttonAero4.setBackground(new java.awt.Color(102, 0, 0));
-        buttonAero4.setText("ELIMINAR");
-        buttonAero4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        buttonAero4.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setBackground(new java.awt.Color(102, 0, 0));
+        btnEditar.setText("EDITAR");
+        btnEditar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAero4ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
-        buttonAero5.setBackground(new java.awt.Color(102, 0, 0));
-        buttonAero5.setText("CANCELAR");
-        buttonAero5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnEliminar.setBackground(new java.awt.Color(102, 0, 0));
+        btnEliminar.setText("ELIMINAR");
+        btnEliminar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setBackground(new java.awt.Color(102, 0, 0));
+        btnCancelar.setText("CANCELAR");
+        btnCancelar.setEnabled(false);
+        btnCancelar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelReflect1Layout = new javax.swing.GroupLayout(panelReflect1);
         panelReflect1.setLayout(panelReflect1Layout);
@@ -244,15 +308,15 @@ public class FrmLogin extends javax.swing.JInternalFrame {
             panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelReflect1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(buttonAero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonAero2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonAero3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonAero4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(buttonAero5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelReflect1Layout.setVerticalGroup(
@@ -260,11 +324,11 @@ public class FrmLogin extends javax.swing.JInternalFrame {
             .addGroup(panelReflect1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonAero2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonAero3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonAero4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonAero5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -298,14 +362,14 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonAero2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAero2ActionPerformed
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         nombres = txtnombres.getText();
         apellidos = txtApellidos.getText();
         nombreUsuario = txtUsuario.getText();
         clave = txtClave.getText();
-        tipo = txtTipo.getSelectedItem().toString();
-        estado = txtEstado.getSelectedItem().toString();
+        tipo = comboTipo.getSelectedItem().toString();
+        estado = comboEstado.getSelectedItem().toString();
         if (tipo.equals("Seleccione")) {
             JOptionPane.showMessageDialog(null, "Seleccione un Tipo de Usuario", "Información", 1);
 
@@ -315,17 +379,17 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         } else {
             cl.guardarLogin(nombres, apellidos, nombreUsuario, clave, tipo, estado);
         }
-    }//GEN-LAST:event_buttonAero2ActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void buttonAero3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAero3ActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         int id = Integer.valueOf(lblid.getText());
         nombres = txtnombres.getText();
         apellidos = txtApellidos.getText();
         nombreUsuario = txtUsuario.getText();
         clave = txtClave.getText();
-        tipo = txtTipo.getSelectedItem().toString();
-        estado = txtEstado.getSelectedItem().toString();
+        tipo = comboTipo.getSelectedItem().toString();
+        estado = comboEstado.getSelectedItem().toString();
         if (tipo.equals("Seleccione")) {
             JOptionPane.showMessageDialog(null, "Seleccione un Tipo de Usuario", "Información", 1);
 
@@ -335,9 +399,9 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         } else {
             cl.modificarLogin(id, nombres, apellidos, nombreUsuario, clave, tipo, estado);
         }
-    }//GEN-LAST:event_buttonAero3ActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void buttonAero4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAero4ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
             int id = Integer.valueOf(lblid.getText());
             cl.eliminarLogin(id);
@@ -345,15 +409,26 @@ public class FrmLogin extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "No se Puede Eliminar", "Información", 1);
 
         }
-    }//GEN-LAST:event_buttonAero4ActionPerformed
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        mostrar();
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        limpiar();
+        ocultar();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.edisoncor.gui.button.ButtonAero buttonAero1;
-    private org.edisoncor.gui.button.ButtonAero buttonAero2;
-    private org.edisoncor.gui.button.ButtonAero buttonAero3;
-    private org.edisoncor.gui.button.ButtonAero buttonAero4;
-    private org.edisoncor.gui.button.ButtonAero buttonAero5;
+    private org.edisoncor.gui.button.ButtonAero btnCancelar;
+    private org.edisoncor.gui.button.ButtonAero btnEditar;
+    private org.edisoncor.gui.button.ButtonAero btnEliminar;
+    private org.edisoncor.gui.button.ButtonAero btnGuardar;
+    private org.edisoncor.gui.button.ButtonAero btnNuevo;
+    private org.edisoncor.gui.comboBox.ComboBoxRect comboEstado;
+    private org.edisoncor.gui.comboBox.ComboBoxRect comboTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -371,8 +446,6 @@ public class FrmLogin extends javax.swing.JInternalFrame {
     private org.edisoncor.gui.panel.PanelTranslucidoComplete2 panelTranslucidoComplete21;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JPasswordField txtClave;
-    private org.edisoncor.gui.comboBox.ComboBoxRect txtEstado;
-    private org.edisoncor.gui.comboBox.ComboBoxRect txtTipo;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtnombres;
     // End of variables declaration//GEN-END:variables

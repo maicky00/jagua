@@ -54,26 +54,12 @@ public class classTarifas {
         }
     }
 
-    public boolean modificarTarifa(int base, float tarBase, String descripcion) {
-        int i = 0;
-        Tarifas usu = new Tarifas();
+    public boolean modificarTarifa(int id,int base, float tarBase, String descripcion) {
+
 
         try {
-            for (Tarifas us : getTarifas()) {
-                if (us.getDescripcion().equals(descripcion)) {
-                    i = 1;
-                    usu = us;
-                    break;
-                }
-            }
-            if (i == 1) {
-
-                JOptionPane.showMessageDialog(null, "Descripcion Existente", "Información", 1);
-                usu = null;
-
-            } else {
-
-                Tarifas dat = tarifasJpacontrolador.findTarifas(buscarTarifaDescrip(descripcion).getIdtarifas());
+            
+                Tarifas dat = tarifasJpacontrolador.findTarifas(id);
                 if (dat == null) {
                     return false;
                 }
@@ -83,7 +69,7 @@ public class classTarifas {
                 tarifasJpacontrolador.edit(dat);
                 JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
 
-            }
+            
         } catch (Exception e) {
         }
         return true;
