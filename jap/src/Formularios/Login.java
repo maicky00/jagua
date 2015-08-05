@@ -5,6 +5,8 @@
  */
 package Formularios;
 
+import Controladores.classLogin;
+
 /**
  *
  * @author JC-PC
@@ -18,6 +20,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
     }
+    classLogin cl = new classLogin();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,6 +32,8 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonAqua1 = new org.edisoncor.gui.button.ButtonAqua();
+        txtusuario = new javax.swing.JTextField();
+        txtclave = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,17 +49,27 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(198, Short.MAX_VALUE)
                 .addComponent(buttonAqua1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(241, Short.MAX_VALUE))
+                .addGap(99, 99, 99))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(185, 185, 185)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtusuario)
+                    .addComponent(txtclave, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(316, Short.MAX_VALUE)
+                .addGap(79, 79, 79)
+                .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(txtclave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(buttonAqua1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -62,9 +77,16 @@ public class Login extends javax.swing.JFrame {
 
     private void buttonAqua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAqua1ActionPerformed
         // TODO add your handling code here:
-        FrmPrincipal fp=new FrmPrincipal();
-        fp.show();
-        this.dispose();
+        FrmPrincipal fp = new FrmPrincipal();
+        String usuario = txtusuario.getText();
+        String password = new String(txtclave.getPassword());
+        entidades.Login validarUsuario = cl.validarUsuario(usuario, password);
+        if (validarUsuario == null) {
+
+        } else {
+            fp.show();
+            this.dispose();
+        }
     }//GEN-LAST:event_buttonAqua1ActionPerformed
 
     /**
@@ -105,5 +127,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonAqua buttonAqua1;
+    private javax.swing.JPasswordField txtclave;
+    private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
 }
