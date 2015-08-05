@@ -6,6 +6,7 @@
 package Controladores;
 
 import entidades.Corte;
+import entidades.Login;
 import entidades.Otrospagos;
 import entidadesCruds.OtrospagosJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
@@ -14,6 +15,8 @@ import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +27,7 @@ public class classOtrosPagos {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("japPU");
     private OtrospagosJpaController otrospagosJpacontrolador = new OtrospagosJpaController(emf);
     classCorte cc = new classCorte();
+    DefaultTableModel modelo;
 
     public List<Otrospagos> getOtrospagos() {
         return otrospagosJpacontrolador.findOtrospagosEntities();
@@ -48,6 +52,29 @@ public class classOtrosPagos {
         }
     }
 
+    public void cargarTablaLogin(JTable tabla) {
+        modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[8];
+        modelo.addColumn("Nro");
+        modelo.addColumn("Nombres");
+        modelo.addColumn("Apellidos");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Clave");
+        modelo.addColumn("Tipo De Usuario");
+        modelo.addColumn("Estado de Cuenta");
+        for (Otrospagos o : getOtrospagos()) {
+            
+            fila[0] = o.getIdcorte();
+            fila[1] = o.getDerconx();
+            fila[2] = o.getMulrecx();
+            fila[3] = o.getMultms();
+            fila[4] = o.getInteres();
+            fila[5] = o.getSerie();
+            modelo.addRow(fila);
+        }
+    }
     public boolean modificarOtrospagos(int idOtrospagos, int idcorte, String derConx, float mulRecx, float multMS, float interes, String serie) {
 
         try {

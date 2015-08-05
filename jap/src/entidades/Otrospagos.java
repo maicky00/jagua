@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Otrospagos.findByMulrecx", query = "SELECT o FROM Otrospagos o WHERE o.mulrecx = :mulrecx"),
     @NamedQuery(name = "Otrospagos.findByMultms", query = "SELECT o FROM Otrospagos o WHERE o.multms = :multms"),
     @NamedQuery(name = "Otrospagos.findByInteres", query = "SELECT o FROM Otrospagos o WHERE o.interes = :interes"),
+    
+    @NamedQuery(name = "Otrospagos.findUsuario", query = "SELECT u.primernombre FROM usuarios u, medidor m,corte c,otrospagos o where u.idusuario=m.idusuario and m.idMedidor=c.idmedidor and c.idcorte=o.idcorte;"),
+    
     @NamedQuery(name = "Otrospagos.findBySerie", query = "SELECT o FROM Otrospagos o WHERE o.serie = :serie")})
 public class Otrospagos implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -144,5 +147,7 @@ public class Otrospagos implements Serializable {
     public String toString() {
         return "entidades.Otrospagos[ idotpagos=" + idotpagos + " ]";
     }
+    
+    
     
 }
