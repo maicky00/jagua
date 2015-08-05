@@ -73,7 +73,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         txtcedula.setText("");
 
     }
-    String nombres, apellidos, cedula,nombreUsuario, clave, tipo, estado;
+    String nombres, apellidos, cedula, nombreUsuario, clave, tipo, estado;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -399,52 +399,50 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         nombres = txtnombres.getText();
         apellidos = txtApellidos.getText();
-        cedula =txtcedula.getText();
+        cedula = txtcedula.getText();
         nombreUsuario = txtUsuario.getText();
         clave = txtClave.getText();
         tipo = comboTipo.getSelectedItem().toString();
         estado = comboEstado.getSelectedItem().toString();
-        if (tipo.equals("Seleccione")) {
-            JOptionPane.showMessageDialog(null, "Seleccione un Tipo de Usuario", "Información", 1);
 
-        } else if (estado.equals("Seleccione")) {
-            JOptionPane.showMessageDialog(null, "Seleccione el Estado del Usuario", "Información", 1);
+        if (lblid.getText().equals("")) {
+            if (tipo.equals("Seleccione")) {
+                JOptionPane.showMessageDialog(null, "Seleccione un Tipo de Usuario", "Información", 1);
 
-        } else {
-            int i = JOptionPane.showConfirmDialog(this, "Gguardar", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                cl.guardarLogin(nombres, apellidos,cedula, nombreUsuario, clave, tipo, estado);
-                cl.cargarTablaLogin(jTable1);
+            } else if (estado.equals("Seleccione")) {
+                JOptionPane.showMessageDialog(null, "Seleccione el Estado del Usuario", "Información", 1);
+
+            } else {
+                int i = JOptionPane.showConfirmDialog(this, "Gguardar", "Confirmar", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    cl.guardarLogin(nombres, apellidos, cedula, nombreUsuario, clave, tipo, estado);
+                    cl.cargarTablaLogin(jTable1);
+                }
+
             }
+        } else if (!lblid.getText().equals("")) {
+            int id = Integer.valueOf(lblid.getText());
+            if (tipo.equals("Seleccione")) {
+                JOptionPane.showMessageDialog(null, "Seleccione un Tipo de Usuario", "Información", 1);
 
+            } else if (estado.equals("Seleccione")) {
+                JOptionPane.showMessageDialog(null, "Seleccione el Estado del Usuario", "Información", 1);
+
+            } else {
+                int i = JOptionPane.showConfirmDialog(this, "Guardar", "Confirmar", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    cl.modificarLogin(id, nombres, apellidos, cedula, nombreUsuario, clave, tipo, estado);
+                    cl.cargarTablaLogin(jTable1);
+                }
+
+            }
         }
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         mostrar();
-        int id = Integer.valueOf(lblid.getText());
-        nombres = txtnombres.getText();
-        apellidos = txtApellidos.getText();
-        nombreUsuario = txtUsuario.getText();
-        clave = txtClave.getText();
-        tipo = comboTipo.getSelectedItem().toString();
-        estado = comboEstado.getSelectedItem().toString();
-        cedula =txtcedula.getText();
-        if (tipo.equals("Seleccione")) {
-            JOptionPane.showMessageDialog(null, "Seleccione un Tipo de Usuario", "Información", 1);
-
-        } else if (estado.equals("Seleccione")) {
-            JOptionPane.showMessageDialog(null, "Seleccione el Estado del Usuario", "Información", 1);
-
-        } else {
-            int i = JOptionPane.showConfirmDialog(this, "Guardar", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                cl.modificarLogin(id, nombres, apellidos, cedula,nombreUsuario, clave, tipo, estado);
-                cl.cargarTablaLogin(jTable1);
-            }
-
-        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -464,6 +462,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         mostrar();
+        limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -510,7 +509,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
             cl.BuscarApe();
         } catch (Exception e) {
         }
-        
+
     }//GEN-LAST:event_jTextField4KeyReleased
 
 

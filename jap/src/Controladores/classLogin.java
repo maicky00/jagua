@@ -72,27 +72,10 @@ public class classLogin {
     }
 
     public boolean modificarLogin(int id, String nombres, String Apellidos, String cedula, String nombreUsuario, String clave, String tipoRol, String estadoUsuario) {
-        int i = 0;
-        Login usu = new Login();
+
 
         try {
-            for (Login us : getLogin()) {
-                if (us.getUsuario().equals(nombreUsuario)) {
-                    i = 1;
-                    usu = us;
-                    break;
-                }
-            }
-            if (i == 1) {
-
-                if (usu.getEstado().equals("INACTIVO")) {
-                    JOptionPane.showMessageDialog(null, "Ya existe el Usuario pero se encuentra Inabilitado", "Información", 1);
-                    usu = null;
-                } else {
-                    JOptionPane.showMessageDialog(null, "Nombre Usuario Ya Existe", "Información", 1);
-                    usu = null;
-                }
-            } else {
+      
 
                 Login dat = loginJpacontrolador.findLogin(id);
                 if (dat == null) {
@@ -108,7 +91,7 @@ public class classLogin {
                 loginJpacontrolador.edit(dat);
                 JOptionPane.showMessageDialog(null, "El Usuario se Modifico exitosamente", "Información", 1);
 
-            }
+            
         } catch (Exception e) {
         }
         return true;
@@ -238,11 +221,11 @@ public class classLogin {
 
     public boolean buscarCedula(String inicio) {
         Login lg = new Login();
-        if (inicio.isEmpty() || inicio.length() > (lg.getCedula().length() + 2)) {
+        if (inicio.isEmpty() || inicio.length() > (lg.cedula.length() + 2)) {
             return false;
         }
         for (int i = 0; i < inicio.length(); ++i) {
-            String r = elimiEspacio(lg.getCedula());
+            String r = elimiEspacio(lg.cedula);
             if (inicio.charAt(i) != (r.charAt(i))) {
                 return false;
             }
@@ -264,7 +247,7 @@ public class classLogin {
         modelo.addColumn("Estado de Cuenta");
 
         for (Login u : getLogin()) {
-            if (buscarApellidos(elimiEspacio(FrmLogin.jTextField4.getText()))) {
+            if (buscarCedula(elimiEspacio(FrmLogin.jTextField4.getText()))) {
                 fila[0] = u.getIdlogin();
                 fila[1] = u.getNombres();
                 fila[2] = u.getApellidos();

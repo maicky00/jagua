@@ -46,7 +46,7 @@ public class Login implements Serializable {
     @Column(name = "APELLIDOS")
     private String apellidos;
     @Column(name = "CEDULA")
-    private String cedula;
+    public String cedula;
     @Column(name = "USUARIO")
     private String usuario;
     @Column(name = "CLAVE")
