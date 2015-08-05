@@ -730,7 +730,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNombre2;
     private javax.swing.JTextField txtObservar;
     private javax.swing.JTextField txtReferencia;
-    private javax.swing.JTextField txtRuc;
+    public static javax.swing.JTextField txtRuc;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
