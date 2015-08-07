@@ -151,6 +151,7 @@ public class classusuario {
     }
     
  public void cargarTablaUsuario(JTable tabla) {
+     
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
         Object[] fila = new Object[10];
@@ -166,7 +167,7 @@ public class classusuario {
         modelo.addColumn("Observacion");
 //        
 
-//         Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
+//        Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
         
         for (Usuarios u : getUsuarios()) {
             fila[0] = u.getIdusuario();
