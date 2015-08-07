@@ -39,6 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuarios.findByTelefono", query = "SELECT u FROM Usuarios u WHERE u.telefono = :telefono"),
     @NamedQuery(name = "Usuarios.findByCelular", query = "SELECT u FROM Usuarios u WHERE u.celular = :celular")})
 public class Usuarios implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -231,5 +232,28 @@ public class Usuarios implements Serializable {
     public String toString() {
         return "entidades.Usuarios[ idusuario=" + idusuario + " ]";
     }
-    
+
+    public String elimiEspacio(String m) {
+        String a[] = m.split(" ");
+        String s = "";
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != " ") {
+                s += a[i];
+            }
+        }
+        return s;
+    }
+
+    public boolean buscarUsuarios(String inicio) {
+        if (inicio.isEmpty() || inicio.length() > (primerapellido.length() + segundoapellido.length() + primernombre.length() + segundonombre.length())) {
+            return false;
+        }
+        for (int i = 0; i < inicio.length(); ++i) {
+            String r = elimiEspacio(primerapellido + segundoapellido + primernombre + segundonombre);
+            if (inicio.charAt(i) != (r.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -14,22 +14,24 @@ import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author JC-PC
  */
 public class classMedidor {
-
+    
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("japPU");
     public MedidorJpaController medidorJpacontrolador = new MedidorJpaController(emf);
     classusuario cu = new classusuario();
-
+    
     public List<Medidor> getMedidor() {
         return medidorJpacontrolador.findMedidorEntities();
     }
-
-    public void guardarMedidor(int idUsuario, String serie, int numMedidor,String estado) {
+    
+    public void guardarMedidor(int idUsuario, String serie, int numMedidor, String estado) {
         int i = 0;
         Medidor med = new Medidor();
         try {
@@ -41,9 +43,9 @@ public class classMedidor {
                 }
             }
             if (i == 1) {
-                JOptionPane.showMessageDialog(null, "Numero Medidor Existente", "Información", 1);
+                JOptionPane.showMessageDialog(null, "Numero Medidor Existente \nNo se pudo Guardar", "Información", 1);
                 med = null;
-
+                
             } else {
                 Usuarios usua = cu.usuariosJpacontrolador.findUsuarios(cu.buscarLoginId(idUsuario).getIdusuario());
                 Medidor dat = new Medidor();
@@ -52,49 +54,48 @@ public class classMedidor {
                 dat.setNummedidor(numMedidor);
                 dat.setEstado(estado);
                 medidorJpacontrolador.create(dat);
+                JOptionPane.showMessageDialog(null, "Registrado");
             }
         } catch (Exception e) {
-
+            
         }
     }
-
-    public boolean modificarMedidor(int id, int idusuario, String serie, int numMedidor,String estado) {
+    
+    public boolean modificarMedidor(int id, int idusuario, String serie, int numMedidor, String estado) {
         int i = 0;
         Medidor med = new Medidor();
-
+        
         try {
             
-
-                Usuarios usua = cu.usuariosJpacontrolador.findUsuarios(cu.buscarLoginId(idusuario).getIdusuario());
-                Medidor dat = medidorJpacontrolador.findMedidor(id);
-                if (dat == null) {
-                    return false;
-                }
-                dat.setIdusuario(usua);
-                dat.setSerie(serie);
-                dat.setNummedidor(numMedidor);
-                dat.setEstado(estado);
-                medidorJpacontrolador.edit(dat);
-                JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
-
+            Usuarios usua = cu.usuariosJpacontrolador.findUsuarios(cu.buscarLoginId(idusuario).getIdusuario());
+            Medidor dat = medidorJpacontrolador.findMedidor(id);
+            if (dat == null) {
+                return false;
+            }
+            dat.setIdusuario(usua);
+            dat.setSerie(serie);
+            dat.setNummedidor(numMedidor);
+            dat.setEstado(estado);
+            medidorJpacontrolador.edit(dat);
+            JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
             
         } catch (Exception e) {
         }
         return true;
     }
-
+    
     public void eliminarMedidor(int id) throws IllegalOrphanException {
-
+        
         try {
             medidorJpacontrolador.destroy(id);
             JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
         } catch (NonexistentEntityException ex) {
         }
-
+        
     }
-
+    
     public Medidor buscarMedidorNumM(int numMedidor) {
-
+        
         for (Medidor dat : getMedidor()) {
             if (dat.getNummedidor().equals(numMedidor)) {
                 return dat;
@@ -102,9 +103,9 @@ public class classMedidor {
         }
         return null;
     }
-
+    
     public Medidor buscarMedidorId(int idMedidor) {
-
+        
         for (Medidor dat : getMedidor()) {
             if (dat.getIdmedidor().equals(idMedidor)) {
                 return dat;
@@ -112,5 +113,57 @@ public class classMedidor {
         }
         return null;
     }
-
+    
+    public void cargarTablaMedidor(JTable tabla) {
+        Usuarios us = new Usuarios();
+        DefaultTableModel modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[7];
+        modelo.addColumn("Nro");
+        modelo.addColumn("Numero Medidor");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Apodo");
+        modelo.addColumn("Serie");
+        modelo.addColumn("estado");
+        modelo.addColumn("#");
+        for (Medidor u : getMedidor()) {
+            fila[0] = u.getIdmedidor();
+            fila[1] = u.getNummedidor();
+            fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                    + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre();
+            fila[3] = u.getIdusuario().getApadosn();
+            fila[4] = u.getSerie();
+            fila[5] = u.getEstado();
+            fila[6] = u.getIdusuario().getIdusuario();
+            modelo.addRow(fila);
+        }
+    }
+    
+    public void cargarTablaApellidosNombres(String txt, JTable tabla) {
+        Usuarios us = new Usuarios();
+        DefaultTableModel modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[7];
+        modelo.addColumn("Nro");
+        modelo.addColumn("Numero Medidor");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Apodo");
+        modelo.addColumn("Serie");
+        modelo.addColumn("estado");
+        modelo.addColumn("#");
+        for (Medidor u : getMedidor()) {
+            if (u.getIdusuario().buscarUsuarios(u.getIdusuario().elimiEspacio(txt))) {
+                fila[0] = u.getIdmedidor();
+                fila[1] = u.getNummedidor();
+                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                        + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre();
+                fila[3] = u.getIdusuario().getApadosn();
+                fila[4] = u.getSerie();
+                fila[5] = u.getEstado();
+                fila[6] = u.getIdusuario().getIdusuario();
+                modelo.addRow(fila);
+            }
+        }
+    }
+    
 }

@@ -6,6 +6,7 @@
 package Formularios;
 
 import Controladores.ControlFormularios;
+import jap.ReportesControlador;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JDialog;
@@ -39,13 +40,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         try {
 
-        
-            
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
         } catch (Exception e) {
         }
     }
+    ReportesControlador b = new ReportesControlador();
     ControlFormularios cf;
 
     //controlar ventanas
@@ -88,6 +88,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem15 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem12 = new javax.swing.JMenuItem();
@@ -222,6 +223,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu2.setText("Reportes");
+
+        jMenuItem15.setText("Usuarios");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem15);
+
         jMenuBar1.add(jMenu2);
 
         jMenu5.setText("Manual");
@@ -354,6 +364,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         cf.ControlaInstancia(fim);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        // TODO add your handling code here:
+        b = new ReportesControlador();
+        b.reporte("reporteMedidores.jasper");
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -404,6 +420,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
