@@ -5,11 +5,13 @@
  */
 package Formularios;
 
+import Controladores.ValidarCedula;
 import Controladores.classInstitucion;
 import Controladores.classMoverRegistros;
 import Controladores.classusuario;
 import entidades.Usuarios;
 import entidadesCruds.exceptions.IllegalOrphanException;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -18,6 +20,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -33,6 +37,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     /**
      * Creates new form FrmUsuario
      */
+    ValidarCedula valCed = new ValidarCedula();
     classInstitucion ci = new classInstitucion();
     classusuario cu = new classusuario();
 
@@ -93,6 +98,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }
 
     public void limpiar() {
+        id.setText("");
         txtRuc.setText("");
         txtDir.setText("");
         txtNombre.setText("");
@@ -105,6 +111,14 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         txtObservar.setText("");
         txtApodo.setText("");
         comboSector.setSelectedIndex(0);
+    }
+
+    private boolean letras(String str) {
+        boolean respuesta = false;
+        if ((str).matches("([a-z]|[A-Z])+")) {
+            respuesta = true;
+        }
+        return respuesta;
     }
 
     /**
@@ -127,7 +141,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         lblfoto = new javax.swing.JLabel();
-        lblidusu = new javax.swing.JLabel();
+        id = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -202,6 +216,9 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
         txtRuc.setEditable(false);
         txtRuc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtRucKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtRucKeyTyped(evt);
             }
@@ -211,63 +228,77 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
         txtNombre.setEditable(false);
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreKeyReleased(evt);
             }
         });
 
         txtNombre2.setEditable(false);
         txtNombre2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombre2KeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombre2KeyReleased(evt);
             }
         });
 
         txtApellido.setEditable(false);
         txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtApellidoKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyReleased(evt);
             }
         });
 
         txtApellido2.setEditable(false);
         txtApellido2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtApellido2KeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApellido2KeyReleased(evt);
             }
         });
 
         txtApodo.setEditable(false);
 
         txtTelefono.setEditable(false);
+        txtTelefono.setText("2 918 000");
+        txtTelefono.setToolTipText("Ingrese 7 digitos");
         txtTelefono.setAutoscrolls(false);
+        txtTelefono.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtTelefonoMouseClicked(evt);
+            }
+        });
         txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtTelefonoKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyReleased(evt);
             }
         });
 
         txtCelular.setEditable(false);
+        txtCelular.setText("095 9090 000");
+        txtCelular.setToolTipText("Ingrese 10 digitos");
         txtCelular.setAutoscrolls(false);
+        txtCelular.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtCelularMouseClicked(evt);
+            }
+        });
         txtCelular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCelularActionPerformed(evt);
             }
         });
         txtCelular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCelularKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCelularKeyTyped(evt);
             }
         });
 
         txtReferencia.setEditable(false);
-        txtReferencia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtReferenciaKeyTyped(evt);
-            }
-        });
+        txtReferencia.setToolTipText("Ingrese Lugar de Referemcia: ej. Cerca de la Escuela");
 
         txtObservar.setEditable(false);
+        txtObservar.setToolTipText("TERCERA EDAD, INSTITUCION, etc.");
         txtObservar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtObservarKeyTyped(evt);
@@ -284,20 +315,20 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             }
         });
 
-        comboSector.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Capillapamba", "Tocagon", "Tocagon Alto", "Trojaloma", "Pilchibuela" }));
+        comboSector.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "Capillapamba", "Coragaloma", "Tocagon Alto", "Pilchibuela" }));
         comboSector.setEnabled(false);
         comboSector.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
 
         label.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Adelante");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Atras");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -341,10 +372,17 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtApodo, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblidusu, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -374,14 +412,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtCelular, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                                            .addComponent(comboSector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(comboSector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -393,7 +424,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel1)
-                                .addComponent(lblidusu, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel8)
                                 .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -416,8 +447,9 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                         .addGap(34, 34, 34))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(lblfoto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonNice6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(buttonNice6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -455,7 +487,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jButton2))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 9, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -630,7 +662,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCelularActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-
+        limpiar();
         mostrar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -645,33 +677,18 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         mostrar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
-        char c = evt.getKeyChar();
-
-        if (Character.isLetter(c)) {
-            getToolkit().beep();
-
-            evt.consume();
-
-            mensaje.setText("error de ingreso, ingrese digitos");
-        } else {
-            mensaje.setText("");
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoKeyTyped
-
     private void txtCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyTyped
-        char c = evt.getKeyChar();
-
-        if (Character.isLetter(c)) {
-            getToolkit().beep();
-
-            evt.consume();
-
-            mensaje.setText("error de ingreso, ingrese digitos");
-        } else {
-            mensaje.setText("");
-        }
+//        char c = evt.getKeyChar();
+//
+//        if (Character.isLetter(c)) {
+//            getToolkit().beep();
+//
+//            evt.consume();
+//
+//            mensaje.setText("error de ingreso, ingrese digitos");
+//        } else {
+//            mensaje.setText("");
+//        }
     }//GEN-LAST:event_txtCelularKeyTyped
 
     private void txtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyTyped
@@ -688,20 +705,6 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtRucKeyTyped
 
-    private void txtReferenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtReferenciaKeyTyped
-        char c = evt.getKeyChar();
-
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-
-            evt.consume();
-
-            mensaje.setText("error de ingreso, ingrese letras!...");
-        } else {
-            mensaje.setText("");
-        }
-    }//GEN-LAST:event_txtReferenciaKeyTyped
-
     private void txtObservarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservarKeyTyped
 
         char c = evt.getKeyChar();
@@ -717,64 +720,6 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txtObservarKeyTyped
 
-    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        char c = evt.getKeyChar();
-
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-
-            evt.consume();
-
-            mensaje.setText("error de ingreso, ingrese letras!...");
-        } else {
-            mensaje.setText("");
-        }
-    }//GEN-LAST:event_txtNombreKeyTyped
-
-    private void txtNombre2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre2KeyTyped
-        char c = evt.getKeyChar();
-
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-
-            evt.consume();
-
-            mensaje.setText("error de ingreso, ingrese letras!...");
-        } else {
-            mensaje.setText("");
-        }
-    }//GEN-LAST:event_txtNombre2KeyTyped
-
-    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
-
-        char c = evt.getKeyChar();
-
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-
-            evt.consume();
-
-            mensaje.setText("error de ingreso, ingrese letras!...");
-        } else {
-            mensaje.setText("");
-        }
-    }//GEN-LAST:event_txtApellidoKeyTyped
-
-    private void txtApellido2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellido2KeyTyped
-
-        char c = evt.getKeyChar();
-
-        if (Character.isDigit(c)) {
-            getToolkit().beep();
-
-            evt.consume();
-
-            mensaje.setText("error de ingreso, ingrese letras!...");
-        } else {
-            mensaje.setText("");
-        }
-    }//GEN-LAST:event_txtApellido2KeyTyped
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         String insti = jLabel9.getText();
@@ -789,25 +734,27 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         String celular = txtCelular.getText();
         String sector = comboSector.getSelectedItem().toString();
         String referencia = txtReferencia.getText();
-        if (lblidusu.getText().equals("")) {
+        if (id.getText().equals("")) {
             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
 
                 bytesImg = cu.AbrirAImagen(archivo);
-                cu.guardarUsuarios(insti, rucCi, primNombre, segNombre, segApellidos, segApellidos, apodo, direccion, telefono, celular, sector, referencia, bytesImg, direccion);
+                cu.guardarUsuarios(insti, rucCi, primNombre, segNombre, primApell, segApellidos, apodo, direccion, telefono, celular, sector, referencia, bytesImg, direccion);
 
             } else {
             }
-        } else if (!lblidusu.getText().equals("")) {
+        } else if (!id.getText().equals("")) {
             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
 
                 bytesImg = cu.AbrirAImagen(archivo);
-                cu.modificarUsuario(Integer.valueOf(lblidusu.getText()), rucCi, primNombre, segNombre, segApellidos, segApellidos, apodo, direccion, telefono, celular, sector, referencia, bytesImg, direccion);
+                cu.modificarUsuario(Integer.valueOf(id.getText()), rucCi, primNombre, segNombre, primApell, segApellidos, apodo, direccion, telefono, celular, sector, referencia, bytesImg, direccion);
 
             } else {
             }
         }
+        limpiar();
+        ocultar();
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -853,21 +800,133 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         try {
-             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                cu.eliminarUsuario(Integer.valueOf(lblidusu.getText()));
+                cu.eliminarUsuario(Integer.valueOf(id.getText()));
             }
-            
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No Se Puede Eliminar", "Información", 1);
-        
+
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtApellido2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellido2KeyReleased
+        String texto = txtApellido2.getText().toUpperCase();
+
+        Pattern patron = Pattern.compile("[^A-Za-z|Ñ|Á|É|Í|Ó|Ú]");
+        Matcher encaja = patron.matcher(texto);
+        if (!encaja.find()) {
+            mensaje.setText("");
+            txtApellido2.setText(texto);
+        } else {
+            evt.consume();
+            mensaje.setText("error de ingreso, contiene caracter no valido!...");
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApellido2KeyReleased
+
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+        String texto = txtNombre.getText().toUpperCase();
+
+        Pattern patron = Pattern.compile("[^A-Za-z|Ñ|Á|É|Í|Ó|Ú]");
+        Matcher encaja = patron.matcher(texto);
+        if (!encaja.find()) {
+            mensaje.setText("");
+            txtNombre.setText(texto);
+        } else {
+            getToolkit().beep();
+            evt.consume();
+            mensaje.setText("error de ingreso, contiene caracter no valido!...");
+        }
+    }//GEN-LAST:event_txtNombreKeyReleased
+
+    private void txtNombre2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre2KeyReleased
+        String texto = txtNombre2.getText().toUpperCase();
+
+        Pattern patron = Pattern.compile("[^A-Za-z|Ñ|Á|É|Í|Ó|Ú]");
+        Matcher encaja = patron.matcher(texto);
+        if (!encaja.find()) {
+            mensaje.setText("");
+            txtNombre2.setText(texto);
+        } else {
+            getToolkit().beep();
+            evt.consume();
+            mensaje.setText("error de ingreso, contiene caracter no valido!...");
+        }
+    }//GEN-LAST:event_txtNombre2KeyReleased
+
+    private void txtApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyReleased
+        String texto = txtApellido.getText().toUpperCase();
+
+        Pattern patron = Pattern.compile("[^A-Za-z|Ñ|Á|É|Í|Ó|Ú]");
+        Matcher encaja = patron.matcher(texto);
+        if (!encaja.find()) {
+            mensaje.setText("");
+            txtApellido.setText(texto);
+        } else {
+            getToolkit().beep();
+            evt.consume();
+            mensaje.setText("error de ingreso, contiene caracter no valido!...");
+        }
+    }//GEN-LAST:event_txtApellidoKeyReleased
+
+    private void txtTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyReleased
+
+        String texto = txtTelefono.getText();
+        Pattern pat = Pattern.compile("[0-9]{7}");
+        Matcher mat = pat.matcher(texto);
+        if (mat.matches()) {
+            mensaje.setText("");
+            //System.out.println("SI");
+        } else {
+            //getToolkit().beep();
+            evt.consume();
+            mensaje.setText("error de ingreso, contiene caracter no valido!...");
+        }
+    }//GEN-LAST:event_txtTelefonoKeyReleased
+
+    private void txtTelefonoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtTelefonoMouseClicked
+        txtTelefono.setText("");
+
+    }//GEN-LAST:event_txtTelefonoMouseClicked
+
+    private void txtCelularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCelularMouseClicked
+
+        txtCelular.setText("");
+    }//GEN-LAST:event_txtCelularMouseClicked
+
+    private void txtCelularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyReleased
+        String texto = txtCelular.getText();
+        Pattern pat = Pattern.compile("0[0-9]{9}");
+        Matcher mat = pat.matcher(texto);
+        if (mat.matches()) {
+            mensaje.setText("");
+            //System.out.println("SI");
+        } else {
+            //getToolkit().beep();
+            evt.consume();
+            mensaje.setText("error de ingreso, contiene caracter no valido!...");
+        }
+    }//GEN-LAST:event_txtCelularKeyReleased
+
+    private void txtRucKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyReleased
+
+        if (valCed.validadorDeCedula(txtRuc.getText()) == true) {
+            mensaje.setForeground(Color.green);
+            mensaje.setText("cedula valida");
+        } else {
+            mensaje.setForeground(new Color(204, 0, 0));
+            mensaje.setText("cedula invalida, ingrese una cedula valida");
+        }
+
+    }//GEN-LAST:event_txtRucKeyReleased
     private void setDatosMover(Usuarios usuario) {
 //        classMedidor cm = new classMedidor();
 //        classusuario cu = new classusuario();
         try {
-            lblidusu.setText(usuario.getIdusuario().toString());
+            id.setText(usuario.getIdusuario().toString());
             txtRuc.setText(usuario.getRucci());
             txtNombre.setText(usuario.getPrimernombre());
             txtNombre2.setText(usuario.getSegundonombre());
@@ -907,6 +966,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     private org.edisoncor.gui.button.ButtonNice btnNuevo;
     private org.edisoncor.gui.button.ButtonNice buttonNice6;
     private org.edisoncor.gui.comboBox.ComboBoxRect comboSector;
+    private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -929,7 +989,6 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     public javax.swing.JLabel label;
     private javax.swing.JLabel lblfoto;
-    private javax.swing.JLabel lblidusu;
     private javax.swing.JLabel mensaje;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtApellido2;
