@@ -11,10 +11,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Institucion;
-import entidades.Medidor;
 import entidades.Usuarios;
 import entidadesCruds.exceptions.NonexistentEntityException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -35,9 +33,6 @@ public class UsuariosJpaController implements Serializable {
     }
 
     public void create(Usuarios usuarios) {
-        if (usuarios.getMedidorList() == null) {
-            usuarios.setMedidorList(new ArrayList<Medidor>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -47,25 +42,10 @@ public class UsuariosJpaController implements Serializable {
                 idinstitucion = em.getReference(idinstitucion.getClass(), idinstitucion.getIdinstitucion());
                 usuarios.setIdinstitucion(idinstitucion);
             }
-            List<Medidor> attachedMedidorList = new ArrayList<Medidor>();
-            for (Medidor medidorListMedidorToAttach : usuarios.getMedidorList()) {
-                medidorListMedidorToAttach = em.getReference(medidorListMedidorToAttach.getClass(), medidorListMedidorToAttach.getIdmedidor());
-                attachedMedidorList.add(medidorListMedidorToAttach);
-            }
-            usuarios.setMedidorList(attachedMedidorList);
             em.persist(usuarios);
             if (idinstitucion != null) {
                 idinstitucion.getUsuariosList().add(usuarios);
                 idinstitucion = em.merge(idinstitucion);
-            }
-            for (Medidor medidorListMedidor : usuarios.getMedidorList()) {
-                Usuarios oldIdusuarioOfMedidorListMedidor = medidorListMedidor.getIdusuario();
-                medidorListMedidor.setIdusuario(usuarios);
-                medidorListMedidor = em.merge(medidorListMedidor);
-                if (oldIdusuarioOfMedidorListMedidor != null) {
-                    oldIdusuarioOfMedidorListMedidor.getMedidorList().remove(medidorListMedidor);
-                    oldIdusuarioOfMedidorListMedidor = em.merge(oldIdusuarioOfMedidorListMedidor);
-                }
             }
             em.getTransaction().commit();
         } finally {
@@ -83,19 +63,10 @@ public class UsuariosJpaController implements Serializable {
             Usuarios persistentUsuarios = em.find(Usuarios.class, usuarios.getIdusuario());
             Institucion idinstitucionOld = persistentUsuarios.getIdinstitucion();
             Institucion idinstitucionNew = usuarios.getIdinstitucion();
-            List<Medidor> medidorListOld = persistentUsuarios.getMedidorList();
-            List<Medidor> medidorListNew = usuarios.getMedidorList();
             if (idinstitucionNew != null) {
                 idinstitucionNew = em.getReference(idinstitucionNew.getClass(), idinstitucionNew.getIdinstitucion());
                 usuarios.setIdinstitucion(idinstitucionNew);
             }
-            List<Medidor> attachedMedidorListNew = new ArrayList<Medidor>();
-            for (Medidor medidorListNewMedidorToAttach : medidorListNew) {
-                medidorListNewMedidorToAttach = em.getReference(medidorListNewMedidorToAttach.getClass(), medidorListNewMedidorToAttach.getIdmedidor());
-                attachedMedidorListNew.add(medidorListNewMedidorToAttach);
-            }
-            medidorListNew = attachedMedidorListNew;
-            usuarios.setMedidorList(medidorListNew);
             usuarios = em.merge(usuarios);
             if (idinstitucionOld != null && !idinstitucionOld.equals(idinstitucionNew)) {
                 idinstitucionOld.getUsuariosList().remove(usuarios);
@@ -104,23 +75,6 @@ public class UsuariosJpaController implements Serializable {
             if (idinstitucionNew != null && !idinstitucionNew.equals(idinstitucionOld)) {
                 idinstitucionNew.getUsuariosList().add(usuarios);
                 idinstitucionNew = em.merge(idinstitucionNew);
-            }
-            for (Medidor medidorListOldMedidor : medidorListOld) {
-                if (!medidorListNew.contains(medidorListOldMedidor)) {
-                    medidorListOldMedidor.setIdusuario(null);
-                    medidorListOldMedidor = em.merge(medidorListOldMedidor);
-                }
-            }
-            for (Medidor medidorListNewMedidor : medidorListNew) {
-                if (!medidorListOld.contains(medidorListNewMedidor)) {
-                    Usuarios oldIdusuarioOfMedidorListNewMedidor = medidorListNewMedidor.getIdusuario();
-                    medidorListNewMedidor.setIdusuario(usuarios);
-                    medidorListNewMedidor = em.merge(medidorListNewMedidor);
-                    if (oldIdusuarioOfMedidorListNewMedidor != null && !oldIdusuarioOfMedidorListNewMedidor.equals(usuarios)) {
-                        oldIdusuarioOfMedidorListNewMedidor.getMedidorList().remove(medidorListNewMedidor);
-                        oldIdusuarioOfMedidorListNewMedidor = em.merge(oldIdusuarioOfMedidorListNewMedidor);
-                    }
-                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -155,11 +109,6 @@ public class UsuariosJpaController implements Serializable {
             if (idinstitucion != null) {
                 idinstitucion.getUsuariosList().remove(usuarios);
                 idinstitucion = em.merge(idinstitucion);
-            }
-            List<Medidor> medidorList = usuarios.getMedidorList();
-            for (Medidor medidorListMedidor : medidorList) {
-                medidorListMedidor.setIdusuario(null);
-                medidorListMedidor = em.merge(medidorListMedidor);
             }
             em.remove(usuarios);
             em.getTransaction().commit();

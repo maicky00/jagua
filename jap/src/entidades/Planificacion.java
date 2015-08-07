@@ -14,9 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,54 +29,59 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author JC-PC
  */
 @Entity
-@Table(name = "mingas")
+@Table(name = "planificacion")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Mingas.findAll", query = "SELECT m FROM Mingas m"),
-    @NamedQuery(name = "Mingas.findByIdminga", query = "SELECT m FROM Mingas m WHERE m.idminga = :idminga"),
-    @NamedQuery(name = "Mingas.findByFecha", query = "SELECT m FROM Mingas m WHERE m.fecha = :fecha"),
-    @NamedQuery(name = "Mingas.findByAsistencia", query = "SELECT m FROM Mingas m WHERE m.asistencia = :asistencia"),
-    @NamedQuery(name = "Mingas.findByValormulta", query = "SELECT m FROM Mingas m WHERE m.valormulta = :valormulta")})
-public class Mingas implements Serializable {
+    @NamedQuery(name = "Planificacion.findAll", query = "SELECT p FROM Planificacion p"),
+    @NamedQuery(name = "Planificacion.findByIdplanificacion", query = "SELECT p FROM Planificacion p WHERE p.idplanificacion = :idplanificacion"),
+    @NamedQuery(name = "Planificacion.findByTipoplanificacion", query = "SELECT p FROM Planificacion p WHERE p.tipoplanificacion = :tipoplanificacion"),
+    @NamedQuery(name = "Planificacion.findByFecha", query = "SELECT p FROM Planificacion p WHERE p.fecha = :fecha"),
+    @NamedQuery(name = "Planificacion.findByValormulta", query = "SELECT p FROM Planificacion p WHERE p.valormulta = :valormulta")})
+public class Planificacion implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "IDMINGA")
-    private Integer idminga;
+    @Column(name = "IDPLANIFICACION")
+    private Integer idplanificacion;
+    @Column(name = "TIPOPLANIFICACION")
+    private String tipoplanificacion;
     @Lob
     @Column(name = "LUGAR")
     private String lugar;
     @Column(name = "FECHA")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @Column(name = "ASISTENCIA")
-    private String asistencia;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "VALORMULTA")
     private Float valormulta;
     @Lob
     @Column(name = "DESCRIPCION")
     private String descripcion;
-    @OneToMany(mappedBy = "idminga")
-    private List<Pagosmingas> pagosmingasList;
-    @JoinColumn(name = "IDMEDIDOR", referencedColumnName = "IDMEDIDOR")
-    @ManyToOne
-    private Medidor idmedidor;
+    @OneToMany(mappedBy = "idplanificacion")
+    private List<Asistencia> asistenciaList;
 
-    public Mingas() {
+    public Planificacion() {
     }
 
-    public Mingas(Integer idminga) {
-        this.idminga = idminga;
+    public Planificacion(Integer idplanificacion) {
+        this.idplanificacion = idplanificacion;
     }
 
-    public Integer getIdminga() {
-        return idminga;
+    public Integer getIdplanificacion() {
+        return idplanificacion;
     }
 
-    public void setIdminga(Integer idminga) {
-        this.idminga = idminga;
+    public void setIdplanificacion(Integer idplanificacion) {
+        this.idplanificacion = idplanificacion;
+    }
+
+    public String getTipoplanificacion() {
+        return tipoplanificacion;
+    }
+
+    public void setTipoplanificacion(String tipoplanificacion) {
+        this.tipoplanificacion = tipoplanificacion;
     }
 
     public String getLugar() {
@@ -95,14 +98,6 @@ public class Mingas implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public String getAsistencia() {
-        return asistencia;
-    }
-
-    public void setAsistencia(String asistencia) {
-        this.asistencia = asistencia;
     }
 
     public Float getValormulta() {
@@ -122,37 +117,29 @@ public class Mingas implements Serializable {
     }
 
     @XmlTransient
-    public List<Pagosmingas> getPagosmingasList() {
-        return pagosmingasList;
+    public List<Asistencia> getAsistenciaList() {
+        return asistenciaList;
     }
 
-    public void setPagosmingasList(List<Pagosmingas> pagosmingasList) {
-        this.pagosmingasList = pagosmingasList;
-    }
-
-    public Medidor getIdmedidor() {
-        return idmedidor;
-    }
-
-    public void setIdmedidor(Medidor idmedidor) {
-        this.idmedidor = idmedidor;
+    public void setAsistenciaList(List<Asistencia> asistenciaList) {
+        this.asistenciaList = asistenciaList;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idminga != null ? idminga.hashCode() : 0);
+        hash += (idplanificacion != null ? idplanificacion.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Mingas)) {
+        if (!(object instanceof Planificacion)) {
             return false;
         }
-        Mingas other = (Mingas) object;
-        if ((this.idminga == null && other.idminga != null) || (this.idminga != null && !this.idminga.equals(other.idminga))) {
+        Planificacion other = (Planificacion) object;
+        if ((this.idplanificacion == null && other.idplanificacion != null) || (this.idplanificacion != null && !this.idplanificacion.equals(other.idplanificacion))) {
             return false;
         }
         return true;
@@ -160,7 +147,7 @@ public class Mingas implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Mingas[ idminga=" + idminga + " ]";
+        return "entidades.Planificacion[ idplanificacion=" + idplanificacion + " ]";
     }
     
 }

@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Detallefactura.findAll", query = "SELECT d FROM Detallefactura d"),
     @NamedQuery(name = "Detallefactura.findByIddetallefac", query = "SELECT d FROM Detallefactura d WHERE d.iddetallefac = :iddetallefac"),
+    @NamedQuery(name = "Detallefactura.findByAniomes", query = "SELECT d FROM Detallefactura d WHERE d.aniomes = :aniomes"),
     @NamedQuery(name = "Detallefactura.findByMedidaant", query = "SELECT d FROM Detallefactura d WHERE d.medidaant = :medidaant"),
     @NamedQuery(name = "Detallefactura.findByMedidaact", query = "SELECT d FROM Detallefactura d WHERE d.medidaact = :medidaact"),
     @NamedQuery(name = "Detallefactura.findByConsumo", query = "SELECT d FROM Detallefactura d WHERE d.consumo = :consumo"),
@@ -46,6 +47,8 @@ public class Detallefactura implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDDETALLEFAC")
     private Integer iddetallefac;
+    @Column(name = "ANIOMES")
+    private String aniomes;
     @Column(name = "MEDIDAANT")
     private Integer medidaant;
     @Column(name = "MEDIDAACT")
@@ -83,6 +86,14 @@ public class Detallefactura implements Serializable {
 
     public void setIddetallefac(Integer iddetallefac) {
         this.iddetallefac = iddetallefac;
+    }
+
+    public String getAniomes() {
+        return aniomes;
+    }
+
+    public void setAniomes(String aniomes) {
+        this.aniomes = aniomes;
     }
 
     public Integer getMedidaant() {

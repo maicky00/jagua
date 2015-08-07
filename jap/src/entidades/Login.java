@@ -35,7 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Login.findByTipo", query = "SELECT l FROM Login l WHERE l.tipo = :tipo"),
     @NamedQuery(name = "Login.findByEstado", query = "SELECT l FROM Login l WHERE l.estado = :estado")})
 public class Login implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -152,7 +151,6 @@ public class Login implements Serializable {
     public String toString() {
         return "entidades.Login[ idlogin=" + idlogin + " ]";
     }
-
     public String elimiEspacio(String m) {
         String a[] = m.split(" ");
         String s = "";

@@ -29,7 +29,7 @@ public class classMedidor {
         return medidorJpacontrolador.findMedidorEntities();
     }
 
-    public void guardarMedidor(String rucCi, String serie, int numMedidor) {
+    public void guardarMedidor(int idUsuario, String serie, int numMedidor,String estado) {
         int i = 0;
         Medidor med = new Medidor();
         try {
@@ -45,11 +45,12 @@ public class classMedidor {
                 med = null;
 
             } else {
-                Usuarios usua = cu.usuariosJpacontrolador.findUsuarios(cu.buscarUsuarioRucCi(rucCi).getIdusuario());
+                Usuarios usua = cu.usuariosJpacontrolador.findUsuarios(cu.buscarLoginId(idUsuario).getIdusuario());
                 Medidor dat = new Medidor();
                 dat.setIdusuario(usua);
                 dat.setSerie(serie);
                 dat.setNummedidor(numMedidor);
+                dat.setEstado(estado);
                 medidorJpacontrolador.create(dat);
             }
         } catch (Exception e) {
@@ -57,26 +58,14 @@ public class classMedidor {
         }
     }
 
-    public boolean modificarMedidor(int id, String rucCi, String serie, int numMedidor) {
+    public boolean modificarMedidor(int id, int idusuario, String serie, int numMedidor,String estado) {
         int i = 0;
         Medidor med = new Medidor();
 
         try {
-            for (Medidor md : getMedidor()) {
-                if (md.getNummedidor().equals(numMedidor)) {
-                    i = 1;
-                    med = md;
-                    break;
-                }
-            }
-            if (i == 1) {
+            
 
-                JOptionPane.showMessageDialog(null, "Numero Medidor Existente", "Información", 1);
-                med = null;
-
-            } else {
-
-                Usuarios usua = cu.usuariosJpacontrolador.findUsuarios(cu.buscarUsuarioRucCi(rucCi).getIdusuario());
+                Usuarios usua = cu.usuariosJpacontrolador.findUsuarios(cu.buscarLoginId(idusuario).getIdusuario());
                 Medidor dat = medidorJpacontrolador.findMedidor(id);
                 if (dat == null) {
                     return false;
@@ -84,10 +73,11 @@ public class classMedidor {
                 dat.setIdusuario(usua);
                 dat.setSerie(serie);
                 dat.setNummedidor(numMedidor);
+                dat.setEstado(estado);
                 medidorJpacontrolador.edit(dat);
                 JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
 
-            }
+            
         } catch (Exception e) {
         }
         return true;

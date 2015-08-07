@@ -31,12 +31,13 @@ public class classDetalleFactura {
         return detallefacturaJpacontrolador.findDetallefacturaEntities();
     }
 
-    public void guardarDetallefactura(int idTarifas, int idMedidor, int medidaAnt, int medidaAct, int consumo, int medExcedido, float tarExcedido, float subtotal, int total) {
+    public void guardarDetallefactura(int idTarifas, int idMedidor, String anioMes,int medidaAnt, int medidaAct, int consumo, int medExcedido, float tarExcedido, float subtotal, int total) {
         try {
 
             Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor).getIdmedidor());
             Tarifas idTar = ct.tarifasJpacontrolador.findTarifas(ct.buscarIdTarifas(idTarifas).getIdtarifas());
             Detallefactura dat = new Detallefactura();
+            dat.setAniomes(anioMes);
             dat.setIdtarifas(idTar);
             dat.setIdmedidor(idmed);
             dat.setMedidaant(medidaAnt);
@@ -53,7 +54,7 @@ public class classDetalleFactura {
         }
     }
 
-    public boolean modificarDetallefactura(int idDetallefactura, int idTarifas, int idMedidor, int medidaAnt, int medidaAct, int consumo, int medExcedido, float tarExcedido, float subtotal, int total) {
+    public boolean modificarDetallefactura(int idDetallefactura, int idTarifas, int idMedidor,String anioMes, int medidaAnt, int medidaAct, int consumo, int medExcedido, float tarExcedido, float subtotal, int total) {
         try {
             Detallefactura dat = detallefacturaJpacontrolador.findDetallefactura(idDetallefactura);
             if (dat == null) {
@@ -62,6 +63,7 @@ public class classDetalleFactura {
             Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor).getIdmedidor());
             Tarifas idTar = ct.tarifasJpacontrolador.findTarifas(ct.buscarIdTarifas(idTarifas).getIdtarifas());
             dat.setIdtarifas(idTar);
+            dat.setAniomes(anioMes);
             dat.setIdmedidor(idmed);
             dat.setMedidaant(medidaAnt);
             dat.setMedidaact(medidaAct);

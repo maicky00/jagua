@@ -10,13 +10,12 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import entidades.Usuarios;
 import entidades.Corte;
 import java.util.ArrayList;
 import java.util.List;
+import entidades.Asistencia;
 import entidades.Detallefactura;
 import entidades.Medidor;
-import entidades.Mingas;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -40,44 +39,35 @@ public class MedidorJpaController implements Serializable {
         if (medidor.getCorteList() == null) {
             medidor.setCorteList(new ArrayList<Corte>());
         }
+        if (medidor.getAsistenciaList() == null) {
+            medidor.setAsistenciaList(new ArrayList<Asistencia>());
+        }
         if (medidor.getDetallefacturaList() == null) {
             medidor.setDetallefacturaList(new ArrayList<Detallefactura>());
-        }
-        if (medidor.getMingasList() == null) {
-            medidor.setMingasList(new ArrayList<Mingas>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Usuarios idusuario = medidor.getIdusuario();
-            if (idusuario != null) {
-                idusuario = em.getReference(idusuario.getClass(), idusuario.getIdusuario());
-                medidor.setIdusuario(idusuario);
-            }
             List<Corte> attachedCorteList = new ArrayList<Corte>();
             for (Corte corteListCorteToAttach : medidor.getCorteList()) {
                 corteListCorteToAttach = em.getReference(corteListCorteToAttach.getClass(), corteListCorteToAttach.getIdcorte());
                 attachedCorteList.add(corteListCorteToAttach);
             }
             medidor.setCorteList(attachedCorteList);
+            List<Asistencia> attachedAsistenciaList = new ArrayList<Asistencia>();
+            for (Asistencia asistenciaListAsistenciaToAttach : medidor.getAsistenciaList()) {
+                asistenciaListAsistenciaToAttach = em.getReference(asistenciaListAsistenciaToAttach.getClass(), asistenciaListAsistenciaToAttach.getIdasistencia());
+                attachedAsistenciaList.add(asistenciaListAsistenciaToAttach);
+            }
+            medidor.setAsistenciaList(attachedAsistenciaList);
             List<Detallefactura> attachedDetallefacturaList = new ArrayList<Detallefactura>();
             for (Detallefactura detallefacturaListDetallefacturaToAttach : medidor.getDetallefacturaList()) {
                 detallefacturaListDetallefacturaToAttach = em.getReference(detallefacturaListDetallefacturaToAttach.getClass(), detallefacturaListDetallefacturaToAttach.getIddetallefac());
                 attachedDetallefacturaList.add(detallefacturaListDetallefacturaToAttach);
             }
             medidor.setDetallefacturaList(attachedDetallefacturaList);
-            List<Mingas> attachedMingasList = new ArrayList<Mingas>();
-            for (Mingas mingasListMingasToAttach : medidor.getMingasList()) {
-                mingasListMingasToAttach = em.getReference(mingasListMingasToAttach.getClass(), mingasListMingasToAttach.getIdminga());
-                attachedMingasList.add(mingasListMingasToAttach);
-            }
-            medidor.setMingasList(attachedMingasList);
             em.persist(medidor);
-            if (idusuario != null) {
-                idusuario.getMedidorList().add(medidor);
-                idusuario = em.merge(idusuario);
-            }
             for (Corte corteListCorte : medidor.getCorteList()) {
                 Medidor oldIdmedidorOfCorteListCorte = corteListCorte.getIdmedidor();
                 corteListCorte.setIdmedidor(medidor);
@@ -87,6 +77,15 @@ public class MedidorJpaController implements Serializable {
                     oldIdmedidorOfCorteListCorte = em.merge(oldIdmedidorOfCorteListCorte);
                 }
             }
+            for (Asistencia asistenciaListAsistencia : medidor.getAsistenciaList()) {
+                Medidor oldIdmedidorOfAsistenciaListAsistencia = asistenciaListAsistencia.getIdmedidor();
+                asistenciaListAsistencia.setIdmedidor(medidor);
+                asistenciaListAsistencia = em.merge(asistenciaListAsistencia);
+                if (oldIdmedidorOfAsistenciaListAsistencia != null) {
+                    oldIdmedidorOfAsistenciaListAsistencia.getAsistenciaList().remove(asistenciaListAsistencia);
+                    oldIdmedidorOfAsistenciaListAsistencia = em.merge(oldIdmedidorOfAsistenciaListAsistencia);
+                }
+            }
             for (Detallefactura detallefacturaListDetallefactura : medidor.getDetallefacturaList()) {
                 Medidor oldIdmedidorOfDetallefacturaListDetallefactura = detallefacturaListDetallefactura.getIdmedidor();
                 detallefacturaListDetallefactura.setIdmedidor(medidor);
@@ -94,15 +93,6 @@ public class MedidorJpaController implements Serializable {
                 if (oldIdmedidorOfDetallefacturaListDetallefactura != null) {
                     oldIdmedidorOfDetallefacturaListDetallefactura.getDetallefacturaList().remove(detallefacturaListDetallefactura);
                     oldIdmedidorOfDetallefacturaListDetallefactura = em.merge(oldIdmedidorOfDetallefacturaListDetallefactura);
-                }
-            }
-            for (Mingas mingasListMingas : medidor.getMingasList()) {
-                Medidor oldIdmedidorOfMingasListMingas = mingasListMingas.getIdmedidor();
-                mingasListMingas.setIdmedidor(medidor);
-                mingasListMingas = em.merge(mingasListMingas);
-                if (oldIdmedidorOfMingasListMingas != null) {
-                    oldIdmedidorOfMingasListMingas.getMingasList().remove(mingasListMingas);
-                    oldIdmedidorOfMingasListMingas = em.merge(oldIdmedidorOfMingasListMingas);
                 }
             }
             em.getTransaction().commit();
@@ -119,18 +109,12 @@ public class MedidorJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Medidor persistentMedidor = em.find(Medidor.class, medidor.getIdmedidor());
-            Usuarios idusuarioOld = persistentMedidor.getIdusuario();
-            Usuarios idusuarioNew = medidor.getIdusuario();
             List<Corte> corteListOld = persistentMedidor.getCorteList();
             List<Corte> corteListNew = medidor.getCorteList();
+            List<Asistencia> asistenciaListOld = persistentMedidor.getAsistenciaList();
+            List<Asistencia> asistenciaListNew = medidor.getAsistenciaList();
             List<Detallefactura> detallefacturaListOld = persistentMedidor.getDetallefacturaList();
             List<Detallefactura> detallefacturaListNew = medidor.getDetallefacturaList();
-            List<Mingas> mingasListOld = persistentMedidor.getMingasList();
-            List<Mingas> mingasListNew = medidor.getMingasList();
-            if (idusuarioNew != null) {
-                idusuarioNew = em.getReference(idusuarioNew.getClass(), idusuarioNew.getIdusuario());
-                medidor.setIdusuario(idusuarioNew);
-            }
             List<Corte> attachedCorteListNew = new ArrayList<Corte>();
             for (Corte corteListNewCorteToAttach : corteListNew) {
                 corteListNewCorteToAttach = em.getReference(corteListNewCorteToAttach.getClass(), corteListNewCorteToAttach.getIdcorte());
@@ -138,6 +122,13 @@ public class MedidorJpaController implements Serializable {
             }
             corteListNew = attachedCorteListNew;
             medidor.setCorteList(corteListNew);
+            List<Asistencia> attachedAsistenciaListNew = new ArrayList<Asistencia>();
+            for (Asistencia asistenciaListNewAsistenciaToAttach : asistenciaListNew) {
+                asistenciaListNewAsistenciaToAttach = em.getReference(asistenciaListNewAsistenciaToAttach.getClass(), asistenciaListNewAsistenciaToAttach.getIdasistencia());
+                attachedAsistenciaListNew.add(asistenciaListNewAsistenciaToAttach);
+            }
+            asistenciaListNew = attachedAsistenciaListNew;
+            medidor.setAsistenciaList(asistenciaListNew);
             List<Detallefactura> attachedDetallefacturaListNew = new ArrayList<Detallefactura>();
             for (Detallefactura detallefacturaListNewDetallefacturaToAttach : detallefacturaListNew) {
                 detallefacturaListNewDetallefacturaToAttach = em.getReference(detallefacturaListNewDetallefacturaToAttach.getClass(), detallefacturaListNewDetallefacturaToAttach.getIddetallefac());
@@ -145,22 +136,7 @@ public class MedidorJpaController implements Serializable {
             }
             detallefacturaListNew = attachedDetallefacturaListNew;
             medidor.setDetallefacturaList(detallefacturaListNew);
-            List<Mingas> attachedMingasListNew = new ArrayList<Mingas>();
-            for (Mingas mingasListNewMingasToAttach : mingasListNew) {
-                mingasListNewMingasToAttach = em.getReference(mingasListNewMingasToAttach.getClass(), mingasListNewMingasToAttach.getIdminga());
-                attachedMingasListNew.add(mingasListNewMingasToAttach);
-            }
-            mingasListNew = attachedMingasListNew;
-            medidor.setMingasList(mingasListNew);
             medidor = em.merge(medidor);
-            if (idusuarioOld != null && !idusuarioOld.equals(idusuarioNew)) {
-                idusuarioOld.getMedidorList().remove(medidor);
-                idusuarioOld = em.merge(idusuarioOld);
-            }
-            if (idusuarioNew != null && !idusuarioNew.equals(idusuarioOld)) {
-                idusuarioNew.getMedidorList().add(medidor);
-                idusuarioNew = em.merge(idusuarioNew);
-            }
             for (Corte corteListOldCorte : corteListOld) {
                 if (!corteListNew.contains(corteListOldCorte)) {
                     corteListOldCorte.setIdmedidor(null);
@@ -178,6 +154,23 @@ public class MedidorJpaController implements Serializable {
                     }
                 }
             }
+            for (Asistencia asistenciaListOldAsistencia : asistenciaListOld) {
+                if (!asistenciaListNew.contains(asistenciaListOldAsistencia)) {
+                    asistenciaListOldAsistencia.setIdmedidor(null);
+                    asistenciaListOldAsistencia = em.merge(asistenciaListOldAsistencia);
+                }
+            }
+            for (Asistencia asistenciaListNewAsistencia : asistenciaListNew) {
+                if (!asistenciaListOld.contains(asistenciaListNewAsistencia)) {
+                    Medidor oldIdmedidorOfAsistenciaListNewAsistencia = asistenciaListNewAsistencia.getIdmedidor();
+                    asistenciaListNewAsistencia.setIdmedidor(medidor);
+                    asistenciaListNewAsistencia = em.merge(asistenciaListNewAsistencia);
+                    if (oldIdmedidorOfAsistenciaListNewAsistencia != null && !oldIdmedidorOfAsistenciaListNewAsistencia.equals(medidor)) {
+                        oldIdmedidorOfAsistenciaListNewAsistencia.getAsistenciaList().remove(asistenciaListNewAsistencia);
+                        oldIdmedidorOfAsistenciaListNewAsistencia = em.merge(oldIdmedidorOfAsistenciaListNewAsistencia);
+                    }
+                }
+            }
             for (Detallefactura detallefacturaListOldDetallefactura : detallefacturaListOld) {
                 if (!detallefacturaListNew.contains(detallefacturaListOldDetallefactura)) {
                     detallefacturaListOldDetallefactura.setIdmedidor(null);
@@ -192,23 +185,6 @@ public class MedidorJpaController implements Serializable {
                     if (oldIdmedidorOfDetallefacturaListNewDetallefactura != null && !oldIdmedidorOfDetallefacturaListNewDetallefactura.equals(medidor)) {
                         oldIdmedidorOfDetallefacturaListNewDetallefactura.getDetallefacturaList().remove(detallefacturaListNewDetallefactura);
                         oldIdmedidorOfDetallefacturaListNewDetallefactura = em.merge(oldIdmedidorOfDetallefacturaListNewDetallefactura);
-                    }
-                }
-            }
-            for (Mingas mingasListOldMingas : mingasListOld) {
-                if (!mingasListNew.contains(mingasListOldMingas)) {
-                    mingasListOldMingas.setIdmedidor(null);
-                    mingasListOldMingas = em.merge(mingasListOldMingas);
-                }
-            }
-            for (Mingas mingasListNewMingas : mingasListNew) {
-                if (!mingasListOld.contains(mingasListNewMingas)) {
-                    Medidor oldIdmedidorOfMingasListNewMingas = mingasListNewMingas.getIdmedidor();
-                    mingasListNewMingas.setIdmedidor(medidor);
-                    mingasListNewMingas = em.merge(mingasListNewMingas);
-                    if (oldIdmedidorOfMingasListNewMingas != null && !oldIdmedidorOfMingasListNewMingas.equals(medidor)) {
-                        oldIdmedidorOfMingasListNewMingas.getMingasList().remove(mingasListNewMingas);
-                        oldIdmedidorOfMingasListNewMingas = em.merge(oldIdmedidorOfMingasListNewMingas);
                     }
                 }
             }
@@ -241,25 +217,20 @@ public class MedidorJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The medidor with id " + id + " no longer exists.", enfe);
             }
-            Usuarios idusuario = medidor.getIdusuario();
-            if (idusuario != null) {
-                idusuario.getMedidorList().remove(medidor);
-                idusuario = em.merge(idusuario);
-            }
             List<Corte> corteList = medidor.getCorteList();
             for (Corte corteListCorte : corteList) {
                 corteListCorte.setIdmedidor(null);
                 corteListCorte = em.merge(corteListCorte);
             }
+            List<Asistencia> asistenciaList = medidor.getAsistenciaList();
+            for (Asistencia asistenciaListAsistencia : asistenciaList) {
+                asistenciaListAsistencia.setIdmedidor(null);
+                asistenciaListAsistencia = em.merge(asistenciaListAsistencia);
+            }
             List<Detallefactura> detallefacturaList = medidor.getDetallefacturaList();
             for (Detallefactura detallefacturaListDetallefactura : detallefacturaList) {
                 detallefacturaListDetallefactura.setIdmedidor(null);
                 detallefacturaListDetallefactura = em.merge(detallefacturaListDetallefactura);
-            }
-            List<Mingas> mingasList = medidor.getMingasList();
-            for (Mingas mingasListMingas : mingasList) {
-                mingasListMingas.setIdmedidor(null);
-                mingasListMingas = em.merge(mingasListMingas);
             }
             em.remove(medidor);
             em.getTransaction().commit();

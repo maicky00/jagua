@@ -33,14 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Otrospagos.findByMulrecx", query = "SELECT o FROM Otrospagos o WHERE o.mulrecx = :mulrecx"),
     @NamedQuery(name = "Otrospagos.findByMultms", query = "SELECT o FROM Otrospagos o WHERE o.multms = :multms"),
     @NamedQuery(name = "Otrospagos.findByInteres", query = "SELECT o FROM Otrospagos o WHERE o.interes = :interes"),
-    
-    
-    //@NamedQuery(name = "Otrospagos.findUsuarios", query = "SELECT o FROM Otrospagos o WHERE o.interes = :interes"),
-    //@NamedQuery(name = "Otrospagos.findUsuario", query = "SELECT u.primernombre FROM usuarios u, medidor m,corte c,otrospagos o where u.idusuario=m.idusuario and m.idMedidor=c.idmedidor and c.idcorte=o.idcorte;"),
-    //@NamedQuery(name = "Usuario.findByUsuario", query = "SELECT u FROM Usuario u WHERE u.usuario = :usuario and u.clave = :clave"),
-    
-    
-    @NamedQuery(name = "Otrospagos.findBySerie", query = "SELECT o FROM Otrospagos o WHERE o.serie = :serie")})
+    @NamedQuery(name = "Otrospagos.findBySerie", query = "SELECT o FROM Otrospagos o WHERE o.serie = :serie"),
+    @NamedQuery(name = "Otrospagos.findByTotal", query = "SELECT o FROM Otrospagos o WHERE o.total = :total")})
 public class Otrospagos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -60,6 +54,11 @@ public class Otrospagos implements Serializable {
     private Float interes;
     @Column(name = "SERIE")
     private String serie;
+    @Column(name = "TOTAL")
+    private Float total;
+    @Lob
+    @Column(name = "USUARIOACTUAL")
+    private String usuarioactual;
     @JoinColumn(name = "IDCORTE", referencedColumnName = "IDCORTE")
     @ManyToOne
     private Corte idcorte;
@@ -119,6 +118,22 @@ public class Otrospagos implements Serializable {
         this.serie = serie;
     }
 
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
+    }
+
+    public String getUsuarioactual() {
+        return usuarioactual;
+    }
+
+    public void setUsuarioactual(String usuarioactual) {
+        this.usuarioactual = usuarioactual;
+    }
+
     public Corte getIdcorte() {
         return idcorte;
     }
@@ -151,7 +166,5 @@ public class Otrospagos implements Serializable {
     public String toString() {
         return "entidades.Otrospagos[ idotpagos=" + idotpagos + " ]";
     }
-    
-    
     
 }

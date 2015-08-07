@@ -8,9 +8,9 @@ package Controladores;
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import entidades.Corte;
 import entidades.Medidor;
-import entidades.Mingas;
+import entidades.Planificacion;
 import entidadesCruds.CorteJpaController;
-import entidadesCruds.MingasJpaController;
+import entidadesCruds.PlanificacionJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.Date;
@@ -23,48 +23,43 @@ import javax.swing.JOptionPane;
  *
  * @author JC-PC
  */
-public class classMingas {
-    
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("japPU");
-    public MingasJpaController mingasJpacontrolador = new MingasJpaController(emf);
-    classMedidor cm = new classMedidor();
+public class classPlanificacion {
 
-    public List<Mingas> getMingas() {
-        return mingasJpacontrolador.findMingasEntities();
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("japPU");
+    public PlanificacionJpaController planificacionJpacontrolador = new PlanificacionJpaController(emf);
+//    classMedidor cm = new classMedidor();
+
+    public List<Planificacion> getPlanificacion() {
+        return planificacionJpacontrolador.findPlanificacionEntities();
     }
 
-    public void guardarMingas(int idMedidor, String lugar, Date fecha, String asistencia, float valorMulta,String descripcion) {
+    public void guardarPlanificacion(String tipoPlanificacion, String lugar, Date fecha, float valorMulta, String descripcion) {
         try {
-
-            Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor).getIdmedidor());
-            Mingas dat = new Mingas();
-            dat.setIdmedidor(idmed);
+            Planificacion dat = new Planificacion();
+            dat.setTipoplanificacion(tipoPlanificacion);
             dat.setLugar(lugar);
             dat.setFecha(fecha);
-            dat.setAsistencia(asistencia);
             dat.setValormulta(valorMulta);
             dat.setDescripcion(descripcion);
-            mingasJpacontrolador.create(dat);
+            planificacionJpacontrolador.create(dat);
 
         } catch (Exception e) {
 
         }
     }
 
-    public boolean modificarMingas(int idMinga,int idMedidor, String lugar, Date fecha, String asistencia, float valorMulta,String descripcion) {
+    public boolean modificarPlanificacion(int idPlanificacion, String tipoPlanificacion, String lugar, Date fecha, float valorMulta, String descripcion) {
         try {
-            Mingas dat = mingasJpacontrolador.findMingas(idMinga);
+            Planificacion dat = planificacionJpacontrolador.findPlanificacion(idPlanificacion);
             if (dat == null) {
                 return false;
             }
-            Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor).getIdmedidor());
-            dat.setIdmedidor(idmed);
+            dat.setTipoplanificacion(tipoPlanificacion);
             dat.setLugar(lugar);
             dat.setFecha(fecha);
-            dat.setAsistencia(asistencia);
             dat.setValormulta(valorMulta);
             dat.setDescripcion(descripcion);
-            mingasJpacontrolador.edit(dat);
+            planificacionJpacontrolador.edit(dat);
             JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
 
         } catch (Exception e) {
@@ -72,20 +67,20 @@ public class classMingas {
         return true;
     }
 
-    public void eliminarMingas(int idMinga) throws IllegalOrphanException {
+    public void eliminarPlanificacion(int idPlanificacion) throws IllegalOrphanException {
 
         try {
-            mingasJpacontrolador.destroy(idMinga);
+            planificacionJpacontrolador.destroy(idPlanificacion);
             JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
         } catch (NonexistentEntityException ex) {
         }
 
     }
 
-    public Mingas buscarIdMingas(int idMingas) {
+    public Planificacion buscarIdPlanificacion(int idPlanificacion) {
 
-        for (Mingas dat : getMingas()) {
-            if (dat.getIdminga().equals(idMingas)) {
+        for (Planificacion dat : getPlanificacion()) {
+            if (dat.getIdplanificacion().equals(idPlanificacion)) {
                 return dat;
             }
         }

@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     07/08/2015 12:31:29                          */
+/* Created on:     07/08/2015 13:28:42                          */
 /*==============================================================*/
 
 
@@ -216,7 +216,7 @@ create table USUARIOS
    CELULAR              varchar(10),
    SECTOR               text,
    REFERENCIA           text,
-   FOTO                 char(10),
+   FOTO                 longblob,
    OBSERVACION          text,
    primary key (IDUSUARIO)
 );

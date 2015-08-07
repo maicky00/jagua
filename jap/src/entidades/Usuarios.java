@@ -6,7 +6,6 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,10 +17,8 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -79,8 +76,6 @@ public class Usuarios implements Serializable {
     @Lob
     @Column(name = "OBSERVACION")
     private String observacion;
-    @OneToMany(mappedBy = "idusuario")
-    private List<Medidor> medidorList;
     @JoinColumn(name = "IDINSTITUCION", referencedColumnName = "IDINSTITUCION")
     @ManyToOne
     private Institucion idinstitucion;
@@ -202,15 +197,6 @@ public class Usuarios implements Serializable {
 
     public void setObservacion(String observacion) {
         this.observacion = observacion;
-    }
-
-    @XmlTransient
-    public List<Medidor> getMedidorList() {
-        return medidorList;
-    }
-
-    public void setMedidorList(List<Medidor> medidorList) {
-        this.medidorList = medidorList;
     }
 
     public Institucion getIdinstitucion() {

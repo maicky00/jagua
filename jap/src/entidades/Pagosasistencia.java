@@ -28,22 +28,22 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author JC-PC
  */
 @Entity
-@Table(name = "pagosmingas")
+@Table(name = "pagosasistencia")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Pagosmingas.findAll", query = "SELECT p FROM Pagosmingas p"),
-    @NamedQuery(name = "Pagosmingas.findByIdpagominga", query = "SELECT p FROM Pagosmingas p WHERE p.idpagominga = :idpagominga"),
-    @NamedQuery(name = "Pagosmingas.findByFechapago", query = "SELECT p FROM Pagosmingas p WHERE p.fechapago = :fechapago"),
-    @NamedQuery(name = "Pagosmingas.findByNummingas", query = "SELECT p FROM Pagosmingas p WHERE p.nummingas = :nummingas"),
-    @NamedQuery(name = "Pagosmingas.findByValormingas", query = "SELECT p FROM Pagosmingas p WHERE p.valormingas = :valormingas"),
-    @NamedQuery(name = "Pagosmingas.findByObservacion", query = "SELECT p FROM Pagosmingas p WHERE p.observacion = :observacion")})
-public class Pagosmingas implements Serializable {
+    @NamedQuery(name = "Pagosasistencia.findAll", query = "SELECT p FROM Pagosasistencia p"),
+    @NamedQuery(name = "Pagosasistencia.findByIdpagoasistencia", query = "SELECT p FROM Pagosasistencia p WHERE p.idpagoasistencia = :idpagoasistencia"),
+    @NamedQuery(name = "Pagosasistencia.findByFechapago", query = "SELECT p FROM Pagosasistencia p WHERE p.fechapago = :fechapago"),
+    @NamedQuery(name = "Pagosasistencia.findByNummingas", query = "SELECT p FROM Pagosasistencia p WHERE p.nummingas = :nummingas"),
+    @NamedQuery(name = "Pagosasistencia.findByValormingas", query = "SELECT p FROM Pagosasistencia p WHERE p.valormingas = :valormingas"),
+    @NamedQuery(name = "Pagosasistencia.findByObservacion", query = "SELECT p FROM Pagosasistencia p WHERE p.observacion = :observacion")})
+public class Pagosasistencia implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "IDPAGOMINGA")
-    private Integer idpagominga;
+    @Column(name = "IDPAGOASISTENCIA")
+    private Integer idpagoasistencia;
     @Column(name = "FECHAPAGO")
     @Temporal(TemporalType.DATE)
     private Date fechapago;
@@ -52,28 +52,28 @@ public class Pagosmingas implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "VALORMINGAS")
     private Float valormingas;
+    @Column(name = "OBSERVACION")
+    private String observacion;
     @Lob
     @Column(name = "USUARIOACTUAL")
     private String usuarioactual;
-    @Column(name = "OBSERVACION")
-    private String observacion;
-    @JoinColumn(name = "IDMINGA", referencedColumnName = "IDMINGA")
+    @JoinColumn(name = "IDASISTENCIA", referencedColumnName = "IDASISTENCIA")
     @ManyToOne
-    private Mingas idminga;
+    private Asistencia idasistencia;
 
-    public Pagosmingas() {
+    public Pagosasistencia() {
     }
 
-    public Pagosmingas(Integer idpagominga) {
-        this.idpagominga = idpagominga;
+    public Pagosasistencia(Integer idpagoasistencia) {
+        this.idpagoasistencia = idpagoasistencia;
     }
 
-    public Integer getIdpagominga() {
-        return idpagominga;
+    public Integer getIdpagoasistencia() {
+        return idpagoasistencia;
     }
 
-    public void setIdpagominga(Integer idpagominga) {
-        this.idpagominga = idpagominga;
+    public void setIdpagoasistencia(Integer idpagoasistencia) {
+        this.idpagoasistencia = idpagoasistencia;
     }
 
     public Date getFechapago() {
@@ -100,14 +100,6 @@ public class Pagosmingas implements Serializable {
         this.valormingas = valormingas;
     }
 
-    public String getUsuarioactual() {
-        return usuarioactual;
-    }
-
-    public void setUsuarioactual(String usuarioactual) {
-        this.usuarioactual = usuarioactual;
-    }
-
     public String getObservacion() {
         return observacion;
     }
@@ -116,29 +108,37 @@ public class Pagosmingas implements Serializable {
         this.observacion = observacion;
     }
 
-    public Mingas getIdminga() {
-        return idminga;
+    public String getUsuarioactual() {
+        return usuarioactual;
     }
 
-    public void setIdminga(Mingas idminga) {
-        this.idminga = idminga;
+    public void setUsuarioactual(String usuarioactual) {
+        this.usuarioactual = usuarioactual;
+    }
+
+    public Asistencia getIdasistencia() {
+        return idasistencia;
+    }
+
+    public void setIdasistencia(Asistencia idasistencia) {
+        this.idasistencia = idasistencia;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idpagominga != null ? idpagominga.hashCode() : 0);
+        hash += (idpagoasistencia != null ? idpagoasistencia.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Pagosmingas)) {
+        if (!(object instanceof Pagosasistencia)) {
             return false;
         }
-        Pagosmingas other = (Pagosmingas) object;
-        if ((this.idpagominga == null && other.idpagominga != null) || (this.idpagominga != null && !this.idpagominga.equals(other.idpagominga))) {
+        Pagosasistencia other = (Pagosasistencia) object;
+        if ((this.idpagoasistencia == null && other.idpagoasistencia != null) || (this.idpagoasistencia != null && !this.idpagoasistencia.equals(other.idpagoasistencia))) {
             return false;
         }
         return true;
@@ -146,7 +146,7 @@ public class Pagosmingas implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Pagosmingas[ idpagominga=" + idpagominga + " ]";
+        return "entidades.Pagosasistencia[ idpagoasistencia=" + idpagoasistencia + " ]";
     }
     
 }

@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Medidor.findAll", query = "SELECT m FROM Medidor m"),
     @NamedQuery(name = "Medidor.findByIdmedidor", query = "SELECT m FROM Medidor m WHERE m.idmedidor = :idmedidor"),
     @NamedQuery(name = "Medidor.findBySerie", query = "SELECT m FROM Medidor m WHERE m.serie = :serie"),
-    @NamedQuery(name = "Medidor.findByNummedidor", query = "SELECT m FROM Medidor m WHERE m.nummedidor = :nummedidor")})
+    @NamedQuery(name = "Medidor.findByNummedidor", query = "SELECT m FROM Medidor m WHERE m.nummedidor = :nummedidor"),
+    @NamedQuery(name = "Medidor.findByEstado", query = "SELECT m FROM Medidor m WHERE m.estado = :estado")})
 public class Medidor implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,15 +46,17 @@ public class Medidor implements Serializable {
     private String serie;
     @Column(name = "NUMMEDIDOR")
     private Integer nummedidor;
+    @Column(name = "ESTADO")
+    private String estado;
     @OneToMany(mappedBy = "idmedidor")
     private List<Corte> corteList;
+    @OneToMany(mappedBy = "idmedidor")
+    private List<Asistencia> asistenciaList;
     @OneToMany(mappedBy = "idmedidor")
     private List<Detallefactura> detallefacturaList;
     @JoinColumn(name = "IDUSUARIO", referencedColumnName = "IDUSUARIO")
     @ManyToOne
     private Usuarios idusuario;
-    @OneToMany(mappedBy = "idmedidor")
-    private List<Mingas> mingasList;
 
     public Medidor() {
     }
@@ -86,6 +89,14 @@ public class Medidor implements Serializable {
         this.nummedidor = nummedidor;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     @XmlTransient
     public List<Corte> getCorteList() {
         return corteList;
@@ -93,6 +104,15 @@ public class Medidor implements Serializable {
 
     public void setCorteList(List<Corte> corteList) {
         this.corteList = corteList;
+    }
+
+    @XmlTransient
+    public List<Asistencia> getAsistenciaList() {
+        return asistenciaList;
+    }
+
+    public void setAsistenciaList(List<Asistencia> asistenciaList) {
+        this.asistenciaList = asistenciaList;
     }
 
     @XmlTransient
@@ -110,15 +130,6 @@ public class Medidor implements Serializable {
 
     public void setIdusuario(Usuarios idusuario) {
         this.idusuario = idusuario;
-    }
-
-    @XmlTransient
-    public List<Mingas> getMingasList() {
-        return mingasList;
-    }
-
-    public void setMingasList(List<Mingas> mingasList) {
-        this.mingasList = mingasList;
     }
 
     @Override
