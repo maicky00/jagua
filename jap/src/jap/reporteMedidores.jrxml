@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="45e7f63d-317d-4d9d-b83e-65b027721400">
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     medidor.`IDMEDIDOR` AS medidor_IDMEDIDOR,
+     medidor.`IDUSUARIO` AS medidor_IDUSUARIO,
+     medidor.`NUMMEDIDOR` AS medidor_NUMMEDIDOR,
+     usuarios.`IDUSUARIO` AS usuarios_IDUSUARIO,
+     usuarios.`IDINSTITUCION` AS usuarios_IDINSTITUCION,
+     usuarios.`PRIMERNOMBRE` AS usuarios_PRIMERNOMBRE,
+     usuarios.`SEGUNDONOMBRE` AS usuarios_SEGUNDONOMBRE,
+     usuarios.`PRIMERAPELLIDO` AS usuarios_PRIMERAPELLIDO,
+     usuarios.`SEGUNDOAPELLIDO` AS usuarios_SEGUNDOAPELLIDO,
+     usuarios.`APADOSN` AS usuarios_APADOSN,
+     usuarios.`FOTO` AS usuarios_FOTO,
+     medidor.`ESTADO` AS medidor_ESTADO,
+     institucion.`IDINSTITUCION` AS institucion_IDINSTITUCION,
+     institucion.`NOMBREINST` AS institucion_NOMBREINST,
+     institucion.`DIRECCION` AS institucion_DIRECCION,
+     institucion.`TELEFONO` AS institucion_TELEFONO,
+     institucion.`EMAIL` AS institucion_EMAIL,
+     institucion.`RUC` AS institucion_RUC,
+     institucion.`CELULAR` AS institucion_CELULAR
+FROM
+     `usuarios` usuarios INNER JOIN `medidor` medidor ON usuarios.`IDUSUARIO` = medidor.`IDUSUARIO`
+     INNER JOIN `institucion` institucion ON usuarios.`IDINSTITUCION` = institucion.`IDINSTITUCION`]]>
+	</queryString>
+	<field name="medidor_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="medidor_NUMMEDIDOR" class="java.lang.Integer"/>
+	<field name="usuarios_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="usuarios_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="usuarios_PRIMERNOMBRE" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDONOMBRE" class="java.lang.String"/>
+	<field name="usuarios_PRIMERAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDOAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_APADOSN" class="java.lang.String"/>
+	<field name="usuarios_FOTO" class="java.lang.Object"/>
+	<field name="medidor_ESTADO" class="java.lang.String"/>
+	<field name="institucion_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="institucion_NOMBREINST" class="java.lang.String"/>
+	<field name="institucion_DIRECCION" class="java.lang.String"/>
+	<field name="institucion_TELEFONO" class="java.lang.String"/>
+	<field name="institucion_EMAIL" class="java.lang.String"/>
+	<field name="institucion_RUC" class="java.lang.String"/>
+	<field name="institucion_CELULAR" class="java.lang.String"/>
+	<group name="institucion_NOMBREINST">
+		<groupExpression><![CDATA[$F{institucion_NOMBREINST}]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<textField>
+					<reportElement style="SubTitle" x="47" y="13" width="506" height="24" forecolor="#006600" uuid="a477c8be-d926-4619-be9f-09e61f70ef7e"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{institucion_NOMBREINST}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="13" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="e095adc8-0514-4922-a6da-52a1f729d77d"/>
+				</rectangle>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<group name="institucion_IDINSTITUCION">
+		<groupExpression><![CDATA[$F{institucion_IDINSTITUCION}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement style="SubTitle" x="0" y="4" width="460" height="20" uuid="a5cad171-e6fd-456a-9962-651bb87fc8e8"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{institucion_IDINSTITUCION}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="institucion_DIRECCION">
+		<groupExpression><![CDATA[$F{institucion_DIRECCION}]]></groupExpression>
+	</group>
+	<group name="institucion_CELULAR">
+		<groupExpression><![CDATA[$F{institucion_CELULAR}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="cb9e12c6-516a-4812-b07b-5d3dd0deedd9"/>
+				<imageExpression><![CDATA["leaf_banner_green.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="58a00880-6de9-48b6-8b2e-8ddb0fdf6aa4"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Leaf Green Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="100" y="46" width="174" height="22" uuid="c8bedcfd-e944-44ed-84dd-658986b81924"/>
+				<text><![CDATA[Leaf Green SubTitle]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="475b8059-5600-4b6a-b45a-b449977edc02"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="37" height="15" uuid="e551d835-121a-4dd6-83d7-93de67add464"/>
+				<text><![CDATA[medidor_IDMEDIDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="37" y="19" width="37" height="15" uuid="8969ee53-b80e-4031-8dd6-7007c4995faa"/>
+				<text><![CDATA[medidor_IDUSUARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="74" y="19" width="37" height="15" uuid="473f3e5e-4a6f-4d8c-b119-a82334901e72"/>
+				<text><![CDATA[medidor_NUMMEDIDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="111" y="19" width="37" height="15" uuid="cb3e7ea1-16e2-4ccb-b79f-1d790220bef8"/>
+				<text><![CDATA[usuarios_IDUSUARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="148" y="19" width="37" height="15" uuid="bf3c652d-0b29-4c59-b3f4-fac3466b4656"/>
+				<text><![CDATA[usuarios_IDINSTITUCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="185" y="19" width="37" height="15" uuid="98981dfd-1fb5-4f64-8251-7fb085cbde34"/>
+				<text><![CDATA[usuarios_PRIMERNOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="222" y="19" width="37" height="15" uuid="dc49b0b6-9883-4674-b363-47a2d41ee641"/>
+				<text><![CDATA[usuarios_SEGUNDONOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="259" y="19" width="37" height="15" uuid="bd371d22-c6f2-4949-99eb-35575e0c52be"/>
+				<text><![CDATA[usuarios_PRIMERAPELLIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="296" y="19" width="37" height="15" uuid="1d746375-d5d0-43b4-bbfa-0dd21e93cbd8"/>
+				<text><![CDATA[usuarios_SEGUNDOAPELLIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="333" y="19" width="37" height="15" uuid="11ab4044-da3e-4bf6-a87d-090f03b06f74"/>
+				<text><![CDATA[usuarios_APADOSN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="370" y="19" width="37" height="15" uuid="0ba17779-5710-4700-a59f-ebc2c61d59ce"/>
+				<text><![CDATA[usuarios_FOTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="407" y="19" width="37" height="15" uuid="b635dd8d-2f71-45e8-87f8-a9836185d043"/>
+				<text><![CDATA[medidor_ESTADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="444" y="19" width="37" height="15" uuid="0c7a0539-a519-4eed-84f2-6776984fd40d"/>
+				<text><![CDATA[institucion_TELEFONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="481" y="19" width="37" height="15" uuid="1f8fccd1-8d52-46ba-8a92-a28e3a393233"/>
+				<text><![CDATA[institucion_EMAIL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="518" y="19" width="37" height="15" uuid="c3b03d5b-9a41-42c5-8e76-96ef6d29a3f5"/>
+				<text><![CDATA[institucion_RUC]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="7f4102cf-b84d-4977-ada3-321d87a982e4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="37" height="15" uuid="8c67493a-f35f-4623-b1cd-5242ee0083c2"/>
+				<textFieldExpression><![CDATA[$F{medidor_IDMEDIDOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="37" y="0" width="37" height="15" uuid="90d0d2be-e334-4cec-8e32-e4c812b716d2"/>
+				<textFieldExpression><![CDATA[$F{medidor_IDUSUARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="74" y="0" width="37" height="15" uuid="0ca69e82-2347-47bc-b479-eb92aa390673"/>
+				<textFieldExpression><![CDATA[$F{medidor_NUMMEDIDOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="111" y="0" width="37" height="15" uuid="064a3a27-721f-4977-b98d-129cd1a1bea9"/>
+				<textFieldExpression><![CDATA[$F{usuarios_IDUSUARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="148" y="0" width="37" height="15" uuid="f36be424-1844-4c24-9afe-5ea9b8cdee6c"/>
+				<textFieldExpression><![CDATA[$F{usuarios_IDINSTITUCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="185" y="0" width="37" height="15" uuid="eb41f39e-518c-4ea8-b3fd-f27fa7a518ba"/>
+				<textFieldExpression><![CDATA[$F{usuarios_PRIMERNOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="222" y="0" width="37" height="15" uuid="77ea1b8f-f6d9-41f9-a28c-bda7a31cffc0"/>
+				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDONOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="259" y="0" width="37" height="15" uuid="47ec84f2-3b2e-4e06-b02f-ee71a37fcc61"/>
+				<textFieldExpression><![CDATA[$F{usuarios_PRIMERAPELLIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="296" y="0" width="37" height="15" uuid="ee0c29d0-a24b-42cb-90c5-746485c9ccbe"/>
+				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDOAPELLIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="333" y="0" width="37" height="15" uuid="22a6e930-a119-4656-8153-45e05136cd60"/>
+				<textFieldExpression><![CDATA[$F{usuarios_APADOSN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="370" y="0" width="37" height="15" uuid="bfa6f44c-262d-4918-80af-c126b341714e"/>
+				<textFieldExpression><![CDATA[""+$F{usuarios_FOTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="407" y="0" width="37" height="15" uuid="5cc7dd8b-9109-408d-867a-ef412fe7b4a0"/>
+				<textFieldExpression><![CDATA[$F{medidor_ESTADO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="444" y="0" width="37" height="15" uuid="efb84724-ac1d-4245-8bf8-ba1e0ba05169"/>
+				<textFieldExpression><![CDATA[$F{institucion_TELEFONO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="481" y="0" width="37" height="15" uuid="4981df74-47c0-4876-8d4e-768c725f6df4"/>
+				<textFieldExpression><![CDATA[$F{institucion_EMAIL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="518" y="0" width="37" height="15" uuid="ab3a6004-342f-415d-8296-efaf602f87c6"/>
+				<textFieldExpression><![CDATA[$F{institucion_RUC}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="b16c31ea-73f8-464d-9b6a-d24ad17aea6b"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="f9564365-3460-4de5-91d5-9dd1fb96a4cb"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="1c0cd686-4265-492a-bb35-8610508d00f4"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="f4961623-b548-48f1-82b7-e62edddceb84"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
