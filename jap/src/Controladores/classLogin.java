@@ -73,25 +73,22 @@ public class classLogin {
 
     public boolean modificarLogin(int id, String nombres, String Apellidos, String cedula, String nombreUsuario, String clave, String tipoRol, String estadoUsuario) {
 
-
         try {
-      
 
-                Login dat = loginJpacontrolador.findLogin(id);
-                if (dat == null) {
-                    return false;
-                }
-                dat.setNombres(nombres);
-                dat.setCedula(cedula);
-                dat.setApellidos(Apellidos);
-                dat.setUsuario(nombreUsuario);
-                dat.setClave(clave);
-                dat.setTipo(tipoRol);
-                dat.setEstado(estadoUsuario);
-                loginJpacontrolador.edit(dat);
-                JOptionPane.showMessageDialog(null, "El Usuario se Modifico exitosamente", "Información", 1);
+            Login dat = loginJpacontrolador.findLogin(id);
+            if (dat == null) {
+                return false;
+            }
+            dat.setNombres(nombres);
+            dat.setCedula(cedula);
+            dat.setApellidos(Apellidos);
+            dat.setUsuario(nombreUsuario);
+            dat.setClave(clave);
+            dat.setTipo(tipoRol);
+            dat.setEstado(estadoUsuario);
+            loginJpacontrolador.edit(dat);
+            JOptionPane.showMessageDialog(null, "El Usuario se Modifico exitosamente", "Información", 1);
 
-            
         } catch (Exception e) {
         }
         return true;
@@ -191,20 +188,6 @@ public class classLogin {
         return s;
     }
 
-    public boolean buscarApellidos(String inicio) {
-        Login lg = new Login();
-        if (inicio.isEmpty() || inicio.length() > (lg.getApellidos().length()+2)) {
-            return false;
-        }
-        for (int i = 0; i < inicio.length(); ++i) {
-            String r = elimiEspacio(lg.getApellidos());
-            if (inicio.charAt(i) != (r.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public boolean buscarNombres(String inicio) {
         Login lg = new Login();
         if (inicio.isEmpty() || inicio.length() > (lg.getNombres().length() + 2)) {
@@ -219,23 +202,9 @@ public class classLogin {
         return true;
     }
 
-    public boolean buscarCedula(String inicio) {
-        Login lg = new Login();
-        if (inicio.isEmpty() || inicio.length() > (lg.cedula.length() + 2)) {
-            return false;
-        }
-        for (int i = 0; i < inicio.length(); ++i) {
-            String r = elimiEspacio(lg.cedula);
-            if (inicio.charAt(i) != (r.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public void BuscarApe() {
+    public void BuscarCed(String txt, JTable tabla) {
         modelo = new DefaultTableModel();
-        FrmLogin.jTable1.setModel(modelo);
+        tabla.setModel(modelo);
         Object[] fila = new Object[8];
         modelo.addColumn("Nro");
         modelo.addColumn("Nombres");
@@ -247,7 +216,35 @@ public class classLogin {
         modelo.addColumn("Estado de Cuenta");
 
         for (Login u : getLogin()) {
-            if (buscarCedula(elimiEspacio(FrmLogin.jTextField4.getText()))) {
+            if (u.buscarApellidos(u.elimiEspacio(txt))) {
+                fila[0] = u.getIdlogin();
+                fila[1] = u.getNombres();
+                fila[2] = u.getApellidos();
+                fila[3] = u.getCedula();
+                fila[4] = u.getUsuario();
+                fila[5] = u.getClave();
+                fila[6] = u.getTipo();
+                fila[7] = u.getEstado();
+                modelo.addRow(fila);
+            }
+        }
+    }
+
+    public void BuscarApe(String txt, JTable tabla) {
+        modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[8];
+        modelo.addColumn("Nro");
+        modelo.addColumn("Nombres");
+        modelo.addColumn("Apellidos");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Clave");
+        modelo.addColumn("Tipo De Usuario");
+        modelo.addColumn("Estado de Cuenta");
+
+        for (Login u : getLogin()) {
+            if (u.buscarCedula(u.elimiEspacio(txt))) {
                 fila[0] = u.getIdlogin();
                 fila[1] = u.getNombres();
                 fila[2] = u.getApellidos();

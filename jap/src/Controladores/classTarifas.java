@@ -12,6 +12,7 @@ import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -54,22 +55,20 @@ public class classTarifas {
         }
     }
 
-    public boolean modificarTarifa(int id,int base, float tarBase, String descripcion) {
-
+    public boolean modificarTarifa(int id, int base, float tarBase, String descripcion) {
 
         try {
-            
-                Tarifas dat = tarifasJpacontrolador.findTarifas(id);
-                if (dat == null) {
-                    return false;
-                }
-                dat.setBase(base);
-                dat.setTarbase(tarBase);
-                dat.setDescripcion(descripcion);
-                tarifasJpacontrolador.edit(dat);
-                JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
 
-            
+            Tarifas dat = tarifasJpacontrolador.findTarifas(id);
+            if (dat == null) {
+                return false;
+            }
+            dat.setBase(base);
+            dat.setTarbase(tarBase);
+            dat.setDescripcion(descripcion);
+            tarifasJpacontrolador.edit(dat);
+            JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
+
         } catch (Exception e) {
         }
         return true;
@@ -105,4 +104,9 @@ public class classTarifas {
         return null;
     }
 
+    public void cargarCmbTarifas(JComboBox lista) {
+        for (Tarifas item : getTarifas()) {
+            lista.addItem(item.getDescripcion());
+        }
+    }
 }

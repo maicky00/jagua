@@ -98,4 +98,16 @@ public class classDetalleFactura {
         return null;
     }
 
+    public int medidaAnterior(int numMedidor) {
+        int r = 0;
+        classMedidor cm = new classMedidor();
+        for (Detallefactura dat : getDetallefactura()) {
+            if (dat.getIdmedidor().getIdmedidor().equals(cm.buscarMedidorNumM(numMedidor).getIdmedidor())) {
+            if (dat.getIddetallefac() > r) {
+                r = dat.getMedidaact();
+            }
+            }
+        }
+        return r;
+    }
 }

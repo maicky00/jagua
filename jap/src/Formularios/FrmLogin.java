@@ -7,6 +7,7 @@ package Formularios;
 
 import Controladores.classLogin;
 import entidadesCruds.exceptions.IllegalOrphanException;
+import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,20 +22,23 @@ public class FrmLogin extends javax.swing.JInternalFrame {
      * Creates new form FrmLogin
      */
     classLogin cl = new classLogin();
-
+    
     public FrmLogin() {
         initComponents();
-        cl.cargarTablaLogin(jTable1);
+        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
+        Dimension jInternalFrameSize = this.getSize();
+        this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
+        cl.cargarTablaLogin(tabusuarios);
     }
-
+    
     private void mostrar() {
-
+        
         txtnombres.setEnabled(true);
         txtApellidos.setEnabled(true);
         txtUsuario.setEnabled(true);
         txtClave.setEnabled(true);
         txtcedula.setEnabled(true);
-
+        
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
@@ -43,17 +47,17 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         comboEstado.setEnabled(true);
         comboTipo.setSelectedIndex(0);
         comboEstado.setSelectedIndex(0);
-
+        
     }
-
+    
     private void ocultar() {
-
+        
         txtnombres.setEnabled(false);
         txtApellidos.setEnabled(false);
         txtUsuario.setEnabled(false);
         txtClave.setEnabled(false);
         txtcedula.setEnabled(false);
-
+        
         btnGuardar.setEnabled(false);
         btnEditar.setEnabled(true);
         btnEliminar.setEnabled(true);
@@ -63,7 +67,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         comboTipo.setSelectedIndex(0);
         comboEstado.setSelectedIndex(0);
     }
-
+    
     private void limpiar() {
         lblid.setText("");
         txtnombres.setText("");
@@ -71,7 +75,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         txtUsuario.setText("");
         txtClave.setText("");
         txtcedula.setText("");
-
+        
     }
     String nombres, apellidos, cedula, nombreUsuario, clave, tipo, estado;
 
@@ -84,6 +88,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rdbGrupoBusqudas = new javax.swing.ButtonGroup();
         panelTranslucido1 = new org.edisoncor.gui.panel.PanelTranslucido();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -103,9 +108,12 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         lblcedula = new javax.swing.JLabel();
         panelTranslucidoComplete21 = new org.edisoncor.gui.panel.PanelTranslucidoComplete2();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabusuarios = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtbusquedas = new javax.swing.JTextField();
+        rdbApellidos = new javax.swing.JRadioButton();
+        rdbCedula = new javax.swing.JRadioButton();
+        rdbTodos = new javax.swing.JRadioButton();
         panelReflect1 = new org.edisoncor.gui.panel.PanelReflect();
         btnNuevo = new org.edisoncor.gui.button.ButtonAero();
         btnGuardar = new org.edisoncor.gui.button.ButtonAero();
@@ -228,7 +236,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
                 .addContainerGap(193, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabusuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -239,24 +247,49 @@ public class FrmLogin extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabusuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tabusuariosMouseClicked(evt);
             }
         });
-        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+        tabusuarios.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTable1KeyReleased(evt);
+                tabusuariosKeyReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabusuarios);
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Buscar:");
 
-        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtbusquedas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField4KeyReleased(evt);
+                txtbusquedasKeyReleased(evt);
+            }
+        });
+
+        rdbGrupoBusqudas.add(rdbApellidos);
+        rdbApellidos.setText("Apellidos");
+        rdbApellidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbApellidosActionPerformed(evt);
+            }
+        });
+
+        rdbGrupoBusqudas.add(rdbCedula);
+        rdbCedula.setText("Cedula");
+        rdbCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbCedulaActionPerformed(evt);
+            }
+        });
+
+        rdbGrupoBusqudas.add(rdbTodos);
+        rdbTodos.setSelected(true);
+        rdbTodos.setText("Todos");
+        rdbTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdbTodosActionPerformed(evt);
             }
         });
 
@@ -273,18 +306,31 @@ public class FrmLogin extends javax.swing.JInternalFrame {
                     .addGroup(panelTranslucidoComplete21Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField4)))
+                        .addComponent(txtbusquedas)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTranslucidoComplete21Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rdbTodos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rdbCedula)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rdbApellidos)
+                .addGap(163, 163, 163))
         );
         panelTranslucidoComplete21Layout.setVerticalGroup(
             panelTranslucidoComplete21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTranslucidoComplete21Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(9, 9, 9)
+                .addGroup(panelTranslucidoComplete21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdbApellidos)
+                    .addComponent(rdbCedula)
+                    .addComponent(rdbTodos))
+                .addGap(18, 18, 18)
                 .addGroup(panelTranslucidoComplete21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(txtbusquedas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -404,37 +450,37 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         clave = txtClave.getText();
         tipo = comboTipo.getSelectedItem().toString();
         estado = comboEstado.getSelectedItem().toString();
-
+        
         if (lblid.getText().equals("")) {
             if (tipo.equals("Seleccione")) {
                 JOptionPane.showMessageDialog(null, "Seleccione un Tipo de Usuario", "Información", 1);
-
+                
             } else if (estado.equals("Seleccione")) {
                 JOptionPane.showMessageDialog(null, "Seleccione el Estado del Usuario", "Información", 1);
-
+                
             } else {
                 int i = JOptionPane.showConfirmDialog(this, "Gguardar", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     cl.guardarLogin(nombres, apellidos, cedula, nombreUsuario, clave, tipo, estado);
-                    cl.cargarTablaLogin(jTable1);
+                    cl.cargarTablaLogin(tabusuarios);
                 }
-
+                
             }
         } else if (!lblid.getText().equals("")) {
             int id = Integer.valueOf(lblid.getText());
             if (tipo.equals("Seleccione")) {
                 JOptionPane.showMessageDialog(null, "Seleccione un Tipo de Usuario", "Información", 1);
-
+                
             } else if (estado.equals("Seleccione")) {
                 JOptionPane.showMessageDialog(null, "Seleccione el Estado del Usuario", "Información", 1);
-
+                
             } else {
                 int i = JOptionPane.showConfirmDialog(this, "Guardar", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     cl.modificarLogin(id, nombres, apellidos, cedula, nombreUsuario, clave, tipo, estado);
-                    cl.cargarTablaLogin(jTable1);
+                    cl.cargarTablaLogin(tabusuarios);
                 }
-
+                
             }
         }
 
@@ -451,12 +497,12 @@ public class FrmLogin extends javax.swing.JInternalFrame {
             if (i == 0) {
                 int id = Integer.valueOf(lblid.getText());
                 cl.eliminarLogin(id);
-                cl.cargarTablaLogin(jTable1);
+                cl.cargarTablaLogin(tabusuarios);
             }
-
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se Puede Eliminar", "Información", 1);
-
+            
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
@@ -470,47 +516,67 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         ocultar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+    private void tabusuariosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tabusuariosKeyReleased
         // TODO add your handling code here:
         try {
-            int n = jTable1.getSelectedRow();
-            lblid.setText(jTable1.getValueAt(n, 0).toString());
-            txtnombres.setText(jTable1.getValueAt(n, 1).toString());
-            txtApellidos.setText(jTable1.getValueAt(n, 2).toString());
-            txtcedula.setText(jTable1.getValueAt(n, 3).toString());
-            txtUsuario.setText(jTable1.getValueAt(n, 4).toString());
-            txtClave.setText(jTable1.getValueAt(n, 5).toString());
-            comboTipo.setSelectedItem(jTable1.getValueAt(n, 6).toString());
-            comboEstado.setSelectedItem(jTable1.getValueAt(n, 7).toString());
+            int n = tabusuarios.getSelectedRow();
+            lblid.setText(tabusuarios.getValueAt(n, 0).toString());
+            txtnombres.setText(tabusuarios.getValueAt(n, 1).toString());
+            txtApellidos.setText(tabusuarios.getValueAt(n, 2).toString());
+            txtcedula.setText(tabusuarios.getValueAt(n, 3).toString());
+            txtUsuario.setText(tabusuarios.getValueAt(n, 4).toString());
+            txtClave.setText(tabusuarios.getValueAt(n, 5).toString());
+            comboTipo.setSelectedItem(tabusuarios.getValueAt(n, 6).toString());
+            comboEstado.setSelectedItem(tabusuarios.getValueAt(n, 7).toString());
         } catch (Exception e) {
         }
 
-    }//GEN-LAST:event_jTable1KeyReleased
+    }//GEN-LAST:event_tabusuariosKeyReleased
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void tabusuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabusuariosMouseClicked
         // TODO add your handling code here:
         try {
-            int n = jTable1.getSelectedRow();
-            lblid.setText(jTable1.getValueAt(n, 0).toString());
-            txtnombres.setText(jTable1.getValueAt(n, 1).toString());
-            txtApellidos.setText(jTable1.getValueAt(n, 2).toString());
-            txtcedula.setText(jTable1.getValueAt(n, 3).toString());
-            txtUsuario.setText(jTable1.getValueAt(n, 4).toString());
-            txtClave.setText(jTable1.getValueAt(n, 5).toString());
-            comboTipo.setSelectedItem(jTable1.getValueAt(n, 6).toString());
-            comboEstado.setSelectedItem(jTable1.getValueAt(n, 7).toString());
+            int n = tabusuarios.getSelectedRow();
+            lblid.setText(tabusuarios.getValueAt(n, 0).toString());
+            txtnombres.setText(tabusuarios.getValueAt(n, 1).toString());
+            txtApellidos.setText(tabusuarios.getValueAt(n, 2).toString());
+            txtcedula.setText(tabusuarios.getValueAt(n, 3).toString());
+            txtUsuario.setText(tabusuarios.getValueAt(n, 4).toString());
+            txtClave.setText(tabusuarios.getValueAt(n, 5).toString());
+            comboTipo.setSelectedItem(tabusuarios.getValueAt(n, 6).toString());
+            comboEstado.setSelectedItem(tabusuarios.getValueAt(n, 7).toString());
         } catch (Exception e) {
         }
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_tabusuariosMouseClicked
 
-    private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
+    private void txtbusquedasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbusquedasKeyReleased
         // TODO add your handling code here:
         try {
-            cl.BuscarApe();
+            if (rdbCedula.isSelected() != true) {
+                cl.BuscarCed(txtbusquedas.getText(), tabusuarios);
+            } else if (rdbApellidos.isSelected() != true) {
+                cl.BuscarApe(txtbusquedas.getText(), tabusuarios);
+            }
+            
         } catch (Exception e) {
         }
 
-    }//GEN-LAST:event_jTextField4KeyReleased
+    }//GEN-LAST:event_txtbusquedasKeyReleased
+
+    private void rdbCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbCedulaActionPerformed
+        // TODO add your handling code here:
+        txtbusquedas.setText("");
+    }//GEN-LAST:event_rdbCedulaActionPerformed
+
+    private void rdbApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbApellidosActionPerformed
+        // TODO add your handling code here:
+        txtbusquedas.setText("");
+    }//GEN-LAST:event_rdbApellidosActionPerformed
+
+    private void rdbTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdbTodosActionPerformed
+        // TODO add your handling code here:
+        cl.cargarTablaLogin(tabusuarios);
+    }//GEN-LAST:event_rdbTodosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -530,16 +596,20 @@ public class FrmLogin extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable1;
-    public static javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblcedula;
     private javax.swing.JLabel lblid;
     private org.edisoncor.gui.panel.PanelReflect panelReflect1;
     private org.edisoncor.gui.panel.PanelTranslucido panelTranslucido1;
     private org.edisoncor.gui.panel.PanelTranslucidoComplete2 panelTranslucidoComplete21;
+    private javax.swing.JRadioButton rdbApellidos;
+    private javax.swing.JRadioButton rdbCedula;
+    private javax.swing.ButtonGroup rdbGrupoBusqudas;
+    private javax.swing.JRadioButton rdbTodos;
+    public static javax.swing.JTable tabusuarios;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JPasswordField txtClave;
     private javax.swing.JTextField txtUsuario;
+    public static javax.swing.JTextField txtbusquedas;
     private javax.swing.JTextField txtcedula;
     private javax.swing.JTextField txtnombres;
     // End of variables declaration//GEN-END:variables

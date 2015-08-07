@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tarifas.findAll", query = "SELECT t FROM Tarifas t"),
     @NamedQuery(name = "Tarifas.findByIdtarifas", query = "SELECT t FROM Tarifas t WHERE t.idtarifas = :idtarifas"),
     @NamedQuery(name = "Tarifas.findByBase", query = "SELECT t FROM Tarifas t WHERE t.base = :base"),
-    @NamedQuery(name = "Tarifas.findByTarbase", query = "SELECT t FROM Tarifas t WHERE t.tarbase = :tarbase")})
+    @NamedQuery(name = "Tarifas.findByTarbase", query = "SELECT t FROM Tarifas t WHERE t.tarbase = :tarbase"),
+    @NamedQuery(name = "Tarifas.findByValorexceso", query = "SELECT t FROM Tarifas t WHERE t.valorexceso = :valorexceso")})
 public class Tarifas implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,6 +49,8 @@ public class Tarifas implements Serializable {
     @Lob
     @Column(name = "DESCRIPCION")
     private String descripcion;
+    @Column(name = "VALOREXCESO")
+    private Float valorexceso;
     @OneToMany(mappedBy = "idtarifas")
     private List<Detallefactura> detallefacturaList;
 
@@ -88,6 +91,14 @@ public class Tarifas implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Float getValorexceso() {
+        return valorexceso;
+    }
+
+    public void setValorexceso(Float valorexceso) {
+        this.valorexceso = valorexceso;
     }
 
     @XmlTransient

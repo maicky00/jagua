@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Login.findByTipo", query = "SELECT l FROM Login l WHERE l.tipo = :tipo"),
     @NamedQuery(name = "Login.findByEstado", query = "SELECT l FROM Login l WHERE l.estado = :estado")})
 public class Login implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +47,7 @@ public class Login implements Serializable {
     @Column(name = "APELLIDOS")
     private String apellidos;
     @Column(name = "CEDULA")
-    public String cedula;
+    private String cedula;
     @Column(name = "USUARIO")
     private String usuario;
     @Column(name = "CLAVE")
@@ -151,5 +152,42 @@ public class Login implements Serializable {
     public String toString() {
         return "entidades.Login[ idlogin=" + idlogin + " ]";
     }
-    
+
+    public String elimiEspacio(String m) {
+        String a[] = m.split(" ");
+        String s = "";
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != " ") {
+                s += a[i];
+            }
+        }
+        return s;
+    }
+
+    public boolean buscarCedula(String inicio) {
+        if (inicio.isEmpty() || inicio.length() > (cedula.length() + 2)) {
+            return false;
+        }
+        for (int i = 0; i < inicio.length(); ++i) {
+            String r = elimiEspacio(cedula);
+            if (inicio.charAt(i) != (r.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean buscarApellidos(String inicio) {
+        Login lg = new Login();
+        if (inicio.isEmpty() || inicio.length() > (apellidos.length() + 2)) {
+            return false;
+        }
+        for (int i = 0; i < inicio.length(); ++i) {
+            String r = elimiEspacio(apellidos);
+            if (inicio.charAt(i) != (r.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

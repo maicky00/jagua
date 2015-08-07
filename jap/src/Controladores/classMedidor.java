@@ -103,7 +103,7 @@ public class classMedidor {
 
     }
 
-    public Medidor buscarMedidorNumM(String numMedidor) {
+    public Medidor buscarMedidorNumM(int numMedidor) {
 
         for (Medidor dat : getMedidor()) {
             if (dat.getNummedidor().equals(numMedidor)) {
