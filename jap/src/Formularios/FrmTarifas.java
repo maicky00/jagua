@@ -23,39 +23,41 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
         inicio();
     }
     classTarifas ta = new classTarifas();
-
-    public void inicio() {
+    
+    private void inicio() {
         Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
-        ta=new classTarifas();
+        ta = new classTarifas();
         
         txtIdTarifas.setText(String.valueOf(ta.buscarIdTarifas(1).getIdtarifas()));
         txtBaseM.setText(String.valueOf(ta.buscarIdTarifas(1).getBase()));
         txtTarifaDolares.setText(String.valueOf(ta.buscarIdTarifas(1).getTarbase()));
+        txtDescripcion.setText(String.valueOf(ta.buscarIdTarifas(1).getDescripcion()));
         
     }
-
+    
     private void mostrar() {
-        txtBaseM.setEnabled(true);
-        txtTarifaDolares.setEnabled(true);
-
+        txtBaseM.setEditable(true);
+        txtTarifaDolares.setEditable(true);
+        txtDescripcion.setEditable(true);
+        
         txtDescripcion.setEnabled(true);
         btnGuardar.setEnabled(true);
         btnCancelar.setEnabled(true);
         btnEditar.setEnabled(false);
-
+        
     }
-
+    
     private void ocultar() {
-        txtBaseM.setEnabled(false);
-        txtTarifaDolares.setEnabled(false);
-        txtDescripcion.setEnabled(false);
-
+        txtBaseM.setEditable(false);
+        txtTarifaDolares.setEditable(false);
+        txtDescripcion.setEditable(false);
+        
         btnGuardar.setEnabled(false);
         btnCancelar.setEnabled(false);
         btnEditar.setEnabled(true);
-
+        
     }
     String tarM3;
     String tarDolar;
@@ -171,14 +173,14 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Tarifa Base $:");
 
-        txtBaseM.setEnabled(false);
+        txtBaseM.setEditable(false);
         txtBaseM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtBaseMKeyTyped(evt);
             }
         });
 
-        txtTarifaDolares.setEnabled(false);
+        txtTarifaDolares.setEditable(false);
         txtTarifaDolares.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTarifaDolaresKeyTyped(evt);
@@ -187,7 +189,7 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Descripcion:");
 
-        txtDescripcion.setEnabled(false);
+        txtDescripcion.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -260,37 +262,37 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
+        
         try {
-            tarM3=txtBaseM.getText();
-            tarDolar=txtTarifaDolares.getText();
+            tarM3 = txtBaseM.getText();
+            tarDolar = txtTarifaDolares.getText();
             ta.modificarTarifa(1, Integer.parseInt(txtBaseM.getText()), Float.parseFloat(txtTarifaDolares.getText()), txtDescripcion.getText());
             
             ocultar();
         } catch (Exception e) {
         }
-        
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-
+        
         mostrar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+        
         ocultar();
 
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtBaseMKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBaseMKeyTyped
         char c = evt.getKeyChar();
-
+        
         if (Character.isLetter(c)) {
             getToolkit().beep();
-
+            
             evt.consume();
-
+            
             mensaje.setText("error de ingreso, ingrese digitos");
         } else {
             mensaje.setText("");
@@ -299,12 +301,12 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
 
     private void txtTarifaDolaresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTarifaDolaresKeyTyped
         char c = evt.getKeyChar();
-
+        
         if (Character.isLetter(c)) {
             getToolkit().beep();
-
+            
             evt.consume();
-
+            
             mensaje.setText("error de ingreso, ingrese digitos");
         } else {
             mensaje.setText("");

@@ -22,6 +22,9 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         tabla2.setShowVerticalLines(true);
     }
     ControlFormularios cf;
+    
+    //ventana
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

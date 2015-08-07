@@ -69,7 +69,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         txtSerie = new javax.swing.JTextField();
         txtMedidor = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         btnEditar1 = new org.edisoncor.gui.button.ButtonNice();
         jLabel6 = new javax.swing.JLabel();
@@ -192,9 +192,13 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
         jLabel5.setText("N° de Medidor:");
 
-        txtUsuario.setEnabled(false);
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
 
-        jTextField1.setEnabled(false);
+        txtNombre.setEnabled(false);
 
         jLabel4.setText("Nombre:");
 
@@ -235,13 +239,12 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtSerie)
                             .addComponent(txtUsuario)
-                            .addComponent(jTextField1))))
+                            .addComponent(txtNombre))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -256,7 +259,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -264,9 +267,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel3))
+                    .addComponent(jLabel3)
                     .addComponent(txtSerie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -338,11 +339,10 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
         this.setVisible(false);
         FrmUsuario us = new FrmUsuario();
-        
-        
+
         cf = new ControlFormularios();
         cf.ControlaInstancia(us);
-        
+
     }//GEN-LAST:event_btnEditar1ActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -352,6 +352,14 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     private void btnElimnarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimnarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnElimnarActionPerformed
+
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+
+        if (txtUsuario.getText().equals("")) {
+            FrmBusqueda bu = new FrmBusqueda();
+            bu.setVisible(true);
+        }
+    }//GEN-LAST:event_txtUsuarioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -371,10 +379,10 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel mensaje;
-    private javax.swing.JTextField txtMedidor;
+    public static javax.swing.JTextField txtMedidor;
+    public static javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSerie;
-    private javax.swing.JTextField txtUsuario;
+    public static javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

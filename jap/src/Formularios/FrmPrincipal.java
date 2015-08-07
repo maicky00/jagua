@@ -6,6 +6,14 @@
 package Formularios;
 
 import Controladores.ControlFormularios;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
 
 /**
  *
@@ -20,8 +28,37 @@ public class FrmPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setExtendedState(MAXIMIZED_BOTH);
+
+        //menu
+        FrmPrincipal.setDefaultLookAndFeelDecorated(true);
+        JDialog.setDefaultLookAndFeelDecorated(true);
+
+        //UIManager.put("InternalFrame.activeTitleBackground", new ColorUIResource(Color.RED));
+        UIManager.put("InternalFrame.activeTitleForeground", new ColorUIResource(Color.blue));
+        UIManager.put("InternalFrame.titleFont", new Font("Dialog", Font.PLAIN, 11));
+
+        try {
+
+        
+            
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+        } catch (Exception e) {
+        }
     }
     ControlFormularios cf;
+
+    //controlar ventanas
+    public void mostrarVentanaDos() {
+        FrmBusqueda lol = new FrmBusqueda();
+        lol.setVisible(true);
+        lol.setLocationRelativeTo(this);
+    }
+
+    private void limpiarPanel() {
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,6 +72,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -51,6 +89,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
+        jMenuItem12 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,14 +97,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 667, Short.MAX_VALUE)
+            .addGap(0, 776, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 354, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
         );
 
         jMenu3.setText("Archivo");
+
+        jMenuItem13.setText("Salir");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem13);
+
         jMenuBar1.add(jMenu3);
 
         jMenu1.setText("Catalogos");
@@ -171,6 +219,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu5);
 
         jMenu6.setText("Ayuda");
+
+        jMenuItem12.setText("jMenuItem12");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem12);
+
         jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
@@ -190,18 +247,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        limpiarPanel();
         FrmUsuarioSistema fs = new FrmUsuarioSistema();
         cf = new ControlFormularios();
         cf.ControlaInstancia(fs);        // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        limpiarPanel();
         FrmUsuario us = new FrmUsuario();
         cf = new ControlFormularios();
         cf.ControlaInstancia(us);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        limpiarPanel();
         FrmMedidor me = new FrmMedidor();
         cf = new ControlFormularios();
         cf.ControlaInstancia(me);
@@ -209,6 +269,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        limpiarPanel();
         FrmCorte co = new FrmCorte();
         cf = new ControlFormularios();
         cf.ControlaInstancia(co);
@@ -216,6 +277,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        limpiarPanel();
         FrmMingas min = new FrmMingas();
         cf = new ControlFormularios();
         cf.ControlaInstancia(min);
@@ -223,6 +285,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        limpiarPanel();
         FrmPagosMingas pago = new FrmPagosMingas();
         cf = new ControlFormularios();
         cf.ControlaInstancia(pago);
@@ -230,13 +293,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-
+        limpiarPanel();
         FrmTarifas tar = new FrmTarifas();
         cf = new ControlFormularios();
         cf.ControlaInstancia(tar);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        limpiarPanel();
         FrmFactura f = new FrmFactura();
         cf = new ControlFormularios();
         cf.ControlaInstancia(f);
@@ -245,6 +309,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        limpiarPanel();
         FrmLogin f = new FrmLogin();
         cf = new ControlFormularios();
         cf.ControlaInstancia(f);
@@ -252,17 +317,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         // TODO add your handling code here:
+        limpiarPanel();
         FrmInstitucion f = new FrmInstitucion();
         cf = new ControlFormularios();
         cf.ControlaInstancia(f);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-
-         FrmOtrosPagos ot = new FrmOtrosPagos();
+        limpiarPanel();
+        FrmOtrosPagos ot = new FrmOtrosPagos();
         cf = new ControlFormularios();
         cf.ControlaInstancia(ot);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        //mostrarVentanaDos();
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,6 +385,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
