@@ -6,6 +6,11 @@
 package Formularios;
 
 import Controladores.classLogin;
+import java.awt.Color;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 
 /**
  *
@@ -17,9 +22,29 @@ public class Login extends javax.swing.JFrame {
      * Creates new form FrmLogin
      */
     public Login() {
+        setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(this);
+        //setOpacity(0.9f);
+
+        label.setBackground(Color.gray);
+        label.setOpaque(true);
+
+        label.setFocusable(false);
+        btnMin.setFocusable(false);
+        btnMax.setFocusable(false);
+
+        label.setLayout(null);
+        btnMin.setLayout(null);
+        btnMax.setLayout(null);
+
+        panel.setBackground(Color.gray);
+        panel.setOpaque(true);
+
+        panel2.setBackground(new Color(0,153,255));
+        panel2.setOpaque(true);
     }
+    int x, y;
     classLogin cl = new classLogin();
 
     /**
@@ -31,11 +56,94 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelCurves1 = new org.edisoncor.gui.panel.PanelCurves();
+        jLabel4 = new javax.swing.JLabel();
+        panelCurves2 = new org.edisoncor.gui.panel.PanelCurves();
+        panel = new javax.swing.JPanel();
+        label = new javax.swing.JLabel();
+        btnMin = new org.edisoncor.gui.button.ButtonAero();
+        btnMax = new org.edisoncor.gui.button.ButtonAero();
+        panel2 = new javax.swing.JPanel();
         buttonAqua1 = new org.edisoncor.gui.button.ButtonAqua();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         txtusuario = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         txtclave = new javax.swing.JPasswordField();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        panelCurves1.setBackground(new java.awt.Color(51, 102, 255));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel4.setText("FORMULARIO DE INGRESO");
+        panelCurves1.add(jLabel4, java.awt.BorderLayout.PAGE_END);
+
+        panel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                panelMouseDragged(evt);
+            }
+        });
+        panel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panelMousePressed(evt);
+            }
+        });
+
+        label.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/SIJAAP.PNG"))); // NOI18N
+        label.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                labelMouseDragged(evt);
+            }
+        });
+        label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                labelMousePressed(evt);
+            }
+        });
+
+        btnMin.setBackground(new java.awt.Color(102, 0, 0));
+        btnMin.setText("-");
+        btnMin.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnMin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinActionPerformed(evt);
+            }
+        });
+
+        btnMax.setBackground(new java.awt.Color(102, 0, 0));
+        btnMax.setText("X");
+        btnMax.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnMax.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMaxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLayout.createSequentialGroup()
+                .addComponent(label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnMin, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnMax, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        panel2.setForeground(new java.awt.Color(0, 153, 255));
 
         buttonAqua1.setBackground(new java.awt.Color(0, 0, 0));
         buttonAqua1.setText("INGRESAR");
@@ -45,31 +153,100 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Inicie sesion para entrar al programa.");
+
+        jLabel2.setText("Usuario:");
+
+        txtusuario.setToolTipText("Ingrese Usuario");
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuario.PNG"))); // NOI18N
+
+        jLabel3.setText("Clave:");
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/llave.PNG"))); // NOI18N
+
+        txtclave.setToolTipText("Ingrese la clave de usuario");
+        txtclave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtclaveKeyPressed(evt);
+            }
+        });
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/tocagon.PNG"))); // NOI18N
+
+        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
+        panel2.setLayout(panel2Layout);
+        panel2Layout.setHorizontalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonAqua1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtclave, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panel2Layout.setVerticalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel2Layout.createSequentialGroup()
+                                .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel2Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(3, 3, 3)))
+                        .addComponent(jLabel3))
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addComponent(txtclave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(buttonAqua1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(198, Short.MAX_VALUE)
-                .addComponent(buttonAqua1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtusuario)
-                    .addComponent(txtclave, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelCurves1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelCurves2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(txtusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(txtclave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addComponent(buttonAqua1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelCurves1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelCurves2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -88,6 +265,57 @@ public class Login extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_buttonAqua1ActionPerformed
+
+    private void btnMaxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaxActionPerformed
+
+        System.exit(0);
+
+    }//GEN-LAST:event_btnMaxActionPerformed
+
+    private void btnMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinActionPerformed
+
+        setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_btnMinActionPerformed
+
+    private void labelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMousePressed
+
+        x = evt.getX();
+        y = evt.getY();
+
+    }//GEN-LAST:event_labelMousePressed
+
+    private void labelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelMouseDragged
+
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
+    }//GEN-LAST:event_labelMouseDragged
+
+    private void panelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMouseDragged
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
+    }//GEN-LAST:event_panelMouseDragged
+
+    private void panelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMousePressed
+        x = evt.getX();
+        y = evt.getY();
+
+    }//GEN-LAST:event_panelMousePressed
+
+    private void txtclaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtclaveKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            FrmPrincipal fp = new FrmPrincipal();
+            String usuario = txtusuario.getText();
+            String password = new String(txtclave.getPassword());
+            entidades.Login validarUsuario = cl.validarUsuario(usuario, password);
+            if (validarUsuario == null) {
+
+            } else {
+                fp.show();
+                this.dispose();
+            }
+
+        }
+    }//GEN-LAST:event_txtclaveKeyPressed
 
     /**
      * @param args the command line arguments
@@ -126,7 +354,21 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.edisoncor.gui.button.ButtonAero btnMax;
+    private org.edisoncor.gui.button.ButtonAero btnMin;
     private org.edisoncor.gui.button.ButtonAqua buttonAqua1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel label;
+    private javax.swing.JPanel panel;
+    private javax.swing.JPanel panel2;
+    private org.edisoncor.gui.panel.PanelCurves panelCurves1;
+    private org.edisoncor.gui.panel.PanelCurves panelCurves2;
     private javax.swing.JPasswordField txtclave;
     private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables

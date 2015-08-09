@@ -79,7 +79,7 @@ public class classusuario {
                     dat.setFoto(null);
                 }
                 usuariosJpacontrolador.create(dat);
-                JOptionPane.showMessageDialog(null, "Guardado", "InformaciÃ³n", 1);
+                JOptionPane.showMessageDialog(null, "Guardado", "Informacion", 1);
 
             }
         } catch (Exception e) {
@@ -131,6 +131,19 @@ public class classusuario {
 
     }
 
+    public Usuarios buscarUsuarioCed(String cedula) {
+
+        for (Usuarios us : usuariosJpacontrolador.findUsuariosEntities()) {
+            if (us.getRucci().equals(cedula)) {
+                return us;
+            }
+            if (us == null) {
+                JOptionPane.showMessageDialog(null, "No se encontro", "Información", 1);
+            }
+        }
+        return null;
+    }
+    
     public Usuarios buscarUsuarioRucCi(String rucCi) {
 
         for (Usuarios dat : getUsuarios()) {
@@ -200,6 +213,34 @@ public class classusuario {
             fila[7] = u.getSector();
             fila[8] = u.getReferencia();
             fila[9] = u.getObservacion();
+            modelo.addRow(fila);
+        }
+    }
+        public void cargarTablaUsuario2(JTable tabla) {
+
+        modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[6];
+        
+        modelo.addColumn("CI/RUC");
+        modelo.addColumn("Nombres");
+        
+        modelo.addColumn("Apodo");
+        
+        modelo.addColumn("tel");
+        modelo.addColumn("cel");
+        modelo.addColumn("sector");
+
+//        Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
+        for (Usuarios u : getUsuarios()) {
+            
+            fila[0] = u.getRucci();
+            fila[1] = u.getPrimernombre()+" "+u.getPrimerapellido()+" "+u.getSegundoapellido();
+            fila[2] = u.getApadosn();
+            
+            fila[3] = u.getTelefono();
+            fila[4] = u.getCelular();
+            fila[5] = u.getSector();
             modelo.addRow(fila);
         }
     }
