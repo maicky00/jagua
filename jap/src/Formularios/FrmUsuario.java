@@ -5,6 +5,7 @@
  */
 package Formularios;
 
+import Controladores.ControlFormularios;
 import Controladores.ValidarCedula;
 import Controladores.classInstitucion;
 import Controladores.classMoverRegistros;
@@ -53,6 +54,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         cu.cargarTablaUsuario2(tablaUsuarios);
     }
     classMoverRegistros moverRegistros = new classMoverRegistros(cu.getUsuarios());
+    ControlFormularios cf;
 
     JFileChooser seleccionado = new JFileChooser();
     File archivo;
@@ -830,6 +832,12 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                 bytesImg = cu.AbrirAImagen(archivo);
                 cu.guardarUsuarios(insti, rucCi, primNombre, segNombre, primApell, segApellidos, apodo, direccion, telefono, celular, sector, referencia, bytesImg, direccion);
                 cu.cargarTablaUsuario2(tablaUsuarios);
+                int j = JOptionPane.showConfirmDialog(this, "¿Asignar Medidor?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                if (j == 0) {
+                    FrmMedidor me = new FrmMedidor();
+                    cf = new ControlFormularios();
+                    cf.ControlaInstancia(me);
+                }
 
             } else {
             }
