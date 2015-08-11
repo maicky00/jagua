@@ -10,11 +10,14 @@ import entidades.Facturas;
 import entidadesCruds.FacturasJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,7 +33,7 @@ public class classFactura {
         return facturasJpacontrolador.findFacturasEntities();
     }
 
-    public void guardarFacturas(int idDetFact, int numFactura, Date fechaEmision, String mes, float valorBase, float exceso, float subtotal, float iva, float total, String usuarioActual) {
+    public void guardarFacturas(int idDetFact, int numFactura, Date fechaEmision, float subtotal, float iva, float total, String usuarioActual) {
         try {
 
             Detallefactura idDetF = cm.detallefacturaJpacontrolador.findDetallefactura(cm.buscarIdDetallefactura(idDetFact).getIddetallefac());
@@ -38,9 +41,6 @@ public class classFactura {
             dat.setIddetallefac(idDetF);
             dat.setNumfactura(numFactura);
             dat.setFechaemision(fechaEmision);
-            dat.setMes(mes);
-            dat.setValorbase(valorBase);
-            dat.setExceso(exceso);
             dat.setSubtotal(subtotal);
             dat.setIva(iva);
             dat.setTotal(total);
@@ -52,7 +52,7 @@ public class classFactura {
         }
     }
 
-    public boolean modificarDetallefactura(int idFactura,int idDetFact, int numFactura, Date fechaEmision, String mes, float valorBase, float exceso, float subtotal, float iva, float total, String usuarioActual) {
+    public boolean modificarDetallefactura(int idFactura, int idDetFact, int numFactura, Date fechaEmision, float subtotal, float iva, float total, String usuarioActual) {
         try {
             Facturas dat = facturasJpacontrolador.findFacturas(idFactura);
             if (dat == null) {
@@ -62,9 +62,6 @@ public class classFactura {
             dat.setIddetallefac(idDetF);
             dat.setNumfactura(numFactura);
             dat.setFechaemision(fechaEmision);
-            dat.setMes(mes);
-            dat.setValorbase(valorBase);
-            dat.setExceso(exceso);
             dat.setSubtotal(subtotal);
             dat.setIva(iva);
             dat.setTotal(total);
@@ -97,4 +94,37 @@ public class classFactura {
         return null;
     }
 
+    public void IngresarlistFact(List<Facturas> listFact) {
+        try {
+            for (Facturas dat : listFact) {
+                facturasJpacontrolador.create(dat);
+            }
+        } catch (Exception ex) {
+        }
+
+    }
+
+    public List<Facturas> getTableFacturas(JTable table, int numFactura, Date fechaEmision, float subtotal, float iva, float total, String usuarioActual) {
+
+        classDetalleFactura cdf = new classDetalleFactura();
+        DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+        List<Facturas> lst = new ArrayList<>();
+        int nRow = dtm.getRowCount(), nCol = dtm.getColumnCount();
+
+        for (int i = 0; i < nRow; i++) {
+            Detallefactura idFact = cdf.detallefacturaJpacontrolador.findDetallefactura(cdf.buscarIdDetallefactura(Integer.valueOf(dtm.getValueAt(i, 0).toString())).getIddetallefac());
+
+            Facturas dat = new Facturas();
+            dat.setIddetallefac(idFact);
+            dat.setNumfactura(numFactura);
+            dat.setFechaemision(fechaEmision);
+            dat.setSubtotal(subtotal);
+            dat.setIva(iva);
+            dat.setTotal(total);
+            dat.setUsuarioactual(usuarioActual);
+            lst.add(dat);
+            cdf.modificarTransaccion(cdf.buscarIdDetallefactura(Integer.valueOf(dtm.getValueAt(i, 0).toString())).getIddetallefac(), "SI");
+        }
+        return lst;
+    }
 }

@@ -176,7 +176,6 @@ public class Login implements Serializable {
     }
 
     public boolean buscarApellidos(String inicio) {
-        Login lg = new Login();
         if (inicio.isEmpty() || inicio.length() > (apellidos.length() + 2)) {
             return false;
         }

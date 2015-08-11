@@ -11,12 +11,16 @@ import entidades.Usuarios;
 import entidadesCruds.LoginJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
+import java.awt.Color;
+import java.awt.Component;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -159,8 +163,8 @@ public class classLogin {
         modelo.addColumn("Nro");
         modelo.addColumn("Nombres");
         modelo.addColumn("Apellidos");
-        modelo.addColumn("Usuario");
         modelo.addColumn("Cedula");
+        modelo.addColumn("Usuario");
         modelo.addColumn("Clave");
         modelo.addColumn("Tipo De Usuario");
         modelo.addColumn("Estado de Cuenta");
@@ -175,6 +179,41 @@ public class classLogin {
             fila[7] = u.getEstado();
             modelo.addRow(fila);
         }
+    }
+
+    public void diseñoTabla(JTable tabla) {
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(21);
+        tabla.getColumnModel().getColumn(0).setResizable(false);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(70);
+        tabla.getColumnModel().getColumn(3).setResizable(false);
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(80);
+        tabla.getColumnModel().getColumn(5).setPreferredWidth(70);
+        tabla.getColumnModel().getColumn(6).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(6).setResizable(false);
+        tabla.getColumnModel().getColumn(7).setPreferredWidth(100);
+        tabla.getColumnModel().getColumn(7).setResizable(false);
+
+    }
+
+    public TableModel fillTabla(JTable tabla) {
+        DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
+        dtm.setRowCount(0);
+        diseñoTabla(tabla);
+        for (Login u : getLogin()) {
+            dtm.addRow(new Object[]{
+                u.getIdlogin(),
+                u.getNombres(),
+                u.getApellidos(),
+                u.getCedula(),
+                u.getUsuario(),
+                u.getClave(),
+                u.getTipo(),
+                u.getEstado()
+            });
+        }
+        return dtm;
     }
 
     public String elimiEspacio(String m) {
@@ -202,15 +241,64 @@ public class classLogin {
         return true;
     }
 
-    public void BuscarCed(String txt, JTable tabla) {
+//    public void BuscarCed(String txt, JTable tabla) {
+//        modelo = new DefaultTableModel();
+//        tabla.setModel(modelo);
+//        Object[] fila = new Object[8];
+//        modelo.addColumn("Nro");
+//        modelo.addColumn("Nombres");
+//        modelo.addColumn("Apellidos");
+//        modelo.addColumn("Cedula");
+//        modelo.addColumn("usuario");
+//        modelo.addColumn("Clave");
+//        modelo.addColumn("Tipo De Usuario");
+//        modelo.addColumn("Estado de Cuenta");
+//        diseñoTabla(tabla);
+//
+//        for (Login u : getLogin()) {
+//            if (u.buscarApellidos(u.elimiEspacio(txt))) {
+//                fila[0] = u.getIdlogin();
+//                fila[1] = u.getNombres();
+//                fila[2] = u.getApellidos();
+//                fila[3] = u.getCedula();
+//                fila[4] = u.getUsuario();
+//                fila[5] = u.getClave();
+//                fila[6] = u.getTipo();
+//                fila[7] = u.getEstado();
+//                modelo.addRow(fila);
+//            }
+//        }
+//    }
+    public TableModel BuscarCed(String txt, JTable tabla) {
+        DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
+        dtm.setRowCount(0);
+        diseñoTabla(tabla);
+        for (Login u : getLogin()) {
+            if (u.buscarCedula(u.elimiEspacio(txt))) {
+                dtm.addRow(new Object[]{
+                    u.getIdlogin(),
+                    u.getNombres(),
+                    u.getApellidos(),
+                    u.getCedula(),
+                    u.getUsuario(),
+                    u.getClave(),
+                    u.getTipo(),
+                    u.getEstado()
+                });
+            }
+        }
+        return dtm;
+    }
+
+    public void BuscarApe(String txt, JTable tabla) {
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
         Object[] fila = new Object[8];
         modelo.addColumn("Nro");
         modelo.addColumn("Nombres");
         modelo.addColumn("Apellidos");
-        modelo.addColumn("Usuario");
         modelo.addColumn("Cedula");
+        modelo.addColumn("Usuario");
         modelo.addColumn("Clave");
         modelo.addColumn("Tipo De Usuario");
         modelo.addColumn("Estado de Cuenta");
@@ -229,32 +317,24 @@ public class classLogin {
             }
         }
     }
-
-    public void BuscarApe(String txt, JTable tabla) {
-        modelo = new DefaultTableModel();
-        tabla.setModel(modelo);
-        Object[] fila = new Object[8];
-        modelo.addColumn("Nro");
-        modelo.addColumn("Nombres");
-        modelo.addColumn("Apellidos");
-        modelo.addColumn("Usuario");
-        modelo.addColumn("Cedula");
-        modelo.addColumn("Clave");
-        modelo.addColumn("Tipo De Usuario");
-        modelo.addColumn("Estado de Cuenta");
-
-        for (Login u : getLogin()) {
-            if (u.buscarCedula(u.elimiEspacio(txt))) {
-                fila[0] = u.getIdlogin();
-                fila[1] = u.getNombres();
-                fila[2] = u.getApellidos();
-                fila[3] = u.getCedula();
-                fila[4] = u.getUsuario();
-                fila[5] = u.getClave();
-                fila[6] = u.getTipo();
-                fila[7] = u.getEstado();
-                modelo.addRow(fila);
-            }
-        }
-    }
+//    public TableModel BuscarApe(String txt, JTable tabla) {
+//        DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
+//        dtm.setRowCount(0);
+//        diseñoTabla(tabla);
+//        for (Login u : getLogin()) {
+//            if (u.buscarApellidos(u.elimiEspacio(txt))) {
+//                dtm.addRow(new Object[]{
+//                    u.getIdlogin(),
+//                    u.getNombres(),
+//                    u.getApellidos(),
+//                    u.getCedula(),
+//                    u.getUsuario(),
+//                    u.getClave(),
+//                    u.getTipo(),
+//                    u.getEstado()
+//                });
+//            }
+//        }
+//        return dtm;
+//    }
 }

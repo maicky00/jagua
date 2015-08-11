@@ -7,6 +7,19 @@ package Formularios;
 
 import Controladores.classInstitucion;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,14 +38,41 @@ public class FrmInstitucion extends javax.swing.JInternalFrame {
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
         ci = new classInstitucion();
+cargarInf();
+    }
+
+    public void cargarInf() {
         txtnombreInst.setText(String.valueOf(ci.buscarIdInstitucion(1).getNombreinst()));
         txtdireccion.setText(String.valueOf(ci.buscarIdInstitucion(1).getDireccion()));
         txtruc.setText(String.valueOf(ci.buscarIdInstitucion(1).getRuc()));
         txttelefono.setText(String.valueOf(ci.buscarIdInstitucion(1).getTelefono()));
         txtcelular.setText(String.valueOf(ci.buscarIdInstitucion(1).getCelular()));
         txtemail.setText(String.valueOf(ci.buscarIdInstitucion(1).getEmail()));
-
+        byte[] data = ci.buscarIdInstitucion(1).getLogo();
+        if (data != null) {
+            try {
+                img = ImageIO.read(new ByteArrayInputStream(data));
+            } catch (IOException ex) {
+               
+            }
+            jLabel1.setIcon(ajustarImagen(img));
+            jLabel1.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+        } else {
+            jLabel1.setIcon(null);
+        }
     }
+
+    private ImageIcon ajustarImagen(BufferedImage ico) {
+        ImageIcon tmpIconAux = new ImageIcon(ico);
+        ImageIcon tmpIcon = new ImageIcon(tmpIconAux.getImage().getScaledInstance(143, 175, Image.SCALE_DEFAULT));
+        return tmpIcon;
+    }
+    JFileChooser seleccionado = new JFileChooser();
+    File archivo;
+    byte[] bytesImg;
+    String ruta, nombre;
+    BufferedImage img;
+
     String nombreInst;
     String direccion;
     String ruc;
@@ -66,6 +106,8 @@ public class FrmInstitucion extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        buttonNice6 = new org.edisoncor.gui.button.ButtonNice();
 
         panelReflect1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -111,35 +153,51 @@ public class FrmInstitucion extends javax.swing.JInternalFrame {
 
         jLabel15.setText("RUC:");
 
+        jLabel1.setText("jLabel1");
+        jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        buttonNice6.setBackground(new java.awt.Color(0, 102, 255));
+        buttonNice6.setForeground(new java.awt.Color(255, 255, 255));
+        buttonNice6.setText("CARGAR");
+        buttonNice6.setSegundoColor(new java.awt.Color(0, 51, 255));
+        buttonNice6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonNice6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelReflect1Layout = new javax.swing.GroupLayout(panelReflect1);
         panelReflect1.setLayout(panelReflect1Layout);
         panelReflect1Layout.setHorizontalGroup(
             panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelReflect1Layout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(299, Short.MAX_VALUE))
+            .addGroup(panelReflect1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelReflect1Layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelReflect1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel12))
-                        .addGap(19, 19, 19)
-                        .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1)
-                            .addComponent(txttelefono)
-                            .addComponent(txtcelular)
-                            .addComponent(txtruc)
-                            .addComponent(txtemail))))
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel12))
+                .addGap(19, 19, 19)
+                .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
+                    .addComponent(txttelefono)
+                    .addComponent(txtcelular)
+                    .addComponent(txtruc)
+                    .addComponent(txtemail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonNice6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47))
         );
         panelReflect1Layout.setVerticalGroup(
             panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +231,11 @@ public class FrmInstitucion extends javax.swing.JInternalFrame {
                             .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13)))
                     .addGroup(panelReflect1Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
+                        .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonNice6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -206,7 +268,8 @@ public class FrmInstitucion extends javax.swing.JInternalFrame {
             telefono = txttelefono.getText();
             celular = txtcelular.getText();
             email = txtemail.getText();
-            ci.modificarInstitucion(1, nombreInst, direccion, telefono, email, ruc, celular);
+            bytesImg = ci.AbrirAImagen(archivo);
+            ci.modificarInstitucion(1, nombreInst, direccion, telefono, email, ruc, celular, bytesImg);
             this.dispose();
         } catch (Exception e) {
         }
@@ -216,10 +279,32 @@ public class FrmInstitucion extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void buttonNice6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNice6ActionPerformed
+        // TODO add your handling code here:
+        if (seleccionado.showDialog(null, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
+            archivo = seleccionado.getSelectedFile();
+            if (archivo.canRead()) {
+                if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
+                    ruta = seleccionado.getSelectedFile().getAbsolutePath();
+                    bytesImg = ci.AbrirAImagen(archivo);
+                    Image preview = Toolkit.getDefaultToolkit().getImage(ruta);
+                    jLabel1.setIcon(new ImageIcon(bytesImg));
+                    ImageIcon icon = new ImageIcon(preview.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_DEFAULT));
+                    jLabel1.setIcon(icon);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo de imagen.");
+                }
+            }
+
+        }
+    }//GEN-LAST:event_buttonNice6ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonNice btnCancelar;
     private org.edisoncor.gui.button.ButtonNice btnNuevo;
+    private org.edisoncor.gui.button.ButtonNice buttonNice6;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

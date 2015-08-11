@@ -39,7 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Detallefactura.findByMedexcedido", query = "SELECT d FROM Detallefactura d WHERE d.medexcedido = :medexcedido"),
     @NamedQuery(name = "Detallefactura.findByTarexcedido", query = "SELECT d FROM Detallefactura d WHERE d.tarexcedido = :tarexcedido"),
     @NamedQuery(name = "Detallefactura.findBySubtotal", query = "SELECT d FROM Detallefactura d WHERE d.subtotal = :subtotal"),
-    @NamedQuery(name = "Detallefactura.findByTotal", query = "SELECT d FROM Detallefactura d WHERE d.total = :total")})
+    @NamedQuery(name = "Detallefactura.findByTotal", query = "SELECT d FROM Detallefactura d WHERE d.total = :total"),
+    @NamedQuery(name = "Detallefactura.findByObservacion", query = "SELECT d FROM Detallefactura d WHERE d.observacion = :observacion")})
 public class Detallefactura implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -64,6 +65,8 @@ public class Detallefactura implements Serializable {
     private Float subtotal;
     @Column(name = "TOTAL")
     private Float total;
+    @Column(name = "OBSERVACION")
+    private String observacion;
     @JoinColumn(name = "IDMEDIDOR", referencedColumnName = "IDMEDIDOR")
     @ManyToOne
     private Medidor idmedidor;
@@ -150,6 +153,14 @@ public class Detallefactura implements Serializable {
 
     public void setTotal(Float total) {
         this.total = total;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 
     public Medidor getIdmedidor() {

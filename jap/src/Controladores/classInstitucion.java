@@ -9,6 +9,9 @@ import entidades.Institucion;
 import entidadesCruds.InstitucionJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -22,12 +25,14 @@ public class classInstitucion {
 
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("japPU");
     public InstitucionJpaController institucionJpacontrolador = new InstitucionJpaController(emf);
+    FileInputStream entrada;
+    FileOutputStream salida;
 
     public List<Institucion> getInstitucion() {
         return institucionJpacontrolador.findInstitucionEntities();
     }
 
-    public void guardarInstitucion(String nombreInstitucion, String direccion, String telefono, String email, String ruc, String celular) {
+    public void guardarInstitucion(String nombreInstitucion, String direccion, String telefono, String email, String ruc, String celular, byte[] foto) {
         int i = 0;
         Institucion usu = new Institucion();
         try {
@@ -50,6 +55,12 @@ public class classInstitucion {
                 dat.setEmail(email);
                 dat.setRuc(ruc);
                 dat.setCelular(celular);
+
+                if (foto != null) {
+                    dat.setLogo(foto);
+                } else {
+                    dat.setLogo(null);
+                }
                 institucionJpacontrolador.create(dat);
             }
         } catch (Exception e) {
@@ -57,7 +68,7 @@ public class classInstitucion {
         }
     }
 
-    public boolean modificarInstitucion(int id,String nombreInstitucion, String direccion, String telefono, String email, String ruc, String celular) {
+    public boolean modificarInstitucion(int id, String nombreInstitucion, String direccion, String telefono, String email, String ruc, String celular, byte[] foto) {
         int i = 0;
         Institucion usu = new Institucion();
 
@@ -73,6 +84,9 @@ public class classInstitucion {
             dat.setEmail(email);
             dat.setRuc(ruc);
             dat.setCelular(celular);
+            if (foto != null) {
+                dat.setLogo(foto);
+            }
             institucionJpacontrolador.edit(dat);
             JOptionPane.showMessageDialog(null, "Datos Guardados", "Información", 1);
 
@@ -111,4 +125,23 @@ public class classInstitucion {
         return null;
     }
 
+    public byte[] AbrirAImagen(File archivo) {
+        byte[] bytesImg = new byte[1024 * 100];
+        try {
+            entrada = new FileInputStream(archivo);
+            entrada.read(bytesImg);
+        } catch (Exception e) {
+        }
+        return bytesImg;
+    }
+
+    public String GuardarAImagen(File archivo, byte[] bytesImg) {
+        String respuesta = null;
+        try {
+            salida = new FileOutputStream(archivo);
+            salida.write(bytesImg);
+        } catch (Exception e) {
+        }
+        return respuesta;
+    }
 }

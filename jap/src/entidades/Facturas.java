@@ -35,9 +35,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Facturas.findByIdfactura", query = "SELECT f FROM Facturas f WHERE f.idfactura = :idfactura"),
     @NamedQuery(name = "Facturas.findByNumfactura", query = "SELECT f FROM Facturas f WHERE f.numfactura = :numfactura"),
     @NamedQuery(name = "Facturas.findByFechaemision", query = "SELECT f FROM Facturas f WHERE f.fechaemision = :fechaemision"),
-    @NamedQuery(name = "Facturas.findByMes", query = "SELECT f FROM Facturas f WHERE f.mes = :mes"),
-    @NamedQuery(name = "Facturas.findByValorbase", query = "SELECT f FROM Facturas f WHERE f.valorbase = :valorbase"),
-    @NamedQuery(name = "Facturas.findByExceso", query = "SELECT f FROM Facturas f WHERE f.exceso = :exceso"),
     @NamedQuery(name = "Facturas.findBySubtotal", query = "SELECT f FROM Facturas f WHERE f.subtotal = :subtotal"),
     @NamedQuery(name = "Facturas.findByIva", query = "SELECT f FROM Facturas f WHERE f.iva = :iva"),
     @NamedQuery(name = "Facturas.findByTotal", query = "SELECT f FROM Facturas f WHERE f.total = :total")})
@@ -53,13 +50,7 @@ public class Facturas implements Serializable {
     @Column(name = "FECHAEMISION")
     @Temporal(TemporalType.DATE)
     private Date fechaemision;
-    @Column(name = "MES")
-    private String mes;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "VALORBASE")
-    private Float valorbase;
-    @Column(name = "EXCESO")
-    private Float exceso;
     @Column(name = "SUBTOTAL")
     private Float subtotal;
     @Column(name = "IVA")
@@ -102,30 +93,6 @@ public class Facturas implements Serializable {
 
     public void setFechaemision(Date fechaemision) {
         this.fechaemision = fechaemision;
-    }
-
-    public String getMes() {
-        return mes;
-    }
-
-    public void setMes(String mes) {
-        this.mes = mes;
-    }
-
-    public Float getValorbase() {
-        return valorbase;
-    }
-
-    public void setValorbase(Float valorbase) {
-        this.valorbase = valorbase;
-    }
-
-    public Float getExceso() {
-        return exceso;
-    }
-
-    public void setExceso(Float exceso) {
-        this.exceso = exceso;
     }
 
     public Float getSubtotal() {

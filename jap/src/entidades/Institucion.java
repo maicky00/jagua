@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Institucion.findByRuc", query = "SELECT i FROM Institucion i WHERE i.ruc = :ruc"),
     @NamedQuery(name = "Institucion.findByCelular", query = "SELECT i FROM Institucion i WHERE i.celular = :celular")})
 public class Institucion implements Serializable {
+    @Lob
+    @Column(name = "LOGO")
+    private byte[] logo;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -154,6 +157,14 @@ public class Institucion implements Serializable {
     @Override
     public String toString() {
         return "entidades.Institucion[ idinstitucion=" + idinstitucion + " ]";
+    }
+
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
     }
     
 }
