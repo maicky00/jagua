@@ -46,10 +46,12 @@ public class classusuario {
         Usuarios usu = new Usuarios();
         try {
             for (Usuarios us : getUsuarios()) {
-                if (us.getRucci().equals(rucCi)) {
-                    i = 1;
-                    usu = us;
-                    break;
+                if (!rucCi.equals("")) {
+                    if (us.getRucci().equals(rucCi) && rucCi.equals("")) {
+                        i = 1;
+                        usu = us;
+                        break;
+                    }
                 }
             }
             if (i == 1) {

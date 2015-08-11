@@ -832,14 +832,14 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                 bytesImg = cu.AbrirAImagen(archivo);
                 cu.guardarUsuarios(insti, rucCi, primNombre, segNombre, primApell, segApellidos, apodo, direccion, telefono, celular, sector, referencia, bytesImg, direccion);
                 cu.cargarTablaUsuario2(tablaUsuarios);
-                int j = JOptionPane.showConfirmDialog(this, "¿Asignar Medidor ?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (j == 0) {
-                    FrmMedidor me = new FrmMedidor();
-                    cf = new ControlFormularios();
-                    cf.ControlaInstancia(me);
-//                    FrmMedidor.
-                    this.dispose();
-                }
+//                int j = JOptionPane.showConfirmDialog(this, "¿Asignar Medidor ?", "Confirmar", JOptionPane.YES_NO_OPTION);
+//                if (j == 0) {
+//                    FrmMedidor me = new FrmMedidor();
+//                    cf = new ControlFormularios();
+//                    cf.ControlaInstancia(me);
+////                    FrmMedidor.
+//                    this.dispose();
+//                }
 
             } else {
             }
