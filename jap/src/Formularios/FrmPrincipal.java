@@ -103,10 +103,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 419, Short.MAX_VALUE)
         );
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/clipboard.png"))); // NOI18N
         jMenu3.setText("Archivo");
+        jMenu3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jMenu3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jMenuItem13.setText("Salir");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +122,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/application_home.png"))); // NOI18N
         jMenu1.setText("Catalogos");
+        jMenu1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jMenu1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jMenuItem1.setText("Usuarios Sistema");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -186,7 +194,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/settings.png"))); // NOI18N
         jMenu4.setText("Mantenimiento");
+        jMenu4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jMenuItem7.setText("Tarifas");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -222,7 +233,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/chart_bar.png"))); // NOI18N
         jMenu2.setText("Reportes");
+        jMenu2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jMenuItem15.setText("Usuarios");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
@@ -234,10 +248,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/book.png"))); // NOI18N
         jMenu5.setText("Manual");
+        jMenu5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jMenuBar1.add(jMenu5);
 
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/help.png"))); // NOI18N
         jMenu6.setText("Ayuda");
+        jMenu6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jMenuItem12.setText("jMenuItem12");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {

@@ -133,6 +133,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        busquedaGrupo = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -169,6 +170,11 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaUsuarios = new javax.swing.JTable();
+        rbtTodos = new javax.swing.JRadioButton();
+        jLabel10 = new javax.swing.JLabel();
+        rbtNombres = new javax.swing.JRadioButton();
+        rbtCedula = new javax.swing.JRadioButton();
+        txtBuscar = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnNuevo = new org.edisoncor.gui.button.ButtonNice();
         btnGuardar = new org.edisoncor.gui.button.ButtonNice();
@@ -447,7 +453,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                         .addComponent(txtReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtObservar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -485,7 +491,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jButton2))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 4, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -514,20 +520,76 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tablaUsuarios);
 
+        busquedaGrupo.add(rbtTodos);
+        rbtTodos.setSelected(true);
+        rbtTodos.setText("Todos");
+        rbtTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtTodosActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Búsqueda:");
+
+        busquedaGrupo.add(rbtNombres);
+        rbtNombres.setText("Apellidos - Nombres");
+        rbtNombres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtNombresActionPerformed(evt);
+            }
+        });
+
+        busquedaGrupo.add(rbtCedula);
+        rbtCedula.setText("Cedula");
+        rbtCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtCedulaActionPerformed(evt);
+            }
+        });
+
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(rbtTodos)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rbtCedula)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbtNombres))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbtTodos)
+                    .addComponent(rbtNombres)
+                    .addComponent(rbtCedula))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -954,33 +1016,29 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
     private void tablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUsuariosMouseClicked
         try {
-
-            
-
+            lblfoto.setIcon(null);
             int n = tablaUsuarios.getSelectedRow();
-            id.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getIdusuario().toString());
-            txtRuc.setText(tablaUsuarios.getValueAt(n, 0).toString());
-            txtNombre.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getPrimernombre());
-            txtNombre2.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getSegundonombre());
-            txtApellido.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getPrimerapellido());
-            txtApellido2.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getSegundoapellido());
-            txtApodo.setText(tablaUsuarios.getValueAt(n, 2).toString());
-            txtDir.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getDireccion());
-            txtTelefono.setText(tablaUsuarios.getValueAt(n, 3).toString());
-            txtCelular.setText(tablaUsuarios.getValueAt(n, 4).toString());
-            comboSector.setSelectedItem(tablaUsuarios.getValueAt(n, 5).toString());
-            txtReferencia.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getReferencia());
-            txtObservar.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getObservacion());
-            
-           // System.out.println(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getFoto());
-            byte[] data = cu.buscarUsuarioCed(tablaUsuarios.getValueAt(n, 0).toString()).getFoto();
+            id.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getIdusuario().toString());
+            txtRuc.setText(tablaUsuarios.getValueAt(n, 1).toString());
+            txtNombre.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getPrimernombre());
+            txtNombre2.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getSegundonombre());
+            txtApellido.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getPrimerapellido());
+            txtApellido2.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getSegundoapellido());
+            txtApodo.setText(tablaUsuarios.getValueAt(n, 3).toString());
+            txtDir.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getDireccion());
+            txtTelefono.setText(tablaUsuarios.getValueAt(n, 4).toString());
+            txtCelular.setText(tablaUsuarios.getValueAt(n, 5).toString());
+            comboSector.setSelectedItem(tablaUsuarios.getValueAt(n, 6).toString());
+            txtReferencia.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getReferencia());
+            txtObservar.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getObservacion());
+
+            // System.out.println(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getFoto());
+            byte[] data = cu.buscarUsuarioCed(tablaUsuarios.getValueAt(n, 1).toString()).getFoto();
             img = ImageIO.read(new ByteArrayInputStream(data));
             lblfoto.setIcon(new ImageIcon(img));
             lblfoto.setIcon(ajustarImagen(img));
             lblfoto.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-
-            
 //            comboTipo.setSelectedItem(tablaUsuarios.getValueAt(n, 6).toString());
 //            comboEstado.setSelectedItem(tablaUsuarios.getValueAt(n, 7).toString());
         } catch (Exception e) {
@@ -988,14 +1046,12 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tablaUsuariosMouseClicked
 
     private void tablaUsuariosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaUsuariosKeyReleased
-                try {
-
-            
+        try {
 
             int n = tablaUsuarios.getSelectedRow();
             id.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getIdusuario().toString());
             txtRuc.setText(tablaUsuarios.getValueAt(n, 0).toString());
-            
+
             txtNombre.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getPrimernombre());
             txtNombre2.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getSegundonombre());
             txtApellido.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getPrimerapellido());
@@ -1007,22 +1063,50 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             comboSector.setSelectedItem(tablaUsuarios.getValueAt(n, 5).toString());
             txtReferencia.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getReferencia());
             txtObservar.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getObservacion());
-            
-           // System.out.println(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getFoto());
+
+            // System.out.println(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getFoto());
             byte[] data = cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getFoto();
             img = ImageIO.read(new ByteArrayInputStream(data));
 //            jLabel2.setIcon(new ImageIcon(img));
             lblfoto.setIcon(ajustarImagen(img));
             lblfoto.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
-
-            
 //            comboTipo.setSelectedItem(tablaUsuarios.getValueAt(n, 6).toString());
 //            comboEstado.setSelectedItem(tablaUsuarios.getValueAt(n, 7).toString());
         } catch (Exception e) {
         }
 
     }//GEN-LAST:event_tablaUsuariosKeyReleased
+
+    private void rbtTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtTodosActionPerformed
+        cu.cargarTablaUsuario2(tablaUsuarios);
+        txtBuscar.setText("");
+
+    }//GEN-LAST:event_rbtTodosActionPerformed
+
+    private void rbtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtCedulaActionPerformed
+        txtBuscar.setText("");
+    }//GEN-LAST:event_rbtCedulaActionPerformed
+
+    private void rbtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtNombresActionPerformed
+        txtBuscar.setText("");
+    }//GEN-LAST:event_rbtNombresActionPerformed
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        try {
+            if (rbtNombres.isSelected() == true) {
+                cu.cargarTablaApellidoNombre(txtBuscar.getText(), tablaUsuarios);
+            } else if (rbtCedula.isSelected() == true) {
+                cu.BuscarCed(txtBuscar.getText(), tablaUsuarios);
+            }
+            if (txtBuscar.getText().equals("")) {
+                cu.cargarTablaUsuario2(tablaUsuarios);
+            }
+        } catch (Exception e) {
+
+        }
+
+    }//GEN-LAST:event_txtBuscarKeyReleased
     private void setDatosMover(Usuarios usuario) {
 //        classMedidor cm = new classMedidor();
 //        classusuario cu = new classusuario();
@@ -1065,12 +1149,14 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     private org.edisoncor.gui.button.ButtonNice btnEliminar;
     private org.edisoncor.gui.button.ButtonNice btnGuardar;
     private org.edisoncor.gui.button.ButtonNice btnNuevo;
+    private javax.swing.ButtonGroup busquedaGrupo;
     private org.edisoncor.gui.button.ButtonNice buttonNice6;
     private org.edisoncor.gui.comboBox.ComboBoxRect comboSector;
     private javax.swing.JLabel id;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -1092,10 +1178,14 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     public javax.swing.JLabel label;
     private javax.swing.JLabel lblfoto;
     private javax.swing.JLabel mensaje;
-    private javax.swing.JTable tablaUsuarios;
+    private javax.swing.JRadioButton rbtCedula;
+    private javax.swing.JRadioButton rbtNombres;
+    private javax.swing.JRadioButton rbtTodos;
+    public static javax.swing.JTable tablaUsuarios;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtApellido2;
     private javax.swing.JTextField txtApodo;
+    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtDir;
     private javax.swing.JTextField txtNombre;

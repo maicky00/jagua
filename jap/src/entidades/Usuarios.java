@@ -256,4 +256,17 @@ public class Usuarios implements Serializable {
         }
         return true;
     }
+
+    public boolean buscarCedula(String inicio) {
+        if (inicio.isEmpty() || inicio.length() > (rucci.length() + 2)) {
+            return false;
+        }
+        for (int i = 0; i < inicio.length(); ++i) {
+            String r = elimiEspacio(rucci);
+            if (inicio.charAt(i) != (r.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

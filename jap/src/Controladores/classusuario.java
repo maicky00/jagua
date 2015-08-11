@@ -143,7 +143,7 @@ public class classusuario {
         }
         return null;
     }
-    
+
     public Usuarios buscarUsuarioRucCi(String rucCi) {
 
         for (Usuarios dat : getUsuarios()) {
@@ -216,32 +216,122 @@ public class classusuario {
             modelo.addRow(fila);
         }
     }
-        public void cargarTablaUsuario2(JTable tabla) {
+
+    public void cargarTablaUsuario2(JTable tabla) {
 
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
-        Object[] fila = new Object[6];
-        
+        Object[] fila = new Object[7];
+        modelo.addColumn("N°");
         modelo.addColumn("CI/RUC");
         modelo.addColumn("Nombres");
-        
+
         modelo.addColumn("Apodo");
-        
+
         modelo.addColumn("tel");
         modelo.addColumn("cel");
         modelo.addColumn("sector");
 
 //        Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
         for (Usuarios u : getUsuarios()) {
-            
-            fila[0] = u.getRucci();
-            fila[1] = u.getPrimernombre()+" "+u.getPrimerapellido()+" "+u.getSegundoapellido();
-            fila[2] = u.getApadosn();
-            
-            fila[3] = u.getTelefono();
-            fila[4] = u.getCelular();
-            fila[5] = u.getSector();
+            fila[0] = u.getIdusuario();
+            fila[1] = u.getRucci();
+            fila[2] = u.getPrimerapellido() + "  " + u.getSegundoapellido() + "  "
+                    + u.getPrimernombre() + "  " + u.getSegundonombre();
+            fila[3] = u.getApadosn();
+
+            fila[4] = u.getTelefono();
+            fila[5] = u.getCelular();
+            fila[6] = u.getSector();
+
+            FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
+            FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(35);
+            FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(1).setMinWidth(70);
+            FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(70);
+            //FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(4).setMinWidth(70);
+            FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(70);
+            //FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(5).setMinWidth(65);
+            FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(75);
+            FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(75);
+
             modelo.addRow(fila);
         }
     }
+
+    public void cargarTablaApellidoNombre(String ced, JTable tabla) {
+        //Usuarios us = new Usuarios();
+        modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[7];
+        modelo.addColumn("N°");
+        modelo.addColumn("CI/RUC");
+        modelo.addColumn("Nombres");
+
+        modelo.addColumn("Apodo");
+
+        modelo.addColumn("tel");
+        modelo.addColumn("cel");
+        modelo.addColumn("sector");
+        for (Usuarios u : getUsuarios()) {
+            if (u.buscarUsuarios(u.elimiEspacio(ced))) {
+                fila[0] = u.getIdusuario();
+                fila[1] = u.getRucci();
+                fila[2] = u.getPrimerapellido() + "  " + u.getSegundoapellido() + "  "
+                        + u.getPrimernombre() + "  " + u.getSegundonombre();
+                fila[3] = u.getApadosn();
+                fila[4] = u.getTelefono();
+                fila[5] = u.getCelular();
+                fila[6] = u.getSector();
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(35);
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(1).setMinWidth(70);
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(70);
+                //FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(4).setMinWidth(70);
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(70);
+                //FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(5).setMinWidth(65);
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(75);
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(75);
+                modelo.addRow(fila);
+            }
+        }
+    }
+
+    public void BuscarCed(String txt, JTable tabla) {
+        modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[7];
+        modelo.addColumn("N°");
+        modelo.addColumn("CI/RUC");
+        modelo.addColumn("Nombres");
+
+        modelo.addColumn("Apodo");
+
+        modelo.addColumn("tel");
+        modelo.addColumn("cel");
+        modelo.addColumn("sector");
+
+        for (Usuarios u : getUsuarios()) {
+            if (u.buscarCedula(u.elimiEspacio(txt))) {
+                fila[0] = u.getIdusuario();
+                fila[1] = u.getRucci();
+                fila[2] = u.getPrimerapellido() + "  " + u.getSegundoapellido() + "  "
+                        + u.getPrimernombre() + "  " + u.getSegundonombre();
+                fila[3] = u.getApadosn();
+                fila[4] = u.getTelefono();
+                fila[5] = u.getCelular();
+                fila[6] = u.getSector();
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(35);
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(1).setMinWidth(70);
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(70);
+                //FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(4).setMinWidth(70);
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(70);
+                //FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(5).setMinWidth(65);
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(75);
+                FrmUsuario.tablaUsuarios.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(75);
+                modelo.addRow(fila);
+            }
+        }
+    }
+
 }

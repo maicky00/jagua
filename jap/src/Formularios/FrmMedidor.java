@@ -7,6 +7,7 @@ package Formularios;
 
 import Controladores.ControlFormularios;
 import Controladores.classMedidor;
+import Controladores.classusuario;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import java.awt.Dimension;
 import java.util.logging.Level;
@@ -23,19 +24,21 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
      * Creates new form FrmMedidor
      */
     classMedidor cm = new classMedidor();
-    
+    classusuario cu = new classusuario();
+
     public FrmMedidor() {
         initComponents();
         limpiar();
         Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
-        cm = new classMedidor();
+         //cu.cargarTablaUsuario2(jTable1);.
+
         cm.cargarTablaMedidor(jTable1);
     }
-    
+
     ControlFormularios cf;
-    
+
     public void mostrar() {
         txtSerie.setEditable(true);
         txtMedidor.setEditable(true);
@@ -44,7 +47,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         btnCancelar.setEnabled(true);
         btnGuardar.setEnabled(true);
     }
-    
+
     public void ocultar() {
         txtSerie.setEditable(false);
         txtMedidor.setEditable(false);
@@ -53,13 +56,18 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         btnCancelar.setEnabled(false);
         btnGuardar.setEnabled(false);
     }
-    
+
     public void limpiar() {
+        txtNombre.setText("");
+        txtUsuarioCed.setText("");
         txtSerie.setText("");
         txtMedidor.setText("");
         lblIdmedidor.setText("");
-        lblIdmedidor.setVisible(false);
-        jLabel1.setVisible(false);
+        lblIdUsuario.setText("");
+        //lblIdUsuario.setVisible(false);
+        //jLabel8.setVisible(false);
+        // lblIdmedidor.setVisible(false);
+        //jLabel1.setVisible(false);
     }
 
     /**
@@ -89,10 +97,13 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         txtSerie = new javax.swing.JTextField();
         txtMedidor = new javax.swing.JTextField();
-        txtUsuario = new javax.swing.JTextField();
+        txtUsuarioCed = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         comboEstado = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        lblIdUsuario = new javax.swing.JLabel();
+        label = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -204,7 +215,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -233,7 +244,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
         jLabel1.setText("id:");
 
-        jLabel2.setText("Id Usuario:");
+        jLabel2.setText("Cedula:");
 
         jLabel3.setText("Serie:");
 
@@ -241,9 +252,10 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
         jLabel5.setText("N° de Medidor:");
 
-        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtUsuarioCed.setEnabled(false);
+        txtUsuarioCed.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtUsuarioKeyTyped(evt);
+                txtUsuarioCedKeyTyped(evt);
             }
         });
 
@@ -252,6 +264,12 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         jLabel4.setText("Nombre:");
 
         comboEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ACTIVO", "INACTIVO" }));
+
+        jLabel8.setText("Numero de Usuario:");
+
+        lblIdUsuario.setText("jLabel9");
+
+        label.setText("jLabel9");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -272,15 +290,23 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtSerie)
-                            .addComponent(txtUsuario)
-                            .addComponent(txtNombre)))
+                            .addComponent(txtUsuarioCed)
+                            .addComponent(txtNombre)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblIdUsuario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 1, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(comboEstado, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtMedidor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE))))
+                            .addComponent(txtMedidor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(label)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -288,11 +314,13 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(lblIdmedidor))
+                    .addComponent(lblIdmedidor)
+                    .addComponent(jLabel8)
+                    .addComponent(lblIdUsuario))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuarioCed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,6 +335,8 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(label)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -364,21 +394,22 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(178, 178, 178)
                 .addComponent(rdbtodos)
                 .addGap(18, 18, 18)
                 .addComponent(rdbApellidosN)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 175, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addGap(46, 46, 46)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
+                .addGap(39, 39, 39))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -392,7 +423,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -425,26 +456,28 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+
+        txtUsuarioCed.setEnabled(true);
         mostrar();
         limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
+
         mostrar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+
         ocultar();
         limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
-        
+
         this.setVisible(false);
         FrmUsuario us = new FrmUsuario();
-        
+
         cf = new ControlFormularios();
         cf.ControlaInstancia(us);
 
@@ -452,31 +485,37 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-try {
-        int idUsuario = Integer.valueOf(txtUsuario.getText());
-        String serie = txtSerie.getText();
-        int numMedidor = Integer.valueOf(txtMedidor.getText());
-        String estado = comboEstado.getSelectedItem().toString();
-        if (lblIdmedidor.getText().equals("")) {
-            int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                cm.guardarMedidor(idUsuario, serie, numMedidor, estado);
+        try {
+
+            int idUsuario = Integer.valueOf(lblIdUsuario.getText());
+            String serie = txtSerie.getText();
+            int numMedidor = Integer.valueOf(txtMedidor.getText());
+            String estado = comboEstado.getSelectedItem().toString();
+            if (lblIdmedidor.getText().equals("")) {
+                int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    cm.guardarMedidor(idUsuario, serie, numMedidor, estado);
+                    cm.cargarTablaMedidor(jTable1);
+                    limpiar();
+                    ocultar();
+                }
+
+            } else if (!lblIdmedidor.getText().equals("")) {
+                int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    int idmed = Integer.valueOf(lblIdmedidor.getText());
+                    cm.modificarMedidor(idmed, idUsuario, serie, numMedidor, estado);
+                    cm.cargarTablaMedidor(jTable1);
+                    limpiar();
+                    ocultar();
+                }
+
             }
-            
-        } else if (!lblIdmedidor.getText().equals("")) {
-            int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                int idmed = Integer.valueOf(lblIdmedidor.getText());
-                cm.modificarMedidor(idmed, idUsuario, serie, numMedidor, estado);
-            }
-            
-        }
-        cm.cargarTablaMedidor(jTable1);
-    
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
         }
-        
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnElimnarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimnarActionPerformed
@@ -487,19 +526,19 @@ try {
                 cm.cargarTablaMedidor(jTable1);
                 JOptionPane.showMessageDialog(null, "Eliminado");
             }
-            
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No Se Puede Eliminar");
         }
     }//GEN-LAST:event_btnElimnarActionPerformed
 
-    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
-        
-        if (txtUsuario.getText().equals("")) {
+    private void txtUsuarioCedKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioCedKeyTyped
+
+        if (txtUsuarioCed.getText().equals("")) {
             FrmBusqueda bu = new FrmBusqueda();
             bu.setVisible(true);
         }
-    }//GEN-LAST:event_txtUsuarioKeyTyped
+    }//GEN-LAST:event_txtUsuarioCedKeyTyped
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         // TODO add your handling code here:
@@ -527,11 +566,15 @@ try {
         try {
             int n = jTable1.getSelectedRow();
             lblIdmedidor.setText(jTable1.getValueAt(n, 0).toString());
-            txtMedidor.setText(jTable1.getValueAt(n, 1).toString());
-            txtNombre.setText(jTable1.getValueAt(n, 2).toString());            
-            txtSerie.setText(jTable1.getValueAt(n, 4).toString());            
+            txtUsuarioCed.setText(jTable1.getValueAt(n, 1).toString());
+            txtNombre.setText(jTable1.getValueAt(n, 2).toString());
+
+            txtMedidor.setText(cu.buscarUsuarioRucCi(txtUsuarioCed.getText()).getIdusuario().toString());
+
+            txtSerie.setText(jTable1.getValueAt(n, 4).toString());
             comboEstado.setSelectedItem(jTable1.getValueAt(n, 5).toString());
-            txtUsuario.setText(jTable1.getValueAt(n, 6).toString());
+            lblIdUsuario.setText(cu.buscarUsuarioRucCi(txtUsuarioCed.getText()).getIdusuario().toString());
+            txtUsuarioCed.setEnabled(false);
         } catch (Exception e) {
         }
 
@@ -541,12 +584,19 @@ try {
         // TODO add your handling code here:
         try {
             int n = jTable1.getSelectedRow();
+
             lblIdmedidor.setText(jTable1.getValueAt(n, 0).toString());
-            txtMedidor.setText(jTable1.getValueAt(n, 1).toString());
-            txtNombre.setText(jTable1.getValueAt(n, 2).toString());            
-            txtSerie.setText(jTable1.getValueAt(n, 4).toString());            
+            txtUsuarioCed.setText(jTable1.getValueAt(n, 1).toString());
+            txtNombre.setText(jTable1.getValueAt(n, 2).toString());
+
+            //txtMedidor.setText(cu.buscarUsuarioRucCi(txtUsuarioCed.getText()).getIdusuario().toString());
+            txtMedidor.setText(jTable1.getValueAt(n, 0).toString());
+            txtSerie.setText(jTable1.getValueAt(n, 4).toString());
             comboEstado.setSelectedItem(jTable1.getValueAt(n, 5).toString());
-            txtUsuario.setText(jTable1.getValueAt(n, 6).toString());
+            lblIdUsuario.setText(cu.buscarUsuarioRucCi(txtUsuarioCed.getText()).getIdusuario().toString());
+            txtUsuarioCed.setEnabled(false);
+            //System.out.println(cm.buscarMedidorNumM(jTable1.getValueAt(n, 0).toString()));
+
         } catch (Exception e) {
         }
 
@@ -569,12 +619,15 @@ try {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    public static javax.swing.JLabel label;
+    public static javax.swing.JLabel lblIdUsuario;
     private javax.swing.JLabel lblIdmedidor;
     private javax.swing.JLabel mensaje;
     private javax.swing.JRadioButton rdbApellidosN;
@@ -582,6 +635,6 @@ try {
     public static javax.swing.JTextField txtMedidor;
     public static javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSerie;
-    public static javax.swing.JTextField txtUsuario;
+    public static javax.swing.JTextField txtUsuarioCed;
     // End of variables declaration//GEN-END:variables
 }
