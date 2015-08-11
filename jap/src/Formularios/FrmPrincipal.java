@@ -112,6 +112,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jMenu3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/arrow_left.png"))); // NOI18N
         jMenuItem13.setText("Salir");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -374,7 +375,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        Login l = new Login();
+        l.setVisible(true);
         this.setVisible(false);
+        
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
