@@ -96,7 +96,7 @@ public class classAsistencia {
         return null;
     }
 
-    public void cargarTablaAsistencia(JTable tabla) {
+    public void cargarTablaAsistencia(JTable tabla, int idPlan) {
 
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
@@ -114,34 +114,36 @@ public class classAsistencia {
 
 //        Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
         for (Asistencia a : getAsistencia()) {
-            fila[0] = a.getIdasistencia();
-            fila[1] = a.getIdplanificacion().getIdplanificacion();
-            fila[2] = a.getIdmedidor().getIdmedidor();
+            if (a.getIdplanificacion().getIdplanificacion() == idPlan) {
+                fila[0] = a.getIdasistencia();
+                fila[1] = a.getIdplanificacion().getIdplanificacion();
+                fila[2] = a.getIdmedidor().getIdmedidor();
 
-            fila[3] = a.getIdmedidor().getIdusuario().getPrimernombre() + " " + a.getIdmedidor().getIdusuario().getPrimerapellido()
-                    + " " + a.getIdmedidor().getIdusuario().getSegundoapellido();
-            fila[4] = a.getIdmedidor().getIdusuario().getRucci();
-            fila[5] = a.getAsistencia();
+                fila[3] = a.getIdmedidor().getIdusuario().getPrimernombre() + " " + a.getIdmedidor().getIdusuario().getPrimerapellido()
+                        + " " + a.getIdmedidor().getIdusuario().getSegundoapellido();
+                fila[4] = a.getIdmedidor().getIdusuario().getRucci();
+                fila[5] = a.getAsistencia();
 
-            fila[6] = a.getValormulta();
-            fila[7] = a.getDescripcion();
+                fila[6] = a.getValormulta();
+                fila[7] = a.getDescripcion();
 
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(35);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(60);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(65);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(40);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(45);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
-            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(35);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(60);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(65);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(40);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(45);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
+                FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
 
-            modelo.addRow(fila);
+                modelo.addRow(fila);
+            }
         }
     }
 

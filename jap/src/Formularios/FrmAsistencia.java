@@ -23,46 +23,48 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
 
     public FrmAsistencia() {
         initComponents();
-        ca.cargarTablaAsistencia(jTable1);
+
         cm.cargarTablaMedidor2(tablaUsuarios);
     }
-    
+
     private void mostrar() {
         btnNuevo.setEnabled(false);
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnCancelar.setEnabled(true);
-        lblIdPlan.setEnabled(true);
-        lblIdMedidor.setEnabled(true);
+        //lblIdPlan.setEnabled(true);
+        //lblIdMedidor.setEnabled(true);
         comboAsistencia.setEnabled(true);
         txtValor.setEnabled(true);
         txtDescripcion.setEnabled(true);
+        tablaUsuarios.setEnabled(true);
     }
-    
+
     private void ocultar() {
         btnNuevo.setEnabled(true);
         btnGuardar.setEnabled(false);
         btnEditar.setEnabled(true);
         btnEliminar.setEnabled(true);
         btnCancelar.setEnabled(false);
-        lblIdPlan.setEnabled(false);
-        lblIdMedidor.setEnabled(false);
+        //lblIdPlan.setEnabled(false);
+        //lblIdMedidor.setEnabled(false);
         comboAsistencia.setEnabled(false);
         txtValor.setEnabled(false);
         txtDescripcion.setEnabled(false);
+        tablaUsuarios.setEnabled(false);
     }
 
     private void limpiar() {
         lblId.setText("");
-        lblIdPlan.setText("");
-        lblIdMedidor.setText("");
+        //lblIdPlan.setText("");
+        //lblIdMedidor.setText("");
         comboAsistencia.setSelectedItem(0);
         txtValor.setText("");
         txtDescripcion.setText("");
-        txtUsuario.setText("");
-        txtCedula.setText("");
-        
+        //txtUsuario.setText("");
+        //txtCedula.setText("");
+
     }
 
     /**
@@ -96,7 +98,8 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
-        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
+        txtMes = new javax.swing.JTextField();
+        txtTipo = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnNuevo = new org.edisoncor.gui.button.ButtonNice();
         btnGuardar = new org.edisoncor.gui.button.ButtonNice();
@@ -225,7 +228,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addGap(8, 8, 8)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -249,7 +252,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        jLabel10.setText("Busqueda:");
+        jLabel10.setText("Mes:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -261,20 +264,23 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2)
-                .addContainerGap())
+                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(23, 23, 23))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -389,6 +395,12 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaUsuarios.setEnabled(false);
+        tablaUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tablaUsuarios);
 
         jLabel9.setText("Busqueda:");
@@ -429,9 +441,9 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -457,7 +469,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
+
         String idAs = lblId.getText();
         int idPlan = Integer.parseInt(lblIdPlan.getText());
         int idMedidor = Integer.parseInt(lblIdMedidor.getText());
@@ -467,17 +479,17 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         if (idAs.equals("")) {
             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                
+
                 ca.guardarAsistencia(idPlan, idMedidor, asistencia, valor, descripcion);
-                ca.cargarTablaAsistencia(jTable1);
+                ca.cargarTablaAsistencia(jTable1,Integer.parseInt(lblIdPlan.getText()));
             } else {
             }
         } else if (!idAs.equals("")) {
             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-                
+
                 ca.modificarAsistencia(Integer.parseInt(idAs), idPlan, idMedidor, asistencia, valor, descripcion);
-                ca.cargarTablaAsistencia(jTable1);
+//                ca.cargarTablaAsistencia(jTable1);
             } else {
             }
         }
@@ -495,26 +507,27 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 ca.eliminarAsistencia(Integer.valueOf(lblId.getText()));
-                ca.cargarTablaAsistencia(jTable1);
+//                ca.cargarTablaAsistencia(jTable1);
                 limpiar();
                 ocultar();
             }
-            
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No Se Puede Eliminar", "Información", 1);
-            
+
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+
         ocultar();
         limpiar();
+        lblIdMedidor.setText("");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try {
-            
+
             int n = jTable1.getSelectedRow();
             lblId.setText(jTable1.getValueAt(n, 0).toString());
             lblIdPlan.setText(jTable1.getValueAt(n, 1).toString());
@@ -529,10 +542,24 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
             txtCedula.setText(jTable1.getValueAt(n, 4).toString());
             txtValor.setText(jTable1.getValueAt(n, 6).toString());
             txtDescripcion.setText(jTable1.getValueAt(n, 7).toString());
-            
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void tablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUsuariosMouseClicked
+        try {
+            int n = tablaUsuarios.getSelectedRow();
+            //lblId.setText(tablaUsuarios.getValueAt(n, 0).toString());
+            lblIdMedidor.setText(tablaUsuarios.getValueAt(n, 1).toString());
+            txtUsuario.setText(tablaUsuarios.getValueAt(n, 3).toString());
+            txtCedula.setText(tablaUsuarios.getValueAt(n, 2).toString());
+            txtValor.setText("");
+            txtDescripcion.setText("");
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_tablaUsuariosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -552,7 +579,6 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -563,12 +589,14 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
     public static javax.swing.JTable jTable1;
     private javax.swing.JLabel lblId;
     private javax.swing.JTextField lblIdMedidor;
-    private javax.swing.JTextField lblIdPlan;
+    public static javax.swing.JTextField lblIdPlan;
     private javax.swing.JLabel mensaje;
     public static javax.swing.JTable tablaUsuarios;
     private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextArea txtDescripcion;
+    public static javax.swing.JTextField txtMes;
+    public static javax.swing.JTextField txtTipo;
     private javax.swing.JTextField txtUsuario;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables

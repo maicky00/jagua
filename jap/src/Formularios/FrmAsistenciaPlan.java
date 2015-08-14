@@ -78,7 +78,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Lugar");
 
-        jButton2.setText("IiNGRESAR USUARIOS");
+        jButton2.setText("ASISTENCIA");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -118,7 +118,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
                                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(9, 9, 9))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
+                        .addGap(77, 77, 77)
                         .addComponent(jButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -239,6 +239,8 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
         cf = new ControlFormularios();
         cf.ControlaInstancia(as);
         this.dispose();
+        FrmAsistencia.lblIdPlan.setText(txtId.getText());
+        ca.cargarTablaAsistencia(FrmAsistencia.jTable1,Integer.parseInt(txtId.getText()));
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
