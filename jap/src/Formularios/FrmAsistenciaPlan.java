@@ -20,7 +20,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
      */
     classAsistencia ca = new classAsistencia();
     classPlanificacion cp = new classPlanificacion();
-    ControlFormularios cf=new ControlFormularios();
+    ControlFormularios cf = new ControlFormularios();
 
     public FrmAsistenciaPlan() {
         initComponents();
@@ -214,7 +214,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int mes = jMonthChooser1.getMonth()+1;
+        int mes = jMonthChooser1.getMonth() + 1;
         int anio = jYearChooser1.getYear();
         cp.cargarTablaPlanificacionPlan(jTable1, mes, anio);
 
@@ -227,21 +227,27 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
             txtId.setText(jTable1.getValueAt(n, 0).toString());
             txtTipo.setText(jTable1.getValueAt(n, 1).toString());
             txtLugar.setText(jTable1.getValueAt(n, 2).toString());
-            
+
         } catch (Exception e) {
         }
-        
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        FrmAsistencia as = new FrmAsistencia();
+        try {
+            FrmAsistencia as = new FrmAsistencia();
+            int n = jTable1.getSelectedRow();
+            
+            
+            cf = new ControlFormularios();
+            cf.ControlaInstancia(as);
+            this.dispose();
+            FrmAsistencia.lblIdPlan.setText(txtId.getText());
+            FrmAsistencia.txtValor.setText(jTable1.getValueAt(n, 4).toString());
+            ca.cargarTablaAsistencia(FrmAsistencia.jTable1, Integer.parseInt(txtId.getText()));
+        } catch (Exception e) {
 
-        cf = new ControlFormularios();
-        cf.ControlaInstancia(as);
-        this.dispose();
-        FrmAsistencia.lblIdPlan.setText(txtId.getText());
-        ca.cargarTablaAsistencia(FrmAsistencia.jTable1,Integer.parseInt(txtId.getText()));
-        
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

@@ -5,6 +5,7 @@
  */
 package Formularios;
 
+import Controladores.ControlFormularios;
 import Controladores.classAsistencia;
 import Controladores.classMedidor;
 import javax.swing.JOptionPane;
@@ -36,7 +37,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         //lblIdPlan.setEnabled(true);
         //lblIdMedidor.setEnabled(true);
         comboAsistencia.setEnabled(true);
-        txtValor.setEnabled(true);
+        //txtValor.setEnabled(true);
         txtDescripcion.setEnabled(true);
         tablaUsuarios.setEnabled(true);
     }
@@ -50,7 +51,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         //lblIdPlan.setEnabled(false);
         //lblIdMedidor.setEnabled(false);
         comboAsistencia.setEnabled(false);
-        txtValor.setEnabled(false);
+        //txtValor.setEnabled(false);
         txtDescripcion.setEnabled(false);
         tablaUsuarios.setEnabled(false);
     }
@@ -60,7 +61,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         //lblIdPlan.setText("");
         //lblIdMedidor.setText("");
         comboAsistencia.setSelectedItem(0);
-        txtValor.setText("");
+//        txtValor.setText("");
         txtDescripcion.setText("");
         //txtUsuario.setText("");
         //txtCedula.setText("");
@@ -107,6 +108,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         btnEliminar = new org.edisoncor.gui.button.ButtonNice();
         btnCancelar = new org.edisoncor.gui.button.ButtonNice();
         mensaje = new javax.swing.JLabel();
+        btnAtras1 = new org.edisoncor.gui.button.ButtonNice();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaUsuarios = new javax.swing.JTable();
@@ -344,12 +346,26 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
 
         mensaje.setForeground(new java.awt.Color(204, 0, 0));
 
+        btnAtras1.setBackground(new java.awt.Color(0, 153, 51));
+        btnAtras1.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtras1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/arrow_left.png"))); // NOI18N
+        btnAtras1.setText("ATRAS");
+        btnAtras1.setModelo(org.edisoncor.gui.button.ButtonNice.Modelo.RECT);
+        btnAtras1.setSegundoColor(new java.awt.Color(0, 51, 255));
+        btnAtras1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtras1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(btnAtras1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -365,20 +381,20 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAtras1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -561,8 +577,19 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_tablaUsuariosMouseClicked
 
+    private void btnAtras1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtras1ActionPerformed
+
+        FrmAsistenciaPlan us = new FrmAsistenciaPlan();
+        ControlFormularios cf = new ControlFormularios();
+        cf.ControlaInstancia(us);
+        this.dispose();
+
+    }//GEN-LAST:event_btnAtras1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.edisoncor.gui.button.ButtonNice btnAtras;
+    private org.edisoncor.gui.button.ButtonNice btnAtras1;
     private org.edisoncor.gui.button.ButtonNice btnCancelar;
     private org.edisoncor.gui.button.ButtonNice btnEditar;
     private org.edisoncor.gui.button.ButtonNice btnEliminar;
@@ -598,6 +625,6 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField txtMes;
     public static javax.swing.JTextField txtTipo;
     private javax.swing.JTextField txtUsuario;
-    private javax.swing.JTextField txtValor;
+    public static javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }
