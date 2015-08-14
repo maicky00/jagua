@@ -134,7 +134,7 @@ public class classPlanificacion {
 
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
-        Object[] fila = new Object[6];
+        Object[] fila = new Object[5];
         modelo.addColumn("id");
         modelo.addColumn("Planificacion");
         modelo.addColumn("Lugar");
@@ -142,7 +142,6 @@ public class classPlanificacion {
         modelo.addColumn("Fecha");
 
         modelo.addColumn("Multa");
-        modelo.addColumn("Descripcion");
 
 //        Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
         for (Planificacion p : getPlanificacion()) {
@@ -159,7 +158,6 @@ public class classPlanificacion {
                 fila[3] = hoy;
 
                 fila[4] = p.getValormulta();
-                fila[5] = p.getDescripcion();
 
 //            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(15);
 //            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(20);
