@@ -269,7 +269,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu4.add(jMenuItem10);
 
         jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/application_cascade.png"))); // NOI18N
-        jMenuItem14.setText("Medidas");
+        jMenuItem14.setText("Registro de Consumos");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem14ActionPerformed(evt);

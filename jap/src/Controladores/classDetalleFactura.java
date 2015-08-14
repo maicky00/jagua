@@ -28,16 +28,16 @@ import javax.swing.table.TableModel;
  * @author JC-PC
  */
 public class classDetalleFactura {
-    
+
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("japPU");
     public DetallefacturaJpaController detallefacturaJpacontrolador = new DetallefacturaJpaController(emf);
     classMedidor cm = new classMedidor();
     classTarifas ct = new classTarifas();
-    
+
     public List<Detallefactura> getDetallefactura() {
         return detallefacturaJpacontrolador.findDetallefacturaEntities();
     }
-    
+
     public void guardarDetallefactura(int idTarifas, int idMedidor, String anioMes, int medidaAnt, int medidaAct, int consumo, int medExcedido, float tarExcedido, float subtotal, float total, String observacion) {
         try {
             int i = 0;
@@ -52,7 +52,7 @@ public class classDetalleFactura {
             if (i == 1) {
                 JOptionPane.showMessageDialog(null, "Num. Medidor, Fecha Ya Estan Registrados", "Informacion", 1);
                 med = null;
-                
+
             } else {
                 Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor).getIdmedidor());
                 Tarifas idTar = ct.tarifasJpacontrolador.findTarifas(ct.buscarIdTarifas(idTarifas).getIdtarifas());
@@ -72,10 +72,10 @@ public class classDetalleFactura {
                 JOptionPane.showMessageDialog(null, "Guardado", "Información", 1);
             }
         } catch (Exception e) {
-            
+
         }
     }
-    
+
     public boolean modificarDetallefactura(int idDetallefactura, int idTarifas, int idMedidor, String anioMes, int medidaAnt, int medidaAct, int consumo, int medExcedido, float tarExcedido, float subtotal, float total, String observacion) {
         try {
             Detallefactura dat = detallefacturaJpacontrolador.findDetallefactura(idDetallefactura);
@@ -97,24 +97,24 @@ public class classDetalleFactura {
             dat.setObservacion(observacion);
             detallefacturaJpacontrolador.edit(dat);
             JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
-            
+
         } catch (Exception e) {
         }
         return true;
     }
-    
+
     public void eliminarDetallefactura(int idetallefactura) throws IllegalOrphanException {
-        
+
         try {
             detallefacturaJpacontrolador.destroy(idetallefactura);
             JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
         } catch (NonexistentEntityException ex) {
         }
-        
+
     }
-    
+
     public Detallefactura buscarIdDetallefactura(int idDetallefactura) {
-        
+
         for (Detallefactura dat : getDetallefactura()) {
             if (dat.getIddetallefac().equals(idDetallefactura)) {
                 return dat;
@@ -122,9 +122,9 @@ public class classDetalleFactura {
         }
         return null;
     }
-    
+
     public Detallefactura buscarNumMedDetallefactura(int numMedidor) {
-        
+
         for (Detallefactura dat : getDetallefactura()) {
             if (dat.getIdmedidor().getNummedidor().equals(numMedidor)) {
                 return dat;
@@ -132,9 +132,9 @@ public class classDetalleFactura {
         }
         return null;
     }
-    
+
     public Detallefactura buscarNumMedAnioMes(int numMedidor, String anioMes) {
-        
+
         for (Detallefactura dat : getDetallefactura()) {
             if (dat.getIdmedidor().getNummedidor().equals(numMedidor) && dat.getAniomes().equals(anioMes)) {
                 return dat;
@@ -142,7 +142,7 @@ public class classDetalleFactura {
         }
         return null;
     }
-    
+
     public int buscarAnioMes(String anioMes) {
         for (Detallefactura dat : getDetallefactura()) {
             if (dat.getAniomes().equals(anioMes)) {
@@ -151,7 +151,7 @@ public class classDetalleFactura {
         }
         return 0;
     }
-    
+
     public int medidaAnterior(int idMedidor) {
         int r = 0;
         int r2 = 0;
@@ -166,9 +166,9 @@ public class classDetalleFactura {
         }
         return r;
     }
-    
+
     public TableModel tablaDetalles(JTable tabla, int numMedidor) {
-        
+
         DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
         dtm.setRowCount(0);
         diseñoTabla(tabla);
@@ -199,7 +199,7 @@ public class classDetalleFactura {
         FrmFactura.tabla2.setValueAt(total, 2, 1);
         return dtm;
     }
-    
+
     public void diseñoTabla(JTable tabla) {
 //        tabla.getColumnModel().getColumn(0).setPreferredWidth(15);
         tabla.getColumn(tabla.getColumnName(0)).setWidth(0);
@@ -214,9 +214,9 @@ public class classDetalleFactura {
         tabla.getColumnModel().getColumn(6).setPreferredWidth(130);
         tabla.getColumnModel().getColumn(7).setPreferredWidth(160);
         tabla.getColumnModel().getColumn(8).setPreferredWidth(100);
-        
+
     }
-    
+
     public boolean modificarTransaccion(int idDetallefactura, String observacion) {
         try {
             Detallefactura dat = detallefacturaJpacontrolador.findDetallefactura(idDetallefactura);
@@ -225,7 +225,7 @@ public class classDetalleFactura {
             }
             dat.setObservacion(observacion);
             detallefacturaJpacontrolador.edit(dat);
-            
+
         } catch (Exception e) {
         }
         return true;
@@ -293,18 +293,20 @@ public class classDetalleFactura {
                 fila[4] = u.getAniomes();
                 fila[5] = u.getMedidaant();
                 fila[6] = u.getMedidaact();
+                frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                 
-                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(24);
-                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(60);
-                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(90);
-                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(200);
-                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(170);
-                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(100);
-                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(100);
-                
+                frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(60);
+                frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(90);
+                frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(200);
+                frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(170);
+                frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(100);
+                frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(100);
+
                 modelo.addRow(fila);
             }
         }
     }
-    
+
 }
