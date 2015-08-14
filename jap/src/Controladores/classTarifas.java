@@ -28,7 +28,7 @@ public class classTarifas {
         return tarifasJpacontrolador.findTarifasEntities();
     }
 
-    public void guardartarifa(int base, float tarBase, String descripcion) {
+    public void guardartarifa(int base, float tarBase, String descripcion, float valorExc, float alcant,float iva) {
         int i = 0;
         Tarifas usu = new Tarifas();
         try {
@@ -48,6 +48,9 @@ public class classTarifas {
                 dat.setBase(base);
                 dat.setTarbase(tarBase);
                 dat.setDescripcion(descripcion);
+                dat.setValorexceso(valorExc);
+                dat.setAlcantarrillado(alcant);
+                dat.setIva(iva);
                 tarifasJpacontrolador.create(dat);
             }
         } catch (Exception e) {
@@ -55,7 +58,7 @@ public class classTarifas {
         }
     }
 
-    public boolean modificarTarifa(int id, int base, float tarBase, String descripcion) {
+    public boolean modificarTarifa(int id, int base, float tarBase, String descripcion, float valorExc, float alcant,float iva) {
 
         try {
 
@@ -66,7 +69,12 @@ public class classTarifas {
             dat.setBase(base);
             dat.setTarbase(tarBase);
             dat.setDescripcion(descripcion);
+            dat.setValorexceso(valorExc);
+            dat.setAlcantarrillado(alcant);
+            dat.setIva(iva);
             tarifasJpacontrolador.edit(dat);
+            
+
             JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
 
         } catch (Exception e) {

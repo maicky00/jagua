@@ -237,6 +237,7 @@
   <SubComponents>
     <Container class="javax.swing.JDesktopPane" name="jDesktopPane1">
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new fondoPrincipal()"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
 

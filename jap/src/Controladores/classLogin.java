@@ -182,7 +182,9 @@ public class classLogin {
     }
 
     public void diseñoTabla(JTable tabla) {
-        tabla.getColumnModel().getColumn(0).setPreferredWidth(21);
+        tabla.getColumn(tabla.getColumnName(0)).setWidth(0);
+        tabla.getColumn(tabla.getColumnName(0)).setMinWidth(0);
+        tabla.getColumn(tabla.getColumnName(0)).setMaxWidth(0);
         tabla.getColumnModel().getColumn(0).setResizable(false);
         tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(100);

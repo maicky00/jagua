@@ -22,7 +22,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="260" max="32767" attributes="0"/>
+              <EmptySpace pref="59" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,16 +50,22 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-                  <Component id="btnEditar" min="-2" pref="108" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="71" max="32767" attributes="0"/>
-                  <Component id="chsAnio" min="-2" pref="59" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="mchMes" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="btnNuevo" min="-2" pref="108" max="-2" attributes="0"/>
+                      <Component id="chsAnio" min="-2" pref="59" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="mchMes" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btnEditar" min="-2" pref="108" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -71,17 +77,26 @@
                       <Component id="mchMes" pref="31" max="32767" attributes="0"/>
                       <Component id="chsAnio" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="btnEditar" min="-2" pref="32" max="-2" attributes="0"/>
-                  <EmptySpace pref="63" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnEditar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btnNuevo" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="52" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
         <Component class="com.toedter.calendar.JYearChooser" name="chsAnio">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="com.toedter.calendar.JMonthChooser" name="mchMes">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="org.edisoncor.gui.button.ButtonNice" name="btnEditar">
           <Properties>
@@ -91,7 +106,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Empezar"/>
+            <Property name="text" type="java.lang.String" value="Ver Registros"/>
             <Property name="modelo" type="org.edisoncor.gui.button.ButtonNice$Modelo" editor="org.netbeans.modules.form.editors.EnumEditor">
               <Value id="RECT"/>
             </Property>
@@ -101,6 +116,26 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="org.edisoncor.gui.button.ButtonNice" name="btnNuevo">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="0" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="NUEVO REGISTRO"/>
+            <Property name="modelo" type="org.edisoncor.gui.button.ButtonNice$Modelo" editor="org.netbeans.modules.form.editors.EnumEditor">
+              <Value id="ROUND_LEFT"/>
+            </Property>
+            <Property name="segundoColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="33" red="0" type="rgb"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

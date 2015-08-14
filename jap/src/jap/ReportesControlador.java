@@ -35,10 +35,10 @@ public class ReportesControlador {
 
     public static void main(String[] args) {
         ReportesControlador b = new ReportesControlador();
-        b.reporte("reporteMedidores.jasper");
+        b.factura("numfact","1","factura.jasper");
     }
 
-        public void reporte(String archivo) {
+    public void reporte(String archivo) {
         try {
 
             JasperReport reporte = null;
@@ -56,6 +56,28 @@ public class ReportesControlador {
 
         } catch (Exception e) {
             System.out.println("Error al cargar reporte.");
+        }
+
+    }
+
+    public void factura(String bddVar, String numfact, String archivo) {
+        try {
+            JasperReport reporte = null;
+            try {
+                URL in = this.getClass().getResource(archivo);
+                reporte = (JasperReport) JRLoader.loadObject(in);
+            } catch (JRException jr) {
+
+            }
+            Map parametro = new HashMap();
+            parametro.put(bddVar, numfact);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametro, con.getCon());
+            JasperViewer jv = new JasperViewer(jasperPrint, false);
+            jv.setTitle("FACTURA");
+            jv.setVisible(true);
+//            JasperPrintManager.printReport(jasperPrint, false); imprime
+
+        } catch (Exception e) {
         }
 
     }

@@ -41,7 +41,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     ValidarCedula valCed = new ValidarCedula();
     classInstitucion ci = new classInstitucion();
     classusuario cu = new classusuario();
-
+    
     public FrmUsuario() {
         initComponents();
         Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
@@ -50,18 +50,18 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         ci = new classInstitucion();
         cu = new classusuario();
         jLabel9.setText(ci.buscarIdInstitucion(1).getNombreinst().toString());
-
+        
         cu.cargarTablaUsuario2(tablaUsuarios);
     }
     classMoverRegistros moverRegistros = new classMoverRegistros(cu.getUsuarios());
     ControlFormularios cf;
-
+    
     JFileChooser seleccionado = new JFileChooser();
-    File archivo;
-    byte[] bytesImg;
+    File archivo = null;
+    byte[] bytesImg = null;
     String ruta, nombre;
     BufferedImage img;
-
+    
     public void mostrar() {
         txtRuc.setEditable(true);
         txtDir.setEditable(true);
@@ -81,7 +81,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(true);
         btnCancelar.setEnabled(true);
     }
-
+    
     public void ocultar() {
         txtRuc.setEditable(false);
         txtDir.setEditable(false);
@@ -100,7 +100,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(false);
         btnCancelar.setEnabled(false);
     }
-
+    
     public void limpiar() {
         lblfoto.setIcon(null);
         id.setText("");
@@ -117,7 +117,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         txtApodo.setText("");
         comboSector.setSelectedIndex(0);
     }
-
+    
     private boolean letras(String str) {
         boolean respuesta = false;
         if ((str).matches("([a-z]|[A-Z])+")) {
@@ -755,10 +755,11 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         limpiar();
         mostrar();
+        bytesImg = null;
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+        
         ocultar();
         limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -784,12 +785,12 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
     private void txtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyTyped
         char c = evt.getKeyChar();
-
+        
         if (Character.isLetter(c)) {
             getToolkit().beep();
-
+            
             evt.consume();
-
+            
             mensaje.setText("error de ingreso, ingrese digitos");
         } else {
             mensaje.setText("");
@@ -797,14 +798,14 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtRucKeyTyped
 
     private void txtObservarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservarKeyTyped
-
+        
         char c = evt.getKeyChar();
-
+        
         if (Character.isDigit(c)) {
             getToolkit().beep();
-
+            
             evt.consume();
-
+            
             mensaje.setText("error de ingreso, ingrese letras!...");
         } else {
             mensaje.setText("");
@@ -812,7 +813,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtObservarKeyTyped
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
+        
         String insti = jLabel9.getText();
         String rucCi = txtRuc.getText();
         String primNombre = txtNombre.getText();
@@ -829,7 +830,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
 
-                bytesImg = cu.AbrirAImagen(archivo);
+//                bytesImg = cu.AbrirAImagen(archivo);
                 cu.guardarUsuarios(insti, rucCi, primNombre, segNombre, primApell, segApellidos, apodo, direccion, telefono, celular, sector, referencia, bytesImg, direccion);
                 cu.cargarTablaUsuario2(tablaUsuarios);
 //                int j = JOptionPane.showConfirmDialog(this, "¿Asignar Medidor ?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -847,7 +848,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
 
-                bytesImg = cu.AbrirAImagen(archivo);
+//                bytesImg = cu.AbrirAImagen(archivo);
                 cu.modificarUsuario(Integer.valueOf(id.getText()), rucCi, primNombre, segNombre, primApell, segApellidos, apodo, direccion, telefono, celular, sector, referencia, bytesImg, direccion);
                 cu.cargarTablaUsuario2(tablaUsuarios);
             } else {
@@ -874,7 +875,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo de imagen.");
                 }
             }
-
+            
         }
     }//GEN-LAST:event_buttonNice6ActionPerformed
 
@@ -883,7 +884,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         try {
             Usuarios usu = (Usuarios) moverRegistros.getNext();
             setDatosMover(usu);
-
+            
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -893,7 +894,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         try {
             Usuarios usu = (Usuarios) moverRegistros.getBack();
             setDatosMover(usu);
-
+            
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -905,16 +906,16 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                 cu.eliminarUsuario(Integer.valueOf(id.getText()));
                 cu.cargarTablaUsuario2(tablaUsuarios);
             }
-
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No Se Puede Eliminar", "Información", 1);
-
+            
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtApellido2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellido2KeyReleased
         String texto = txtApellido2.getText().toUpperCase();
-
+        
         Pattern patron = Pattern.compile("[^A-Za-z|Ñ|Á|É|Í|Ó|Ú]");
         Matcher encaja = patron.matcher(texto);
         if (!encaja.find()) {
@@ -930,7 +931,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         String texto = txtNombre.getText().toUpperCase();
-
+        
         Pattern patron = Pattern.compile("[^A-Za-z|Ñ|Á|É|Í|Ó|Ú]");
         Matcher encaja = patron.matcher(texto);
         if (!encaja.find()) {
@@ -945,7 +946,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
     private void txtNombre2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre2KeyReleased
         String texto = txtNombre2.getText().toUpperCase();
-
+        
         Pattern patron = Pattern.compile("[^A-Za-z|Ñ|Á|É|Í|Ó|Ú]");
         Matcher encaja = patron.matcher(texto);
         if (!encaja.find()) {
@@ -960,7 +961,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
     private void txtApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyReleased
         String texto = txtApellido.getText().toUpperCase();
-
+        
         Pattern patron = Pattern.compile("[^A-Za-z|Ñ|Á|É|Í|Ó|Ú]");
         Matcher encaja = patron.matcher(texto);
         if (!encaja.find()) {
@@ -974,7 +975,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtApellidoKeyReleased
 
     private void txtTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyReleased
-
+        
         String texto = txtTelefono.getText();
         Pattern pat = Pattern.compile("[0-9]{7}");
         Matcher mat = pat.matcher(texto);
@@ -994,7 +995,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTelefonoMouseClicked
 
     private void txtCelularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCelularMouseClicked
-
+        
         txtCelular.setText("");
     }//GEN-LAST:event_txtCelularMouseClicked
 
@@ -1013,7 +1014,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCelularKeyReleased
 
     private void txtRucKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyReleased
-
+        
         if (valCed.validadorDeCedula(txtRuc.getText()) == true) {
             mensaje.setForeground(Color.green);
             mensaje.setText("cedula valida");
@@ -1057,27 +1058,27 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
     private void tablaUsuariosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablaUsuariosKeyReleased
         try {
-
+            lblfoto.setIcon(null);
             int n = tablaUsuarios.getSelectedRow();
-            id.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getIdusuario().toString());
-            txtRuc.setText(tablaUsuarios.getValueAt(n, 0).toString());
+            int idb=Integer.valueOf(tablaUsuarios.getValueAt(n, 0).toString());
+            id.setText(cu.buscarLoginId(idb).getIdusuario().toString());
+            txtRuc.setText(cu.buscarLoginId(idb).getRucci().toString());
+            
+            txtNombre.setText(cu.buscarLoginId(idb).getPrimernombre());
+            txtNombre2.setText(cu.buscarLoginId(idb).getSegundonombre());
+            txtApellido.setText(cu.buscarLoginId(idb).getPrimerapellido());
+            txtApellido2.setText(cu.buscarLoginId(idb).getSegundoapellido());
+            txtApodo.setText(cu.buscarLoginId(idb).getApadosn());
+            txtDir.setText(cu.buscarLoginId(idb).getDireccion());
+            txtTelefono.setText(cu.buscarLoginId(idb).getTelefono());
+            txtCelular.setText(cu.buscarLoginId(idb).getCelular());
+            comboSector.setSelectedItem(cu.buscarLoginId(idb).getSector().toString());
+            txtReferencia.setText(cu.buscarLoginId(idb).getReferencia());
+            txtObservar.setText(cu.buscarLoginId(idb).getObservacion());
 
-            txtNombre.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getPrimernombre());
-            txtNombre2.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getSegundonombre());
-            txtApellido.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getPrimerapellido());
-            txtApellido2.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getSegundoapellido());
-            txtApodo.setText(tablaUsuarios.getValueAt(n, 2).toString());
-            txtDir.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getDireccion());
-            txtTelefono.setText(tablaUsuarios.getValueAt(n, 3).toString());
-            txtCelular.setText(tablaUsuarios.getValueAt(n, 4).toString());
-            comboSector.setSelectedItem(tablaUsuarios.getValueAt(n, 5).toString());
-            txtReferencia.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getReferencia());
-            txtObservar.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getObservacion());
-
-            // System.out.println(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getFoto());
-            byte[] data = cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 0).toString()).getFoto();
+            byte[] data = cu.buscarLoginId(idb).getFoto();
             img = ImageIO.read(new ByteArrayInputStream(data));
-//            jLabel2.setIcon(new ImageIcon(img));
+            lblfoto.setIcon(new ImageIcon(img));
             lblfoto.setIcon(ajustarImagen(img));
             lblfoto.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
@@ -1113,7 +1114,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                 cu.cargarTablaUsuario2(tablaUsuarios);
             }
         } catch (Exception e) {
-
+            
         }
 
     }//GEN-LAST:event_txtBuscarKeyReleased
@@ -1141,12 +1142,12 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             } else {
                 lblfoto.setIcon(null);
             }
-
+            
         } catch (Exception e) {
         }
-
+        
     }
-
+    
     private ImageIcon ajustarImagen(BufferedImage ico) {
         ImageIcon tmpIconAux = new ImageIcon(ico);
         ImageIcon tmpIcon = new ImageIcon(tmpIconAux.getImage().getScaledInstance(143, 175, Image.SCALE_DEFAULT));

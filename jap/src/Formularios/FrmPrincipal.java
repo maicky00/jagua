@@ -7,8 +7,10 @@ package Formularios;
 
 import Controladores.ControlFormularios;
 import jap.ReportesControlador;
+import jap.fondoPrincipal;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -27,6 +29,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal() {
         initComponents();
+        setIconImage(new ImageIcon(this.getClass().getResource("Globe.png")).getImage());
+        ((fondoPrincipal) jDesktopPane1).setImagen("curvas.jpg");
         this.setLocationRelativeTo(this);
         this.setExtendedState(MAXIMIZED_BOTH);
 
@@ -69,7 +73,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jDesktopPane1 = new fondoPrincipal();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();

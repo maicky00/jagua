@@ -34,33 +34,39 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
         txtBaseM.setText(String.valueOf(ta.buscarIdTarifas(1).getBase()));
         txtTarifaDolares.setText(String.valueOf(ta.buscarIdTarifas(1).getTarbase()));
         txtDescripcion.setText(String.valueOf(ta.buscarIdTarifas(1).getDescripcion()));
-        
+        txtvalorexceso.setText(String.valueOf(ta.buscarIdTarifas(1).getValorexceso()));
+        txtalcant.setText(String.valueOf(ta.buscarIdTarifas(1).getAlcantarrillado()));
+        txtIva.setText(String.valueOf(ta.buscarIdTarifas(1).getIva()));
     }
     
     private void mostrar() {
         txtBaseM.setEditable(true);
         txtTarifaDolares.setEditable(true);
         txtDescripcion.setEditable(true);
-        
+        txtvalorexceso.setEditable(true);
+        txtalcant.setEditable(true);
         txtDescripcion.setEnabled(true);
         btnGuardar.setEnabled(true);
         btnCancelar.setEnabled(true);
         btnEditar.setEnabled(false);
-        
+        txtIva.setEditable(true);
     }
     
     private void ocultar() {
         txtBaseM.setEditable(false);
         txtTarifaDolares.setEditable(false);
         txtDescripcion.setEditable(false);
-        
+        txtvalorexceso.setEditable(false);
+        txtalcant.setEditable(false);
         btnGuardar.setEnabled(false);
         btnCancelar.setEnabled(false);
         btnEditar.setEnabled(true);
+        txtIva.setEditable(false);
         
     }
     String tarM3;
     String tarDolar;
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -85,12 +91,19 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
         txtTarifaDolares = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
+        txtvalorexceso = new javax.swing.JTextField();
+        txtalcant = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtIva = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
         setTitle("Formlario de Tarifas");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Formularios/Globe.png"))); // NOI18N
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -191,6 +204,20 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
 
         txtDescripcion.setEditable(false);
 
+        txtvalorexceso.setEditable(false);
+
+        txtalcant.setEditable(false);
+
+        jLabel5.setText("Valor de Exceso");
+
+        jLabel6.setText("Valor Alcantarrillado:");
+
+        jLabel7.setText("por m3:");
+
+        jLabel8.setText("Valor Iva:");
+
+        txtIva.setEditable(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -214,7 +241,18 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTarifaDolares)
                             .addComponent(txtDescripcion))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtvalorexceso)
+                    .addComponent(txtalcant, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                    .addComponent(txtIva))
+                .addGap(37, 37, 37))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,19 +261,39 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtIdTarifas))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtBaseM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtTarifaDolares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtBaseM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtTarifaDolares, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(txtvalorexceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtalcant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(txtIva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -266,7 +324,10 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
         try {
             tarM3 = txtBaseM.getText();
             tarDolar = txtTarifaDolares.getText();
-            ta.modificarTarifa(1, Integer.parseInt(txtBaseM.getText()), Float.parseFloat(txtTarifaDolares.getText()), txtDescripcion.getText());
+            float valorExc=Float.valueOf(txtvalorexceso.getText());
+            float alc=Float.valueOf(txtalcant.getText());
+            float iva=Float.valueOf(txtIva.getText());
+            ta.modificarTarifa(1, Integer.parseInt(txtBaseM.getText()), Float.parseFloat(txtTarifaDolares.getText()), txtDescripcion.getText(),valorExc,alc,iva);
             
             ocultar();
         } catch (Exception e) {
@@ -322,12 +383,19 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel mensaje;
     private javax.swing.JTextField txtBaseM;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JLabel txtIdTarifas;
+    private javax.swing.JTextField txtIva;
     private javax.swing.JTextField txtTarifaDolares;
+    private javax.swing.JTextField txtalcant;
+    private javax.swing.JTextField txtvalorexceso;
     // End of variables declaration//GEN-END:variables
 }

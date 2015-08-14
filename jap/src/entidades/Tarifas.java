@@ -35,6 +35,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tarifas.findByTarbase", query = "SELECT t FROM Tarifas t WHERE t.tarbase = :tarbase"),
     @NamedQuery(name = "Tarifas.findByValorexceso", query = "SELECT t FROM Tarifas t WHERE t.valorexceso = :valorexceso")})
 public class Tarifas implements Serializable {
+    @Column(name = "IVA")
+    private Float iva;
+    @Column(name = "ALCANTARRILLADO")
+    private Float alcantarrillado;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -133,6 +137,22 @@ public class Tarifas implements Serializable {
     @Override
     public String toString() {
         return "entidades.Tarifas[ idtarifas=" + idtarifas + " ]";
+    }
+
+    public Float getAlcantarrillado() {
+        return alcantarrillado;
+    }
+
+    public void setAlcantarrillado(Float alcantarrillado) {
+        this.alcantarrillado = alcantarrillado;
+    }
+
+    public Float getIva() {
+        return iva;
+    }
+
+    public void setIva(Float iva) {
+        this.iva = iva;
     }
     
 }

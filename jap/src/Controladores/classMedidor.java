@@ -6,11 +6,14 @@
 package Controladores;
 
 import Formularios.FrmMedidor;
+import Formularios.frmDetalleFactura;
+import entidades.Detallefactura;
 import entidades.Medidor;
 import entidades.Usuarios;
 import entidadesCruds.MedidorJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -233,6 +236,60 @@ public class classMedidor {
             });
         }
         return dtm;
+    }
+
+    public List<Medidor> getbuscarMedidor() {
+        try {
+            List<Medidor> datos = new ArrayList<Medidor>();
+            for (Medidor e : getMedidor()) {
+                datos.add(e);
+            }
+            return datos;
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void cargarTablaMedidorDetalle(JTable tabla) {
+        Usuarios us = new Usuarios();
+        DefaultTableModel modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[7];
+        //modelo.addColumn("Nro");
+        modelo.addColumn("#");
+        modelo.addColumn("N° Medidor");
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Apodo");
+        modelo.addColumn("Serie");
+        modelo.addColumn("estado");
+        for (Medidor u : getMedidor()) {
+            // fila[0] = u.getIdmedidor();
+            fila[0] = u.getIdmedidor();
+            fila[1] = u.getNummedidor();
+            fila[2] = u.getIdusuario().getRucci();
+            fila[3] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                    + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre();
+            fila[4] = u.getIdusuario().getApadosn();
+            fila[5] = u.getSerie();
+            fila[6] = u.getEstado();
+
+            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+//            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(20);
+//            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(20);
+            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(1).setMinWidth(45);
+            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(90);
+            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(2).setMinWidth(60);
+            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(65);
+            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(5).setMinWidth(60);
+            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(85);
+            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(6).setMinWidth(40);
+            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(45);
+
+            modelo.addRow(fila);
+        }
     }
 
 }

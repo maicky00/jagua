@@ -94,11 +94,36 @@ public class classFactura {
         return null;
     }
 
+    public Facturas buscarRucCi(String rucCi) {
+        int i = 0;
+        for (Facturas dat : getFacturas()) {
+            if (dat.getIddetallefac().getIdmedidor().getIdusuario().getRucci().equals(rucCi)) {
+                i = i + 1;
+                if (i > 1) {
+                    JOptionPane.showMessageDialog(null, "Usuario Con mas de un Medidor \n Busque por Num. medidor", "Información", 1);
+                }
+                return dat;
+            }
+        }
+        return null;
+    }
+
+    public int numFactura() {
+        int i = 0;
+        for (Facturas dat : getFacturas()) {
+            if (dat.getNumfactura() > i) {
+                i = dat.getNumfactura();
+            }
+        }
+        return i;
+    }
+
     public void IngresarlistFact(List<Facturas> listFact) {
         try {
             for (Facturas dat : listFact) {
                 facturasJpacontrolador.create(dat);
             }
+            JOptionPane.showMessageDialog(null, "Realizado", "Información", 1);
         } catch (Exception ex) {
         }
 
