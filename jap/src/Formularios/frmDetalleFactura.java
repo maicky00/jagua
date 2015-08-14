@@ -30,7 +30,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     classMedidor cm = new classMedidor();
     classTarifas ct = new classTarifas();
     classDetalleFactura cdt = new classDetalleFactura();
-    
+
     public frmDetalleFactura() {
         initComponents();
         Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
@@ -49,9 +49,9 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     classMoverRegistros moverRegistros = new classMoverRegistros(cm.getMedidor());
     classMoverRegistros moverRegistros2;
     int mes = FrmIngresoMedidas.mchMes.getMonth() + 1;
-    
+
     private void mostrar() {
-        
+
         btnNuevo.setEnabled(false);
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(false);
@@ -59,7 +59,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         btnCancelar.setEnabled(true);
         txtmedAct.setEnabled(true);
     }
-    
+
     private void ocultar() {
         btnNuevo.setEnabled(true);
         btnGuardar.setEnabled(false);
@@ -68,7 +68,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         btnCancelar.setEnabled(false);
         txtmedAct.setEnabled(false);
     }
-    
+
     private void limpiar() {
         txtnumMedidor.setText("");
         txtrucCi.setText("");
@@ -85,7 +85,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         txtSubTotal.setText("");
         txtTotal.setText("");
         lblIdDetalle.setText("");
-        
+
     }
 
     /**
@@ -520,6 +520,16 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTable1KeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         jButton1.setText("Buscar");
@@ -550,8 +560,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtBuscarNumMedidor, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jButton1))
                             .addComponent(jScrollPane2))))
                 .addContainerGap())
         );
@@ -581,7 +590,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        
+
         mostrar();
         limpiar();
 
@@ -610,16 +619,19 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                     cdt.modificarDetallefactura(Integer.valueOf(lblIdDetalle.getText().toString()), idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total, "NO");
                     limpiar();
                 }
+                cdf.cargarBusquedaAnioMes(jTable1, anioMes);
+                mostrar();
+                limpiar();
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error en Entrada de Datos", "Información", 1);
-            
+
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
+
         mostrar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -649,13 +661,13 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnElimnarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+
         ocultar();
         limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtmedActKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmedActKeyReleased
-        
+
         try {
             int medExc = 0;
             float valorExced = 0;
@@ -688,7 +700,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     private void tablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMouseClicked
         // TODO add your handling code here:
         try {
-            //limpiar();
+            limpiar();
             int n = tabla.getSelectedRow();
             txtnumMedidor.setText(tabla.getValueAt(n, 1).toString());
             txtrucCi.setText(tabla.getValueAt(n, 2).toString());
@@ -697,16 +709,15 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
             txtSerie.setText(tabla.getValueAt(n, 5).toString());
             txtEstado.setText(tabla.getValueAt(n, 6).toString());
             txtalcanta.setText(ct.buscarTarifaDescrip(combotarifas.getSelectedItem().toString()).getAlcantarrillado().toString());
-            
-            if (cdt.medidaAnterior(Integer.valueOf(txtnumMedidor.getText()))==0) {
+
+            if (cdt.medidaAnterior(Integer.valueOf(txtnumMedidor.getText())) == 0) {
                 txtmedAnterior.setEditable(true);
-            }
-            else{
+            } else {
                 txtmedAnterior.setEditable(false);
             }
-            
+
             txtmedAnterior.setText(String.valueOf(cdt.medidaAnterior(Integer.valueOf(txtnumMedidor.getText()))));
-            
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_tablaMouseClicked
@@ -724,7 +735,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
             txtEstado.setText(tabla.getValueAt(n, 6).toString());
             txtalcanta.setText(ct.buscarTarifaDescrip(combotarifas.getSelectedItem().toString()).getAlcantarrillado().toString());
             txtmedAnterior.setText(String.valueOf(cdt.medidaAnterior(Integer.valueOf(txtnumMedidor.getText()))));
-            
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_tablaKeyReleased
@@ -762,27 +773,86 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        
+
         FrmIngresoMedidas us = new FrmIngresoMedidas();
         ControlFormularios cf = new ControlFormularios();
         cf.ControlaInstancia(us);
         this.dispose();
-        
+
 
     }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+
+        try {
+            limpiar();
+            int n = jTable1.getSelectedRow();
+            int idDetalle = Integer.valueOf(jTable1.getValueAt(n, 0).toString());
+            lblIdDetalle.setText(cdt.buscarIdDetallefactura(idDetalle).getIddetallefac().toString());
+            txtnumMedidor.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getNummedidor().toString());
+            txtrucCi.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getRucci().toString());
+            txtUsuario.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getPrimernombre() + " "
+                    + cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getSegundonombre() + " "
+                    + cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                    + cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getSegundoapellido());
+            txtApodo.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getApadosn());
+            txtSerie.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getSerie());
+            txtEstado.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getEstado());
+            txtalcanta.setText(cdt.buscarIdDetallefactura(idDetalle).getIdtarifas().getAlcantarrillado().toString());
+            txtmedAnterior.setText(cdt.buscarIdDetallefactura(idDetalle).getMedidaant().toString());
+            txtmedAct.setText(cdt.buscarIdDetallefactura(idDetalle).getMedidaact().toString());
+            txtconsumoag.setText(cdt.buscarIdDetallefactura(idDetalle).getConsumo().toString());
+            txtMedExcedido.setText(cdt.buscarIdDetallefactura(idDetalle).getMedexcedido().toString());
+            txtTarexcedido.setText(cdt.buscarIdDetallefactura(idDetalle).getTarexcedido().toString());
+            txtSubTotal.setText(cdt.buscarIdDetallefactura(idDetalle).getSubtotal().toString());
+            txtTotal.setText(cdt.buscarIdDetallefactura(idDetalle).getTotal().toString());
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTable1KeyReleased
+        // TODO add your handling code here:
+        try {
+            int n = jTable1.getSelectedRow();
+            int idDetalle = Integer.valueOf(jTable1.getValueAt(n, 0).toString());
+            lblIdDetalle.setText(cdt.buscarIdDetallefactura(idDetalle).getIddetallefac().toString());
+            txtnumMedidor.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getNummedidor().toString());
+            txtrucCi.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getRucci().toString());
+            txtUsuario.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getPrimernombre() + " "
+                    + cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getSegundonombre() + " "
+                    + cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                    + cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getSegundoapellido());
+            txtApodo.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getApadosn());
+            txtSerie.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getSerie());
+            txtEstado.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getEstado());
+            txtalcanta.setText(cdt.buscarIdDetallefactura(idDetalle).getIdtarifas().getAlcantarrillado().toString());
+            txtmedAnterior.setText(cdt.buscarIdDetallefactura(idDetalle).getMedidaant().toString());
+            txtmedAct.setText(cdt.buscarIdDetallefactura(idDetalle).getMedidaact().toString());
+            txtconsumoag.setText(cdt.buscarIdDetallefactura(idDetalle).getConsumo().toString());
+            txtMedExcedido.setText(cdt.buscarIdDetallefactura(idDetalle).getMedexcedido().toString());
+            txtTarexcedido.setText(cdt.buscarIdDetallefactura(idDetalle).getTarexcedido().toString());
+            txtSubTotal.setText(cdt.buscarIdDetallefactura(idDetalle).getSubtotal().toString());
+            txtTotal.setText(cdt.buscarIdDetallefactura(idDetalle).getTotal().toString());
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jTable1KeyReleased
     private void setDatosMover(Medidor medidor, String descripTar) {
 //        classMedidor cm = new classMedidor();
 //        classusuario cu = new classusuario();
         try {
+            limpiar();
             txtalcanta.setText(ct.buscarTarifaDescrip(descripTar).getAlcantarrillado().toString());
             txtnumMedidor.setText(medidor.getNummedidor().toString());
             txtUsuario.setText(medidor.getIdusuario().getPrimerapellido() + " " + medidor.getIdusuario().getSegundoapellido());
             txtSerie.setText(medidor.getIdusuario().getPrimernombre() + " " + medidor.getIdusuario().getSegundonombre());
             txtApodo.setText(medidor.getIdusuario().getApadosn());
-            
+
         } catch (Exception e) {
         }
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
