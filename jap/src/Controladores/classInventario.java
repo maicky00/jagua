@@ -14,8 +14,10 @@ import entidadesCruds.UsuariosJpaController;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
@@ -147,23 +149,28 @@ public class classInventario {
         modelo.addColumn("Descripcion");
 
         for (Inventario u : getnventario()) {
+            Date fechaActual = u.getFechaadquisicion();
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            String hoy = formato.format(fechaActual);
             fila[0] = u.getIdinventario();
             fila[1] = u.getCantidad();
             fila[2] = u.getNombre();
-            fila[3] = u.getFechaadquisicion();
+            fila[3] = hoy;
             fila[4] = u.getValor();
             fila[5] = u.getDepreciable();
             fila[6] = u.getCodarticulo();
             fila[7] = u.getDescripcion();
 
-            FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(0).setWidth(0);
-            FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(0).setWidth(0);
-            FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(0).setWidth(0);
+            FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+            FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+            FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+//          
             FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(60);
             FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(2).setMinWidth(100);
             FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(110);
             FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(100);
             FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(80);
+            FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(80);
             FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(130);
             modelo.addRow(fila);
         }

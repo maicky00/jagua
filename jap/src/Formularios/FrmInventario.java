@@ -15,7 +15,10 @@ import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -45,6 +48,7 @@ public class FrmInventario extends javax.swing.JInternalFrame {
         Dimension jInternalFrameSize = this.getSize();
         jLabel9.setText(ci.buscarIdInstitucion(1).getNombreinst().toString());
         civ.tablaArti(tabla);
+        id.setVisible(false);
     }
 
     JFileChooser seleccionado = new JFileChooser();
@@ -114,7 +118,6 @@ public class FrmInventario extends javax.swing.JInternalFrame {
         busquedaGrupo = new javax.swing.ButtonGroup();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblfoto = new javax.swing.JLabel();
@@ -156,8 +159,6 @@ public class FrmInventario extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("usuario Nuevo"));
         jPanel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        jLabel1.setText("id");
 
         jLabel2.setText("Cantidad:");
 
@@ -251,10 +252,8 @@ public class FrmInventario extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10)
+                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
                         .addComponent(lblfoto, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,9 +308,7 @@ public class FrmInventario extends javax.swing.JInternalFrame {
                         .addGap(23, 23, 23)
                         .addComponent(buttonNice6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(36, 36, 36)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtvalor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,7 +320,7 @@ public class FrmInventario extends javax.swing.JInternalFrame {
                         .addComponent(txtCodArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtdescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -339,7 +336,7 @@ public class FrmInventario extends javax.swing.JInternalFrame {
                     .addComponent(txtfecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(73, 73, 73)
-                .addComponent(label, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(label, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -679,17 +676,17 @@ public class FrmInventario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtvalorMouseClicked
 
     private void txtvalorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalorKeyReleased
-        String texto = txtvalor.getText();
-        Pattern pat = Pattern.compile("0[0-9]{9}");
-        Matcher mat = pat.matcher(texto);
-        if (mat.matches()) {
-            mensaje.setText("");
-            //System.out.println("SI");
-        } else {
-            //getToolkit().beep();
-            evt.consume();
-            mensaje.setText("error de ingreso, contiene caracter no valido!...");
-        }
+//        String texto = txtvalor.getText();
+//        Pattern pat = Pattern.compile("0[0-9]{9}");
+//        Matcher mat = pat.matcher(texto);
+//        if (mat.matches()) {
+//            mensaje.setText("");
+//            //System.out.println("SI");
+//        } else {
+//            //getToolkit().beep();
+//            evt.consume();
+//            mensaje.setText("error de ingreso, contiene caracter no valido!...");
+//        }
     }//GEN-LAST:event_txtvalorKeyReleased
 
     private void txtCantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyReleased
@@ -701,7 +698,7 @@ public class FrmInventario extends javax.swing.JInternalFrame {
         try {
             lblfoto.setIcon(null);
             int n = tabla.getSelectedRow();
-            int idc = Integer.valueOf(tabla.getValueAt(n, 1).toString());
+            int idc = Integer.valueOf(tabla.getValueAt(n, 0).toString());
             id.setText(tabla.getValueAt(n, 0).toString());
             txtCantidad.setText(tabla.getValueAt(n, 1).toString());
             txtNombre.setText(tabla.getValueAt(n, 2).toString());
@@ -724,7 +721,7 @@ public class FrmInventario extends javax.swing.JInternalFrame {
         try {
             lblfoto.setIcon(null);
             int n = tabla.getSelectedRow();
-            int idc = Integer.valueOf(tabla.getValueAt(n, 1).toString());
+            int idc = Integer.valueOf(tabla.getValueAt(n, 0).toString());
             id.setText(tabla.getValueAt(n, 0).toString());
             txtCantidad.setText(tabla.getValueAt(n, 1).toString());
             txtNombre.setText(tabla.getValueAt(n, 2).toString());
@@ -744,7 +741,7 @@ public class FrmInventario extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_tablaKeyReleased
-   
+
     private ImageIcon ajustarImagen(BufferedImage ico) {
         ImageIcon tmpIconAux = new ImageIcon(ico);
         ImageIcon tmpIcon = new ImageIcon(tmpIconAux.getImage().getScaledInstance(143, 175, Image.SCALE_DEFAULT));
@@ -761,7 +758,6 @@ public class FrmInventario extends javax.swing.JInternalFrame {
     private org.edisoncor.gui.button.ButtonNice buttonNice6;
     private org.edisoncor.gui.comboBox.ComboBoxRect comboDepre;
     private javax.swing.JLabel id;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
