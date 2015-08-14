@@ -254,7 +254,7 @@ public class Login extends javax.swing.JFrame {
 
     private void buttonAqua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAqua1ActionPerformed
         // TODO add your handling code here:
-        FrmPrincipal2 fp = new FrmPrincipal2();
+        FrmPrincipal fp = new FrmPrincipal();
         String usuario = txtusuario.getText();
         String password = new String(txtclave.getPassword());
         entidades.Login validarUsuario = cl.validarUsuario(usuario, password);
@@ -303,7 +303,7 @@ public class Login extends javax.swing.JFrame {
 
     private void txtclaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtclaveKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            FrmPrincipal2 fp = new FrmPrincipal2();
+            FrmPrincipal fp = new FrmPrincipal();
             String usuario = txtusuario.getText();
             String password = new String(txtclave.getPassword());
             entidades.Login validarUsuario = cl.validarUsuario(usuario, password);

@@ -25,7 +25,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
 
     public FrmLogin() {
         initComponents();
-        Dimension desktopSize = FrmPrincipal2.jDesktopPane1.getSize();
+        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
 //        cl.cargarTablaLogin(tabusuarios);

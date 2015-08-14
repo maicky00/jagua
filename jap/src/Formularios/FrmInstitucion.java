@@ -34,7 +34,7 @@ public class FrmInstitucion extends javax.swing.JInternalFrame {
 
     public FrmInstitucion() {
         initComponents();
-        Dimension desktopSize = FrmPrincipal2.jDesktopPane1.getSize();
+        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
         ci = new classInstitucion();
