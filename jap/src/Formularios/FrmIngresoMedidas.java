@@ -41,26 +41,13 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         chsAnio = new com.toedter.calendar.JYearChooser();
         mchMes = new com.toedter.calendar.JMonthChooser();
-        btnEditar = new org.edisoncor.gui.button.ButtonNice();
         btnNuevo = new org.edisoncor.gui.button.ButtonNice();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        btnEditar.setBackground(new java.awt.Color(0, 102, 255));
-        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEditar.setText("Ver Registros");
-        btnEditar.setModelo(org.edisoncor.gui.button.ButtonNice.Modelo.RECT);
-        btnEditar.setSegundoColor(new java.awt.Color(0, 51, 255));
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
         btnNuevo.setBackground(new java.awt.Color(0, 102, 255));
         btnNuevo.setForeground(new java.awt.Color(255, 255, 255));
         btnNuevo.setText("NUEVO REGISTRO");
-        btnNuevo.setModelo(org.edisoncor.gui.button.ButtonNice.Modelo.ROUND_LEFT);
         btnNuevo.setSegundoColor(new java.awt.Color(0, 51, 255));
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,18 +60,15 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chsAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(mchMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(108, 108, 108))))
+                .addContainerGap(71, Short.MAX_VALUE)
+                .addComponent(chsAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(mchMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,11 +77,9 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(mchMes, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(chsAnio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -120,27 +102,6 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        try {
-            int mes = mchMes.getMonth() + 1;
-            String mensaje = "Año:  " + chsAnio.getYear() + "  Mes:  " + mes;
-            String anioMes = chsAnio.getYear() + "-" + mes;
-            int i = JOptionPane.showConfirmDialog(this, "¿Ver Registros del?\n" + mensaje, "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                f = new frmDetalleFactura();
-                cf = new ControlFormularios();
-                cf.ControlaInstancia(f);
-                frmDetalleFactura.lblanio.setText(String.valueOf(chsAnio.getYear()));
-                frmDetalleFactura.lblmes.setText(String.valueOf(mchMes.getMonth() + 1));
-                dispose();
-                cdf.cargarBusquedaAnioMes(frmDetalleFactura.tabla, anioMes);
-            }
-
-        } catch (Exception e) {
-        }
-
-    }//GEN-LAST:event_btnEditarActionPerformed
-
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
 
         try {
@@ -159,13 +120,13 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
 //
 //                JOptionPane.showMessageDialog(null, "Esta Fecha ya se Registro\n " + mensaje, "Información", 1);
 //            }
+                cdf.cargarBusquedaAnioMes(frmDetalleFactura.jTable1, anioMes);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.edisoncor.gui.button.ButtonNice btnEditar;
     private org.edisoncor.gui.button.ButtonNice btnNuevo;
     public static com.toedter.calendar.JYearChooser chsAnio;
     private javax.swing.JPanel jPanel1;
