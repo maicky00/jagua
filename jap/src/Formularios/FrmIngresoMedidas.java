@@ -21,7 +21,7 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
      */
     public FrmIngresoMedidas() {
         initComponents();
-        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
+        Dimension desktopSize = FrmPrincipal2.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
     }

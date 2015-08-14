@@ -22,20 +22,20 @@ import javax.swing.plaf.ColorUIResource;
  *
  * @author JC-PC
  */
-public class FrmPrincipal extends javax.swing.JFrame {
+public class FrmPrincipal2 extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmPrincipal
      */
-    public FrmPrincipal() {
+    public FrmPrincipal2() {
         initComponents();
+        setIconImage(new ImageIcon(this.getClass().getResource("Globe.png")).getImage());
+        ((fondoPrincipal) jDesktopPane1).setImagen("curvas.jpg");
         this.setLocationRelativeTo(this);
         this.setExtendedState(MAXIMIZED_BOTH);
-        setIconImage(new ImageIcon(this.getClass().getResource("Globe.png")).getImage());
-        ((fondoPrincipal)jDesktopPane1).setImagen("curvas.jpg");
 
         //menu
-        FrmPrincipal.setDefaultLookAndFeelDecorated(true);
+        FrmPrincipal2.setDefaultLookAndFeelDecorated(true);
         JDialog.setDefaultLookAndFeelDecorated(true);
 
         //UIManager.put("InternalFrame.activeTitleBackground", new ColorUIResource(Color.RED));
@@ -86,8 +86,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem16 = new javax.swing.JMenuItem();
-        jMenuItem17 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -119,7 +117,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/arrow_left.png"))); // NOI18N
-        jMenuItem13.setText("Atras");
+        jMenuItem13.setText("Salir");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
@@ -143,7 +141,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/group.png"))); // NOI18N
         jMenuItem2.setText("Usuarios");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +149,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/ipod.png"))); // NOI18N
         jMenuItem3.setText("Medidor");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +157,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/keyboard_magnify.png"))); // NOI18N
         jMenuItem4.setText("Corte");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,7 +165,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/folder_user.png"))); // NOI18N
         jMenuItem5.setText("Mingas");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +173,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem5);
 
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/monitor.png"))); // NOI18N
         jMenuItem6.setText("Pagos de Mingas");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,7 +181,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem6);
 
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/money_dollar.png"))); // NOI18N
         jMenuItem8.setText("Factura");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,7 +189,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem8);
 
-        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/money.png"))); // NOI18N
         jMenuItem11.setText("Pago Otros Gastos");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,23 +197,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem11);
 
-        jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/spellcheck.png"))); // NOI18N
-        jMenuItem16.setText("Planificacion");
-        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem16ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem16);
-
-        jMenuItem17.setText("Asistencia Planificacion");
-        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem17ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem17);
-
         jMenuBar1.add(jMenu1);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/settings.png"))); // NOI18N
@@ -230,7 +204,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/monitor_add.png"))); // NOI18N
         jMenuItem7.setText("Tarifas");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,7 +212,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem7);
 
-        jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/key.png"))); // NOI18N
         jMenuItem9.setText("Usuarios Login");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,7 +220,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem9);
 
-        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/text_allcaps.png"))); // NOI18N
         jMenuItem10.setText("Datos Junta");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,7 +228,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem10);
 
-        jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/application_cascade.png"))); // NOI18N
         jMenuItem14.setText("Medidas");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,7 +243,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/status_online.png"))); // NOI18N
         jMenuItem15.setText("Usuarios");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -360,10 +329,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        limpiarPanel();
-        FrmPagosAsistencia pago = new FrmPagosAsistencia();
-        cf = new ControlFormularios();
-        cf.ControlaInstancia(pago);
+//        limpiarPanel();
+//        FrmPagosMingas pago = new FrmPagosMingas();
+//        cf = new ControlFormularios();
+//        cf.ControlaInstancia(pago);
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
@@ -429,19 +398,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         b.reporte("reporteMedidores.jasper");
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
-    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        FrmPlanificacion p = new FrmPlanificacion();
-        cf = new ControlFormularios();
-        cf.ControlaInstancia(p);
-    }//GEN-LAST:event_jMenuItem16ActionPerformed
-
-    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        FrmAsistencia as = new FrmAsistencia();
-        cf = new ControlFormularios();
-        cf.ControlaInstancia(as);
-        
-    }//GEN-LAST:event_jMenuItem17ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -459,13 +415,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmPrincipal2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -473,7 +429,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmPrincipal().setVisible(true);
+                new FrmPrincipal2().setVisible(true);
             }
         });
     }
@@ -494,8 +450,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

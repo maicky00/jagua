@@ -5,6 +5,7 @@
  */
 package Controladores;
 
+import Formularios.FrmAsistencia;
 import entidades.Asistencia;
 import entidades.Medidor;
 import entidades.Planificacion;
@@ -16,6 +17,8 @@ import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,6 +30,7 @@ public class classAsistencia {
     public AsistenciaJpaController asistenciaJpacontrolador = new AsistenciaJpaController(emf);
     classPlanificacion cp = new classPlanificacion();
     classMedidor cm = new classMedidor();
+    DefaultTableModel modelo;
 
     public List<Asistencia> getAsistencia() {
         return asistenciaJpacontrolador.findAsistenciaEntities();
@@ -45,7 +49,6 @@ public class classAsistencia {
             dat.setDescripcion(descripcion);
             asistenciaJpacontrolador.create(dat);
             JOptionPane.showMessageDialog(null, "Guardado", "Información", 1);
-
 
         } catch (Exception e) {
 
@@ -91,6 +94,53 @@ public class classAsistencia {
             }
         }
         return null;
+    }
+
+    public void cargarTablaAsistencia(JTable tabla) {
+
+        modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[8];
+        modelo.addColumn("id");
+        modelo.addColumn("idPlan");
+        modelo.addColumn("idMed");
+
+        modelo.addColumn("Usuario");
+        modelo.addColumn("cedula");
+        modelo.addColumn("Asistencia");
+
+        modelo.addColumn("multa");
+        modelo.addColumn("descripcion");
+
+//        Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
+        for (Asistencia a : getAsistencia()) {
+            fila[0] = a.getIdasistencia();
+            fila[1] = a.getIdplanificacion().getIdplanificacion();
+            fila[2] = a.getIdmedidor().getIdmedidor();
+
+            fila[3] = a.getIdmedidor().getIdusuario().getPrimernombre() + " " + a.getIdmedidor().getIdusuario().getPrimerapellido()
+                    + " " + a.getIdmedidor().getIdusuario().getSegundoapellido();
+            fila[4] = a.getIdmedidor().getIdusuario().getRucci();
+            fila[5] = a.getAsistencia();
+
+            fila[6] = a.getValormulta();
+            fila[7] = a.getDescripcion();
+
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(35);
+//            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+//            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+//            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
+//            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
+//            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
+//            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
+            //FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(60);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(65);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(40);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(45);
+
+            modelo.addRow(fila);
+        }
     }
 
 }

@@ -25,7 +25,7 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
     classTarifas ta = new classTarifas();
     
     private void inicio() {
-        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
+        Dimension desktopSize = FrmPrincipal2.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
         ta = new classTarifas();

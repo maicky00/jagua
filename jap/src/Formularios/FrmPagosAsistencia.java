@@ -13,12 +13,12 @@ import java.util.GregorianCalendar;
  *
  * @author Marco
  */
-public class FrmPagosMingas extends javax.swing.JInternalFrame {
+public class FrmPagosAsistencia extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form FrmPagosMingas
      */
-    public FrmPagosMingas() {
+    public FrmPagosAsistencia() {
         initComponents();
 //        java.util.Date fecha = new Date();
 //        txtFechaPago.setText("" + fecha);
@@ -112,6 +112,7 @@ public class FrmPagosMingas extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Asistencia Mingas/Asambleas");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
