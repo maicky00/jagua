@@ -81,11 +81,9 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtValor" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="comboTipo" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="fecha" alignment="0" pref="136" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="txtValor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="comboTipo" alignment="0" max="32767" attributes="0"/>
+                              <Component id="fecha" alignment="0" pref="348" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" alignment="0" pref="348" max="32767" attributes="0"/>
                               <Component id="txtLugar" max="32767" attributes="0"/>
                           </Group>
@@ -180,6 +178,7 @@
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="fecha">
           <Properties>
+            <Property name="dateFormatString" type="java.lang.String" value="yyyy/MM/dd"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
@@ -245,7 +244,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnCancelar1" min="-2" pref="108" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="mensaje" max="32767" attributes="0"/>
+                  <Component id="mensaje" pref="315" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -398,7 +397,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane2" pref="582" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>

@@ -128,16 +128,18 @@ public class classAsistencia {
 
             FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
             FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(35);
-//            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
-//            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
-//            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
-//            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
-//            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
-//            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
-            //FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(60);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(60);
             FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(65);
             FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(40);
             FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(45);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
+            FrmAsistencia.jTable1.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
 
             modelo.addRow(fila);
         }

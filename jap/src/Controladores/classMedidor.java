@@ -5,6 +5,7 @@
  */
 package Controladores;
 
+import Formularios.FrmAsistencia;
 import Formularios.FrmMedidor;
 import Formularios.frmDetalleFactura;
 import entidades.Detallefactura;
@@ -287,6 +288,33 @@ public class classMedidor {
             frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(85);
             frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(6).setMinWidth(40);
             frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(45);
+
+            modelo.addRow(fila);
+        }
+    }
+
+    public void cargarTablaMedidor2(JTable tabla) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[5];
+        modelo.addColumn("id");
+        modelo.addColumn("Nro");
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Apodo");
+
+        for (Medidor u : getMedidor()) {
+            // fila[0] = u.getIdmedidor();
+            fila[0] = u.getIdmedidor();
+
+            fila[1] = u.getNummedidor();
+            fila[2] = u.getIdusuario().getRucci();
+            fila[3] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                    + u.getIdusuario().getPrimernombre();
+            fila[4] = u.getIdusuario().getApadosn();
+
+            FrmAsistencia.tablaUsuarios.getTableHeader().getColumnModel().getColumn(0).setMinWidth(20);
+            FrmAsistencia.tablaUsuarios.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(20);
 
             modelo.addRow(fila);
         }

@@ -6,6 +6,7 @@
 package Formularios;
 
 import Controladores.classAsistencia;
+import Controladores.classMedidor;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,13 +18,15 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
     /**
      * Creates new form FrmAsistencia
      */
-    classAsistencia ca=new classAsistencia();
+    classAsistencia ca = new classAsistencia();
+    classMedidor cm = new classMedidor();
+
     public FrmAsistencia() {
         initComponents();
         ca.cargarTablaAsistencia(jTable1);
-                
+        cm.cargarTablaMedidor2(tablaUsuarios);
     }
-
+    
     private void mostrar() {
         btnNuevo.setEnabled(false);
         btnGuardar.setEnabled(true);
@@ -36,7 +39,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         txtValor.setEnabled(true);
         txtDescripcion.setEnabled(true);
     }
-
+    
     private void ocultar() {
         btnNuevo.setEnabled(true);
         btnGuardar.setEnabled(false);
@@ -49,7 +52,8 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         txtValor.setEnabled(false);
         txtDescripcion.setEnabled(false);
     }
-    private void limpiar(){
+
+    private void limpiar() {
         lblId.setText("");
         lblIdPlan.setText("");
         lblIdMedidor.setText("");
@@ -91,6 +95,8 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         jPanel4 = new javax.swing.JPanel();
         btnNuevo = new org.edisoncor.gui.button.ButtonNice();
         btnGuardar = new org.edisoncor.gui.button.ButtonNice();
@@ -98,6 +104,11 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         btnEliminar = new org.edisoncor.gui.button.ButtonNice();
         btnCancelar = new org.edisoncor.gui.button.ButtonNice();
         mensaje = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaUsuarios = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        txtBusqueda = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -214,7 +225,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addGap(8, 8, 8)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 
@@ -238,20 +249,31 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
+        jLabel10.setText("Busqueda:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10)
+                    .addComponent(jMonthChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
 
@@ -332,7 +354,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -354,6 +376,49 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Usuarios"));
+
+        tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tablaUsuarios);
+
+        jLabel9.setText("Busqueda:");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBusqueda)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -364,7 +429,9 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -376,7 +443,8 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -389,7 +457,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
+        
         String idAs = lblId.getText();
         int idPlan = Integer.parseInt(lblIdPlan.getText());
         int idMedidor = Integer.parseInt(lblIdMedidor.getText());
@@ -399,12 +467,10 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         if (idAs.equals("")) {
             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
-
                 
                 ca.guardarAsistencia(idPlan, idMedidor, asistencia, valor, descripcion);
                 ca.cargarTablaAsistencia(jTable1);
-            }
-            else{
+            } else {
             }
         } else if (!idAs.equals("")) {
             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -433,15 +499,15 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                 limpiar();
                 ocultar();
             }
-
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No Se Puede Eliminar", "Información", 1);
-
+            
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+        
         ocultar();
         limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -463,7 +529,6 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
             txtCedula.setText(jTable1.getValueAt(n, 4).toString());
             txtValor.setText(jTable1.getValueAt(n, 6).toString());
             txtDescripcion.setText(jTable1.getValueAt(n, 7).toString());
-
             
         } catch (Exception e) {
         }
@@ -478,6 +543,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
     private org.edisoncor.gui.button.ButtonNice btnNuevo;
     private org.edisoncor.gui.comboBox.ComboBoxRect comboAsistencia;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -485,16 +551,22 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JTable jTable1;
     private javax.swing.JLabel lblId;
     private javax.swing.JTextField lblIdMedidor;
     private javax.swing.JTextField lblIdPlan;
     private javax.swing.JLabel mensaje;
+    public static javax.swing.JTable tablaUsuarios;
+    private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtUsuario;

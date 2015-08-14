@@ -57,6 +57,7 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
         fecha.setToolTipText(null);
         txtValor.setText("");
         txtDescripcion.setText("");
+        lblId.setText("");
     }
 
     /**
@@ -113,6 +114,7 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Fecha:");
 
+        fecha.setDateFormatString("yyyy/MM/dd");
         fecha.setEnabled(false);
 
         txtLugar.setEnabled(false);
@@ -144,10 +146,9 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtValor, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(comboTipo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(fecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+                            .addComponent(txtValor)
+                            .addComponent(comboTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                             .addComponent(txtLugar)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -264,7 +265,7 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -310,7 +311,7 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -436,14 +437,10 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.edisoncor.gui.button.ButtonNice btnCancelar;
     private org.edisoncor.gui.button.ButtonNice btnCancelar1;
-    private org.edisoncor.gui.button.ButtonNice btnEditar;
     private org.edisoncor.gui.button.ButtonNice btnEditar1;
-    private org.edisoncor.gui.button.ButtonNice btnElimnar;
     private org.edisoncor.gui.button.ButtonNice btnElimnar1;
     private org.edisoncor.gui.button.ButtonNice btnGuardar;
-    private org.edisoncor.gui.button.ButtonNice btnNuevo;
     private org.edisoncor.gui.button.ButtonNice btnNuevo1;
     private org.edisoncor.gui.comboBox.ComboBoxRect comboTipo;
     private com.toedter.calendar.JDateChooser fecha;
@@ -455,7 +452,6 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
