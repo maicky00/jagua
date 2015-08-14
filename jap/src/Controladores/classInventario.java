@@ -166,7 +166,7 @@ public class classInventario {
             FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
 //          
             FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(60);
-            FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(2).setMinWidth(100);
+            FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(2).setMinWidth(80);
             FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(110);
             FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(100);
             FrmInventario.tabla.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(80);
