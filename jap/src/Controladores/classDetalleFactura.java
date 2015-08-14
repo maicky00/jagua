@@ -271,7 +271,6 @@ public class classDetalleFactura {
 //
 //    }
     public void cargarBusquedaAnioMes(JTable tabla, String anioMes) {
-        
         DefaultTableModel modelo = new DefaultTableModel();
         tabla.setModel(modelo);
         Object[] fila = new Object[7];
