@@ -256,6 +256,10 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Mes:");
 
+        txtMes.setEditable(false);
+
+        txtTipo.setEditable(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
