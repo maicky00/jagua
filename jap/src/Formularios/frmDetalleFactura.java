@@ -52,7 +52,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     int mes = FrmIngresoMedidas.mchMes.getMonth() + 1;
 
     private void mostrar() {
-
+        tabla.setEnabled(true);
         btnNuevo.setEnabled(false);
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(false);
@@ -62,6 +62,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     }
 
     private void ocultar() {
+        tabla.setEnabled(false);
         btnNuevo.setEnabled(true);
         btnGuardar.setEnabled(false);
         btnEditar.setEnabled(true);
@@ -528,6 +529,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                 "#", "Num. Medidor", "Usuario", "Apodo", "Medidor Serie", "Estado Medidor", "#U"
             }
         ));
+        tabla.setEnabled(false);
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaMouseClicked(evt);
@@ -618,7 +620,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-
+        
         mostrar();
         limpiar();
 
@@ -650,7 +652,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                     limpiar();
                 }
                 cdf.cargarBusquedaAnioMes(jTable1, anioMes);
-                mostrar();
+                ocultar();
                 limpiar();
             }
 

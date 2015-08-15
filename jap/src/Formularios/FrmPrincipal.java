@@ -32,7 +32,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         this.setExtendedState(MAXIMIZED_BOTH);
         setIconImage(new ImageIcon(this.getClass().getResource("Globe.png")).getImage());
-        ((fondoPrincipal)jDesktopPane1).setImagen("curvas.jpg");
+        ((fondoPrincipal)jDesktopPane1).setImagen("jap.jpg");
 
         //menu
         FrmPrincipal.setDefaultLookAndFeelDecorated(true);
