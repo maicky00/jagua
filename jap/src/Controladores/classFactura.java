@@ -120,11 +120,17 @@ public class classFactura {
 
     public void IngresarlistFact(List<Facturas> listFact) {
         try {
-            for (Facturas dat : listFact) {
+            if (listFact.size()>0) {
+               for (Facturas dat : listFact) {
                 facturasJpacontrolador.create(dat);
             }
             JOptionPane.showMessageDialog(null, "Realizado", "Información", 1);
-        } catch (Exception ex) {
+      
+            }else{
+                JOptionPane.showMessageDialog(null, "No hay valores a Pagar", "Información", 1);
+      
+            }
+               } catch (Exception ex) {
         }
 
     }

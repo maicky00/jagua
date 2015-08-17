@@ -463,9 +463,11 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                 String usActual = "ADMINISTR";
                 List<Facturas> tableData = cft.getTableFacturas(jTable1, numFact, fechaActual, subtotal, iva, total, usActual);
                 cft.IngresarlistFact(tableData);
-
-                b.factura("numfact", String.valueOf(numFact), "factura.jasper");
-                limpiar();
+                if (tableData.size()>0) {
+                    b.factura("numfact", String.valueOf(numFact), "factura.jasper");
+                 
+                }
+               limpiar();
                 txtnumMedidor.setText("");
 //            cft.getTableFacturas(jTable1, numFact, fecha, subtotal, iva, total, usActual);
             } catch (Exception ex) {
