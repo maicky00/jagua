@@ -33,6 +33,7 @@ public class classDetalleFactura {
     public DetallefacturaJpaController detallefacturaJpacontrolador = new DetallefacturaJpaController(emf);
     classMedidor cm = new classMedidor();
     classTarifas ct = new classTarifas();
+    DefaultTableModel mod;
 
     public List<Detallefactura> getDetallefactura() {
         return detallefacturaJpacontrolador.findDetallefacturaEntities();
@@ -296,7 +297,7 @@ public class classDetalleFactura {
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-                
+
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(60);
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(90);
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(200);
@@ -307,6 +308,41 @@ public class classDetalleFactura {
                 modelo.addRow(fila);
             }
         }
+    }
+
+    public void tablaCorte(JTable tabla) {
+
+        mod = new DefaultTableModel();
+        tabla.setModel(mod);
+        Object[] fila = new Object[4];
+        mod.addColumn("id");
+        mod.addColumn("idNum");
+        mod.addColumn("Num medidor");
+        mod.addColumn("observacion");
+
+        for (Detallefactura u : getDetallefactura()) {
+            System.out.println(u.getIdmedidor().getNummedidor() + " " + u.getIdmedidor().getIdmedidor() + u.getObservacion());
+            if (numContar(u.getIdmedidor().getIdmedidor()) > 3 && u.getObservacion().equals("NO")) {
+                //System.out.println(u.getIdmedidor().getNummedidor() + " " + u.getIdmedidor().getIdmedidor());
+                fila[0] = u.getIddetallefac();
+                fila[1] = u.getIdmedidor().getIdmedidor();
+                fila[2] = u.getIdmedidor().getNummedidor();
+                fila[3] = u.getObservacion();
+            }
+        }
+        mod.addRow(fila);
+
+    }
+
+    public int numContar(int idNumMedidor) {
+        int papitas = 0;
+
+        for (Detallefactura dat : getDetallefactura()) {
+            if (dat.getIdmedidor().getIdmedidor().equals(idNumMedidor) && dat.getObservacion().equals("NO")) {
+                papitas = papitas + 1;
+            }
+        }
+        return papitas;
     }
 
 }
