@@ -574,7 +574,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
             lblIdMedidor.setText(tablaUsuarios.getValueAt(n, 1).toString());
             txtUsuario.setText(tablaUsuarios.getValueAt(n, 3).toString());
             txtCedula.setText(tablaUsuarios.getValueAt(n, 2).toString());
-            txtValor.setText("");
+            //txtValor.setText("");
             txtDescripcion.setText("");
         } catch (Exception e) {
         }

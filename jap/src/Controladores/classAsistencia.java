@@ -9,6 +9,7 @@ import Formularios.FrmAsistencia;
 import entidades.Asistencia;
 import entidades.Medidor;
 import entidades.Planificacion;
+import entidades.Usuarios;
 import entidadesCruds.AsistenciaJpaController;
 import entidadesCruds.PagosasistenciaJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
@@ -30,6 +31,7 @@ public class classAsistencia {
     public AsistenciaJpaController asistenciaJpacontrolador = new AsistenciaJpaController(emf);
     classPlanificacion cp = new classPlanificacion();
     classMedidor cm = new classMedidor();
+    classusuario cu = new classusuario();
     DefaultTableModel modelo;
 
     public List<Asistencia> getAsistencia() {
@@ -37,23 +39,41 @@ public class classAsistencia {
     }
 
     public void guardarAsistencia(int idPlanificacion, int NumMedidor, String asistencia, float valorMulta, String descripcion) {
-        try {
+        int i = 0;
+        Asistencia a = new Asistencia();
+//        try {
+            Medidor idMedidor = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorNumM(NumMedidor).getIdmedidor());
+            Planificacion idP = cp.planificacionJpacontrolador.findPlanificacion(cp.buscarIdPlanificacion(idPlanificacion).getIdplanificacion());
+            Asistencia numMe = asistenciaJpacontrolador.findAsistencia(cm.buscarMedidorNumM(NumMedidor).getIdmedidor());
 
-            
-            Planificacion idPlan = cp.planificacionJpacontrolador.findPlanificacion(cp.buscarIdPlanificacion(idPlanificacion).getIdplanificacion());
-            Medidor idMed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorNumM(NumMedidor).getIdmedidor());
-            Asistencia dat = new Asistencia();
-            dat.setIdplanificacion(idPlan);
-            dat.setIdmedidor(idMed);
-            dat.setAsistencia(asistencia);
-            dat.setValormulta(valorMulta);
-            dat.setDescripcion(descripcion);
-            asistenciaJpacontrolador.create(dat);
-            JOptionPane.showMessageDialog(null, "Guardado", "Información", 1);
+            for (Asistencia as : getAsistencia()) {
+                System.out.println(as.getIdmedidor().getIdmedidor() + " " + String.valueOf(NumMedidor));
+                System.out.println(as.getIdplanificacion().getIdplanificacion() + " " + String.valueOf(idPlanificacion));
+//                System.out.println(a.getIdmedidor().getIdmedidor());
 
-        } catch (Exception e) {
-
-        }
+                if (as.getIdmedidor().getIdmedidor().equals(idMedidor) && as.getIdplanificacion().getIdplanificacion().equals(idP)) {
+                    i = 1;
+                    break;
+                }
+            }
+            if (i == 1) {
+                JOptionPane.showMessageDialog(null, "Numero Medidor/Usuario Existente \nNo se pudo Guardar", "Informacion", 1);
+            } else {
+                Planificacion idPlan = cp.planificacionJpacontrolador.findPlanificacion(cp.buscarIdPlanificacion(idPlanificacion).getIdplanificacion());
+                Medidor idMed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorNumM(NumMedidor).getIdmedidor());
+                Asistencia dat = new Asistencia();
+                dat.setIdplanificacion(idPlan);
+                dat.setIdmedidor(idMed);
+                dat.setAsistencia(asistencia);
+                dat.setValormulta(valorMulta);
+                dat.setDescripcion(descripcion);
+                asistenciaJpacontrolador.create(dat);
+                JOptionPane.showMessageDialog(null, "Guardado", "Información", 1);
+            }
+//
+//        } catch (Exception e) {
+//
+//        }
     }
 
     public boolean modificarAsistencia(int idAsistencia, int idPlanificacion, int NumMedidor, String asistencia, float valorMulta, String descripcion) {
