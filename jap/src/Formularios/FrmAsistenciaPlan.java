@@ -219,7 +219,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
         txtId.setText("");
         txtTipo.setText("");
         txtLugar.setText("");
-        
+
         int mes = jMonthChooser1.getMonth() + 1;
         int anio = jYearChooser1.getYear();
         cp.cargarTablaPlanificacionPlan(jTable1, mes, anio);
@@ -241,22 +241,21 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            if(!txtId.getText().equals("")){
-            FrmAsistencia as = new FrmAsistencia();
-            int n = jTable1.getSelectedRow();
-            int mes = jMonthChooser1.getMonth() + 1;
-            int anio = jYearChooser1.getYear();
+            if (!txtId.getText().equals("")) {
+                FrmAsistencia as = new FrmAsistencia();
+                int n = jTable1.getSelectedRow();
+                int mes = jMonthChooser1.getMonth() + 1;
+                int anio = jYearChooser1.getYear();
 
-            cf = new ControlFormularios();
-            cf.ControlaInstancia(as);
-            this.dispose();
-            FrmAsistencia.lblIdPlan.setText(txtId.getText());
-            FrmAsistencia.txtValor.setText(jTable1.getValueAt(n, 4).toString());
-            FrmAsistencia.txtMes.setText(mes+"/"+anio);
-            FrmAsistencia.txtTipo.setText(jTable1.getValueAt(n, 1).toString());
-            ca.cargarTablaAsistencia(FrmAsistencia.jTable1, Integer.parseInt(txtId.getText()));
-            }
-            else{
+                cf = new ControlFormularios();
+                cf.ControlaInstancia(as);
+                this.dispose();
+                FrmAsistencia.lblIdPlan.setText(txtId.getText());
+                FrmAsistencia.txtValor.setText(jTable1.getValueAt(n, 4).toString());
+                FrmAsistencia.txtMes.setText(mes + "/" + anio);
+                FrmAsistencia.txtTipo.setText(jTable1.getValueAt(n, 1).toString());
+                ca.cargarTablaAsistencia(FrmAsistencia.jTable1, Integer.parseInt(txtId.getText()));
+            } else {
                 JOptionPane.showMessageDialog(null, "Debe especificar el tipo de planificacion");
             }
         } catch (Exception e) {

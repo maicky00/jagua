@@ -212,6 +212,10 @@ where facturas.`NUMFACTURA`=$P{numfact}]]>
 				<reportElement style="Detail" x="418" y="85" width="77" height="15" uuid="68af31b2-2115-4409-b6e6-8d7419d2b2d1"/>
 				<textFieldExpression><![CDATA[$F{facturas_FECHAEMISION}]]></textFieldExpression>
 			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="7" y="7" width="84" height="78" uuid="3ab1b234-d74d-4322-bc8d-be51c9aeb9c3"/>
+				<imageExpression><![CDATA[new ByteArrayInputStream((byte[])$F{institucion_LOGO})]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

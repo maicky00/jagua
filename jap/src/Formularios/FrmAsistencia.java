@@ -24,8 +24,10 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
 
     public FrmAsistencia() {
         initComponents();
-
+        ca = new classAsistencia();
+        cm = new classMedidor();
         cm.cargarTablaMedidor2(tablaUsuarios);
+        lblId.setText("");
     }
 
     private void mostrar() {
@@ -109,6 +111,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         btnCancelar = new org.edisoncor.gui.button.ButtonNice();
         mensaje = new javax.swing.JLabel();
         btnAtras1 = new org.edisoncor.gui.button.ButtonNice();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaUsuarios = new javax.swing.JTable();
@@ -362,6 +365,13 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -379,16 +389,23 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jButton1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -397,7 +414,8 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                             .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAtras1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -494,14 +512,14 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         int idPlan = Integer.parseInt(lblIdPlan.getText());
         int idMedidor = Integer.parseInt(lblIdMedidor.getText());
         String asistencia = comboAsistencia.getSelectedItem().toString();
-        Float valor = Float.parseFloat(txtValor.getText());
+        float valor = Float.parseFloat(txtValor.getText());
         String descripcion = txtDescripcion.getText();
         if (idAs.equals("")) {
             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
 
                 ca.guardarAsistencia(idPlan, idMedidor, asistencia, valor, descripcion);
-                ca.cargarTablaAsistencia(jTable1,Integer.parseInt(lblIdPlan.getText()));
+                ca.cargarTablaAsistencia(jTable1, Integer.parseInt(lblIdPlan.getText()));
             } else {
             }
         } else if (!idAs.equals("")) {
@@ -590,9 +608,34 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnAtras1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String idAs = lblId.getText();
+;
+        String asistencia = comboAsistencia.getSelectedItem().toString();
+        float valor = Float.parseFloat(txtValor.getText());
+        String descripcion = txtDescripcion.getText();
+        if (idAs.equals("")) {
+            int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+
+                ca.guardarAsistencia(Integer.parseInt(lblIdPlan.getText()),Integer.parseInt(lblIdMedidor.getText()), asistencia, valor, descripcion);
+                ca.cargarTablaAsistencia(jTable1, Integer.parseInt(lblIdPlan.getText()));
+            } else {
+            }
+        } else if (!idAs.equals("")) {
+            int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+
+//                ca.modificarAsistencia(Integer.parseInt(idAs), idPlan, idMedidor, asistencia, valor, descripcion);
+//                ca.cargarTablaAsistencia(jTable1);
+            } else {
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.edisoncor.gui.button.ButtonNice btnAtras;
     private org.edisoncor.gui.button.ButtonNice btnAtras1;
     private org.edisoncor.gui.button.ButtonNice btnCancelar;
     private org.edisoncor.gui.button.ButtonNice btnEditar;
@@ -600,6 +643,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
     private org.edisoncor.gui.button.ButtonNice btnGuardar;
     private org.edisoncor.gui.button.ButtonNice btnNuevo;
     private org.edisoncor.gui.comboBox.ComboBoxRect comboAsistencia;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

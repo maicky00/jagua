@@ -41,22 +41,19 @@ public class classAsistencia {
     public void guardarAsistencia(int idPlanificacion, int NumMedidor, String asistencia, float valorMulta, String descripcion) {
         int i = 0;
         Asistencia a = new Asistencia();
-//        try {
+        try {
             Medidor idMedidor = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorNumM(NumMedidor).getIdmedidor());
-            Planificacion idP = cp.planificacionJpacontrolador.findPlanificacion(cp.buscarIdPlanificacion(idPlanificacion).getIdplanificacion());
-            Asistencia numMe = asistenciaJpacontrolador.findAsistencia(cm.buscarMedidorNumM(NumMedidor).getIdmedidor());
+            Planificacion idP = cp.planificacionJpacontrolador.findPlanificacion(idPlanificacion);
 
             for (Asistencia as : getAsistencia()) {
-                System.out.println(as.getIdmedidor().getIdmedidor() + " " + String.valueOf(NumMedidor));
-                System.out.println(as.getIdplanificacion().getIdplanificacion() + " " + String.valueOf(idPlanificacion));
-//                System.out.println(a.getIdmedidor().getIdmedidor());
-
-                if (as.getIdmedidor().getIdmedidor().equals(idMedidor) && as.getIdplanificacion().getIdplanificacion().equals(idP)) {
+                if (as.getIdmedidor().getIdmedidor().equals(idMedidor.getIdmedidor()) && as.getIdplanificacion().getIdplanificacion().equals(idP.getIdplanificacion())) {
                     i = 1;
+                    a = as;
                     break;
                 }
             }
             if (i == 1) {
+                a = null;
                 JOptionPane.showMessageDialog(null, "Numero Medidor/Usuario Existente \nNo se pudo Guardar", "Informacion", 1);
             } else {
                 Planificacion idPlan = cp.planificacionJpacontrolador.findPlanificacion(cp.buscarIdPlanificacion(idPlanificacion).getIdplanificacion());
@@ -70,10 +67,15 @@ public class classAsistencia {
                 asistenciaJpacontrolador.create(dat);
                 JOptionPane.showMessageDialog(null, "Guardado", "Información", 1);
             }
-//
-//        } catch (Exception e) {
-//
-//        }
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    public static void main(String[] args) {
+        classAsistencia ca = new classAsistencia();
+        ca.guardarAsistencia(1, 2, "NO", 20, "Hola mundo");
     }
 
     public boolean modificarAsistencia(int idAsistencia, int idPlanificacion, int NumMedidor, String asistencia, float valorMulta, String descripcion) {
@@ -82,7 +84,7 @@ public class classAsistencia {
             if (dat == null) {
                 return false;
             }
-            Planificacion idPlan = cp.planificacionJpacontrolador.findPlanificacion(cp.buscarIdPlanificacion(idPlanificacion).getIdplanificacion());
+            Planificacion idPlan = cp.planificacionJpacontrolador.findPlanificacion(idPlanificacion);
             Medidor idMed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorNumM(NumMedidor).getIdmedidor());
             dat.setIdplanificacion(idPlan);
             dat.setIdmedidor(idMed);
