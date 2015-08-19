@@ -298,7 +298,7 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "#", "FECHA CORRESPONDIENTE", "MEDIDA DE INICIO", "MEDIDA FINAL", "CONSUMO", "EXCEDIDO M3"
+                "#", "Valor Multa", "Asistencia", "Fecha del Evento", "Tipo de evento", "Lugar del Evento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
