@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+
 /**
  *
  * @author JC-PC
@@ -178,6 +179,7 @@ public class classLogin {
             fila[6] = u.getTipo();
             fila[7] = u.getEstado();
             modelo.addRow(fila);
+            //sdfdsfds
         }
     }
 
