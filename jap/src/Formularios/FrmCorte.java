@@ -8,6 +8,7 @@ package Formularios;
 import Controladores.classCorte;
 import Controladores.classDetalleFactura;
 import Controladores.classMedidor;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,7 +18,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
     classDetalleFactura cdf = new classDetalleFactura();
     classMedidor cm = new classMedidor();
-    classCorte cc=new classCorte();
+    classCorte cc = new classCorte();
 
     /**
      * Creates new form FrmCorte
@@ -28,39 +29,38 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         cdf = new classDetalleFactura();
         //cdf.tablaCorte(jTable1);
         cm.cargarCorte(jTable1);
+        cc.cargarCorte(jTable2);
 
     }
 
     private void mostrar() {
         txtObservacion.setEnabled(true);
         txtMulta.setEnabled(true);
-        txtMora.setEnabled(true);
+//        txtMora.setEnabled(true);
 
         btnGuardar.setEnabled(true);
         btnEditar.setEnabled(false);
-        btnElimnar.setEnabled(false);
         btnCancelar.setEnabled(true);
         comboCorte.setEnabled(true);
-        dataChoser.setEnabled(true);
+        fecha.setEnabled(true);
     }
 
     private void ocultar() {
         txtObservacion.setEnabled(false);
         txtMulta.setEnabled(false);
-        txtMora.setEnabled(false);
+//        txtMora.setEnabled(false);
 
         btnGuardar.setEnabled(false);
         btnEditar.setEnabled(true);
-        btnElimnar.setEnabled(true);
         btnCancelar.setEnabled(false);
         comboCorte.setEnabled(false);
-        dataChoser.setEnabled(false);
+        fecha.setEnabled(false);
     }
 
     private void limpiar() {
         txtObservacion.setText("");
         txtMulta.setText("");
-        txtMora.setText("");
+//        txtMora.setText("");
 
     }
 
@@ -73,11 +73,11 @@ public class FrmCorte extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel4 = new javax.swing.JPanel();
         btnNuevo = new org.edisoncor.gui.button.ButtonNice();
         btnGuardar = new org.edisoncor.gui.button.ButtonNice();
         btnEditar = new org.edisoncor.gui.button.ButtonNice();
-        btnElimnar = new org.edisoncor.gui.button.ButtonNice();
         btnCancelar = new org.edisoncor.gui.button.ButtonNice();
         mensaje = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -88,7 +88,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         comboCorte = new org.edisoncor.gui.comboBox.ComboBoxRect();
         jLabel5 = new javax.swing.JLabel();
-        dataChoser = new com.toedter.calendar.JDateChooser();
+        fecha = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         txtObservacion = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -104,12 +104,24 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         jLabel11 = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
+        jLabel12 = new javax.swing.JLabel();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -153,17 +165,6 @@ public class FrmCorte extends javax.swing.JInternalFrame {
             }
         });
 
-        btnElimnar.setBackground(new java.awt.Color(0, 102, 255));
-        btnElimnar.setForeground(new java.awt.Color(255, 255, 255));
-        btnElimnar.setText("ELIMINAR");
-        btnElimnar.setModelo(org.edisoncor.gui.button.ButtonNice.Modelo.RECT);
-        btnElimnar.setSegundoColor(new java.awt.Color(0, 51, 255));
-        btnElimnar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnElimnarActionPerformed(evt);
-            }
-        });
-
         btnCancelar.setBackground(new java.awt.Color(0, 102, 255));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("CANCELAR");
@@ -189,11 +190,9 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnElimnar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -210,7 +209,6 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                             .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnElimnar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -232,7 +230,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Fecha:");
 
-        dataChoser.setEnabled(false);
+        fecha.setEnabled(false);
 
         jLabel6.setText("Observacion:");
 
@@ -276,6 +274,8 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         jButton1.setText("+");
         jButton1.setToolTipText("Asignar un nuevo medidor para corte");
 
+        jLabel13.setText("Usd");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -296,11 +296,14 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                             .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(dataChoser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(fecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                             .addComponent(txtObservacion, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMulta, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboCorte, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMora, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(txtMora, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtMulta, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel13))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -351,7 +354,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                     .addComponent(txtMesesDebe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dataChoser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -365,7 +368,8 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtMulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -373,7 +377,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuario con corte"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de usuarios programados para corte"));
 
         jTable1.setForeground(new java.awt.Color(255, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -406,9 +410,11 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de usuarios con corte"));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -421,7 +427,20 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
+
+        jLabel12.setText("Mostrar usuarios con corte activo:");
+
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("SI");
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("NO");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -429,14 +448,26 @@ public class FrmCorte extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addGap(29, 29, 29)
+                        .addComponent(jRadioButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jRadioButton2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -481,21 +512,41 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            
+
         } catch (Exception e) {
         }
-        
-        
+        try {
+            int idMedidor = cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdmedidor();
+            String corte = comboCorte.getSelectedItem().toString();
+            if (lblId.getText().equals("")) {
+                int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    cc.guardarCorte(idMedidor, corte, fecha.getDate(), txtObservacion.getText(), Float.parseFloat(txtMulta.getText()),
+                            Integer.parseInt(txtMora.getText()));
+                    cc.cargarCorte(jTable2);
+                    limpiar();
+                    ocultar();
+                }
+            } else if (!lblId.getText().equals("")) {
+                int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    int idC = Integer.parseInt(lblId.getText());
+                    cc.modificarCorte(idC, idMedidor, corte, fecha.getDate(), txtObservacion.getText(), Float.parseFloat(txtMulta.getText()),
+                            Integer.parseInt(txtMora.getText()));
+                    cc.cargarCorte(jTable2);
+                    limpiar();
+                    ocultar();
+                }
+            }
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         mostrar();
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnElimnarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimnarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnElimnarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 
@@ -536,12 +587,14 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
         // TODO add your handling code here:
         try {
+            limpiar();
             int n = jTable1.getSelectedRow();
             txtMedidor.setText(jTable1.getValueAt(n, 0).toString());
             txtCedula.setText(jTable1.getValueAt(n, 1).toString());
             txtUsuario.setText(jTable1.getValueAt(n, 2).toString());
             txtApodo.setText(jTable1.getValueAt(n, 3).toString());
             txtMesesDebe.setText(jTable1.getValueAt(n, 4).toString());
+            txtMora.setText(jTable1.getValueAt(n, 4).toString());
             //comboCorte.setSelectedItem(jTable1.getValueAt(n, 1).toString());
 
         } catch (Exception e) {
@@ -549,19 +602,45 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jTable1MouseClicked
 
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        try {
+            limpiar();
+            txtMesesDebe.setText("");
+            int n = jTable2.getSelectedRow();
+            lblId.setText(jTable2.getValueAt(n, 0).toString());
+            txtMedidor.setText(jTable2.getValueAt(n, 1).toString());
+            txtCedula.setText(cm.buscarMedidorId(Integer.valueOf(txtMedidor.getText())).getIdusuario().getRucci());
+            String usuario = cm.buscarMedidorId(Integer.valueOf(txtMedidor.getText())).getIdusuario().getPrimernombre()+" "
+                    + cm.buscarMedidorId(Integer.valueOf(txtMedidor.getText())).getIdusuario().getPrimerapellido()+" "
+                    + cm.buscarMedidorId(Integer.valueOf(txtMedidor.getText())).getIdusuario().getSegundoapellido();
+            txtUsuario.setText(usuario);
+            txtApodo.setText(cm.buscarMedidorId(Integer.valueOf(txtMedidor.getText())).getIdusuario().getApadosn());
+            comboCorte.setSelectedItem(jTable2.getValueAt(n, 2).toString());
+            txtObservacion.setText(jTable2.getValueAt(n, 4).toString());
+            txtMulta.setText(jTable2.getValueAt(n, 5).toString());
+            txtMora.setText(jTable2.getValueAt(n, 6).toString());
+
+        } catch (Exception e) {
+        }
+
+
+    }//GEN-LAST:event_jTable2MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonNice btnCancelar;
     private org.edisoncor.gui.button.ButtonNice btnEditar;
-    private org.edisoncor.gui.button.ButtonNice btnElimnar;
     private org.edisoncor.gui.button.ButtonNice btnGuardar;
     private org.edisoncor.gui.button.ButtonNice btnNuevo;
+    private javax.swing.ButtonGroup buttonGroup1;
     private org.edisoncor.gui.comboBox.ComboBoxRect comboCorte;
-    private com.toedter.calendar.JDateChooser dataChoser;
+    private com.toedter.calendar.JDateChooser fecha;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -574,6 +653,8 @@ public class FrmCorte extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable jTable1;
