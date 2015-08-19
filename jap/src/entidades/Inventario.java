@@ -37,6 +37,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Inventario.findByDepreciable", query = "SELECT i FROM Inventario i WHERE i.depreciable = :depreciable"),
     @NamedQuery(name = "Inventario.findByCantidad", query = "SELECT i FROM Inventario i WHERE i.cantidad = :cantidad")})
 public class Inventario implements Serializable {
+    @Lob
+    @Column(name = "IMAGEN")
+    private byte[] imagen;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,9 +64,6 @@ public class Inventario implements Serializable {
     private String nombre;
     @Column(name = "CANTIDAD")
     private Integer cantidad;
-    @Lob
-    @Column(name = "IMAGEN")
-    private byte[] imagen;
 
     public Inventario() {
     }
@@ -136,13 +136,6 @@ public class Inventario implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public byte[] getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
 
     @Override
     public int hashCode() {
@@ -167,6 +160,14 @@ public class Inventario implements Serializable {
     @Override
     public String toString() {
         return "entidades.Inventario[ idinventario=" + idinventario + " ]";
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
     
 }

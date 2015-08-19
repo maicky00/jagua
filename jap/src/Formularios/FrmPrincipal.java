@@ -384,7 +384,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         limpiarPanel();
-        FrmPagosAsistencia pago = new FrmPagosAsistencia();
+        FrmPagosAsistemcia pago = new FrmPagosAsistemcia();
         cf = new ControlFormularios();
         cf.ControlaInstancia(pago);
         // TODO add your handling code here:

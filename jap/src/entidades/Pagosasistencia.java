@@ -38,6 +38,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pagosasistencia.findByValormingas", query = "SELECT p FROM Pagosasistencia p WHERE p.valormingas = :valormingas"),
     @NamedQuery(name = "Pagosasistencia.findByObservacion", query = "SELECT p FROM Pagosasistencia p WHERE p.observacion = :observacion")})
 public class Pagosasistencia implements Serializable {
+    @Column(name = "NUMFACTURA")
+    private Integer numfactura;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -147,6 +149,14 @@ public class Pagosasistencia implements Serializable {
     @Override
     public String toString() {
         return "entidades.Pagosasistencia[ idpagoasistencia=" + idpagoasistencia + " ]";
+    }
+
+    public Integer getNumfactura() {
+        return numfactura;
+    }
+
+    public void setNumfactura(Integer numfactura) {
+        this.numfactura = numfactura;
     }
     
 }
