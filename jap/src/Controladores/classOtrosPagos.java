@@ -33,7 +33,7 @@ public class classOtrosPagos {
         return otrospagosJpacontrolador.findOtrospagosEntities();
     }
 
-    public void guardarOtrospagos(int idcorte, String derConx, float mulRecx, float multMS, float interes, String serie) {
+    public void guardarOtrospagos(int idcorte, String derConx, float mulRecx, float multMS, float interes, String serie,float total,String usuarioActual) {
         try {
 
             Corte idOtpg = cc.corteJpacontrolador.findCorte(cc.buscarIdCorte(idcorte).getIdcorte());
@@ -42,8 +42,10 @@ public class classOtrosPagos {
             dat.setDerconx(derConx);
             dat.setMulrecx(mulRecx);
             dat.setMultms(multMS);
-            dat.setInteres(interes);
+            dat.setInteres(interes); 
             dat.setSerie(serie);
+            dat.setTotal(total);
+            dat.setUsuarioactual(usuarioActual);
             otrospagosJpacontrolador.create(dat);
             JOptionPane.showMessageDialog(null, "Pago realizado corectamente");
 
@@ -52,26 +54,31 @@ public class classOtrosPagos {
         }
     }
 
-    public void cargarTablaLogin(JTable tabla) {
+    public void cargarTablaOtros(JTable tabla) {
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
-        Object[] fila = new Object[8];
-        modelo.addColumn("Nro");
-        modelo.addColumn("Nombres");
-        modelo.addColumn("Apellidos");
-        modelo.addColumn("Usuario");
-        modelo.addColumn("Cedula");
-        modelo.addColumn("Clave");
-        modelo.addColumn("Tipo De Usuario");
-        modelo.addColumn("Estado de Cuenta");
+        Object[] fila = new Object[9];
+        modelo.addColumn("id");
+        modelo.addColumn("idcorte");
+        modelo.addColumn("dercon");
+        modelo.addColumn("mulrec");
+        modelo.addColumn("mulMS");
+        modelo.addColumn("interes");
+        modelo.addColumn("serie");
+        modelo.addColumn("total");
+        modelo.addColumn("usuarioAct");
         for (Otrospagos o : getOtrospagos()) {
             
-            fila[0] = o.getIdcorte();
-            fila[1] = o.getDerconx();
-            fila[2] = o.getMulrecx();
-            fila[3] = o.getMultms();
-            fila[4] = o.getInteres();
-            fila[5] = o.getSerie();
+            fila[0] = o.getIdotpagos();
+            fila[1] = o.getIdcorte().getIdcorte();
+            fila[2] = o.getDerconx();
+            fila[3] = o.getMulrecx();
+            fila[4] = o.getMultms();
+            fila[5] = o.getInteres();
+            fila[6] = o.getSerie();
+            fila[7] = o.getTotal();
+            fila[8] = o.getUsuarioactual();
+            
             modelo.addRow(fila);
         }
     }

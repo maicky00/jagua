@@ -10,11 +10,13 @@ import entidades.Medidor;
 import entidadesCruds.CorteJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import sun.util.calendar.BaseCalendar;
 
 /**
@@ -26,6 +28,7 @@ public class classCorte {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("japPU");
     public CorteJpaController corteJpacontrolador = new CorteJpaController(emf);
     classMedidor cm = new classMedidor();
+    DefaultTableModel modelo;
 
     public List<Corte> getCorte() {
         return corteJpacontrolador.findCorteEntities();
@@ -99,6 +102,37 @@ public class classCorte {
             }
         }
         return null;
+    }
+
+    public void cargarCorte(JTable tabla) {
+        classDetalleFactura cdf = new classDetalleFactura();
+        modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[7];
+        modelo.addColumn("id");
+        modelo.addColumn("idmed");
+        modelo.addColumn("corte");
+        modelo.addColumn("fecha");
+        modelo.addColumn("observacion");
+        modelo.addColumn("multa");
+        modelo.addColumn("mora");
+
+        for (Corte c : getCorte()) {
+            //if (c.getCorte().equals("SI")) {
+                fila[0] = c.getIdcorte();
+                fila[1] = c.getIdmedidor().getIdmedidor();
+                fila[2] = c.getCorte();
+                fila[3] = c.getFecha();
+                fila[4] = c.getObservacion();
+                fila[5] = c.getMulta();
+                fila[6] = c.getMora();
+
+//                FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(50);
+//                FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(55);
+                modelo.addRow(fila);
+            //}
+        }
+
     }
 
 }
