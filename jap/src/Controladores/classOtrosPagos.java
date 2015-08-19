@@ -33,7 +33,7 @@ public class classOtrosPagos {
         return otrospagosJpacontrolador.findOtrospagosEntities();
     }
 
-    public void guardarOtrospagos(int idcorte, String derConx, float mulRecx, float multMS, float interes, String serie,float total,String usuarioActual) {
+    public void guardarOtrospagos(int idcorte, String derConx, float mulRecx,  float interes, float total,String usuarioActual) {
         try {
 
             Corte idOtpg = cc.corteJpacontrolador.findCorte(cc.buscarIdCorte(idcorte).getIdcorte());
@@ -41,9 +41,7 @@ public class classOtrosPagos {
             dat.setIdcorte(idOtpg);
             dat.setDerconx(derConx);
             dat.setMulrecx(mulRecx);
-            dat.setMultms(multMS);
             dat.setInteres(interes); 
-            dat.setSerie(serie);
             dat.setTotal(total);
             dat.setUsuarioactual(usuarioActual);
             otrospagosJpacontrolador.create(dat);
@@ -57,14 +55,12 @@ public class classOtrosPagos {
     public void cargarTablaOtros(JTable tabla) {
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
-        Object[] fila = new Object[9];
+        Object[] fila = new Object[7];
         modelo.addColumn("id");
         modelo.addColumn("idcorte");
         modelo.addColumn("dercon");
         modelo.addColumn("mulrec");
-        modelo.addColumn("mulMS");
         modelo.addColumn("interes");
-        modelo.addColumn("serie");
         modelo.addColumn("total");
         modelo.addColumn("usuarioAct");
         for (Otrospagos o : getOtrospagos()) {
@@ -73,16 +69,14 @@ public class classOtrosPagos {
             fila[1] = o.getIdcorte().getIdcorte();
             fila[2] = o.getDerconx();
             fila[3] = o.getMulrecx();
-            fila[4] = o.getMultms();
             fila[5] = o.getInteres();
-            fila[6] = o.getSerie();
             fila[7] = o.getTotal();
             fila[8] = o.getUsuarioactual();
             
             modelo.addRow(fila);
         }
     }
-    public boolean modificarOtrospagos(int idOtrospagos, int idcorte, String derConx, float mulRecx, float multMS, float interes, String serie) {
+    public boolean modificarOtrospagos(int idOtrospagos, int idcorte, String derConx, float mulRecx,  float interes) {
 
         try {
             Otrospagos dat = otrospagosJpacontrolador.findOtrospagos(idOtrospagos);
@@ -93,9 +87,7 @@ public class classOtrosPagos {
             dat.setIdcorte(idOtpg);
             dat.setDerconx(derConx);
             dat.setMulrecx(mulRecx);
-            dat.setMultms(multMS);
             dat.setInteres(interes);
-            dat.setSerie(serie);
             otrospagosJpacontrolador.edit(dat);
             JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
 

@@ -31,10 +31,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Otrospagos.findAll", query = "SELECT o FROM Otrospagos o"),
     @NamedQuery(name = "Otrospagos.findByIdotpagos", query = "SELECT o FROM Otrospagos o WHERE o.idotpagos = :idotpagos"),
     @NamedQuery(name = "Otrospagos.findByMulrecx", query = "SELECT o FROM Otrospagos o WHERE o.mulrecx = :mulrecx"),
-    @NamedQuery(name = "Otrospagos.findByMultms", query = "SELECT o FROM Otrospagos o WHERE o.multms = :multms"),
     @NamedQuery(name = "Otrospagos.findByInteres", query = "SELECT o FROM Otrospagos o WHERE o.interes = :interes"),
-    @NamedQuery(name = "Otrospagos.findBySerie", query = "SELECT o FROM Otrospagos o WHERE o.serie = :serie"),
-    @NamedQuery(name = "Otrospagos.findByTotal", query = "SELECT o FROM Otrospagos o WHERE o.total = :total")})
+    @NamedQuery(name = "Otrospagos.findByTotal", query = "SELECT o FROM Otrospagos o WHERE o.total = :total"),
+    @NamedQuery(name = "Otrospagos.findByObservacion", query = "SELECT o FROM Otrospagos o WHERE o.observacion = :observacion")})
 public class Otrospagos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,14 +47,12 @@ public class Otrospagos implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "MULRECX")
     private Float mulrecx;
-    @Column(name = "MULTMS")
-    private Float multms;
     @Column(name = "INTERES")
     private Float interes;
-    @Column(name = "SERIE")
-    private String serie;
     @Column(name = "TOTAL")
     private Float total;
+    @Column(name = "OBSERVACION")
+    private String observacion;
     @Lob
     @Column(name = "USUARIOACTUAL")
     private String usuarioactual;
@@ -94,14 +91,6 @@ public class Otrospagos implements Serializable {
         this.mulrecx = mulrecx;
     }
 
-    public Float getMultms() {
-        return multms;
-    }
-
-    public void setMultms(Float multms) {
-        this.multms = multms;
-    }
-
     public Float getInteres() {
         return interes;
     }
@@ -110,20 +99,20 @@ public class Otrospagos implements Serializable {
         this.interes = interes;
     }
 
-    public String getSerie() {
-        return serie;
-    }
-
-    public void setSerie(String serie) {
-        this.serie = serie;
-    }
-
     public Float getTotal() {
         return total;
     }
 
     public void setTotal(Float total) {
         this.total = total;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 
     public String getUsuarioactual() {

@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import entidades.Usuarios;
 import entidades.Corte;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,11 @@ public class MedidorJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Usuarios idusuario = medidor.getIdusuario();
+            if (idusuario != null) {
+                idusuario = em.getReference(idusuario.getClass(), idusuario.getIdusuario());
+                medidor.setIdusuario(idusuario);
+            }
             List<Corte> attachedCorteList = new ArrayList<Corte>();
             for (Corte corteListCorteToAttach : medidor.getCorteList()) {
                 corteListCorteToAttach = em.getReference(corteListCorteToAttach.getClass(), corteListCorteToAttach.getIdcorte());
@@ -68,6 +74,10 @@ public class MedidorJpaController implements Serializable {
             }
             medidor.setDetallefacturaList(attachedDetallefacturaList);
             em.persist(medidor);
+            if (idusuario != null) {
+                idusuario.getMedidorList().add(medidor);
+                idusuario = em.merge(idusuario);
+            }
             for (Corte corteListCorte : medidor.getCorteList()) {
                 Medidor oldIdmedidorOfCorteListCorte = corteListCorte.getIdmedidor();
                 corteListCorte.setIdmedidor(medidor);
@@ -109,12 +119,18 @@ public class MedidorJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Medidor persistentMedidor = em.find(Medidor.class, medidor.getIdmedidor());
+            Usuarios idusuarioOld = persistentMedidor.getIdusuario();
+            Usuarios idusuarioNew = medidor.getIdusuario();
             List<Corte> corteListOld = persistentMedidor.getCorteList();
             List<Corte> corteListNew = medidor.getCorteList();
             List<Asistencia> asistenciaListOld = persistentMedidor.getAsistenciaList();
             List<Asistencia> asistenciaListNew = medidor.getAsistenciaList();
             List<Detallefactura> detallefacturaListOld = persistentMedidor.getDetallefacturaList();
             List<Detallefactura> detallefacturaListNew = medidor.getDetallefacturaList();
+            if (idusuarioNew != null) {
+                idusuarioNew = em.getReference(idusuarioNew.getClass(), idusuarioNew.getIdusuario());
+                medidor.setIdusuario(idusuarioNew);
+            }
             List<Corte> attachedCorteListNew = new ArrayList<Corte>();
             for (Corte corteListNewCorteToAttach : corteListNew) {
                 corteListNewCorteToAttach = em.getReference(corteListNewCorteToAttach.getClass(), corteListNewCorteToAttach.getIdcorte());
@@ -137,6 +153,14 @@ public class MedidorJpaController implements Serializable {
             detallefacturaListNew = attachedDetallefacturaListNew;
             medidor.setDetallefacturaList(detallefacturaListNew);
             medidor = em.merge(medidor);
+            if (idusuarioOld != null && !idusuarioOld.equals(idusuarioNew)) {
+                idusuarioOld.getMedidorList().remove(medidor);
+                idusuarioOld = em.merge(idusuarioOld);
+            }
+            if (idusuarioNew != null && !idusuarioNew.equals(idusuarioOld)) {
+                idusuarioNew.getMedidorList().add(medidor);
+                idusuarioNew = em.merge(idusuarioNew);
+            }
             for (Corte corteListOldCorte : corteListOld) {
                 if (!corteListNew.contains(corteListOldCorte)) {
                     corteListOldCorte.setIdmedidor(null);
@@ -216,6 +240,11 @@ public class MedidorJpaController implements Serializable {
                 medidor.getIdmedidor();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The medidor with id " + id + " no longer exists.", enfe);
+            }
+            Usuarios idusuario = medidor.getIdusuario();
+            if (idusuario != null) {
+                idusuario.getMedidorList().remove(medidor);
+                idusuario = em.merge(idusuario);
             }
             List<Corte> corteList = medidor.getCorteList();
             for (Corte corteListCorte : corteList) {

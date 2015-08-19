@@ -571,7 +571,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
             usuario = "";
             otros = new classOtrosPagos();
             otros.guardarOtrospagos(Integer.valueOf(idCorte), derecho, Float.valueOf(multaR),
-                    Float.valueOf(multaMS), Float.valueOf(interes), serie,
+                     Float.valueOf(interes),
                     Float.valueOf(txtTotal.getText()), usuario);
             ocultar();
            otros.cargarTablaOtros(jTable2);
