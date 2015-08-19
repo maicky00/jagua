@@ -6,6 +6,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +18,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +42,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Usuarios.findByTelefono", query = "SELECT u FROM Usuarios u WHERE u.telefono = :telefono"),
     @NamedQuery(name = "Usuarios.findByCelular", query = "SELECT u FROM Usuarios u WHERE u.celular = :celular")})
 public class Usuarios implements Serializable {
+    @Lob
+    @Column(name = "FOTO")
+    private byte[] foto;
+    @OneToMany(mappedBy = "idusuario")
+    private List<Medidor> medidorList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -71,9 +79,6 @@ public class Usuarios implements Serializable {
     @Lob
     @Column(name = "REFERENCIA")
     private String referencia;
-    @Lob
-    @Column(name = "FOTO")
-    private byte[] foto;
     @Lob
     @Column(name = "OBSERVACION")
     private String observacion;
@@ -184,13 +189,6 @@ public class Usuarios implements Serializable {
         this.referencia = referencia;
     }
 
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
-    }
 
     public String getObservacion() {
         return observacion;
@@ -268,5 +266,23 @@ public class Usuarios implements Serializable {
             }
         }
         return true;
+    }
+
+
+    @XmlTransient
+    public List<Medidor> getMedidorList() {
+        return medidorList;
+    }
+
+    public void setMedidorList(List<Medidor> medidorList) {
+        this.medidorList = medidorList;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 }

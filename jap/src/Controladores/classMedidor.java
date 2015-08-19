@@ -297,25 +297,19 @@ public class classMedidor {
     public void cargarTablaMedidor2(JTable tabla) {
         DefaultTableModel modelo = new DefaultTableModel();
         tabla.setModel(modelo);
-        Object[] fila = new Object[5];
-        modelo.addColumn("id");
-        modelo.addColumn("Nro");
+        Object[] fila = new Object[4];
+        modelo.addColumn("Nro medidor");
         modelo.addColumn("Cedula");
         modelo.addColumn("Usuario");
         modelo.addColumn("Apodo");
 
         for (Medidor u : getMedidor()) {
-            // fila[0] = u.getIdmedidor();
-            fila[0] = u.getIdmedidor();
 
-            fila[1] = u.getNummedidor();
-            fila[2] = u.getIdusuario().getRucci();
-            fila[3] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+            fila[0] = u.getNummedidor();
+            fila[1] = u.getIdusuario().getRucci();
+            fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
                     + u.getIdusuario().getPrimernombre();
-            fila[4] = u.getIdusuario().getApadosn();
-
-            FrmAsistencia.tablaUsuarios.getTableHeader().getColumnModel().getColumn(0).setMinWidth(20);
-            FrmAsistencia.tablaUsuarios.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(20);
+            fila[3] = u.getIdusuario().getApadosn();
 
             modelo.addRow(fila);
         }
