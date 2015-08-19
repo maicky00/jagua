@@ -190,7 +190,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem11);
 
         jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/folder_user.png"))); // NOI18N
-        jMenuItem17.setText("Asistencia Planificacion");
+        jMenuItem17.setText("Planificacion");
         jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem17ActionPerformed(evt);
@@ -411,7 +411,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
-        FrmAsistencia as = new FrmAsistencia();
+        FrmPlanificacion as = new FrmPlanificacion();
         cf = new ControlFormularios();
         cf.ControlaInstancia(as);
         
