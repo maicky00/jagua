@@ -38,7 +38,7 @@ public class classMedidor {
         return medidorJpacontrolador.findMedidorEntities();
     }
 
-    public void guardarMedidor(int idUsuario, String serie, int numMedidor, String estado) {
+    public void guardarMedidor(int idUsuario, String serie, int numMedidor, String estado, float valorConexion) {
         int i = 0;
         Medidor med = new Medidor();
         try {
@@ -60,6 +60,7 @@ public class classMedidor {
                 dat.setSerie(serie);
                 dat.setNummedidor(numMedidor);
                 dat.setEstado(estado);
+                dat.setValorporconexion(valorConexion);
                 medidorJpacontrolador.create(dat);
                 JOptionPane.showMessageDialog(null, "Registrado");
             }
@@ -68,7 +69,7 @@ public class classMedidor {
         }
     }
 
-    public boolean modificarMedidor(int id, int idusuario, String serie, int numMedidor, String estado) {
+    public boolean modificarMedidor(int id, int idusuario, String serie, int numMedidor, String estado, float valorConexion) {
         int i = 0;
         Medidor med = new Medidor();
 
@@ -83,8 +84,26 @@ public class classMedidor {
             dat.setSerie(serie);
             dat.setNummedidor(numMedidor);
             dat.setEstado(estado);
+            dat.setValorporconexion(valorConexion);
             medidorJpacontrolador.edit(dat);
             JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
+
+        } catch (Exception e) {
+        }
+        return true;
+    }
+
+    public boolean modificarValorConexion(int numMed, float valorConexion) {
+        Medidor med = new Medidor();
+
+        try {
+            Medidor dat = medidorJpacontrolador.findMedidor(buscarMedidorNumM(numMed).getIdmedidor());
+            if (dat == null) {
+                return false;
+            }
+
+            dat.setValorporconexion(valorConexion);
+            medidorJpacontrolador.edit(dat);
 
         } catch (Exception e) {
         }

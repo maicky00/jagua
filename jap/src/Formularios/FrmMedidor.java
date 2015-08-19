@@ -104,6 +104,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         lblIdUsuario = new javax.swing.JLabel();
         label = new javax.swing.JLabel();
+        txtvalorConexion = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -295,18 +296,18 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addGap(18, 18, 18)
-                                .addComponent(lblIdUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(lblIdUsuario))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 1, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(comboEstado, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtMedidor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtMedidor, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(label)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtvalorConexion, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -334,9 +335,11 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     .addComponent(txtMedidor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtvalorConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(label)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label)
+                    .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -423,7 +426,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -491,10 +494,11 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             String serie = txtSerie.getText();
             int numMedidor = Integer.valueOf(txtMedidor.getText());
             String estado = comboEstado.getSelectedItem().toString();
+            float valorConx=Float.valueOf(txtvalorConexion.getText());
             if (lblIdmedidor.getText().equals("")) {
                 int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    cm.guardarMedidor(idUsuario, serie, numMedidor, estado);
+                    cm.guardarMedidor(idUsuario, serie, numMedidor, estado,valorConx);
                     cm.cargarTablaMedidor(jTable1);
                     limpiar();
                     ocultar();
@@ -504,7 +508,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                 int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     int idmed = Integer.valueOf(lblIdmedidor.getText());
-                    cm.modificarMedidor(idmed, idUsuario, serie, numMedidor, estado);
+                    cm.modificarMedidor(idmed, idUsuario, serie, numMedidor, estado,valorConx);
                     cm.cargarTablaMedidor(jTable1);
                     limpiar();
                     ocultar();
@@ -636,5 +640,6 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSerie;
     public static javax.swing.JTextField txtUsuarioCed;
+    private javax.swing.JTextField txtvalorConexion;
     // End of variables declaration//GEN-END:variables
 }
