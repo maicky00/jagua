@@ -54,36 +54,15 @@ public class BarChart extends JFrame  {
   DefaultCategoryDataset result = new DefaultCategoryDataset();
  
    result.setValue(154, "PP", "2008");
-  result.setValue(169, "PSOE", "2008");
-  result.setValue(10, "CIU", "2008");
-  result.setValue(2, "IU-LV", "2008");
-  result.setValue(0, "AMAIUR", "2008");
-  result.setValue(1, "UPyD", "2008");
-  result.setValue(6, "EAJ-PNV", "2008");
-  result.setValue(3, "ERC", "2008");
-  result.setValue(2, "BNG", "2008");
+
+
 
   result.setValue(186, "PP", "2011");
-  result.setValue(110, "PSOE", "2011");
-  result.setValue(16, "CIU", "2011");
-  result.setValue(11, "IU-LV", "2011");
-  result.setValue(7, "AMAIUR", "2011");
-  result.setValue(5, "UPyD", "2011");
-  result.setValue(5, "EAJ-PNV", "2011");
-  result.setValue(3, "ERC", "2011");
-  result.setValue(2, "BNG", "2011");
- 
+
 
  
-     result.setValue(56, "PP", "2012");
-  result.setValue(5, "PSOE", "2012");
-  result.setValue(48, "CIU", "2012");
-  result.setValue(67, "IU-LV", "2012");
-  result.setValue(200, "AMAIUR", "2012");
-  result.setValue(8, "UPyD", "2012");
-  result.setValue(6, "EAJ-PNV", "2012");
-  result.setValue(43, "ERC", "2012");
-  result.setValue(21, "BNG", "2012");
+  result.setValue(56, "PP", "2012");
+
 
 
 

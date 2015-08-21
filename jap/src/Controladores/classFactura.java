@@ -109,7 +109,7 @@ public class classFactura {
     }
 
     public int numFactura() {
-        int i = 0;
+        int i = 1;
         for (Facturas dat : getFacturas()) {
             if (dat.getNumfactura() > i) {
                 i = dat.getNumfactura();
