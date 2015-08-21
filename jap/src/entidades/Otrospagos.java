@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Otrospagos.findAll", query = "SELECT o FROM Otrospagos o"),
     @NamedQuery(name = "Otrospagos.findByIdotpagos", query = "SELECT o FROM Otrospagos o WHERE o.idotpagos = :idotpagos"),
+    @NamedQuery(name = "Otrospagos.findByDerconx", query = "SELECT o FROM Otrospagos o WHERE o.derconx = :derconx"),
     @NamedQuery(name = "Otrospagos.findByMulrecx", query = "SELECT o FROM Otrospagos o WHERE o.mulrecx = :mulrecx"),
     @NamedQuery(name = "Otrospagos.findByInteres", query = "SELECT o FROM Otrospagos o WHERE o.interes = :interes"),
     @NamedQuery(name = "Otrospagos.findByTotal", query = "SELECT o FROM Otrospagos o WHERE o.total = :total"),
@@ -41,10 +42,9 @@ public class Otrospagos implements Serializable {
     @Basic(optional = false)
     @Column(name = "IDOTPAGOS")
     private Integer idotpagos;
-    @Lob
-    @Column(name = "DERCONX")
-    private String derconx;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "DERCONX")
+    private Float derconx;
     @Column(name = "MULRECX")
     private Float mulrecx;
     @Column(name = "INTERES")
@@ -75,11 +75,11 @@ public class Otrospagos implements Serializable {
         this.idotpagos = idotpagos;
     }
 
-    public String getDerconx() {
+    public Float getDerconx() {
         return derconx;
     }
 
-    public void setDerconx(String derconx) {
+    public void setDerconx(Float derconx) {
         this.derconx = derconx;
     }
 

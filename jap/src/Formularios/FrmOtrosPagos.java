@@ -72,7 +72,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
         txtInteres.setText("");
     }
     String idCorte;
-    String derecho;
+    float derecho;
     String multaR;
     String multaMS;
     String interes;
@@ -621,7 +621,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
 
 //        try {
         idCorte = txtIdCorte.getText();
-        derecho = txtDerecho.getText();
+        derecho = Float.valueOf(txtDerecho.getText());
         multaR = txtMulta.getText();
         multaMS = txtMultaMS.getText();
         interes = txtInteres.getText();

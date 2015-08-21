@@ -7,6 +7,7 @@
     <class>entidades.Detallefactura</class>
     <class>entidades.Facturas</class>
     <class>entidades.Institucion</class>
+    <class>entidades.Inventario</class>
     <class>entidades.Login</class>
     <class>entidades.Medidor</class>
     <class>entidades.Otrospagos</class>
@@ -14,8 +15,6 @@
     <class>entidades.Planificacion</class>
     <class>entidades.Tarifas</class>
     <class>entidades.Usuarios</class>
-    <class>entidades.Facturadetallefactura</class>
-    <class>entidades.Inventario</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistemaagua2?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

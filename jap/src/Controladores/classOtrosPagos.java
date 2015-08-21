@@ -33,7 +33,7 @@ public class classOtrosPagos {
         return otrospagosJpacontrolador.findOtrospagosEntities();
     }
 
-    public void guardarOtrospagos(int idcorte, String derConx, float mulRecx,  float interes, float total,String usuarioActual) {
+    public void guardarOtrospagos(int idcorte, float derConx, float mulRecx,  float interes, float total,String usuarioActual) {
         try {
 
             Corte idOtpg = cc.corteJpacontrolador.findCorte(cc.buscarIdCorte(idcorte).getIdcorte());
@@ -76,7 +76,7 @@ public class classOtrosPagos {
             modelo.addRow(fila);
         }
     }
-    public boolean modificarOtrospagos(int idOtrospagos, int idcorte, String derConx, float mulRecx,  float interes) {
+    public boolean modificarOtrospagos(int idOtrospagos, int idcorte, float derConx, float mulRecx,  float interes) {
 
         try {
             Otrospagos dat = otrospagosJpacontrolador.findOtrospagos(idOtrospagos);
