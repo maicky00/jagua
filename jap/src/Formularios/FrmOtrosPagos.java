@@ -113,7 +113,6 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
         txtMedidor = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtArea = new javax.swing.JTextArea();
         txtIdCorte = new javax.swing.JLabel();
@@ -123,6 +122,11 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txtSubtotal = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel10 = new javax.swing.JLabel();
+        txtMonto = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 =  new javax.swing.JTable(){
@@ -130,6 +134,9 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                 return false; //Disallow the editing of any cell
             }
         };
+        jLabel17 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable(){
@@ -288,8 +295,6 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
 
         txtCedula.setEnabled(false);
 
-        jLabel10.setText("Usuario:");
-
         txtArea.setEditable(false);
         txtArea.setColumns(20);
         txtArea.setRows(5);
@@ -307,6 +312,16 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
         jLabel14.setText("subtotal:");
 
         txtSubtotal.setEditable(false);
+
+        jLabel15.setText("Detalle de conexion, es nueva conexion?");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "---", "SI", "NO" }));
+
+        jLabel10.setText("Monto a Pagar nueva conexion:");
+
+        txtMonto.setEnabled(false);
+
+        jLabel16.setText("USD");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -346,9 +361,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(txtSerie))))))
                                     .addComponent(jLabel9)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -373,8 +386,18 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                                     .addComponent(txtMedidor)))
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel14))
+                            .addComponent(jLabel14)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel16))
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -396,12 +419,19 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(txtDerecho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -468,20 +498,48 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
             jTable1.getColumnModel().getColumn(3).setHeaderValue("Title 4");
         }
 
+        jLabel17.setText("Listar usuarios nuevos que deben:");
+
+        jButton1.setText("VER");
+        jButton1.setToolTipText("Listar usuarios nuevos que deben");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Listar cortes");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel17)
+                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -546,7 +604,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 6, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -562,19 +620,19 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
 //        try {
-            idCorte = txtIdCorte.getText();
-            derecho = txtDerecho.getText();
-            multaR = txtMulta.getText();
-            multaMS = txtMultaMS.getText();
-            interes = txtInteres.getText();
-            serie = txtSerie.getText();
-            usuario = "";
-            otros = new classOtrosPagos();
-            otros.guardarOtrospagos(Integer.valueOf(idCorte), derecho, Float.valueOf(multaR),
-                     Float.valueOf(interes),
-                    Float.valueOf(txtTotal.getText()), usuario);
-            ocultar();
-           otros.cargarTablaOtros(jTable2);
+        idCorte = txtIdCorte.getText();
+        derecho = txtDerecho.getText();
+        multaR = txtMulta.getText();
+        multaMS = txtMultaMS.getText();
+        interes = txtInteres.getText();
+        serie = txtSerie.getText();
+        usuario = "";
+        otros = new classOtrosPagos();
+        otros.guardarOtrospagos(Integer.valueOf(idCorte), derecho, Float.valueOf(multaR),
+                Float.valueOf(interes),
+                Float.valueOf(txtTotal.getText()), usuario);
+        ocultar();
+        otros.cargarTablaOtros(jTable2);
 //        } catch (Exception e) {
 //        }
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -613,6 +671,10 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
             String ref = cm.buscarMedidorId(Integer.valueOf(jTable1.getValueAt(n, 1).toString())).getIdusuario().getSector();
             txtArea.setText("Nombre: " + usuario + "\nApodo: " + apodo + "\nDireccion: " + dir + "\nSector: " + sec + "\nReferencia: " + ref);
             txtTotal.setText("");
+            
+            //tabla name tabla
+            
+            
         } catch (Exception e) {
         }
 
@@ -689,6 +751,18 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_txtInteresKeyReleased
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTable1.setName("tabla");
+
+        limpiar();
+        cm.cargarTablaMedidorUsuarioDebe(jTable1);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        limpiar();
+        cc.cargarCorte(jTable1);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonNice btnCancelar;
@@ -696,12 +770,18 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
     private org.edisoncor.gui.button.ButtonNice btnElimnar;
     private org.edisoncor.gui.button.ButtonNice btnGuardar;
     private org.edisoncor.gui.button.ButtonNice btnNuevo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -727,6 +807,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txtIdCorte;
     private javax.swing.JTextField txtInteres;
     private javax.swing.JTextField txtMedidor;
+    private javax.swing.JTextField txtMonto;
     private javax.swing.JTextField txtMulta;
     private javax.swing.JTextField txtMultaMS;
     private javax.swing.JTextField txtSerie;

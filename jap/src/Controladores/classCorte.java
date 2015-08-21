@@ -38,14 +38,18 @@ public class classCorte {
         try {
 
             Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor).getIdmedidor());
-            Corte dat = new Corte();
-            dat.setIdmedidor(idmed);
-            dat.setCorte(corte);
-            dat.setFecha(fecha);
-            dat.setObservacion(observacion);
-            dat.setMulta(multa);
-            dat.setMora(mora);
-            corteJpacontrolador.create(dat);
+            if (idmed.getIdmedidor() != idMedidor) {
+                Corte dat = new Corte();
+                dat.setIdmedidor(idmed);
+                dat.setCorte(corte);
+                dat.setFecha(fecha);
+                dat.setObservacion(observacion);
+                dat.setMulta(multa);
+                dat.setMora(mora);
+                corteJpacontrolador.create(dat);
+            } else {
+                JOptionPane.showMessageDialog(null, "Error de ingreso,\nNo se puede ingresar el mismo usuario", "Información", 1);
+            }
 
         } catch (Exception e) {
 
@@ -118,7 +122,7 @@ public class classCorte {
         modelo.addColumn("mora");
 
         for (Corte c : getCorte()) {
-            //if (c.getCorte().equals("SI")) {
+            if (c.getCorte().equals("SI")) {
                 fila[0] = c.getIdcorte();
                 fila[1] = c.getIdmedidor().getIdmedidor();
                 fila[2] = c.getCorte();
@@ -130,7 +134,38 @@ public class classCorte {
 //                FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(50);
 //                FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(55);
                 modelo.addRow(fila);
-            //}
+            }
+        }
+
+    }
+
+    public void cargarCorteSINO(JTable tabla) {
+        classDetalleFactura cdf = new classDetalleFactura();
+        modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[7];
+        modelo.addColumn("id");
+        modelo.addColumn("idmed");
+        modelo.addColumn("corte");
+        modelo.addColumn("fecha");
+        modelo.addColumn("observacion");
+        modelo.addColumn("multa");
+        modelo.addColumn("mora");
+
+        for (Corte c : getCorte()) {
+            if (c.getCorte().equals("NO")) {
+                fila[0] = c.getIdcorte();
+                fila[1] = c.getIdmedidor().getIdmedidor();
+                fila[2] = c.getCorte();
+                fila[3] = c.getFecha();
+                fila[4] = c.getObservacion();
+                fila[5] = c.getMulta();
+                fila[6] = c.getMora();
+
+//                FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(50);
+//                FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(55);
+                modelo.addRow(fila);
+            }
         }
 
     }

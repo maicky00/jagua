@@ -365,4 +365,29 @@ public class classMedidor {
 
         }
     }
+
+    public void cargarTablaMedidorUsuarioDebe(JTable tabla) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[4];
+        modelo.addColumn("Nro medidor");
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Apodo");
+        float valor = 0;
+        for (Medidor u : getMedidor()) {
+
+            valor = Float.valueOf(u.getValorporconexion());
+            if (valor == 200) {
+                fila[0] = u.getNummedidor();
+                fila[1] = u.getIdusuario().getRucci();
+                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                        + u.getIdusuario().getPrimernombre();
+                fila[3] = u.getIdusuario().getApadosn();
+
+                modelo.addRow(fila);
+            }
+        }
+    }
+
 }

@@ -191,7 +191,7 @@ public class classusuario {
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
         Object[] fila = new Object[10];
-        modelo.addColumn("Id");
+        modelo.addColumn("N°");//id
         modelo.addColumn("CI/RUC");
         modelo.addColumn("Nombres");
         modelo.addColumn("Apodo");
@@ -215,6 +215,22 @@ public class classusuario {
             fila[7] = u.getSector();
             fila[8] = u.getReferencia();
             fila[9] = u.getObservacion();
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(40);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(75);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(80);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(0);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(0);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(9).setMinWidth(0);
+            FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(9).setMaxWidth(0);
             modelo.addRow(fila);
         }
     }

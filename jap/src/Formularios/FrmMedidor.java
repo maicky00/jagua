@@ -35,22 +35,29 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
          //cu.cargarTablaUsuario2(jTable1);.
 
         cm.cargarTablaMedidor(jTable1);
+        ocultar();
     }
 
     ControlFormularios cf;
 
     public void mostrar() {
+        
+        txtvalorConexion.setEnabled(true);
         txtSerie.setEditable(true);
         txtMedidor.setEditable(true);
+        btnNuevo.setEnabled(false);
         btnEditar.setEnabled(false);
         btnElimnar.setEnabled(false);
         btnCancelar.setEnabled(true);
         btnGuardar.setEnabled(true);
+        
     }
 
     public void ocultar() {
+        txtvalorConexion.setEnabled(false);
         txtSerie.setEditable(false);
         txtMedidor.setEditable(false);
+        btnNuevo.setEnabled(true);
         btnEditar.setEnabled(true);
         btnElimnar.setEnabled(true);
         btnCancelar.setEnabled(false);
@@ -64,6 +71,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         txtMedidor.setText("");
         lblIdmedidor.setText("");
         lblIdUsuario.setText("");
+        txtvalorConexion.setText("");
         //lblIdUsuario.setVisible(false);
         //jLabel8.setVisible(false);
         // lblIdmedidor.setVisible(false);
@@ -105,6 +113,8 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         lblIdUsuario = new javax.swing.JLabel();
         label = new javax.swing.JLabel();
         txtvalorConexion = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -272,6 +282,10 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
         label.setText("jLabel9");
 
+        jLabel9.setText("Monto conexion:");
+
+        jLabel10.setText("USD");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -303,11 +317,16 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtMedidor, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(label)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label)
+                            .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtvalorConexion, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtvalorConexion, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel10)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -335,7 +354,10 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     .addComponent(txtMedidor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addComponent(txtvalorConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtvalorConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label)
@@ -617,6 +639,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox comboEstado;
     private javax.swing.ButtonGroup grupoBusqueda;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -624,6 +647,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
@@ -640,6 +664,6 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSerie;
     public static javax.swing.JTextField txtUsuarioCed;
-    private javax.swing.JTextField txtvalorConexion;
+    public static javax.swing.JTextField txtvalorConexion;
     // End of variables declaration//GEN-END:variables
 }
