@@ -38,7 +38,7 @@ public class classMedidor {
         return medidorJpacontrolador.findMedidorEntities();
     }
 
-    public void guardarMedidor(int idUsuario, String serie, int numMedidor, String estado, float valorConexion) {
+    public void guardarMedidor(int idUsuario, String serie, int numMedidor, String estado, float valorConexion, String pagado, float saldo) {
         int i = 0;
         Medidor med = new Medidor();
         try {
@@ -61,6 +61,8 @@ public class classMedidor {
                 dat.setNummedidor(numMedidor);
                 dat.setEstado(estado);
                 dat.setValorporconexion(valorConexion);
+                dat.setPagado(pagado);
+                dat.setSaldo(saldo);
                 medidorJpacontrolador.create(dat);
                 JOptionPane.showMessageDialog(null, "Registrado");
             }
@@ -69,7 +71,7 @@ public class classMedidor {
         }
     }
 
-    public boolean modificarMedidor(int id, int idusuario, String serie, int numMedidor, String estado, float valorConexion) {
+    public boolean modificarMedidor(int id, int idusuario, String serie, int numMedidor, String estado, float valorConexion, String pagado, float saldo) {
         int i = 0;
         Medidor med = new Medidor();
 
@@ -85,6 +87,8 @@ public class classMedidor {
             dat.setNummedidor(numMedidor);
             dat.setEstado(estado);
             dat.setValorporconexion(valorConexion);
+            dat.setPagado(pagado);
+            dat.setSaldo(saldo);
             medidorJpacontrolador.edit(dat);
             JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
 
@@ -162,7 +166,7 @@ public class classMedidor {
         modelo.addColumn("Apodo");
         modelo.addColumn("Serie");
         modelo.addColumn("estado");
-        modelo.addColumn("NÂ° Medidor");
+        modelo.addColumn("N° Medidor");
         for (Medidor u : getMedidor()) {
             // fila[0] = u.getIdmedidor();
             fila[0] = u.getIdmedidor();

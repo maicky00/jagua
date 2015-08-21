@@ -72,6 +72,8 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         lblIdmedidor.setText("");
         lblIdUsuario.setText("");
         txtvalorConexion.setText("");
+        txtPagado.setText("");
+        txtSaldo.setText("");
         //lblIdUsuario.setVisible(false);
         //jLabel8.setVisible(false);
         // lblIdmedidor.setVisible(false);
@@ -115,6 +117,11 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         txtvalorConexion = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtPagado = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtSaldo = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -280,11 +287,27 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
         lblIdUsuario.setText("jLabel9");
 
-        label.setText("jLabel9");
+        label.setText("Estado:");
+
+        txtvalorConexion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtvalorConexionKeyReleased(evt);
+            }
+        });
 
         jLabel9.setText("Monto conexion:");
 
         jLabel10.setText("USD");
+
+        jLabel11.setText("Pagado:");
+
+        txtPagado.setEditable(false);
+
+        jLabel12.setText("Saldo:");
+
+        txtSaldo.setEditable(false);
+
+        jLabel13.setText("USD");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -317,16 +340,26 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtMedidor, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(label)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtvalorConexion, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtSaldo, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtvalorConexion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel10)))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel13))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -355,13 +388,22 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtvalorConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label)
                     .addComponent(comboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtvalorConexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(txtPagado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -448,7 +490,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -517,10 +559,12 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             int numMedidor = Integer.valueOf(txtMedidor.getText());
             String estado = comboEstado.getSelectedItem().toString();
             float valorConx=Float.valueOf(txtvalorConexion.getText());
+            String pagado=txtPagado.getText();
+            float saldo=Float.valueOf(txtSaldo.getText());
             if (lblIdmedidor.getText().equals("")) {
                 int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    cm.guardarMedidor(idUsuario, serie, numMedidor, estado,valorConx);
+                    cm.guardarMedidor(idUsuario, serie, numMedidor, estado,valorConx,pagado,saldo);
                     cm.cargarTablaMedidor(jTable1);
                     limpiar();
                     ocultar();
@@ -530,7 +574,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                 int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     int idmed = Integer.valueOf(lblIdmedidor.getText());
-                    cm.modificarMedidor(idmed, idUsuario, serie, numMedidor, estado,valorConx);
+                    cm.modificarMedidor(idmed,idUsuario, serie, numMedidor, estado,valorConx,pagado,saldo);
                     cm.cargarTablaMedidor(jTable1);
                     limpiar();
                     ocultar();
@@ -610,6 +654,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             int n = jTable1.getSelectedRow();
+            int numM=Integer.valueOf(jTable1.getValueAt(n, 6).toString());
 
             lblIdmedidor.setText(jTable1.getValueAt(n, 0).toString());
             txtUsuarioCed.setText(jTable1.getValueAt(n, 1).toString());
@@ -621,12 +666,29 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             comboEstado.setSelectedItem(jTable1.getValueAt(n, 5).toString());
             lblIdUsuario.setText(cu.buscarUsuarioRucCi(txtUsuarioCed.getText()).getIdusuario().toString());
             txtUsuarioCed.setEnabled(false);
+            txtvalorConexion.setText(cm.buscarMedidorNumM(numM).getValorporconexion().toString());
+            txtPagado.setText(cm.buscarMedidorNumM(numM).getPagado().toString());
+            txtSaldo.setText(cm.buscarMedidorNumM(numM).getSaldo().toString());
             //System.out.println(cm.buscarMedidorNumM(jTable1.getValueAt(n, 0).toString()));
 
         } catch (Exception e) {
         }
 
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void txtvalorConexionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalorConexionKeyReleased
+        txtSaldo.setText(txtvalorConexion.getText());
+        
+        int sald=Integer.valueOf(txtSaldo.getText());
+        if(sald==0){
+            txtPagado.setText("SI");
+        }
+        else if(sald!=0){
+            txtPagado.setText("NO");
+        }
+        
+        
+    }//GEN-LAST:event_txtvalorConexionKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -640,6 +702,9 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     private javax.swing.ButtonGroup grupoBusqueda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -662,6 +727,8 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton rdbtodos;
     public static javax.swing.JTextField txtMedidor;
     public static javax.swing.JTextField txtNombre;
+    public static javax.swing.JTextField txtPagado;
+    public static javax.swing.JTextField txtSaldo;
     private javax.swing.JTextField txtSerie;
     public static javax.swing.JTextField txtUsuarioCed;
     public static javax.swing.JTextField txtvalorConexion;
