@@ -10,6 +10,9 @@ import jap.ReportesControlador;
 import jap.fondoPrincipal;
 import java.awt.Color;
 import java.awt.Font;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -356,10 +359,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        limpiarPanel();
-        FrmFactura f = new FrmFactura();
-        cf = new ControlFormularios();
-        cf.ControlaInstancia(f);
+        try {
+            limpiarPanel();
+            FrmFactura f = new FrmFactura();
+            cf = new ControlFormularios();
+            cf.ControlaInstancia(f);
+            f.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+        }
 
 
     }//GEN-LAST:event_jMenuItem8ActionPerformed

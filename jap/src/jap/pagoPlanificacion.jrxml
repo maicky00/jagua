@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="41f18c73-0ca7-47c3-817d-f175f0451603">
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     institucion.`IDINSTITUCION` AS institucion_IDINSTITUCION,
+     institucion.`NOMBREINST` AS institucion_NOMBREINST,
+     institucion.`DIRECCION` AS institucion_DIRECCION,
+     institucion.`TELEFONO` AS institucion_TELEFONO,
+     institucion.`EMAIL` AS institucion_EMAIL,
+     institucion.`RUC` AS institucion_RUC,
+     institucion.`CELULAR` AS institucion_CELULAR,
+     institucion.`LOGO` AS institucion_LOGO,
+     usuarios.`IDUSUARIO` AS usuarios_IDUSUARIO,
+     usuarios.`IDINSTITUCION` AS usuarios_IDINSTITUCION,
+     usuarios.`RUCCI` AS usuarios_RUCCI,
+     usuarios.`PRIMERNOMBRE` AS usuarios_PRIMERNOMBRE,
+     usuarios.`SEGUNDONOMBRE` AS usuarios_SEGUNDONOMBRE,
+     usuarios.`PRIMERAPELLIDO` AS usuarios_PRIMERAPELLIDO,
+     usuarios.`SEGUNDOAPELLIDO` AS usuarios_SEGUNDOAPELLIDO,
+     usuarios.`APADOSN` AS usuarios_APADOSN,
+     usuarios.`DIRECCION` AS usuarios_DIRECCION,
+     usuarios.`TELEFONO` AS usuarios_TELEFONO,
+     usuarios.`CELULAR` AS usuarios_CELULAR,
+     usuarios.`SECTOR` AS usuarios_SECTOR,
+     usuarios.`REFERENCIA` AS usuarios_REFERENCIA,
+     usuarios.`FOTO` AS usuarios_FOTO,
+     usuarios.`OBSERVACION` AS usuarios_OBSERVACION,
+     medidor.`IDMEDIDOR` AS medidor_IDMEDIDOR,
+     medidor.`IDUSUARIO` AS medidor_IDUSUARIO,
+     medidor.`SERIE` AS medidor_SERIE,
+     medidor.`NUMMEDIDOR` AS medidor_NUMMEDIDOR,
+     medidor.`ESTADO` AS medidor_ESTADO,
+     medidor.`VALORPORCONEXION` AS medidor_VALORPORCONEXION,
+     medidor.`PAGADO` AS medidor_PAGADO,
+     medidor.`SALDO` AS medidor_SALDO,
+     asistencia.`IDASISTENCIA` AS asistencia_IDASISTENCIA,
+     asistencia.`IDPLANIFICACION` AS asistencia_IDPLANIFICACION,
+     asistencia.`IDMEDIDOR` AS asistencia_IDMEDIDOR,
+     asistencia.`ASISTENCIA` AS asistencia_ASISTENCIA,
+     asistencia.`VALORMULTA` AS asistencia_VALORMULTA,
+     asistencia.`DESCRIPCION` AS asistencia_DESCRIPCION,
+     asistencia.`OBSEVACION` AS asistencia_OBSEVACION,
+     planificacion.`IDPLANIFICACION` AS planificacion_IDPLANIFICACION,
+     planificacion.`TIPOPLANIFICACION` AS planificacion_TIPOPLANIFICACION,
+     planificacion.`LUGAR` AS planificacion_LUGAR,
+     planificacion.`FECHA` AS planificacion_FECHA,
+     planificacion.`VALORMULTA` AS planificacion_VALORMULTA,
+     planificacion.`DESCRIPCION` AS planificacion_DESCRIPCION,
+     pagosasistencia.`IDPAGOASISTENCIA` AS pagosasistencia_IDPAGOASISTENCIA,
+     pagosasistencia.`IDASISTENCIA` AS pagosasistencia_IDASISTENCIA,
+     pagosasistencia.`FECHAPAGO` AS pagosasistencia_FECHAPAGO,
+     pagosasistencia.`NUMMINGAS` AS pagosasistencia_NUMMINGAS,
+     pagosasistencia.`VALORMINGAS` AS pagosasistencia_VALORMINGAS,
+     pagosasistencia.`OBSERVACION` AS pagosasistencia_OBSERVACION,
+     pagosasistencia.`USUARIOACTUAL` AS pagosasistencia_USUARIOACTUAL,
+     pagosasistencia.`NUMFACTURA` AS pagosasistencia_NUMFACTURA
+FROM
+     `institucion` institucion INNER JOIN `usuarios` usuarios ON institucion.`IDINSTITUCION` = usuarios.`IDINSTITUCION`
+     INNER JOIN `medidor` medidor ON usuarios.`IDUSUARIO` = medidor.`IDUSUARIO`
+     INNER JOIN `asistencia` asistencia ON medidor.`IDMEDIDOR` = asistencia.`IDMEDIDOR`
+     INNER JOIN `planificacion` planificacion ON asistencia.`IDPLANIFICACION` = planificacion.`IDPLANIFICACION`
+     INNER JOIN `pagosasistencia` pagosasistencia ON asistencia.`IDASISTENCIA` = pagosasistencia.`IDASISTENCIA`]]>
+	</queryString>
+	<field name="institucion_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="institucion_NOMBREINST" class="java.lang.String"/>
+	<field name="institucion_DIRECCION" class="java.lang.String"/>
+	<field name="institucion_TELEFONO" class="java.lang.String"/>
+	<field name="institucion_EMAIL" class="java.lang.String"/>
+	<field name="institucion_RUC" class="java.lang.String"/>
+	<field name="institucion_CELULAR" class="java.lang.String"/>
+	<field name="institucion_LOGO" class="java.lang.Object"/>
+	<field name="usuarios_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="usuarios_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="usuarios_RUCCI" class="java.lang.String"/>
+	<field name="usuarios_PRIMERNOMBRE" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDONOMBRE" class="java.lang.String"/>
+	<field name="usuarios_PRIMERAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDOAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_APADOSN" class="java.lang.String"/>
+	<field name="usuarios_DIRECCION" class="java.lang.String"/>
+	<field name="usuarios_TELEFONO" class="java.lang.String"/>
+	<field name="usuarios_CELULAR" class="java.lang.String"/>
+	<field name="usuarios_SECTOR" class="java.lang.String"/>
+	<field name="usuarios_REFERENCIA" class="java.lang.String"/>
+	<field name="usuarios_FOTO" class="java.lang.Object"/>
+	<field name="usuarios_OBSERVACION" class="java.lang.String"/>
+	<field name="medidor_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="medidor_SERIE" class="java.lang.String"/>
+	<field name="medidor_NUMMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_ESTADO" class="java.lang.String"/>
+	<field name="medidor_VALORPORCONEXION" class="java.lang.Float"/>
+	<field name="medidor_PAGADO" class="java.lang.String"/>
+	<field name="medidor_SALDO" class="java.lang.Float"/>
+	<field name="asistencia_IDASISTENCIA" class="java.lang.Integer"/>
+	<field name="asistencia_IDPLANIFICACION" class="java.lang.Integer"/>
+	<field name="asistencia_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="asistencia_ASISTENCIA" class="java.lang.String"/>
+	<field name="asistencia_VALORMULTA" class="java.lang.Float"/>
+	<field name="asistencia_DESCRIPCION" class="java.lang.String"/>
+	<field name="asistencia_OBSEVACION" class="java.lang.String"/>
+	<field name="planificacion_IDPLANIFICACION" class="java.lang.Integer"/>
+	<field name="planificacion_TIPOPLANIFICACION" class="java.lang.String"/>
+	<field name="planificacion_LUGAR" class="java.lang.String"/>
+	<field name="planificacion_FECHA" class="java.sql.Date"/>
+	<field name="planificacion_VALORMULTA" class="java.lang.Float"/>
+	<field name="planificacion_DESCRIPCION" class="java.lang.String"/>
+	<field name="pagosasistencia_IDPAGOASISTENCIA" class="java.lang.Integer"/>
+	<field name="pagosasistencia_IDASISTENCIA" class="java.lang.Integer"/>
+	<field name="pagosasistencia_FECHAPAGO" class="java.sql.Date"/>
+	<field name="pagosasistencia_NUMMINGAS" class="java.lang.Integer"/>
+	<field name="pagosasistencia_VALORMINGAS" class="java.lang.Float"/>
+	<field name="pagosasistencia_OBSERVACION" class="java.lang.String"/>
+	<field name="pagosasistencia_USUARIOACTUAL" class="java.lang.String"/>
+	<field name="pagosasistencia_NUMFACTURA" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="396b4b72-ae07-497b-b4ea-3e971210f966"/>
+				<imageExpression><![CDATA["leaf_banner_green.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="eed0eac3-30c8-4857-b9ca-c5fa6ea108b2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Leaf Green Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="100" y="46" width="174" height="22" uuid="2283e7bb-db1e-4ed6-b50d-5f95cbeb4b94"/>
+				<text><![CDATA[Leaf Green SubTitle]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="09d9eb90-f781-4393-99f0-c9ab34899f35"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="10" height="15" uuid="224934a2-157d-4371-b40f-e4725e702e38"/>
+				<text><![CDATA[institucion_IDINSTITUCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="10" y="19" width="10" height="15" uuid="ee5f7ad2-90f2-4df1-9690-1183f48c54d1"/>
+				<text><![CDATA[institucion_NOMBREINST]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="20" y="19" width="10" height="15" uuid="ceea02ba-f494-40d0-a5e0-6f9dd4336811"/>
+				<text><![CDATA[institucion_DIRECCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="30" y="19" width="10" height="15" uuid="4d52fad4-a65f-4697-9f9b-fbbee50881ac"/>
+				<text><![CDATA[institucion_TELEFONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="40" y="19" width="10" height="15" uuid="101d9bf8-981e-4806-b1b8-83426a42a9a6"/>
+				<text><![CDATA[institucion_EMAIL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="50" y="19" width="10" height="15" uuid="eaa1ec2e-44ff-48ab-887e-ec5dc5ff1aea"/>
+				<text><![CDATA[institucion_RUC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="60" y="19" width="10" height="15" uuid="cb37c26d-760b-4097-9f22-d79ed753bf03"/>
+				<text><![CDATA[institucion_CELULAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="70" y="19" width="10" height="15" uuid="7268ec4a-51b2-4fa1-b270-5f966e8dd79b"/>
+				<text><![CDATA[institucion_LOGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="80" y="19" width="10" height="15" uuid="7776d2da-881a-4b4a-bb0c-805966a55d2e"/>
+				<text><![CDATA[usuarios_IDUSUARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="90" y="19" width="10" height="15" uuid="9719e50c-8db4-4651-a59d-419112d16059"/>
+				<text><![CDATA[usuarios_IDINSTITUCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="100" y="19" width="10" height="15" uuid="d649f389-11e4-420d-9a63-fa6fb052d761"/>
+				<text><![CDATA[usuarios_RUCCI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="110" y="19" width="10" height="15" uuid="3e967c47-4a52-4c6e-b4b4-d1f48d7edabe"/>
+				<text><![CDATA[usuarios_PRIMERNOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="120" y="19" width="10" height="15" uuid="e7b8fc77-9f0e-46ba-9764-f25798040e3c"/>
+				<text><![CDATA[usuarios_SEGUNDONOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="130" y="19" width="10" height="15" uuid="f708e610-4b7f-48cb-8ccc-7c65e8f3a8a6"/>
+				<text><![CDATA[usuarios_PRIMERAPELLIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="140" y="19" width="10" height="15" uuid="a3c9f0bb-5e4c-4afc-b165-b694e56013e1"/>
+				<text><![CDATA[usuarios_SEGUNDOAPELLIDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="150" y="19" width="10" height="15" uuid="5a07b423-227d-40ea-a0f3-70c9f4ffee75"/>
+				<text><![CDATA[usuarios_APADOSN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="160" y="19" width="10" height="15" uuid="01abd5e4-a79b-4396-8e9c-855b74fcf5a3"/>
+				<text><![CDATA[usuarios_DIRECCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="170" y="19" width="10" height="15" uuid="6ab4da9e-8d59-4278-8cd4-5c2e50ce829b"/>
+				<text><![CDATA[usuarios_TELEFONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="180" y="19" width="10" height="15" uuid="c9fa8e87-ea9d-4d28-9a25-afa0b894a851"/>
+				<text><![CDATA[usuarios_CELULAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="190" y="19" width="10" height="15" uuid="98ad098d-e0a3-4577-b618-35d1814815bd"/>
+				<text><![CDATA[usuarios_SECTOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="200" y="19" width="10" height="15" uuid="2816532a-0589-419e-9509-275da052f619"/>
+				<text><![CDATA[usuarios_REFERENCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="210" y="19" width="10" height="15" uuid="ef330f12-70de-415a-82a4-b3f4a9bbc93a"/>
+				<text><![CDATA[usuarios_FOTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="220" y="19" width="10" height="15" uuid="50fdb4ba-0c0c-4000-a9d1-6d691c7cd232"/>
+				<text><![CDATA[usuarios_OBSERVACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="230" y="19" width="10" height="15" uuid="94535c56-0e52-4780-8651-2ba81606bd59"/>
+				<text><![CDATA[medidor_IDMEDIDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="240" y="19" width="10" height="15" uuid="aaf52b15-ed43-4e73-8bfa-e2ec645774b2"/>
+				<text><![CDATA[medidor_IDUSUARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="250" y="19" width="10" height="15" uuid="b6855b44-6c23-4f1f-920c-3e35eff68672"/>
+				<text><![CDATA[medidor_SERIE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="260" y="19" width="10" height="15" uuid="904e600e-e283-4211-bff2-1491487b2bc3"/>
+				<text><![CDATA[medidor_NUMMEDIDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="270" y="19" width="10" height="15" uuid="4ec276d1-675e-4893-9466-c0af3950a0dd"/>
+				<text><![CDATA[medidor_ESTADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="280" y="19" width="10" height="15" uuid="63aa1d7b-64e7-42f6-ac88-1acb2b96c434"/>
+				<text><![CDATA[medidor_VALORPORCONEXION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="290" y="19" width="10" height="15" uuid="8b825650-e609-48e2-901d-924fe17252e9"/>
+				<text><![CDATA[medidor_PAGADO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="300" y="19" width="10" height="15" uuid="bb45173e-6139-4948-a436-7163226e64c2"/>
+				<text><![CDATA[medidor_SALDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="310" y="19" width="10" height="15" uuid="05b58b1d-6451-4762-b722-558366a4d886"/>
+				<text><![CDATA[asistencia_IDASISTENCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="320" y="19" width="10" height="15" uuid="acb54b8e-686c-46c0-98fb-f9e7ba8195bd"/>
+				<text><![CDATA[asistencia_IDPLANIFICACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="330" y="19" width="10" height="15" uuid="70a14271-0b9c-4bbc-b216-ef964dae11e0"/>
+				<text><![CDATA[asistencia_IDMEDIDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="340" y="19" width="10" height="15" uuid="4b2e1624-dd51-47cf-862f-9773e9e3a906"/>
+				<text><![CDATA[asistencia_ASISTENCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="350" y="19" width="10" height="15" uuid="8f8a5988-104e-4331-84fd-1ec4ec0f64db"/>
+				<text><![CDATA[asistencia_VALORMULTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="360" y="19" width="10" height="15" uuid="0660dc8b-3d32-48c4-a4ba-6945d60d55dc"/>
+				<text><![CDATA[asistencia_DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="370" y="19" width="10" height="15" uuid="68bc153c-da35-41c8-94de-1d90849f9ceb"/>
+				<text><![CDATA[asistencia_OBSEVACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="380" y="19" width="10" height="15" uuid="2c5d88db-f304-46d8-a9b8-86021a84d7ad"/>
+				<text><![CDATA[planificacion_IDPLANIFICACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="390" y="19" width="10" height="15" uuid="4cb7bcba-bdbb-4d8d-8a8e-be5210cc51f8"/>
+				<text><![CDATA[planificacion_TIPOPLANIFICACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="400" y="19" width="10" height="15" uuid="632c8e49-28b9-423e-9d65-2887dc8158d0"/>
+				<text><![CDATA[planificacion_LUGAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="410" y="19" width="10" height="15" uuid="deb32a94-b43b-4c1f-bd2d-dafcdd0fda74"/>
+				<text><![CDATA[planificacion_FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="420" y="19" width="10" height="15" uuid="fbed898b-71ca-4ec2-9a80-bc1a5d0375f0"/>
+				<text><![CDATA[planificacion_VALORMULTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="430" y="19" width="10" height="15" uuid="1fd4380a-b937-43d1-82a6-a7bc4897dba1"/>
+				<text><![CDATA[planificacion_DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="440" y="19" width="10" height="15" uuid="b7cb451c-d9d6-4d3d-8458-0cdc08193f6a"/>
+				<text><![CDATA[pagosasistencia_IDPAGOASISTENCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="450" y="19" width="10" height="15" uuid="f3a84ffd-89e8-4837-88da-a8b81fa7e946"/>
+				<text><![CDATA[pagosasistencia_IDASISTENCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="460" y="19" width="10" height="15" uuid="c44e3bed-7418-4d47-aab2-61f7f28aca48"/>
+				<text><![CDATA[pagosasistencia_FECHAPAGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="470" y="19" width="10" height="15" uuid="07e77545-0561-45ab-92cf-a746ca6be385"/>
+				<text><![CDATA[pagosasistencia_NUMMINGAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="480" y="19" width="10" height="15" uuid="b16cb9b7-6e3f-4ca3-b7c2-ef1731cf1c00"/>
+				<text><![CDATA[pagosasistencia_VALORMINGAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="490" y="19" width="10" height="15" uuid="a6089e36-b02c-425c-a91e-e2c0dc0c56e1"/>
+				<text><![CDATA[pagosasistencia_OBSERVACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="500" y="19" width="10" height="15" uuid="cc27e5eb-84c0-4360-b1e0-358ad271502d"/>
+				<text><![CDATA[pagosasistencia_USUARIOACTUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="510" y="19" width="10" height="15" uuid="ca57ec11-711e-4031-a6ee-96df78df6104"/>
+				<text><![CDATA[pagosasistencia_NUMFACTURA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="ae41a94e-b785-4da8-a6e0-2e7bab6aabc3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="10" height="15" uuid="efb2a49a-f4c3-4b95-b2a9-0c6144ace28a"/>
+				<textFieldExpression><![CDATA[$F{institucion_IDINSTITUCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="10" y="0" width="10" height="15" uuid="fe46f97e-14c9-43c8-ae45-e94e18d3b2a2"/>
+				<textFieldExpression><![CDATA[$F{institucion_NOMBREINST}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="20" y="0" width="10" height="15" uuid="a256ae9d-057c-4eeb-b613-6e8f10df502d"/>
+				<textFieldExpression><![CDATA[$F{institucion_DIRECCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="30" y="0" width="10" height="15" uuid="7f4d8f0f-032a-4ed1-962a-f88db233529f"/>
+				<textFieldExpression><![CDATA[$F{institucion_TELEFONO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="40" y="0" width="10" height="15" uuid="fdb138dc-a397-463a-9045-1d07de9d7cb7"/>
+				<textFieldExpression><![CDATA[$F{institucion_EMAIL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="50" y="0" width="10" height="15" uuid="9cada9af-ec25-45df-9eea-868afc55ce10"/>
+				<textFieldExpression><![CDATA[$F{institucion_RUC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="60" y="0" width="10" height="15" uuid="56a9f8b5-39f0-4ebf-8435-fa5388e73df0"/>
+				<textFieldExpression><![CDATA[$F{institucion_CELULAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="70" y="0" width="10" height="15" uuid="d05aa5f4-c005-4798-a185-bf75094b5a2e"/>
+				<textFieldExpression><![CDATA[""+$F{institucion_LOGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="80" y="0" width="10" height="15" uuid="28e96aff-9de3-4d38-8a87-1a9faf5aee3e"/>
+				<textFieldExpression><![CDATA[$F{usuarios_IDUSUARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="90" y="0" width="10" height="15" uuid="74a9f36f-05de-4d22-a4fc-7b439e882f39"/>
+				<textFieldExpression><![CDATA[$F{usuarios_IDINSTITUCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="100" y="0" width="10" height="15" uuid="a2783fbc-9a76-48d5-b537-835d9866b7a7"/>
+				<textFieldExpression><![CDATA[$F{usuarios_RUCCI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="110" y="0" width="10" height="15" uuid="92e28a12-9516-4db4-853e-6677c34f3760"/>
+				<textFieldExpression><![CDATA[$F{usuarios_PRIMERNOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="120" y="0" width="10" height="15" uuid="c0639ccb-2c1e-459c-ac16-c6f05685e366"/>
+				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDONOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="130" y="0" width="10" height="15" uuid="ecb91d01-748b-4f64-afbd-bff835fa17d8"/>
+				<textFieldExpression><![CDATA[$F{usuarios_PRIMERAPELLIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="140" y="0" width="10" height="15" uuid="bd0643ac-044c-4511-affe-e041dd4448da"/>
+				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDOAPELLIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="150" y="0" width="10" height="15" uuid="dd144971-e254-48d1-a6ef-4b9ad22c766a"/>
+				<textFieldExpression><![CDATA[$F{usuarios_APADOSN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="160" y="0" width="10" height="15" uuid="5d7ce81a-a4b1-4755-96b0-a2ceda324cf2"/>
+				<textFieldExpression><![CDATA[$F{usuarios_DIRECCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="170" y="0" width="10" height="15" uuid="318b5233-9876-4132-991c-619d43f8c8e2"/>
+				<textFieldExpression><![CDATA[$F{usuarios_TELEFONO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="180" y="0" width="10" height="15" uuid="5f1c0f0b-644f-494b-865a-b58d82ff09ae"/>
+				<textFieldExpression><![CDATA[$F{usuarios_CELULAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="190" y="0" width="10" height="15" uuid="bc9c593c-f0b7-4dad-8f39-0b4277f717b0"/>
+				<textFieldExpression><![CDATA[$F{usuarios_SECTOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="200" y="0" width="10" height="15" uuid="7d62c88d-2e95-4cf8-b2d7-daa7935938d3"/>
+				<textFieldExpression><![CDATA[$F{usuarios_REFERENCIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="210" y="0" width="10" height="15" uuid="5753f008-45c6-42aa-a574-f38af951be1c"/>
+				<textFieldExpression><![CDATA[""+$F{usuarios_FOTO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="220" y="0" width="10" height="15" uuid="e2996e93-13dd-4923-9acc-cf209a310898"/>
+				<textFieldExpression><![CDATA[$F{usuarios_OBSERVACION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="230" y="0" width="10" height="15" uuid="a765d109-3aac-43fd-8c2a-61be8e4f9bba"/>
+				<textFieldExpression><![CDATA[$F{medidor_IDMEDIDOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="240" y="0" width="10" height="15" uuid="3183aac2-ab70-4611-8514-110af6e2a7a9"/>
+				<textFieldExpression><![CDATA[$F{medidor_IDUSUARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="250" y="0" width="10" height="15" uuid="40f090c9-ea1e-4a9d-b8f8-2181466e5012"/>
+				<textFieldExpression><![CDATA[$F{medidor_SERIE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="260" y="0" width="10" height="15" uuid="4c81a689-8d3b-4f3f-87d4-993abb237570"/>
+				<textFieldExpression><![CDATA[$F{medidor_NUMMEDIDOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="270" y="0" width="10" height="15" uuid="e07de185-3931-4826-80c2-fe80853b5d33"/>
+				<textFieldExpression><![CDATA[$F{medidor_ESTADO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="280" y="0" width="10" height="15" uuid="0d55e5f9-ac48-4ff8-b66a-43b04cb374ac"/>
+				<textFieldExpression><![CDATA[$F{medidor_VALORPORCONEXION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="290" y="0" width="10" height="15" uuid="a33c75c1-6dc8-4be2-aa42-456b062d0750"/>
+				<textFieldExpression><![CDATA[$F{medidor_PAGADO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="300" y="0" width="10" height="15" uuid="f6d6e660-630e-48fe-9d24-a97f2b3833ae"/>
+				<textFieldExpression><![CDATA[$F{medidor_SALDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="310" y="0" width="10" height="15" uuid="884dc702-6c30-4880-829a-1e4159918965"/>
+				<textFieldExpression><![CDATA[$F{asistencia_IDASISTENCIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="320" y="0" width="10" height="15" uuid="5b77e8b5-9630-4649-b04b-747a81c06542"/>
+				<textFieldExpression><![CDATA[$F{asistencia_IDPLANIFICACION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="330" y="0" width="10" height="15" uuid="0de48b15-7bb3-4e33-86e7-1ce03524b312"/>
+				<textFieldExpression><![CDATA[$F{asistencia_IDMEDIDOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="340" y="0" width="10" height="15" uuid="e70b4f2b-5f9f-49e7-a0e9-28ac95e9caa4"/>
+				<textFieldExpression><![CDATA[$F{asistencia_ASISTENCIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="350" y="0" width="10" height="15" uuid="b8cc8494-8f6b-4f39-86d4-5502d9f60b29"/>
+				<textFieldExpression><![CDATA[$F{asistencia_VALORMULTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="360" y="0" width="10" height="15" uuid="20bb4641-9fa0-4f81-9d54-19c1e8e16b90"/>
+				<textFieldExpression><![CDATA[$F{asistencia_DESCRIPCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="370" y="0" width="10" height="15" uuid="ad515831-c063-4439-9e43-a1255a4ab661"/>
+				<textFieldExpression><![CDATA[$F{asistencia_OBSEVACION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="380" y="0" width="10" height="15" uuid="51f6d471-6f77-4676-97d4-d7e95266986a"/>
+				<textFieldExpression><![CDATA[$F{planificacion_IDPLANIFICACION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="390" y="0" width="10" height="15" uuid="6dd45767-9ba8-4264-bff4-1816720293da"/>
+				<textFieldExpression><![CDATA[$F{planificacion_TIPOPLANIFICACION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="400" y="0" width="10" height="15" uuid="43ab4efb-d8a5-4179-971e-8be10da83e6a"/>
+				<textFieldExpression><![CDATA[$F{planificacion_LUGAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="410" y="0" width="10" height="15" uuid="1f556d02-3904-4394-b48c-a4b57a6a6ada"/>
+				<textFieldExpression><![CDATA[$F{planificacion_FECHA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="420" y="0" width="10" height="15" uuid="067738a7-074b-4daf-a173-0849c2685d6c"/>
+				<textFieldExpression><![CDATA[$F{planificacion_VALORMULTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="430" y="0" width="10" height="15" uuid="eaab81cd-3728-43c2-b9c1-85268d30fcc6"/>
+				<textFieldExpression><![CDATA[$F{planificacion_DESCRIPCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="440" y="0" width="10" height="15" uuid="4e859926-e167-421b-8eca-9e37fc096a75"/>
+				<textFieldExpression><![CDATA[$F{pagosasistencia_IDPAGOASISTENCIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="450" y="0" width="10" height="15" uuid="89e5b78d-ff00-4de2-99ec-64cdb73d984b"/>
+				<textFieldExpression><![CDATA[$F{pagosasistencia_IDASISTENCIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="460" y="0" width="10" height="15" uuid="17311eb2-b074-43e6-ba49-fc3da5b47407"/>
+				<textFieldExpression><![CDATA[$F{pagosasistencia_FECHAPAGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="470" y="0" width="10" height="15" uuid="37315164-50a8-4dab-b62f-662d3772e69f"/>
+				<textFieldExpression><![CDATA[$F{pagosasistencia_NUMMINGAS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="480" y="0" width="10" height="15" uuid="38f9526a-a3ed-4404-959e-585900d47dcf"/>
+				<textFieldExpression><![CDATA[$F{pagosasistencia_VALORMINGAS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="490" y="0" width="10" height="15" uuid="93085cdd-ac77-4dbe-a3e9-384935ae2101"/>
+				<textFieldExpression><![CDATA[$F{pagosasistencia_OBSERVACION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="500" y="0" width="10" height="15" uuid="7a178dd5-84c2-404d-9c6d-1e0b2445307e"/>
+				<textFieldExpression><![CDATA[$F{pagosasistencia_USUARIOACTUAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="510" y="0" width="10" height="15" uuid="c5e0098f-8305-4395-8f75-57cf764b0967"/>
+				<textFieldExpression><![CDATA[$F{pagosasistencia_NUMFACTURA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="317c813c-e7fe-49f9-af49-5bd4179c1261"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="ca94962d-e1bb-4ff5-930e-71aaec4dec95"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="e9fc8fa7-36a6-42dc-8e80-fb29e0967b07"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="53c92ab2-3002-4050-8fc9-a63371800fb5"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

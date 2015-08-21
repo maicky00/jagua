@@ -436,22 +436,7 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        try {
-            limpiar();
-            int numMed = Integer.valueOf(txtnumMedidor.getText());
-            String ruc = ca.buscarNumMed(numMed).getIdmedidor().getIdusuario().getRucci();
-            String client = ca.buscarNumMed(numMed).getIdmedidor().getIdusuario().getPrimerapellido() + " "
-                    + ca.buscarNumMed(numMed).getIdmedidor().getIdusuario().getSegundoapellido() + " "
-                    + ca.buscarNumMed(numMed).getIdmedidor().getIdusuario().getPrimernombre() + " "
-                    + ca.buscarNumMed(numMed).getIdmedidor().getIdusuario().getSegundonombre() + " ";
-            String direccioN = ca.buscarNumMed(numMed).getIdmedidor().getIdusuario().getDireccion();
-            txtRuc.setText(ruc);
-            txtCliente.setText(client);
-            txtdireccion.setText(direccioN);
-            ca.tablaAsistencias(jTable1, numMed);
-
-        } catch (Exception e) {
-        }
+        pagar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -497,7 +482,24 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+    public void pagar() {
+        try {
+            limpiar();
+            int numMed = Integer.valueOf(txtnumMedidor.getText());
+            String ruc = ca.buscarNumMed(numMed).getIdmedidor().getIdusuario().getRucci();
+            String client = ca.buscarNumMed(numMed).getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                    + ca.buscarNumMed(numMed).getIdmedidor().getIdusuario().getSegundoapellido() + " "
+                    + ca.buscarNumMed(numMed).getIdmedidor().getIdusuario().getPrimernombre() + " "
+                    + ca.buscarNumMed(numMed).getIdmedidor().getIdusuario().getSegundonombre() + " ";
+            String direccioN = ca.buscarNumMed(numMed).getIdmedidor().getIdusuario().getDireccion();
+            txtRuc.setText(ruc);
+            txtCliente.setText(client);
+            txtdireccion.setText(direccioN);
+            ca.tablaAsistencias(jTable1, numMed);
 
+        } catch (Exception e) {
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -525,6 +527,6 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCliente;
     public static javax.swing.JTextField txtRuc;
     private javax.swing.JTextField txtdireccion;
-    private javax.swing.JTextField txtnumMedidor;
+    public static javax.swing.JTextField txtnumMedidor;
     // End of variables declaration//GEN-END:variables
 }

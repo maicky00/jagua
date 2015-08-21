@@ -153,7 +153,6 @@ cargarInf();
 
         jLabel15.setText("RUC:");
 
-        jLabel1.setText("jLabel1");
         jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         buttonNice6.setBackground(new java.awt.Color(0, 102, 255));
@@ -171,29 +170,30 @@ cargarInf();
         panelReflect1Layout.setHorizontalGroup(
             panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelReflect1Layout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(299, Short.MAX_VALUE))
-            .addGroup(panelReflect1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel12))
-                .addGap(19, 19, 19)
-                .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(txttelefono)
-                    .addComponent(txtcelular)
-                    .addComponent(txtruc)
-                    .addComponent(txtemail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelReflect1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel12))
+                        .addGap(19, 19, 19)
+                        .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
+                            .addComponent(txttelefono)
+                            .addComponent(txtcelular)
+                            .addComponent(txtruc)
+                            .addComponent(txtemail)))
+                    .addGroup(panelReflect1Layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonNice6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -210,7 +210,7 @@ cargarInf();
                 .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtruc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(panelReflect1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelReflect1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -254,7 +254,7 @@ cargarInf();
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelReflect1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -268,7 +268,6 @@ cargarInf();
             telefono = txttelefono.getText();
             celular = txtcelular.getText();
             email = txtemail.getText();
-            bytesImg = ci.AbrirAImagen(archivo);
             ci.modificarInstitucion(1, nombreInst, direccion, telefono, email, ruc, celular, bytesImg);
             this.dispose();
         } catch (Exception e) {
@@ -284,7 +283,8 @@ cargarInf();
         if (seleccionado.showDialog(null, "ABRIR ARCHIVO") == JFileChooser.APPROVE_OPTION) {
             archivo = seleccionado.getSelectedFile();
             if (archivo.canRead()) {
-                if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")) {
+                if (archivo.getName().endsWith("jpg") || archivo.getName().endsWith("png") || archivo.getName().endsWith("gif")||
+                        archivo.getName().endsWith("JPG") || archivo.getName().endsWith("PNG") || archivo.getName().endsWith("GIF")) {
                     ruta = seleccionado.getSelectedFile().getAbsolutePath();
                     bytesImg = ci.AbrirAImagen(archivo);
                     Image preview = Toolkit.getDefaultToolkit().getImage(ruta);

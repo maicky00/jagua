@@ -147,6 +147,17 @@ public class classAsistencia {
         return null;
     }
 
+    public int buscarMultaPagado(int idNumMed) {
+        int i = 0;
+        for (Asistencia dat : getAsistencia()) {
+            if (dat.getIdmedidor().getNummedidor().equals(idNumMed)
+                    && dat.getObsevacion().equals("NO")) {
+                i++;
+            }
+        }
+        return i;
+    }
+
     public void cargarTablaAsistencia(JTable tabla, int idPlan) {
 
         modelo = new DefaultTableModel();
