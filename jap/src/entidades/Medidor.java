@@ -36,6 +36,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Medidor.findByNummedidor", query = "SELECT m FROM Medidor m WHERE m.nummedidor = :nummedidor"),
     @NamedQuery(name = "Medidor.findByEstado", query = "SELECT m FROM Medidor m WHERE m.estado = :estado")})
 public class Medidor implements Serializable {
+    @Column(name = "PAGADO")
+    private String pagado;
+    @Column(name = "SALDO")
+    private Float saldo;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "VALORPORCONEXION")
     private Float valorporconexion;
@@ -167,6 +171,22 @@ public class Medidor implements Serializable {
 
     public void setValorporconexion(Float valorporconexion) {
         this.valorporconexion = valorporconexion;
+    }
+
+    public String getPagado() {
+        return pagado;
+    }
+
+    public void setPagado(String pagado) {
+        this.pagado = pagado;
+    }
+
+    public Float getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Float saldo) {
+        this.saldo = saldo;
     }
 
 

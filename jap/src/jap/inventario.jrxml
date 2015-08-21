@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1fda3002-15d2-42e7-b040-8961cb837c65">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     inventario.`IDINVENTARIO` AS inventario_IDINVENTARIO,
+     inventario.`CODARTICULO` AS inventario_CODARTICULO,
+     inventario.`DESCRIPCION` AS inventario_DESCRIPCION,
+     inventario.`FECHAADQUISICION` AS inventario_FECHAADQUISICION,
+     inventario.`VALOR` AS inventario_VALOR,
+     inventario.`DEPRECIABLE` AS inventario_DEPRECIABLE,
+     inventario.`NOMBRE` AS inventario_NOMBRE,
+     inventario.`CANTIDAD` AS inventario_CANTIDAD,
+     inventario.`IMAGEN` AS inventario_IMAGEN
+FROM
+     `inventario` inventario]]>
+	</queryString>
+	<field name="inventario_IDINVENTARIO" class="java.lang.Integer"/>
+	<field name="inventario_CODARTICULO" class="java.lang.String"/>
+	<field name="inventario_DESCRIPCION" class="java.lang.String"/>
+	<field name="inventario_FECHAADQUISICION" class="java.sql.Date"/>
+	<field name="inventario_VALOR" class="java.lang.Float"/>
+	<field name="inventario_DEPRECIABLE" class="java.lang.String"/>
+	<field name="inventario_NOMBRE" class="java.lang.String"/>
+	<field name="inventario_CANTIDAD" class="java.lang.Integer"/>
+	<field name="inventario_IMAGEN" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="3b4ea739-5097-433b-840f-b125ab863c24"/>
+				<imageExpression><![CDATA["leaf_banner_green.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="04c7e2cb-3c8c-45d0-b081-d2b4acbe2825"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Leaf Green Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="100" y="46" width="174" height="22" uuid="55766d36-b985-4683-a5c0-384eb7aeda9d"/>
+				<text><![CDATA[Leaf Green SubTitle]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="29863ab3-fdaa-4d94-9637-16805c0b9c7f"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="61" height="15" uuid="6211f2ed-ae5e-47d3-bb6b-78223a5c3ebc"/>
+				<text><![CDATA[inventario_IDINVENTARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="61" y="19" width="61" height="15" uuid="a6fcbfb5-e810-4b5d-b6be-b6b2e82267fb"/>
+				<text><![CDATA[inventario_CODARTICULO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="122" y="19" width="61" height="15" uuid="2e628637-ce9c-408e-af95-a43c737cba19"/>
+				<text><![CDATA[inventario_DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="183" y="19" width="61" height="15" uuid="3faef8a3-279d-4af7-82bf-d162813c4de8"/>
+				<text><![CDATA[inventario_FECHAADQUISICION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="244" y="19" width="61" height="15" uuid="40444c44-9d8d-48b1-af58-6311c985baa0"/>
+				<text><![CDATA[inventario_VALOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="305" y="19" width="61" height="15" uuid="8f7968fb-f643-488f-83c8-cb25a8f7a2fe"/>
+				<text><![CDATA[inventario_DEPRECIABLE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="366" y="19" width="61" height="15" uuid="ece0d3ad-1b26-4e41-87b9-8c4cd53f3cb0"/>
+				<text><![CDATA[inventario_NOMBRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="427" y="19" width="61" height="15" uuid="c4951a7a-a91e-4e87-b740-8134d8a0fa03"/>
+				<text><![CDATA[inventario_CANTIDAD]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="78" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="1fdc301f-0d20-405c-b7f8-96ad3e0397f3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="61" height="15" uuid="5a61a248-c82b-4856-9fc7-f0c26b65c31f"/>
+				<textFieldExpression><![CDATA[$F{inventario_IDINVENTARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="61" y="0" width="61" height="15" uuid="67a241e3-cb84-47da-9f8d-645881871241"/>
+				<textFieldExpression><![CDATA[$F{inventario_CODARTICULO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="122" y="0" width="61" height="15" uuid="585612e3-a1a9-4f8c-b429-2b5108f35be7"/>
+				<textFieldExpression><![CDATA[$F{inventario_DESCRIPCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="183" y="0" width="61" height="15" uuid="01063570-de4f-40f4-9257-db1bcd889191"/>
+				<textFieldExpression><![CDATA[$F{inventario_FECHAADQUISICION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="244" y="0" width="61" height="15" uuid="c9f3553a-0aa3-4893-a080-78ee1956bac5"/>
+				<textFieldExpression><![CDATA[$F{inventario_VALOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="305" y="0" width="61" height="15" uuid="bf4966de-f8c7-430e-aeda-70f8621c4867"/>
+				<textFieldExpression><![CDATA[$F{inventario_DEPRECIABLE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="366" y="0" width="61" height="15" uuid="6383ba30-4c84-47d2-b1e6-bf85328e0ba7"/>
+				<textFieldExpression><![CDATA[$F{inventario_NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="427" y="0" width="61" height="15" uuid="ee9ce7e0-9482-424e-822f-7165c00d927d"/>
+				<textFieldExpression><![CDATA[$F{inventario_CANTIDAD}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement x="470" y="16" width="59" height="50" uuid="0cc468b8-1a88-44c1-b08a-073f7c1c696a"/>
+				<imageExpression><![CDATA[new ByteArrayInputStream((byte[])$F{inventario_IMAGEN}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="328b1414-e6e4-41e5-96a1-0300acb1800a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="54bc0182-4a5b-4d3f-b66d-ef80f12f22c2"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="86db3054-2afb-4aa3-9ceb-3ddd52128181"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="7f52ad7a-c82d-40de-8bec-854171d0d106"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
