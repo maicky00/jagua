@@ -37,7 +37,8 @@ public class classCorte {
     public void guardarCorte(int idMedidor, String corte, Date fecha, String observacion, float multa, int mora) {
         try {
 
-            Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor).getIdmedidor());
+            Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorNumM(idMedidor).getNummedidor());
+            System.out.println(idmed.getNummedidor());
             if (idmed.getIdmedidor() != idMedidor) {
                 Corte dat = new Corte();
                 dat.setIdmedidor(idmed);

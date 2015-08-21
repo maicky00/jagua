@@ -397,7 +397,7 @@ public class classDetalleFactura {
             linea.getTitle().setPaint(Color.blue);
             CategoryPlot p = linea.getCategoryPlot();
             p.setRangeGridlinePaint(Color.red);
-            BufferedImage graficoLinea = linea.createBufferedImage(400, 240);
+            BufferedImage graficoLinea = linea.createBufferedImage(400, 220);
             FrmFactura.lblGrafico.setSize(400, 100);
             FrmFactura.lblGrafico.setIcon(new ImageIcon(graficoLinea));
         } catch (Exception e) {
