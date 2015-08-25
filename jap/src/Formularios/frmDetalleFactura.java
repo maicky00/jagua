@@ -670,7 +670,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                     cdt.guardarDetallefactura(idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total, "NO");
                     limpiar();
                 } else if (!lblIdDetalle.getText().equals("")) {
-                    cdt.modificarDetallefactura(Integer.valueOf(lblIdDetalle.getText().toString()), idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total, "NO");
+                    cdt.modificarDetallefactura(Integer.valueOf(lblIdDetalle.getText().toString()), idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total);
                     limpiar();
                 }
                 cdf.cargarBusquedaAnioMes(jTable1, anioMes);

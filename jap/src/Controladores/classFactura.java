@@ -110,27 +110,22 @@ public class classFactura {
     }
 
     public int numFactura() {
-        Otrospagos op = new Otrospagos();
+//        Otrospagos op = new Otrospagos();
         classOtrosPagos cop = new classOtrosPagos();
-        int j = 1;
-        int r = 0;
-        for (Otrospagos dat : cop.getOtrospagos()) {
-            if (dat.getNumfactura() > j) {
-                j = dat.getNumfactura();
-            }
-        }
         int i = 1;
+        int r = 0;
+        
         for (Facturas dat : getFacturas()) {
             if (dat.getNumfactura() > i) {
                 i = dat.getNumfactura();
             }
         }
-        if (i >= j) {
+        if (i >= cop.numFactura()) {
             r = i;
         } else {
-            r = j;
+            r = cop.numFactura();
         }
-        return i;
+        return r;
     }
 
     public void IngresarlistFact(List<Facturas> listFact) {

@@ -34,7 +34,7 @@ public class classOtrosPagos {
         return otrospagosJpacontrolador.findOtrospagosEntities();
     }
 
-    public void guardarOtrospagos(int idcorte, float derConx, float mulRecx,  float interes, float total,int numFact,String usuarioActual,Date fechaPago) {
+    public void guardarOtrospagos(int idcorte, float derConx, float mulRecx, float interes, float total, int numFact, String usuarioActual, Date fechaPago) {
         try {
 
             Corte idOtpg = cc.corteJpacontrolador.findCorte(cc.buscarIdCorte(idcorte).getIdcorte());
@@ -42,7 +42,7 @@ public class classOtrosPagos {
             dat.setIdcorte(idOtpg);
             dat.setDerconx(derConx);
             dat.setMulrecx(mulRecx);
-            dat.setInteres(interes); 
+            dat.setInteres(interes);
             dat.setTotal(total);
             dat.setNumfactura(numFact);
             dat.setUsuarioactual(usuarioActual);
@@ -67,7 +67,7 @@ public class classOtrosPagos {
         modelo.addColumn("total");
         modelo.addColumn("usuarioAct");
         for (Otrospagos o : getOtrospagos()) {
-            
+
             fila[0] = o.getIdotpagos();
             fila[1] = o.getIdcorte().getIdcorte();
             fila[2] = o.getDerconx();
@@ -75,11 +75,12 @@ public class classOtrosPagos {
             fila[4] = o.getInteres();
             fila[5] = o.getTotal();
             fila[6] = o.getUsuarioactual();
-            
+
             modelo.addRow(fila);
         }
     }
-    public boolean modificarOtrospagos(int idOtrospagos, int idcorte, float derConx, float mulRecx,  float interes) {
+
+    public boolean modificarOtrospagos(int idOtrospagos, int idcorte, float derConx, float mulRecx, float interes) {
 
         try {
             Otrospagos dat = otrospagosJpacontrolador.findOtrospagos(idOtrospagos);
@@ -119,4 +120,16 @@ public class classOtrosPagos {
         return null;
     }
 
+    public int numFactura() {
+
+        int j = 1;
+
+        for (Otrospagos dat1 : getOtrospagos()) {
+            if (dat1.getNumfactura() > j) {
+                j = dat1.getNumfactura();
+            }
+        }
+
+        return j;
+    }
 }

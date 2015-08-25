@@ -563,19 +563,19 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtRucKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() > 0) {
-            comboPagos.removeAllItems();
-            comboPagos.setVisible(true);
-            for (int i = 0; i < cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() + 1; i++) {
-                comboPagos.addItem(i + ".0");
-            }
-            lbldescNuevoMed.setText("Cuotas Pagadas: " + cpnm.numCuotas(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdmedidor()) + " Saldo Faltantate por Conexion: "
-                    + cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo().toString());
-//            txtPagoNuevoMed.setText(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo().toString());
-        } else {
-            lbldescNuevoMed.setText("");
-            comboPagos.setVisible(false);
-        }
+//        if (cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() > 0) {
+//            comboPagos.removeAllItems();
+//            comboPagos.setVisible(true);
+//            for (int i = 0; i < cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() + 1; i++) {
+//                comboPagos.addItem(i + ".0");
+//            }
+//            lbldescNuevoMed.setText("Cuotas Pagadas: " + cpnm.numCuotas(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdmedidor()) + " Saldo Faltantate por Conexion: "
+//                    + cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo().toString());
+////            txtPagoNuevoMed.setText(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo().toString());
+//        } else {
+//            lbldescNuevoMed.setText("");
+//            comboPagos.setVisible(false);
+//        }
         // TODO add your handling code here:
 
         try {
@@ -615,12 +615,12 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int i = JOptionPane.showConfirmDialog(this, "¿REAlIZAR TRANSACCION?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
-            co.guardarOtrospagos(Integer.valueOf(txtIdCorte.getText()),
-                    Float.valueOf(txtDerecho.getText()),
-                    Float.valueOf(txtMultaReconexion.getText()),
-                    Float.valueOf(txtInteres.getText()),
-                    Float.valueOf(tablaOtros.getValueAt(0, 1).toString()),
-                    Integer.parseInt(jLabel2.getText()), "", new Date());
+//            co.guardarOtrospagos(Integer.valueOf(txtIdCorte.getText()),
+//                    Float.valueOf(txtDerecho.getText()),
+//                    Float.valueOf(txtMultaReconexion.getText()),
+//                    Float.valueOf(txtInteres.getText()),
+//                    Float.valueOf(tablaOtros.getValueAt(0, 1).toString()),
+//                    Integer.parseInt(jLabel2.getText()), "", new Date());
             try {
                 String usActual = "ADMINISTR";
 
@@ -629,11 +629,11 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                 //otros gastos
 
                 //fin otros gastos
-                if (Float.valueOf(comboPagos.getSelectedItem().toString()) > 0) {
-                    float r = cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() - Float.valueOf(comboPagos.getSelectedItem().toString());
-                    cpnm.guardarPagosnuevomed(Integer.valueOf(txtnumMedidor.getText()), "Pago Por Coneccion", Float.valueOf(comboPagos.getSelectedItem().toString()), fechaActual);
-                    cm.modificarValorConexion(Integer.valueOf(txtnumMedidor.getText()), r);
-                }
+//                if (Float.valueOf(comboPagos.getSelectedItem().toString()) > 0) {
+//                    float r = cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() - Float.valueOf(comboPagos.getSelectedItem().toString());
+//                    cpnm.guardarPagosnuevomed(Integer.valueOf(txtnumMedidor.getText()), "Pago Por Coneccion", Float.valueOf(comboPagos.getSelectedItem().toString()), fechaActual);
+//                    cm.modificarValorConexion(Integer.valueOf(txtnumMedidor.getText()), r);
+//                }
                 int numFact = cft.numFactura() + 1;
 
                 float subtotal = Float.valueOf(tabla2.getValueAt(0, 1).toString());

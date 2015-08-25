@@ -86,7 +86,7 @@ public class classDetalleFactura {
         }
     }
     
-    public boolean modificarDetallefactura(int idDetallefactura, int idTarifas, int idMedidor, String anioMes, int medidaAnt, int medidaAct, int consumo, int medExcedido, float tarExcedido, float subtotal, float total, String observacion) {
+    public boolean modificarDetallefactura(int idDetallefactura, int idTarifas, int idMedidor, String anioMes, int medidaAnt, int medidaAct, int consumo, int medExcedido, float tarExcedido, float subtotal, float total) {
         try {
             Detallefactura dat = detallefacturaJpacontrolador.findDetallefactura(idDetallefactura);
             if (dat == null) {
@@ -104,7 +104,6 @@ public class classDetalleFactura {
             dat.setTarexcedido(tarExcedido);
             dat.setSubtotal(subtotal);
             dat.setTotal(total);
-            dat.setObservacion(observacion);
             detallefacturaJpacontrolador.edit(dat);
             JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
             
