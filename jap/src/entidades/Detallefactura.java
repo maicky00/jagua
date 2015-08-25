@@ -6,7 +6,6 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -42,10 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Detallefactura.findByTotal", query = "SELECT d FROM Detallefactura d WHERE d.total = :total"),
     @NamedQuery(name = "Detallefactura.findByObservacion", query = "SELECT d FROM Detallefactura d WHERE d.observacion = :observacion")})
 public class Detallefactura implements Serializable {
-    @Column(name = "DETALLENUEVOMED")
-    private String detallenuevomed;
-    @Column(name = "VALORPAGONUEVOMED")
-    private Float valorpagonuevomed;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,14 +64,12 @@ public class Detallefactura implements Serializable {
     private Float total;
     @Column(name = "OBSERVACION")
     private String observacion;
-    @JoinColumn(name = "IDMEDIDOR", referencedColumnName = "IDMEDIDOR")
-    @ManyToOne
-    private Medidor idmedidor;
     @JoinColumn(name = "IDTARIFAS", referencedColumnName = "IDTARIFAS")
     @ManyToOne
     private Tarifas idtarifas;
-    @OneToMany(mappedBy = "iddetallefac")
-    private List<Facturas> facturasList;
+    @JoinColumn(name = "IDMEDIDOR", referencedColumnName = "IDMEDIDOR")
+    @ManyToOne
+    private Medidor idmedidor;
 
     public Detallefactura() {
     }
@@ -167,14 +158,6 @@ public class Detallefactura implements Serializable {
         this.observacion = observacion;
     }
 
-    public Medidor getIdmedidor() {
-        return idmedidor;
-    }
-
-    public void setIdmedidor(Medidor idmedidor) {
-        this.idmedidor = idmedidor;
-    }
-
     public Tarifas getIdtarifas() {
         return idtarifas;
     }
@@ -183,13 +166,12 @@ public class Detallefactura implements Serializable {
         this.idtarifas = idtarifas;
     }
 
-    @XmlTransient
-    public List<Facturas> getFacturasList() {
-        return facturasList;
+    public Medidor getIdmedidor() {
+        return idmedidor;
     }
 
-    public void setFacturasList(List<Facturas> facturasList) {
-        this.facturasList = facturasList;
+    public void setIdmedidor(Medidor idmedidor) {
+        this.idmedidor = idmedidor;
     }
 
     @Override
@@ -215,22 +197,6 @@ public class Detallefactura implements Serializable {
     @Override
     public String toString() {
         return "entidades.Detallefactura[ iddetallefac=" + iddetallefac + " ]";
-    }
-
-    public String getDetallenuevomed() {
-        return detallenuevomed;
-    }
-
-    public void setDetallenuevomed(String detallenuevomed) {
-        this.detallenuevomed = detallenuevomed;
-    }
-
-    public Float getValorpagonuevomed() {
-        return valorpagonuevomed;
-    }
-
-    public void setValorpagonuevomed(Float valorpagonuevomed) {
-        this.valorpagonuevomed = valorpagonuevomed;
     }
     
 }

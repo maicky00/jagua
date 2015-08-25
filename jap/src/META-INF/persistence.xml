@@ -15,6 +15,7 @@
     <class>entidades.Planificacion</class>
     <class>entidades.Tarifas</class>
     <class>entidades.Usuarios</class>
+    <class>entidades.Pagosnuevomed</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistemaagua2?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

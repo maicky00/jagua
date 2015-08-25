@@ -17,6 +17,7 @@ import java.util.List;
 import entidades.Asistencia;
 import entidades.Detallefactura;
 import entidades.Medidor;
+import entidades.Pagosnuevomed;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -46,6 +47,9 @@ public class MedidorJpaController implements Serializable {
         if (medidor.getDetallefacturaList() == null) {
             medidor.setDetallefacturaList(new ArrayList<Detallefactura>());
         }
+        if (medidor.getPagosnuevomedList() == null) {
+            medidor.setPagosnuevomedList(new ArrayList<Pagosnuevomed>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -73,6 +77,12 @@ public class MedidorJpaController implements Serializable {
                 attachedDetallefacturaList.add(detallefacturaListDetallefacturaToAttach);
             }
             medidor.setDetallefacturaList(attachedDetallefacturaList);
+            List<Pagosnuevomed> attachedPagosnuevomedList = new ArrayList<Pagosnuevomed>();
+            for (Pagosnuevomed pagosnuevomedListPagosnuevomedToAttach : medidor.getPagosnuevomedList()) {
+                pagosnuevomedListPagosnuevomedToAttach = em.getReference(pagosnuevomedListPagosnuevomedToAttach.getClass(), pagosnuevomedListPagosnuevomedToAttach.getIdnuevomed());
+                attachedPagosnuevomedList.add(pagosnuevomedListPagosnuevomedToAttach);
+            }
+            medidor.setPagosnuevomedList(attachedPagosnuevomedList);
             em.persist(medidor);
             if (idusuario != null) {
                 idusuario.getMedidorList().add(medidor);
@@ -105,6 +115,15 @@ public class MedidorJpaController implements Serializable {
                     oldIdmedidorOfDetallefacturaListDetallefactura = em.merge(oldIdmedidorOfDetallefacturaListDetallefactura);
                 }
             }
+            for (Pagosnuevomed pagosnuevomedListPagosnuevomed : medidor.getPagosnuevomedList()) {
+                Medidor oldIdmedidorOfPagosnuevomedListPagosnuevomed = pagosnuevomedListPagosnuevomed.getIdmedidor();
+                pagosnuevomedListPagosnuevomed.setIdmedidor(medidor);
+                pagosnuevomedListPagosnuevomed = em.merge(pagosnuevomedListPagosnuevomed);
+                if (oldIdmedidorOfPagosnuevomedListPagosnuevomed != null) {
+                    oldIdmedidorOfPagosnuevomedListPagosnuevomed.getPagosnuevomedList().remove(pagosnuevomedListPagosnuevomed);
+                    oldIdmedidorOfPagosnuevomedListPagosnuevomed = em.merge(oldIdmedidorOfPagosnuevomedListPagosnuevomed);
+                }
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -127,6 +146,8 @@ public class MedidorJpaController implements Serializable {
             List<Asistencia> asistenciaListNew = medidor.getAsistenciaList();
             List<Detallefactura> detallefacturaListOld = persistentMedidor.getDetallefacturaList();
             List<Detallefactura> detallefacturaListNew = medidor.getDetallefacturaList();
+            List<Pagosnuevomed> pagosnuevomedListOld = persistentMedidor.getPagosnuevomedList();
+            List<Pagosnuevomed> pagosnuevomedListNew = medidor.getPagosnuevomedList();
             if (idusuarioNew != null) {
                 idusuarioNew = em.getReference(idusuarioNew.getClass(), idusuarioNew.getIdusuario());
                 medidor.setIdusuario(idusuarioNew);
@@ -152,6 +173,13 @@ public class MedidorJpaController implements Serializable {
             }
             detallefacturaListNew = attachedDetallefacturaListNew;
             medidor.setDetallefacturaList(detallefacturaListNew);
+            List<Pagosnuevomed> attachedPagosnuevomedListNew = new ArrayList<Pagosnuevomed>();
+            for (Pagosnuevomed pagosnuevomedListNewPagosnuevomedToAttach : pagosnuevomedListNew) {
+                pagosnuevomedListNewPagosnuevomedToAttach = em.getReference(pagosnuevomedListNewPagosnuevomedToAttach.getClass(), pagosnuevomedListNewPagosnuevomedToAttach.getIdnuevomed());
+                attachedPagosnuevomedListNew.add(pagosnuevomedListNewPagosnuevomedToAttach);
+            }
+            pagosnuevomedListNew = attachedPagosnuevomedListNew;
+            medidor.setPagosnuevomedList(pagosnuevomedListNew);
             medidor = em.merge(medidor);
             if (idusuarioOld != null && !idusuarioOld.equals(idusuarioNew)) {
                 idusuarioOld.getMedidorList().remove(medidor);
@@ -212,6 +240,23 @@ public class MedidorJpaController implements Serializable {
                     }
                 }
             }
+            for (Pagosnuevomed pagosnuevomedListOldPagosnuevomed : pagosnuevomedListOld) {
+                if (!pagosnuevomedListNew.contains(pagosnuevomedListOldPagosnuevomed)) {
+                    pagosnuevomedListOldPagosnuevomed.setIdmedidor(null);
+                    pagosnuevomedListOldPagosnuevomed = em.merge(pagosnuevomedListOldPagosnuevomed);
+                }
+            }
+            for (Pagosnuevomed pagosnuevomedListNewPagosnuevomed : pagosnuevomedListNew) {
+                if (!pagosnuevomedListOld.contains(pagosnuevomedListNewPagosnuevomed)) {
+                    Medidor oldIdmedidorOfPagosnuevomedListNewPagosnuevomed = pagosnuevomedListNewPagosnuevomed.getIdmedidor();
+                    pagosnuevomedListNewPagosnuevomed.setIdmedidor(medidor);
+                    pagosnuevomedListNewPagosnuevomed = em.merge(pagosnuevomedListNewPagosnuevomed);
+                    if (oldIdmedidorOfPagosnuevomedListNewPagosnuevomed != null && !oldIdmedidorOfPagosnuevomedListNewPagosnuevomed.equals(medidor)) {
+                        oldIdmedidorOfPagosnuevomedListNewPagosnuevomed.getPagosnuevomedList().remove(pagosnuevomedListNewPagosnuevomed);
+                        oldIdmedidorOfPagosnuevomedListNewPagosnuevomed = em.merge(oldIdmedidorOfPagosnuevomedListNewPagosnuevomed);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -260,6 +305,11 @@ public class MedidorJpaController implements Serializable {
             for (Detallefactura detallefacturaListDetallefactura : detallefacturaList) {
                 detallefacturaListDetallefactura.setIdmedidor(null);
                 detallefacturaListDetallefactura = em.merge(detallefacturaListDetallefactura);
+            }
+            List<Pagosnuevomed> pagosnuevomedList = medidor.getPagosnuevomedList();
+            for (Pagosnuevomed pagosnuevomedListPagosnuevomed : pagosnuevomedList) {
+                pagosnuevomedListPagosnuevomed.setIdmedidor(null);
+                pagosnuevomedListPagosnuevomed = em.merge(pagosnuevomedListPagosnuevomed);
             }
             em.remove(medidor);
             em.getTransaction().commit();
