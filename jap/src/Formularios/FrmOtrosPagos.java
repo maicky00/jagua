@@ -27,17 +27,15 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
      */
     classCorte cc = new classCorte();
     classMedidor cm = new classMedidor();
-    ControlFormularios cf=new ControlFormularios();
-    classDetalleFactura cdf=new classDetalleFactura();
-    classFactura cft=new classFactura();
+    ControlFormularios cf = new ControlFormularios();
+    classDetalleFactura cdf = new classDetalleFactura();
+    classFactura cft = new classFactura();
+
     public FrmOtrosPagos() {
         initComponents();
         inicio();
-        label.setVisible(false);
 //        cc = new classCorte();
 //        cc.cargarCorte(jTable1);
-        panelNueva.setVisible(false);
-        panelReconexion.setVisible(false);
     }
     classOtrosPagos otros;
 
@@ -46,14 +44,11 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
         otros = new classOtrosPagos();
-        otros.cargarTablaOtros(jTable2);
-//        tabla2.setVisible(false);
+        cc.cargarCorte2(jTable1);
     }
 
     private void mostrar() {
-//        txtIdCorte.setEnabled(true);
         txtDerecho.setEnabled(true);
-//        txtMulta.setEnabled(true);
         txtInteres.setEnabled(true);
 //        txtSerie.setEnabled(true);
 
@@ -63,15 +58,8 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
     }
 
     private void ocultar() {
-//        txtIdCorte.setEnabled(false);
-//        txtDerecho.setEnabled(false);
-//        txtMulta.setEnabled(false);
-//        txtInteres.setEnabled(false);
-//        txtSerie.setEnabled(false);
-
-//        btnGuardar.setEnabled(false);
-//        btnEditar.setEnabled(true);
-//        btnCancelar.setEnabled(false);
+        txtDerecho.setEnabled(false);
+        txtInteres.setEnabled(false);
     }
 
     private void limpiar() {
@@ -80,12 +68,8 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
         txtIdCorte.setText("");
         txtMedidor.setText("");
         txtArea.setText("");
-        txtValorAPagar.setText("");
         txtMulta.setText("");
-        txtSubtotal.setText("");
         txtTotal.setText("");
-        txtMontoAPagar.setText("");
-        txtSaldo.setText("");
         txtCedula.setText("");
     }
     String idCorte;
@@ -123,17 +107,6 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
         txtIdCorte = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        txtValorAPagar = new javax.swing.JTextField();
-        label = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        panelNueva = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        txtMontoAPagar = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        txtSaldo = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
         panelReconexion = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtMulta = new javax.swing.JTextField();
@@ -144,22 +117,10 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         txtInteres = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        txtSubtotal = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 =  new javax.swing.JTable(){
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return false; //Disallow the editing of any cell
-            }
-        };
-        jLabel17 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false; //Disallow the editing of any cell
             }
@@ -213,14 +174,14 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(18, 18, 18)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(18, 18, 18)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -259,72 +220,11 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
         txtArea.setRows(5);
         jScrollPane3.setViewportView(txtArea);
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("TOTAL:");
         jLabel11.setToolTipText("Valor total a pagar");
 
         txtTotal.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
-        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel18.setText("VALOR A CANCELAR:");
-
-        txtValorAPagar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtValorAPagar.setToolTipText("INGRESE EL MONTO A CANCELAR OTROS GASTOS");
-
-        label.setText("jLabel6");
-
-        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel21.setText("USD");
-
-        panelNueva.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle de nueva conexion"));
-
-        jLabel10.setText("Monto a Pagar nueva conexion:");
-
-        txtMontoAPagar.setEnabled(false);
-
-        jLabel16.setText("USD");
-
-        jLabel19.setText("Saldo anterior:");
-
-        txtSaldo.setEditable(false);
-
-        jLabel20.setText("USD");
-
-        javax.swing.GroupLayout panelNuevaLayout = new javax.swing.GroupLayout(panelNueva);
-        panelNueva.setLayout(panelNuevaLayout);
-        panelNuevaLayout.setHorizontalGroup(
-            panelNuevaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelNuevaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelNuevaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelNuevaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(panelNuevaLayout.createSequentialGroup()
-                        .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel20))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelNuevaLayout.createSequentialGroup()
-                        .addComponent(txtMontoAPagar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel16)))
-                .addGap(62, 62, 62))
-        );
-        panelNuevaLayout.setVerticalGroup(
-            panelNuevaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelNuevaLayout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addGroup(panelNuevaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(txtMontoAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelNuevaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel20))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         panelReconexion.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle de Reconexion de corte"));
 
@@ -357,12 +257,6 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
 
         jLabel13.setText("% ej: 12");
 
-        jLabel14.setText("subtotal:");
-
-        txtSubtotal.setEditable(false);
-
-        jLabel24.setText("USD");
-
         javax.swing.GroupLayout panelReconexionLayout = new javax.swing.GroupLayout(panelReconexion);
         panelReconexion.setLayout(panelReconexionLayout);
         panelReconexionLayout.setHorizontalGroup(
@@ -383,17 +277,11 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                             .addComponent(jLabel22)
                             .addComponent(jLabel23)))
                     .addGroup(panelReconexionLayout.createSequentialGroup()
-                        .addGroup(panelReconexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel14))
-                        .addGap(117, 117, 117)
-                        .addGroup(panelReconexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtInteres, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                            .addComponent(txtSubtotal))
+                        .addComponent(jLabel7)
+                        .addGap(121, 121, 121)
+                        .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelReconexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel24)
-                            .addComponent(jLabel13))))
+                        .addComponent(jLabel13)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelReconexionLayout.setVerticalGroup(
@@ -414,55 +302,47 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtInteres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelReconexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(txtSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel24))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel25.setText("USD");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelReconexion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelNueva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel9)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIdCorte, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(label))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                                    .addComponent(txtMedidor)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtValorAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel21))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 8, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(panelReconexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtIdCorte, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                                        .addComponent(txtMedidor)))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(18, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(26, 26, 26)
+                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel25)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -473,9 +353,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(label)
-                        .addComponent(txtIdCorte, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtIdCorte, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -486,19 +364,13 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18)
-                    .addComponent(txtValorAPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(41, 41, 41)
                 .addComponent(panelReconexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -531,86 +403,20 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel17.setText("Listar usuarios nuevos que deben:");
-
-        jButton1.setText("VER");
-        jButton1.setToolTipText("Listar usuarios nuevos que deben");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Listar cortes");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel17)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
                 .addContainerGap())
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuario debe cancelar"));
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2MouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jTable2);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addGap(36, 36, 36))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -625,8 +431,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(3, 3, 3)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -636,8 +441,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -652,7 +456,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
             FrmFactura as = new FrmFactura();
             cf = new ControlFormularios();
             cf.ControlaInstancia(as);
-            
+
             FrmFactura.tablaOtros.setValueAt(txtTotal.getText(), 0, 1);
             FrmFactura.txtnumMedidor.setText(txtMedidor.getText());
             FrmFactura.txtnumMedidor.setEnabled(false);
@@ -660,38 +464,34 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
             FrmFactura.tablaOtros.setVisible(true);
             FrmFactura.btnMasDetalles.setVisible(true);
 
-                    try {
-            limpiar();
+            try {
+                limpiar();
 
-            if (cdf.buscarNumMedDetallefactura(Integer.valueOf(txtnumMedidor.getText())).equals(null)) {
-            } else {
-                FrmFactura.jLabel2.setText(String.valueOf(cft.numFactura()));
-                int numMed = Integer.valueOf(FrmFactura.txtnumMedidor.getText());
-                String ruc = cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getRucci();
-                String client = cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getPrimerapellido() + " "
-                        + cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getSegundoapellido() + " "
-                        + cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getPrimernombre() + " "
-                        + cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getSegundonombre() + " ";
-                String direccioN = cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getDireccion();
-                FrmFactura.txtRuc.setText(ruc);
-                FrmFactura.txtCliente.setText(client);
-                cdf.tablaDetalles(FrmFactura.jTable1, numMed);
-                FrmFactura.txtdireccion.setText(direccioN);
-                cdf.graficador(Integer.valueOf(FrmFactura.txtnumMedidor.getText()));
+                if (cdf.buscarNumMedDetallefactura(Integer.valueOf(txtnumMedidor.getText())).equals(null)) {
+                } else {
+                    FrmFactura.jLabel2.setText(String.valueOf(cft.numFactura()));
+                    int numMed = Integer.valueOf(FrmFactura.txtnumMedidor.getText());
+                    String ruc = cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getRucci();
+                    String client = cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                            + cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getSegundoapellido() + " "
+                            + cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getPrimernombre() + " "
+                            + cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getSegundonombre() + " ";
+                    String direccioN = cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getDireccion();
+                    FrmFactura.txtRuc.setText(ruc);
+                    FrmFactura.txtCliente.setText(client);
+                    cdf.tablaDetalles(FrmFactura.jTable1, numMed);
+                    FrmFactura.txtdireccion.setText(direccioN);
+                    cdf.graficador(Integer.valueOf(FrmFactura.txtnumMedidor.getText()));
 //                        FrmPagosAsistemcia pago = new FrmPagosAsistemcia();
 //                        cf = new ControlFormularios();
 //                        cf.ControlaInstancia(pago);
 //                        FrmPagosAsistemcia.txtnumMedidor.setText(txtnumMedidor.getText());
 //                        pago.pagar();
-                    
-                
-            }
-        } catch (Exception e) {
-        }
 
-            
-            
-            
+                }
+            } catch (Exception e) {
+            }
+
 //            idCorte = txtIdCorte.getText();
 //            derecho = Float.valueOf(txtDerecho.getText());
 //            multaR = txtMulta.getText();
@@ -724,38 +524,21 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
         limpiar();
         int n = jTable1.getSelectedRow();
 
-        if (label.getText().equals("1")) {
-            txtIdCorte.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdcorte().toString());
-            txtMedidor.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getNummedidor().toString());
-            txtMulta.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getMulta().toString());
-            txtCedula.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getRucci());
-            String usuario = cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getPrimernombre() + " "
-                    + cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getPrimerapellido() + " "
-                    + cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getSegundoapellido();
-            String apodo = cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getApadosn();
-            String dir = cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getDireccion();
-            String sec = cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getSector();
-            String ref = cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getReferencia();
-            txtArea.setText("Nombre: " + usuario + "\nApodo: " + apodo + "\nDireccion: " + dir + "\nSector: " + sec + "\nReferencia: " + ref);
-//        txtTotal.setText("");
+//        if (label.getText().equals("1")) {
+        txtIdCorte.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdcorte().toString());
+        txtMedidor.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getNummedidor().toString());
+        txtMulta.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getMulta().toString());
+        txtCedula.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getRucci());
+        String usuario = cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getPrimernombre() + " "
+                + cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                + cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getSegundoapellido();
+        String apodo = cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getApadosn();
+        String dir = cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getDireccion();
+        String sec = cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getSector();
+        String ref = cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdmedidor().getIdusuario().getReferencia();
+        txtArea.setText("Nombre: " + usuario + "\nApodo: " + apodo + "\nDireccion: " + dir + "\nSector: " + sec + "\nReferencia: " + ref);
 
-            //tabla name tabla
-//        } catch (Exception e) {
-//        }
-        } else if (label.getText().equals("2")) {
-            txtMedidor.setText(cm.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getNummedidor().toString());
-            txtCedula.setText(cm.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdusuario().getRucci());
-            String usuario = cm.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdusuario().getPrimernombre() + " "
-                    + cm.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdusuario().getPrimerapellido() + " "
-                    + cm.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdusuario().getSegundoapellido();
-            String apodo = cm.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdusuario().getApadosn();
-            String dir = cm.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdusuario().getDireccion();
-            String sec = cm.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdusuario().getSector();
-            String ref = cm.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getIdusuario().getReferencia();
-            txtArea.setText("Nombre: " + usuario + "\nApodo: " + apodo + "\nDireccion: " + dir + "\nSector: " + sec + "\nReferencia: " + ref);
-            txtMontoAPagar.setText(cm.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getValorporconexion().toString());
-            txtSaldo.setText(cm.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getSaldo().toString());
-        }
+        txtTotal.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable1.getValueAt(n, 0).toString())).getMulta().toString());
 
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -769,12 +552,10 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                 derRec = 0;
                 inte = 0;
                 txtTotal.setText(mulRec + " usd");
-                txtSubtotal.setText("");
             }
             if (txtInteres.getText().equals("")) {
                 inte = 0;
                 derRec = Float.valueOf(txtDerecho.getText());
-                txtSubtotal.setText("");
             } else if (!txtInteres.getText().equals("")) {
                 derRec = Float.valueOf(txtDerecho.getText());
                 inte = Float.valueOf(txtInteres.getText()) / 100;
@@ -783,9 +564,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
             subtotal = (mulRec + derRec) * inte;
             float total = mulRec + derRec + subtotal;
 
-            txtSubtotal.setText(subtotal + "");
             txtTotal.setText(total + "");
-            txtValorAPagar.setText(total + "");
         } catch (Exception e) {
         }
 
@@ -801,10 +580,8 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                 derRec = 0;
                 inte = 0;
                 txtTotal.setText(mulRec + "");
-                txtSubtotal.setText("");
             }
             if (txtInteres.getText().equals("")) {
-                txtSubtotal.setText("");
                 inte = 0;
             }
 //            if(!txtInteres.getText().equals("")){
@@ -823,60 +600,24 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
             subtotal = (mulRec + derRec) * inte;
             float total = mulRec + derRec + subtotal;
 
-            txtSubtotal.setText(String.valueOf(subtotal));
             txtTotal.setText(total + "");
-            txtValorAPagar.setText(total + "");
         } catch (Exception e) {
         }
 
     }//GEN-LAST:event_txtInteresKeyReleased
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        panelReconexion.setVisible(false);
-        panelNueva.setVisible(true);
-
-        label.setText("2");
-        limpiar();
-        toFront();
-        repaint();
-        cm.cargarTablaMedidorUsuarioDebe(jTable1);
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        panelNueva.setVisible(false);
-        panelReconexion.setVisible(true);
-        label.setText("1");
-        limpiar();
-        cc.cargarCorte2(jTable1);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        limpiar();
-    }//GEN-LAST:event_jTable2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonNice btnCancelar;
     private org.edisoncor.gui.button.ButtonNice btnEditar;
     private org.edisoncor.gui.button.ButtonNice btnGuardar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -884,17 +625,12 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JLabel label;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel mensaje;
-    private javax.swing.JPanel panelNueva;
     private javax.swing.JPanel panelReconexion;
     private javax.swing.JTextArea txtArea;
     private javax.swing.JTextField txtCedula;
@@ -902,11 +638,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel txtIdCorte;
     private javax.swing.JTextField txtInteres;
     private javax.swing.JTextField txtMedidor;
-    private javax.swing.JTextField txtMontoAPagar;
     private javax.swing.JTextField txtMulta;
-    private javax.swing.JTextField txtSaldo;
-    private javax.swing.JTextField txtSubtotal;
     private javax.swing.JLabel txtTotal;
-    private javax.swing.JTextField txtValorAPagar;
     // End of variables declaration//GEN-END:variables
 }
