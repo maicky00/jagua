@@ -42,6 +42,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Detallefactura.findByTotal", query = "SELECT d FROM Detallefactura d WHERE d.total = :total"),
     @NamedQuery(name = "Detallefactura.findByObservacion", query = "SELECT d FROM Detallefactura d WHERE d.observacion = :observacion")})
 public class Detallefactura implements Serializable {
+    @Column(name = "DETALLENUEVOMED")
+    private String detallenuevomed;
+    @Column(name = "VALORPAGONUEVOMED")
+    private Float valorpagonuevomed;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -211,6 +215,22 @@ public class Detallefactura implements Serializable {
     @Override
     public String toString() {
         return "entidades.Detallefactura[ iddetallefac=" + iddetallefac + " ]";
+    }
+
+    public String getDetallenuevomed() {
+        return detallenuevomed;
+    }
+
+    public void setDetallenuevomed(String detallenuevomed) {
+        this.detallenuevomed = detallenuevomed;
+    }
+
+    public Float getValorpagonuevomed() {
+        return valorpagonuevomed;
+    }
+
+    public void setValorpagonuevomed(Float valorpagonuevomed) {
+        this.valorpagonuevomed = valorpagonuevomed;
     }
     
 }
