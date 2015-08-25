@@ -613,16 +613,18 @@ public class FrmFactura extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        String usActual = "ADMINISTR";
+
         int i = JOptionPane.showConfirmDialog(this, "¿REAlIZAR TRANSACCION?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
+            System.out.println(jLabel2.getText());
             co.guardarOtrospagos(Integer.valueOf(txtIdCorte.getText()),
                     Float.valueOf(txtDerecho.getText()),
                     Float.valueOf(txtMultaReconexion.getText()),
                     Float.valueOf(txtInteres.getText()),
-                    Float.valueOf(tablaOtros.getValueAt(0, 1).toString()),
-                    Integer.parseInt(jLabel2.getText()), "", new Date());
+                    Float.valueOf(txtDerecho.getText()),
+                    Integer.parseInt(jLabel2.getText()), usActual, new Date());
             try {
-                String usActual = "ADMINISTR";
 
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                 Date fechaActual = formato.parse(lblfecha.getText());
