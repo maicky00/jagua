@@ -37,11 +37,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Otrospagos.findByMulrecx", query = "SELECT o FROM Otrospagos o WHERE o.mulrecx = :mulrecx"),
     @NamedQuery(name = "Otrospagos.findByInteres", query = "SELECT o FROM Otrospagos o WHERE o.interes = :interes"),
     @NamedQuery(name = "Otrospagos.findByTotal", query = "SELECT o FROM Otrospagos o WHERE o.total = :total"),
-    @NamedQuery(name = "Otrospagos.findByObservacion", query = "SELECT o FROM Otrospagos o WHERE o.observacion = :observacion")})
+    @NamedQuery(name = "Otrospagos.findByNumfactura", query = "SELECT o FROM Otrospagos o WHERE o.numfactura = :numfactura"),
+    @NamedQuery(name = "Otrospagos.findByFechapago", query = "SELECT o FROM Otrospagos o WHERE o.fechapago = :fechapago")})
 public class Otrospagos implements Serializable {
-    @Column(name = "FECHAPAGO")
-    @Temporal(TemporalType.DATE)
-    private Date fechapago;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,11 +55,14 @@ public class Otrospagos implements Serializable {
     private Float interes;
     @Column(name = "TOTAL")
     private Float total;
-    @Column(name = "OBSERVACION")
-    private String observacion;
+    @Column(name = "NUMFACTURA")
+    private Integer numfactura;
     @Lob
     @Column(name = "USUARIOACTUAL")
     private String usuarioactual;
+    @Column(name = "FECHAPAGO")
+    @Temporal(TemporalType.DATE)
+    private Date fechapago;
     @JoinColumn(name = "IDCORTE", referencedColumnName = "IDCORTE")
     @ManyToOne
     private Corte idcorte;
@@ -113,12 +114,12 @@ public class Otrospagos implements Serializable {
         this.total = total;
     }
 
-    public String getObservacion() {
-        return observacion;
+    public Integer getNumfactura() {
+        return numfactura;
     }
 
-    public void setObservacion(String observacion) {
-        this.observacion = observacion;
+    public void setNumfactura(Integer numfactura) {
+        this.numfactura = numfactura;
     }
 
     public String getUsuarioactual() {
@@ -127,6 +128,14 @@ public class Otrospagos implements Serializable {
 
     public void setUsuarioactual(String usuarioactual) {
         this.usuarioactual = usuarioactual;
+    }
+
+    public Date getFechapago() {
+        return fechapago;
+    }
+
+    public void setFechapago(Date fechapago) {
+        this.fechapago = fechapago;
     }
 
     public Corte getIdcorte() {
@@ -160,14 +169,6 @@ public class Otrospagos implements Serializable {
     @Override
     public String toString() {
         return "entidades.Otrospagos[ idotpagos=" + idotpagos + " ]";
-    }
-
-    public Date getFechapago() {
-        return fechapago;
-    }
-
-    public void setFechapago(Date fechapago) {
-        this.fechapago = fechapago;
     }
     
 }
