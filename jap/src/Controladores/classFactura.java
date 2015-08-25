@@ -7,6 +7,7 @@ package Controladores;
 
 import entidades.Detallefactura;
 import entidades.Facturas;
+import entidades.Otrospagos;
 import entidadesCruds.FacturasJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
@@ -109,11 +110,25 @@ public class classFactura {
     }
 
     public int numFactura() {
+        Otrospagos op = new Otrospagos();
+        classOtrosPagos cop = new classOtrosPagos();
+        int j = 1;
+        int r = 0;
+        for (Otrospagos dat : cop.getOtrospagos()) {
+            if (dat.getNumfactura() > j) {
+                j = dat.getNumfactura();
+            }
+        }
         int i = 1;
         for (Facturas dat : getFacturas()) {
             if (dat.getNumfactura() > i) {
                 i = dat.getNumfactura();
             }
+        }
+        if (i >= j) {
+            r = i;
+        } else {
+            r = j;
         }
         return i;
     }
@@ -136,7 +151,7 @@ public class classFactura {
     }
 
     public List<Facturas> getTableFacturas(JTable table, int numFactura, Date fechaEmision, float subtotal, float iva, float total, String usuarioActual) {
-        
+
         classDetalleFactura cdf = new classDetalleFactura();
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         List<Facturas> lst = new ArrayList<>();

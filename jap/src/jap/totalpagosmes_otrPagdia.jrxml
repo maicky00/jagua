@@ -24,7 +24,7 @@
      otrospagos.`MULRECX` AS otrospagos_MULRECX,
      otrospagos.`INTERES` AS otrospagos_INTERES,
      otrospagos.`TOTAL` AS otrospagos_TOTAL,
-     otrospagos.`OBSERVACION` AS otrospagos_OBSERVACION,
+     otrospagos.`NUMFACTURA` AS otrospagos_NUMFACTURA,
      otrospagos.`USUARIOACTUAL` AS otrospagos_USUARIOACTUAL,
      otrospagos.`FECHAPAGO` AS otrospagos_FECHAPAGO
 FROM
@@ -39,7 +39,6 @@ and extract(day from  otrospagos.`FECHAPAGO`)=$P{dia}]]>
 	<field name="otrospagos_MULRECX" class="java.lang.Float"/>
 	<field name="otrospagos_INTERES" class="java.lang.Float"/>
 	<field name="otrospagos_TOTAL" class="java.lang.Float"/>
-	<field name="otrospagos_OBSERVACION" class="java.lang.String"/>
 	<field name="otrospagos_USUARIOACTUAL" class="java.lang.String"/>
 	<field name="otrospagos_FECHAPAGO" class="java.sql.Date"/>
 	<variable name="totalotrpag" class="java.lang.Float" calculation="Sum">

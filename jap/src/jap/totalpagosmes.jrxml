@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="52cf8c1a-a0de-43a3-a2c3-f417148b57f3">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="15"/>
+	<property name="ireport.y" value="169"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -126,7 +126,7 @@ FROM
 	<detail>
 		<band height="343" splitType="Stretch">
 			<subreport>
-				<reportElement x="6" y="11" width="527" height="100" uuid="e794806c-0771-4240-9179-ad3013ab407b"/>
+				<reportElement x="6" y="11" width="527" height="71" uuid="e794806c-0771-4240-9179-ad3013ab407b"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -141,7 +141,7 @@ FROM
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "totalpagosmes_fact.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="6" y="116" width="527" height="100" uuid="f9e2db5e-d7d4-44f6-882b-d4fd24e3a292"/>
+				<reportElement x="6" y="91" width="527" height="69" uuid="f9e2db5e-d7d4-44f6-882b-d4fd24e3a292"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -156,7 +156,7 @@ FROM
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "totalpagosmes_pagAsist.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="6" y="224" width="527" height="100" uuid="f0ca05ff-5549-452a-94e4-7c5c06c5d22b"/>
+				<reportElement x="6" y="179" width="527" height="65" uuid="f0ca05ff-5549-452a-94e4-7c5c06c5d22b"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -169,6 +169,21 @@ FROM
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<returnValue subreportVariable="totalotrpag" toVariable="totalGeneral" calculation="Sum"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "totalpagosmes_otrPag.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="6" y="257" width="527" height="74" uuid="f7053998-d3a7-4733-9ff9-427a763c0e7d"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mes">
+					<subreportParameterExpression><![CDATA[$P{mes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="anio">
+					<subreportParameterExpression><![CDATA[$P{anio}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="total" toVariable="totalGeneral" calculation="Sum"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "totalpagosmes_PAGOSnUEVOmED.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
