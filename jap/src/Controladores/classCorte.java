@@ -5,6 +5,8 @@
  */
 package Controladores;
 
+import Formularios.FrmCorte;
+import Formularios.FrmOtrosPagos;
 import entidades.Corte;
 import entidades.Medidor;
 import entidadesCruds.CorteJpaController;
@@ -17,7 +19,7 @@ import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import sun.util.calendar.BaseCalendar;
+//import sun.util.calendar.BaseCalendar;
 
 /**
  *
@@ -37,20 +39,21 @@ public class classCorte {
     public void guardarCorte(int idMedidor, String corte, Date fecha, String observacion, float multa, int mora) {
         try {
 
-            Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorNumM(idMedidor).getNummedidor());
-            System.out.println(idmed.getNummedidor());
-            if (idmed.getIdmedidor() != idMedidor) {
-                Corte dat = new Corte();
-                dat.setIdmedidor(idmed);
-                dat.setCorte(corte);
-                dat.setFecha(fecha);
-                dat.setObservacion(observacion);
-                dat.setMulta(multa);
-                dat.setMora(mora);
-                corteJpacontrolador.create(dat);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error de ingreso,\nNo se puede ingresar el mismo usuario", "Información", 1);
-            }
+            Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor).getIdmedidor());
+            //System.out.println(idmed.getIdmedidor().toString()+" " +idMedidor);
+//            if (idmed.getIdmedidor() != idMedidor) {
+            Corte dat = new Corte();
+            dat.setIdmedidor(idmed);
+            dat.setCorte(corte);
+            dat.setFecha(fecha);
+            dat.setObservacion(observacion);
+            dat.setMulta(multa);
+            dat.setMora(mora);
+            corteJpacontrolador.create(dat);
+            JOptionPane.showMessageDialog(null, "Se guardo exitosamente", "Información", 1);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Error de ingreso,\nNo se puede ingresar el mismo usuario", "Información", 1);
+//            }
 
         } catch (Exception e) {
 
@@ -98,6 +101,15 @@ public class classCorte {
         }
         return null;
     }
+        public Corte buscarMedidorNumM(int numMedidor) {
+
+        for (Corte dat : getCorte()) {
+            if (dat.getIdmedidor().getNummedidor().equals(numMedidor)) {
+                return dat;
+            }
+        }
+        return null;
+    }
 
     public Corte buscarIdCorte(int idCorte) {
 
@@ -110,30 +122,66 @@ public class classCorte {
     }
 
     public void cargarCorte(JTable tabla) {
-        classDetalleFactura cdf = new classDetalleFactura();
+//        classDetalleFactura cdf = new classDetalleFactura();
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
-        Object[] fila = new Object[7];
+        Object[] fila = new Object[6];
         modelo.addColumn("id");
-        modelo.addColumn("idmed");
-        modelo.addColumn("corte");
-        modelo.addColumn("fecha");
-        modelo.addColumn("observacion");
+        modelo.addColumn("N° Med");
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Apodo");
         modelo.addColumn("multa");
-        modelo.addColumn("mora");
+        
 
         for (Corte c : getCorte()) {
             if (c.getCorte().equals("SI")) {
                 fila[0] = c.getIdcorte();
-                fila[1] = c.getIdmedidor().getIdmedidor();
-                fila[2] = c.getCorte();
-                fila[3] = c.getFecha();
-                fila[4] = c.getObservacion();
+                fila[1] = c.getIdmedidor().getNummedidor();
+                fila[2] = c.getIdmedidor().getIdusuario().getRucci();
+                fila[3] = c.getIdmedidor().getIdusuario().getPrimernombre()+" "+
+                        c.getIdmedidor().getIdusuario().getPrimerapellido()+" "+
+                        c.getIdmedidor().getIdusuario().getSegundoapellido();
+                fila[4] = c.getIdmedidor().getIdusuario().getApadosn();
                 fila[5] = c.getMulta();
-                fila[6] = c.getMora();
+                
 
-//                FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(50);
-//                FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(55);
+                FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                modelo.addRow(fila);
+            }
+        }
+
+    }
+    public void cargarCorte2(JTable tabla) {
+//        classDetalleFactura cdf = new classDetalleFactura();
+        modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[4];
+        //modelo.addColumn("id");
+        modelo.addColumn("N° Med");
+        modelo.addColumn("cedula");
+        modelo.addColumn("usuario");
+        modelo.addColumn("Apodo");
+        //modelo.addColumn("multa");
+        //modelo.addColumn("mora");
+
+        for (Corte c : getCorte()) {
+            if (c.getCorte().equals("SI")) {
+//                fila[0] = c.getIdcorte();
+                fila[0] = c.getIdmedidor().getNummedidor();
+                fila[1] = c.getIdmedidor().getIdusuario().getRucci();
+                fila[2] = c.getIdmedidor().getIdusuario().getPrimernombre() + " "
+                        + c.getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                        + c.getIdmedidor().getIdusuario().getSegundoapellido();
+                fila[3] = c.getIdmedidor().getIdusuario().getApadosn();
+//                fila[5] = c.getMulta();
+//                fila[6] = c.getMora();
+
+                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
+                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(45);
+                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(65);
+                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
                 modelo.addRow(fila);
             }
         }

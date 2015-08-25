@@ -59,7 +59,11 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         ci = new classInstitucion();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         cargarInf();
-
+        tablaOtros.setTableHeader(null);
+        btnNuevo.setVisible(false);
+        btnMasDetalles.setVisible(false);
+        tablaOtros.setVisible(false);
+//        labelVermas.setVisible(false);
     }
     BufferedImage img;
     ReportesControlador b = new ReportesControlador();
@@ -138,6 +142,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         txtnumMedidor = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         lblfecha = new javax.swing.JLabel();
+        btnNuevo = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -145,6 +150,10 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         tabla2 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         lblGrafico = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaOtros = new javax.swing.JTable();
+        btnMasDetalles = new javax.swing.JButton();
+        labelVermas = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
 
         setClosable(true);
@@ -242,6 +251,13 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         lblfecha.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblfecha.setText("Hora");
 
+        btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -261,7 +277,9 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                         .addComponent(txtnumMedidor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 248, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnNuevo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -282,7 +300,9 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                             .addComponent(txtnumMedidor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(lblfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnNuevo)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -328,7 +348,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                 {"TOTAL", null}
             },
             new String [] {
-                "DESCRIPCION", "VALOR"
+                " DESCRIPCION", " VALOR"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -340,10 +360,12 @@ public class FrmFactura extends javax.swing.JInternalFrame {
             }
         });
         tabla2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tabla2.setAutoscrolls(false);
         tabla2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane2.setViewportView(tabla2);
         if (tabla2.getColumnModel().getColumnCount() > 0) {
             tabla2.getColumnModel().getColumn(0).setResizable(false);
+            tabla2.getColumnModel().getColumn(1).setResizable(false);
         }
 
         jButton2.setText("RALIZAR PAGO");
@@ -355,6 +377,39 @@ public class FrmFactura extends javax.swing.JInternalFrame {
 
         lblGrafico.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
 
+        tablaOtros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"OTROS GASTOS", null}
+            },
+            new String [] {
+                "", ""
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaOtros.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tablaOtros.setAutoscrolls(false);
+        tablaOtros.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tablaOtros.getTableHeader().setResizingAllowed(false);
+        tablaOtros.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tablaOtros);
+        if (tablaOtros.getColumnModel().getColumnCount() > 0) {
+            tablaOtros.getColumnModel().getColumn(0).setResizable(false);
+            tablaOtros.getColumnModel().getColumn(0).setHeaderValue(" ");
+            tablaOtros.getColumnModel().getColumn(1).setResizable(false);
+            tablaOtros.getColumnModel().getColumn(1).setHeaderValue(" ");
+        }
+
+        btnMasDetalles.setText("Ver mas detalles");
+
+        labelVermas.setText("Tiene Otros Pagos:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -362,29 +417,42 @@ public class FrmFactura extends javax.swing.JInternalFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57)))))
-                .addContainerGap())
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnMasDetalles)
+                                    .addComponent(labelVermas))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelVermas))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnMasDetalles))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
@@ -446,6 +514,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
 
         try {
             limpiar();
+
             if (cdf.buscarNumMedDetallefactura(Integer.valueOf(txtnumMedidor.getText())).equals(null)) {
             } else {
                 jLabel2.setText(String.valueOf(cft.numFactura()));
@@ -525,32 +594,45 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        //            if(txtnumMedidor.getText().equals("")){
+        btnNuevo.setVisible(false);
+        txtnumMedidor.setEnabled(true);
+        tablaOtros.setValueAt("", 0, 1);
+//            }
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public static javax.swing.JButton btnMasDetalles;
+    public static javax.swing.JButton btnNuevo;
+    public static javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel2;
+    public static javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
+    public static javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane3;
+    public static javax.swing.JTable jTable1;
+    private javax.swing.JLabel labelVermas;
     public static javax.swing.JLabel lblGrafico;
     private javax.swing.JLabel lblInstitucion;
     private javax.swing.JLabel lblInstitucion1;
     public static javax.swing.JLabel lblfecha;
     public static javax.swing.JTable tabla2;
-    private javax.swing.JTextField txtCliente;
+    public static javax.swing.JTable tablaOtros;
+    public static javax.swing.JTextField txtCliente;
     public static javax.swing.JTextField txtRuc;
-    private javax.swing.JTextField txtdireccion;
-    private javax.swing.JTextField txtnumMedidor;
+    public static javax.swing.JTextField txtdireccion;
+    public static javax.swing.JTextField txtnumMedidor;
     // End of variables declaration//GEN-END:variables
 }

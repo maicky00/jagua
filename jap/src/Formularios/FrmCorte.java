@@ -528,15 +528,15 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
         mostrar();
         limpiar();
+        
+        
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        try {
 
-        } catch (Exception e) {
-        }
         try {
             int idMedidor = cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdmedidor();
+            
             String corte = comboCorte.getSelectedItem().toString();
             if (lblId.getText().equals("")) {
                 int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -629,16 +629,19 @@ public class FrmCorte extends javax.swing.JInternalFrame {
             int n = jTable2.getSelectedRow();
             lblId.setText(jTable2.getValueAt(n, 0).toString());
             txtMedidor.setText(jTable2.getValueAt(n, 1).toString());
-            txtCedula.setText(cm.buscarMedidorId(Integer.valueOf(txtMedidor.getText())).getIdusuario().getRucci());
-            String usuario = cm.buscarMedidorId(Integer.valueOf(txtMedidor.getText())).getIdusuario().getPrimernombre()+" "
-                    + cm.buscarMedidorId(Integer.valueOf(txtMedidor.getText())).getIdusuario().getPrimerapellido()+" "
-                    + cm.buscarMedidorId(Integer.valueOf(txtMedidor.getText())).getIdusuario().getSegundoapellido();
+            txtCedula.setText(cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getRucci());
+            String usuario = cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getPrimernombre()+" "
+                    + cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getPrimerapellido()+" "
+                    + cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getSegundoapellido();
             txtUsuario.setText(usuario);
-            txtApodo.setText(cm.buscarMedidorId(Integer.valueOf(txtMedidor.getText())).getIdusuario().getApadosn());
-            comboCorte.setSelectedItem(jTable2.getValueAt(n, 2).toString());
-            txtObservacion.setText(jTable2.getValueAt(n, 4).toString());
-            txtMulta.setText(jTable2.getValueAt(n, 5).toString());
-            txtMora.setText(jTable2.getValueAt(n, 6).toString());
+            txtApodo.setText(cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getApadosn());
+            txtMesesDebe.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable2.getValueAt(n, 1).toString())).getMora().toString());
+//            comboCorte.setSelectedItem(jTable2.getValueAt(n, 2).toString());
+//            txtObservacion.setText(jTable2.getValueAt(n, 4).toString());
+            comboCorte.setSelectedItem(cc.buscarMedidorNumM(Integer.valueOf(jTable2.getValueAt(n, 1).toString())).getCorte());
+            txtObservacion.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable2.getValueAt(n, 1).toString())).getObservacion());
+            txtMulta.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable2.getValueAt(n, 1).toString())).getMulta().toString());
+            txtMora.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable2.getValueAt(n, 1).toString())).getMora().toString());
 
         } catch (Exception e) {
         }
@@ -687,7 +690,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    public static javax.swing.JTable jTable2;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel mensaje;
     private javax.swing.JTextField txtApodo;

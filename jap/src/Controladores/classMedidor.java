@@ -8,6 +8,7 @@ package Controladores;
 import Formularios.FrmAsistencia;
 import Formularios.FrmCorte;
 import Formularios.FrmMedidor;
+import Formularios.FrmOtrosPagos;
 import Formularios.frmDetalleFactura;
 import entidades.Detallefactura;
 import entidades.Medidor;
@@ -180,8 +181,8 @@ public class classMedidor {
             fila[6] = u.getNummedidor();
 
             //FrmMedidor.jTable1.getColumnModel().getColumn(0).setWidth(20);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(20);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(20);
+            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
 
             FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(60);
             FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(65);
@@ -374,20 +375,24 @@ public class classMedidor {
         DefaultTableModel modelo = new DefaultTableModel();
         tabla.setModel(modelo);
         Object[] fila = new Object[4];
-        modelo.addColumn("Nro medidor");
+        modelo.addColumn("N° Medidor");
         modelo.addColumn("Cedula");
         modelo.addColumn("Usuario");
         modelo.addColumn("Apodo");
         float valor = 0;
         for (Medidor u : getMedidor()) {
 
-            valor = Float.valueOf(u.getValorporconexion());
-            if (valor == 200) {
+            valor = u.getValorporconexion();
+            if (valor > 0) {
                 fila[0] = u.getNummedidor();
                 fila[1] = u.getIdusuario().getRucci();
                 fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
                         + u.getIdusuario().getPrimernombre();
                 fila[3] = u.getIdusuario().getApadosn();
+                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
+                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(45);
+                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(65);
+                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
 
                 modelo.addRow(fila);
             }

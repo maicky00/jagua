@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -69,9 +69,9 @@ public class classOtrosPagos {
             fila[1] = o.getIdcorte().getIdcorte();
             fila[2] = o.getDerconx();
             fila[3] = o.getMulrecx();
-            fila[5] = o.getInteres();
-            fila[7] = o.getTotal();
-            fila[8] = o.getUsuarioactual();
+            fila[4] = o.getInteres();
+            fila[5] = o.getTotal();
+            fila[6] = o.getUsuarioactual();
             
             modelo.addRow(fila);
         }

@@ -6,6 +6,7 @@
 package Formularios;
 
 import Controladores.ControlFormularios;
+import entidades.reloj;
 import jap.ReportesControlador;
 import jap.fondoPrincipal;
 import java.awt.Color;
@@ -45,6 +46,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         UIManager.put("InternalFrame.activeTitleForeground", new ColorUIResource(Color.blue));
         UIManager.put("InternalFrame.titleFont", new Font("Dialog", Font.PLAIN, 11));
 
+        reloj r=new reloj();
+        
         try {
 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -101,6 +104,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem19 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        reloj = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -304,6 +309,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu7);
 
+        jMenu8.setText("HORA:");
+        jMenuBar1.add(jMenu8);
+
+        reloj.setText("reloj");
+        jMenuBar1.add(reloj);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -483,6 +494,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
@@ -500,5 +512,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    public static javax.swing.JMenu reloj;
     // End of variables declaration//GEN-END:variables
 }

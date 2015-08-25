@@ -253,6 +253,19 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu8">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="HORA:"/>
+          </Properties>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="reloj">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="reloj"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
