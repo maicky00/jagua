@@ -42,7 +42,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
     public void mostrar() {
 
-        txtvalorConexion.setEnabled(true);
+        //txtvalorConexion.setEnabled(true);
         txtSerie.setEditable(true);
         txtMedidor.setEditable(true);
         btnNuevo.setEnabled(false);
@@ -545,6 +545,14 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
+        float saldo=cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getSaldo();
+        if(saldo!=200){
+            txtvalorConexion.setText(saldo+"");
+            txtvalorConexion.setEnabled(false);
+        }
+        else{
+            txtvalorConexion.setEnabled(true);
+        }
         mostrar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
