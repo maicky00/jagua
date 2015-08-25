@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="totalpagosmes_pagAsist" language="groovy" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7e706ece-dd74-4f8f-a3c8-99fbb886b815">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="anio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mes" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     pagosasistencia.`IDPAGOASISTENCIA` AS pagosasistencia_IDPAGOASISTENCIA,
+     pagosasistencia.`IDASISTENCIA` AS pagosasistencia_IDASISTENCIA,
+     pagosasistencia.`FECHAPAGO` AS pagosasistencia_FECHAPAGO,
+     pagosasistencia.`NUMMINGAS` AS pagosasistencia_NUMMINGAS,
+     pagosasistencia.`VALORMINGAS` AS pagosasistencia_VALORMINGAS,
+     pagosasistencia.`OBSERVACION` AS pagosasistencia_OBSERVACION,
+     pagosasistencia.`USUARIOACTUAL` AS pagosasistencia_USUARIOACTUAL,
+     pagosasistencia.`NUMFACTURA` AS pagosasistencia_NUMFACTURA
+FROM
+     `pagosasistencia` pagosasistencia
+where extract(year from pagosasistencia.`FECHAPAGO`)=$P{anio} 
+and extract(month from pagosasistencia.`FECHAPAGO`)=$P{mes}]]>
+	</queryString>
+	<field name="pagosasistencia_IDPAGOASISTENCIA" class="java.lang.Integer"/>
+	<field name="pagosasistencia_IDASISTENCIA" class="java.lang.Integer"/>
+	<field name="pagosasistencia_FECHAPAGO" class="java.sql.Date"/>
+	<field name="pagosasistencia_NUMMINGAS" class="java.lang.Integer"/>
+	<field name="pagosasistencia_VALORMINGAS" class="java.lang.Float"/>
+	<field name="pagosasistencia_OBSERVACION" class="java.lang.String"/>
+	<field name="pagosasistencia_USUARIOACTUAL" class="java.lang.String"/>
+	<field name="pagosasistencia_NUMFACTURA" class="java.lang.Integer"/>
+	<variable name="totalasist" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{pagosasistencia_VALORMINGAS}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<summary>
+		<band height="100" splitType="Stretch">
+			<textField>
+				<reportElement x="145" y="41" width="100" height="20" uuid="5b5b8b35-012b-4af3-9ebc-9e1b8947bc41"/>
+				<textFieldExpression><![CDATA[$V{totalasist}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="73" y="42" width="69" height="15" uuid="f9dce864-4451-436b-bab8-ad958edad3eb"/>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="72" y="14" width="350" height="15" uuid="5d1c7571-52a9-45f3-b687-bc159eea3844"/>
+				<text><![CDATA[MULTAS DE EVENTOS PLANIFICADOS(Mingas,Asambleas)]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

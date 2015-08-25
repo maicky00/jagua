@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="totalpagosmes_fact" language="groovy" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="29066bfe-ac97-46f1-9f85-55483e71a799">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="anio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mes" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     facturas.`IDFACTURA` AS facturas_IDFACTURA,
+     facturas.`IDDETALLEFAC` AS facturas_IDDETALLEFAC,
+     facturas.`NUMFACTURA` AS facturas_NUMFACTURA,
+     facturas.`FECHAEMISION` AS facturas_FECHAEMISION,
+     facturas.`SUBTOTAL` AS facturas_SUBTOTAL,
+     facturas.`IVA` AS facturas_IVA,
+     facturas.`TOTAL` AS facturas_TOTAL,
+     facturas.`USUARIOACTUAL` AS facturas_USUARIOACTUAL
+FROM
+     `facturas` facturas
+where extract(year from facturas.`FECHAEMISION`)=$P{anio} 
+and extract(month from facturas.`FECHAEMISION`)=$P{mes}]]>
+	</queryString>
+	<field name="facturas_IDFACTURA" class="java.lang.Integer"/>
+	<field name="facturas_IDDETALLEFAC" class="java.lang.Integer"/>
+	<field name="facturas_NUMFACTURA" class="java.lang.Integer"/>
+	<field name="facturas_FECHAEMISION" class="java.sql.Date"/>
+	<field name="facturas_SUBTOTAL" class="java.lang.Float"/>
+	<field name="facturas_IVA" class="java.lang.Float"/>
+	<field name="facturas_TOTAL" class="java.lang.Float"/>
+	<field name="facturas_USUARIOACTUAL" class="java.lang.String"/>
+	<variable name="total" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{facturas_TOTAL}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="88d8a400-a5c2-47d7-ac04-5d5ca2a5a9bc"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="13" y="12" width="170" height="15" uuid="6995c1fd-d6d5-4a71-bda8-0bf6cc9e45c5"/>
+				<text><![CDATA[CORRESPONDIENTE A:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="191" y="12" width="97" height="15" uuid="ba3901f9-565b-4b27-b398-c3380e661fcf"/>
+				<textFieldExpression><![CDATA[$P{anio}+" - "+$P{mes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="100" splitType="Stretch">
+			<textField>
+				<reportElement x="145" y="34" width="100" height="20" uuid="b4ab39e7-f8f0-46fc-a771-585abc489ef1"/>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="75" y="34" width="69" height="15" uuid="6ae5f368-5999-4366-b8ed-8323f35b0d8d"/>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="73" y="9" width="197" height="15" uuid="7311f5e2-5fb6-4031-9ce4-1e0ea106d182"/>
+				<text><![CDATA[CONSUMO DE AGUA POTABLE]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
