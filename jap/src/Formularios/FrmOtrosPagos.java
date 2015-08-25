@@ -11,8 +11,8 @@ import Controladores.classDetalleFactura;
 import Controladores.classFactura;
 import Controladores.classMedidor;
 import Controladores.classOtrosPagos;
-import static Formularios.FrmFactura.txtRuc;
-import static Formularios.FrmFactura.txtnumMedidor;
+import Controladores.classPagosNuevoMed;
+import static Formularios.FrmFactura.*;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
@@ -30,6 +30,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
     ControlFormularios cf = new ControlFormularios();
     classDetalleFactura cdf = new classDetalleFactura();
     classFactura cft = new classFactura();
+    classPagosNuevoMed cpnm = new classPagosNuevoMed();
 
     public FrmOtrosPagos() {
         initComponents();
@@ -456,7 +457,19 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
             FrmFactura as = new FrmFactura();
             cf = new ControlFormularios();
             cf.ControlaInstancia(as);
-
+            if (cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getSaldo() > 0) {
+                FrmFactura.comboPagos.removeAllItems();
+                FrmFactura.comboPagos.setVisible(true);
+                for (int i = 0; i < cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getSaldo() + 1; i++) {
+                    FrmFactura.comboPagos.addItem(i + ".0");
+                }
+                FrmFactura.lbldescNuevoMed.setText("Cuotas Pagadas: " + cpnm.numCuotas(cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdmedidor()) + " Saldo Faltantate por Conexion: "
+                        + cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getSaldo().toString());
+//            txtPagoNuevoMed.setText(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo().toString());
+            } else {
+                FrmFactura.lbldescNuevoMed.setText("");
+                FrmFactura.comboPagos.setVisible(false);
+            }
             FrmFactura.tablaOtros.setValueAt(txtTotal.getText(), 0, 1);
             FrmFactura.txtnumMedidor.setText(txtMedidor.getText());
             FrmFactura.txtnumMedidor.setEnabled(false);
@@ -465,7 +478,6 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
             FrmFactura.btnMasDetalles.setVisible(true);
 
             try {
-                limpiar();
 
                 if (cdf.buscarNumMedDetallefactura(Integer.valueOf(txtnumMedidor.getText())).equals(null)) {
                 } else {
@@ -482,11 +494,10 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                     cdf.tablaDetalles(FrmFactura.jTable1, numMed);
                     FrmFactura.txtdireccion.setText(direccioN);
                     cdf.graficador(Integer.valueOf(FrmFactura.txtnumMedidor.getText()));
-//                        FrmPagosAsistemcia pago = new FrmPagosAsistemcia();
-//                        cf = new ControlFormularios();
-//                        cf.ControlaInstancia(pago);
-//                        FrmPagosAsistemcia.txtnumMedidor.setText(txtnumMedidor.getText());
-//                        pago.pagar();
+                    FrmFactura.txtIdCorte.setText(txtIdCorte.getText());
+                    FrmFactura.txtMultaReconexion.setText(txtMulta.getText());
+                    FrmFactura.txtDerecho.setText(txtDerecho.getText());
+                    FrmFactura.txtInteres.setText(txtInteres.getText());
 
                 }
             } catch (Exception e) {

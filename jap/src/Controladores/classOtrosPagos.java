@@ -11,6 +11,7 @@ import entidades.Otrospagos;
 import entidadesCruds.OtrospagosJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -33,7 +34,7 @@ public class classOtrosPagos {
         return otrospagosJpacontrolador.findOtrospagosEntities();
     }
 
-    public void guardarOtrospagos(int idcorte, float derConx, float mulRecx,  float interes, float total,String usuarioActual) {
+    public void guardarOtrospagos(int idcorte, float derConx, float mulRecx,  float interes, float total,int numFact,String usuarioActual,Date fechaPago) {
         try {
 
             Corte idOtpg = cc.corteJpacontrolador.findCorte(cc.buscarIdCorte(idcorte).getIdcorte());
@@ -43,7 +44,9 @@ public class classOtrosPagos {
             dat.setMulrecx(mulRecx);
             dat.setInteres(interes); 
             dat.setTotal(total);
+            dat.setNumfactura(numFact);
             dat.setUsuarioactual(usuarioActual);
+            dat.setFechapago(fechaPago);
             otrospagosJpacontrolador.create(dat);
             JOptionPane.showMessageDialog(null, "Pago realizado corectamente");
 

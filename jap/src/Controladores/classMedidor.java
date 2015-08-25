@@ -370,33 +370,33 @@ public class classMedidor {
 
         }
     }
-
-    public void cargarTablaMedidorUsuarioDebe(JTable tabla) {
-        DefaultTableModel modelo = new DefaultTableModel();
-        tabla.setModel(modelo);
-        Object[] fila = new Object[4];
-        modelo.addColumn("N° Medidor");
-        modelo.addColumn("Cedula");
-        modelo.addColumn("Usuario");
-        modelo.addColumn("Apodo");
-        float valor = 0;
-        for (Medidor u : getMedidor()) {
-
-            valor = u.getValorporconexion();
-            if (valor > 0) {
-                fila[0] = u.getNummedidor();
-                fila[1] = u.getIdusuario().getRucci();
-                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-                        + u.getIdusuario().getPrimernombre();
-                fila[3] = u.getIdusuario().getApadosn();
-                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
-                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(45);
-                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(65);
-                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
-
-                modelo.addRow(fila);
-            }
-        }
-    }
+//
+//    public void cargarTablaMedidorUsuarioDebe(JTable tabla) {
+//        DefaultTableModel modelo = new DefaultTableModel();
+//        tabla.setModel(modelo);
+//        Object[] fila = new Object[4];
+//        modelo.addColumn("N° Medidor");
+//        modelo.addColumn("Cedula");
+//        modelo.addColumn("Usuario");
+//        modelo.addColumn("Apodo");
+//        float valor = 0;
+//        for (Medidor u : getMedidor()) {
+//
+//            valor = u.getValorporconexion();
+//            if (valor > 0) {
+//                fila[0] = u.getNummedidor();
+//                fila[1] = u.getIdusuario().getRucci();
+//                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+//                        + u.getIdusuario().getPrimernombre();
+//                fila[3] = u.getIdusuario().getApadosn();
+//                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
+//                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(45);
+//                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(65);
+//                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
+//
+//                modelo.addRow(fila);
+//            }
+//        }
+//    }
 
 }
