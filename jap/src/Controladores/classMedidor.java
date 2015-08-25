@@ -107,7 +107,7 @@ public class classMedidor {
                 return false;
             }
 
-            dat.setValorporconexion(valorConexion);
+            dat.setSaldo(valorConexion);
             medidorJpacontrolador.edit(dat);
 
         } catch (Exception e) {

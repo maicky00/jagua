@@ -10,6 +10,8 @@ import Controladores.classAsistencia;
 import Controladores.classDetalleFactura;
 import Controladores.classFactura;
 import Controladores.classInstitucion;
+import Controladores.classMedidor;
+import Controladores.classPagosNuevoMed;
 import entidades.Facturas;
 import jap.ReportesControlador;
 import java.awt.Color;
@@ -65,6 +67,9 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         tablaOtros.setVisible(false);
 //        labelVermas.setVisible(false);
     }
+    classPagosNuevoMed cpnm = new classPagosNuevoMed();
+    classMedidor cm = new classMedidor();
+
     BufferedImage img;
     ReportesControlador b = new ReportesControlador();
 
@@ -154,6 +159,8 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         tablaOtros = new javax.swing.JTable();
         btnMasDetalles = new javax.swing.JButton();
         labelVermas = new javax.swing.JLabel();
+        lbldescNuevoMed = new javax.swing.JLabel();
+        comboPagos = new javax.swing.JComboBox();
         jButton3 = new javax.swing.JButton();
 
         setClosable(true);
@@ -410,6 +417,10 @@ public class FrmFactura extends javax.swing.JInternalFrame {
 
         labelVermas.setText("Tiene Otros Pagos:");
 
+        lbldescNuevoMed.setText("jLabel1");
+
+        comboPagos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -422,13 +433,18 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(24, 24, 24)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnMasDetalles)
-                                    .addComponent(labelVermas))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbldescNuevoMed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(comboPagos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnMasDetalles)
+                                            .addComponent(labelVermas))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
@@ -438,13 +454,18 @@ public class FrmFactura extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelVermas))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lbldescNuevoMed)
+                                .addGap(37, 37, 37)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(labelVermas)
+                                    .addComponent(comboPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -492,7 +513,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jButton3)
-                        .addContainerGap(301, Short.MAX_VALUE))
+                        .addContainerGap(317, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -510,6 +531,19 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtRucKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() > 0) {
+            comboPagos.removeAllItems();
+            comboPagos.setVisible(true);
+            for (int i = 0; i < cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() + 1; i++) {
+                comboPagos.addItem(i + ".0");
+            }
+            lbldescNuevoMed.setText("Cuotas Pagadas: " + cpnm.numCuotas(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdmedidor()) + " Saldo Faltantate por Conexion: "
+                    + cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo().toString());
+//            txtPagoNuevoMed.setText(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo().toString());
+        } else {
+            lbldescNuevoMed.setText("");
+            comboPagos.setVisible(false);
+        }
         // TODO add your handling code here:
 
         try {
@@ -550,9 +584,15 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         int i = JOptionPane.showConfirmDialog(this, "¿REAlIZAR TRANSACCION?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             try {
-                int numFact = cft.numFactura() + 1;
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                 Date fechaActual = formato.parse(lblfecha.getText());
+                if (Float.valueOf(comboPagos.getSelectedItem().toString()) > 0) {
+                    float r = cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() - Float.valueOf(comboPagos.getSelectedItem().toString());
+                    cpnm.guardarPagosnuevomed(Integer.valueOf(txtnumMedidor.getText()), "Pago Por Coneccion", Float.valueOf(comboPagos.getSelectedItem().toString()), fechaActual);
+                    cm.modificarValorConexion(Integer.valueOf(txtnumMedidor.getText()), r);
+                }
+                int numFact = cft.numFactura() + 1;
+
                 float subtotal = Float.valueOf(tabla2.getValueAt(0, 1).toString());
                 float iva = Float.valueOf(tabla2.getValueAt(1, 1).toString());
                 float total = Float.valueOf(tabla2.getValueAt(2, 1).toString());
@@ -606,6 +646,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnMasDetalles;
     public static javax.swing.JButton btnNuevo;
+    private javax.swing.JComboBox comboPagos;
     public static javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -627,6 +668,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     public static javax.swing.JLabel lblGrafico;
     private javax.swing.JLabel lblInstitucion;
     private javax.swing.JLabel lblInstitucion1;
+    public static javax.swing.JLabel lbldescNuevoMed;
     public static javax.swing.JLabel lblfecha;
     public static javax.swing.JTable tabla2;
     public static javax.swing.JTable tablaOtros;

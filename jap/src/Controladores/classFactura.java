@@ -120,23 +120,23 @@ public class classFactura {
 
     public void IngresarlistFact(List<Facturas> listFact) {
         try {
-            if (listFact.size()>0) {
-               for (Facturas dat : listFact) {
-                facturasJpacontrolador.create(dat);
-            }
-            JOptionPane.showMessageDialog(null, "Realizado", "Información", 1);
-      
-            }else{
+            if (listFact.size() > 0) {
+                for (Facturas dat : listFact) {
+                    facturasJpacontrolador.create(dat);
+                }
+                JOptionPane.showMessageDialog(null, "Realizado", "Información", 1);
+
+            } else {
                 JOptionPane.showMessageDialog(null, "No hay valores a Pagar", "Información", 1);
-      
+
             }
-               } catch (Exception ex) {
+        } catch (Exception ex) {
         }
 
     }
 
     public List<Facturas> getTableFacturas(JTable table, int numFactura, Date fechaEmision, float subtotal, float iva, float total, String usuarioActual) {
-
+        
         classDetalleFactura cdf = new classDetalleFactura();
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
         List<Facturas> lst = new ArrayList<>();
