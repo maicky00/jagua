@@ -38,7 +38,7 @@ public class reloj {
                 segundos = calendario.get(Calendar.SECOND);
                 String hour = String.format("%02d : %02d : %02d", hora, minutos, segundos);
                 String date = String.format("%02d / %02d / %02d", dia, mes, año);
-                FrmPrincipal.reloj.setText("fecha: "+date+"   "+hour);
+                FrmPrincipal.reloj.setText(hour+"   FECHA: "+date+"   ");
             }
         });
         timer.start();
