@@ -121,15 +121,19 @@ public class classOtrosPagos {
     }
 
     public int numFactura() {
+        try {
+            int j = 1;
 
-        int j = 1;
-
-        for (Otrospagos dat1 : getOtrospagos()) {
-            if (dat1.getNumfactura() > j) {
-                j = dat1.getNumfactura();
+            for (Otrospagos dat1 : getOtrospagos()) {
+                if (dat1.getNumfactura() > j) {
+                    j = dat1.getNumfactura();
+                }
             }
-        }
 
-        return j;
+            return j;
+
+        } catch (Exception e) {
+        }
+        return 0;
     }
 }

@@ -65,16 +65,16 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         cargarInf();
 //        tablaOtros.setTableHeader(null);
-//        btnNuevo.setVisible(false);
-//        btnMasDetalles.setVisible(false);
+        btnNuevo.setVisible(false);
+        btnMasDetalles.setVisible(false);
 //        tablaOtros.setVisible(false);
-//        labelVermas.setVisible(false);
+        labelVermas.setVisible(false);
 //        lbldescNuevoMed.setVisible(false);
 //        comboPagos.setVisible(false);
-//        txtIdCorte.setVisible(false);
-//        txtMultaReconexion.setVisible(false);
-//        txtDerecho.setVisible(false);
-//        txtInteres.setVisible(false);
+        txtIdCorte.setVisible(false);
+        txtMultaReconexion.setVisible(false);
+        txtDerecho.setVisible(false);
+        txtInteres.setVisible(false);
     }
     classPagosNuevoMed cpnm = new classPagosNuevoMed();
     classMedidor cm = new classMedidor();
@@ -107,6 +107,9 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     }
 
     public void limpiar() {
+        lbldescNuevoMed.setText("");
+        comboPagos.removeAllItems();
+        txtTotalgeneral.setText("");
         jLabel2.setText("");
         lblGrafico.setIcon(null);
         txtRuc.setText("");

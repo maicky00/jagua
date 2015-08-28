@@ -30,7 +30,7 @@ public class classPagosNuevoMed {
         return pagosnuevomedJpacontrolador.findPagosnuevomedEntities();
     }
 
-    public void guardarPagosnuevomed(int NumMed, String observacion, float cantidad, Date fecha,int numFact) {
+    public void guardarPagosnuevomed(int NumMed, String observacion, float cantidad, Date fecha, int numFact) {
         try {
 
             Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorNumM(NumMed).getIdmedidor());
@@ -94,16 +94,21 @@ public class classPagosNuevoMed {
         }
         return r;
     }
-     public int numFactura() {
 
-        int j = 1;
+    public int numFactura() {
+        try {
+            int j = 1;
 
-        for (Pagosnuevomed dat : getPagosnuevomed()) {
-            if (dat.getNumfact() > j) {
-                j = dat.getNumfact();
+            for (Pagosnuevomed dat : getPagosnuevomed()) {
+                if (dat.getNumfact() > j) {
+                    j = dat.getNumfact();
+                }
             }
-        }
 
-        return j;
+            return j;
+
+        } catch (Exception e) {
+        }
+        return 0;
     }
 }
