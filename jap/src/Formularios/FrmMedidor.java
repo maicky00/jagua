@@ -42,7 +42,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
     public void mostrar() {
 
-        //txtvalorConexion.setEnabled(true);
+        txtvalorConexion.setEnabled(true);
         txtSerie.setEditable(true);
         txtMedidor.setEditable(true);
         btnNuevo.setEnabled(false);
@@ -67,6 +67,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     }
 
     public void limpiar() {
+        
         txtNombre.setText("");
         txtUsuarioCed.setText("");
         txtSerie.setText("");

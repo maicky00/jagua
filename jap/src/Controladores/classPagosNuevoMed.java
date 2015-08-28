@@ -6,6 +6,7 @@
 package Controladores;
 
 import entidades.Medidor;
+import entidades.Otrospagos;
 import entidades.Pagosnuevomed;
 import entidadesCruds.PagosnuevomedJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
@@ -29,7 +30,7 @@ public class classPagosNuevoMed {
         return pagosnuevomedJpacontrolador.findPagosnuevomedEntities();
     }
 
-    public void guardarPagosnuevomed(int NumMed, String observacion, float cantidad, Date fecha) {
+    public void guardarPagosnuevomed(int NumMed, String observacion, float cantidad, Date fecha,int numFact) {
         try {
 
             Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorNumM(NumMed).getIdmedidor());
@@ -38,6 +39,7 @@ public class classPagosNuevoMed {
             dat.setObsercion(observacion);
             dat.setCantidadpagar(cantidad);
             dat.setFechapago(fecha);
+            dat.setNumfact(numFact);
             pagosnuevomedJpacontrolador.create(dat);
 
         } catch (Exception e) {
@@ -91,5 +93,17 @@ public class classPagosNuevoMed {
             }
         }
         return r;
+    }
+     public int numFactura() {
+
+        int j = 1;
+
+        for (Pagosnuevomed dat : getPagosnuevomed()) {
+            if (dat.getNumfact() > j) {
+                j = dat.getNumfact();
+            }
+        }
+
+        return j;
     }
 }

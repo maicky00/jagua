@@ -276,8 +276,9 @@ public class classMedidor {
         return null;
     }
 
-    public void cargarTablaMedidorDetalle(JTable tabla) {
-        Usuarios us = new Usuarios();
+    public void cargarTablaMedidorDetalle(JTable tabla, String aniomes) {
+
+        classDetalleFactura cdf = new classDetalleFactura();
         DefaultTableModel modelo = new DefaultTableModel();
         tabla.setModel(modelo);
         Object[] fila = new Object[7];
@@ -290,31 +291,34 @@ public class classMedidor {
         modelo.addColumn("Serie");
         modelo.addColumn("estado");
         for (Medidor u : getMedidor()) {
-            // fila[0] = u.getIdmedidor();
-            fila[0] = u.getIdmedidor();
-            fila[1] = u.getNummedidor();
-            fila[2] = u.getIdusuario().getRucci();
-            fila[3] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-                    + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre();
-            fila[4] = u.getIdusuario().getApadosn();
-            fila[5] = u.getSerie();
-            fila[6] = u.getEstado();
+            if (cdf.buscardiferentes(u.getIdmedidor(), aniomes) != u.getIdmedidor()) {
 
-            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                // fila[0] = u.getIdmedidor();
+                fila[0] = u.getIdmedidor();
+                fila[1] = u.getNummedidor();
+                fila[2] = u.getIdusuario().getRucci();
+                fila[3] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                        + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre();
+                fila[4] = u.getIdusuario().getApadosn();
+                fila[5] = u.getSerie();
+                fila[6] = u.getEstado();
+
+                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
 //            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(20);
 //            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(20);
-            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(1).setMinWidth(45);
-            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(90);
-            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(2).setMinWidth(60);
-            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(65);
-            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(5).setMinWidth(60);
-            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(85);
-            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(6).setMinWidth(40);
-            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(45);
+                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(1).setMinWidth(45);
+                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(90);
+                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(2).setMinWidth(60);
+                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(65);
+                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(5).setMinWidth(60);
+                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(85);
+                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(6).setMinWidth(40);
+                frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(45);
 
-            modelo.addRow(fila);
+                modelo.addRow(fila);
+            }
         }
     }
 

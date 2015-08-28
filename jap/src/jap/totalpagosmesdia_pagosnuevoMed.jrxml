@@ -7,7 +7,16 @@
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
-	<queryString language="SQL">
+	<parameter name="anio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mes" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dia" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
 		<![CDATA[SELECT
      pagosnuevomed.`IDNUEVOMED` AS pagosnuevomed_IDNUEVOMED,
      pagosnuevomed.`IDMEDIDOR` AS pagosnuevomed_IDMEDIDOR,
@@ -15,7 +24,10 @@
      pagosnuevomed.`CANTIDADPAGAR` AS pagosnuevomed_CANTIDADPAGAR,
      pagosnuevomed.`FECHAPAGO` AS pagosnuevomed_FECHAPAGO
 FROM
-     `pagosnuevomed` pagosnuevomed]]>
+     `pagosnuevomed` pagosnuevomed
+where extract(year from pagosnuevomed.`FECHAPAGO`)=$P{anio} 
+and extract(month from pagosnuevomed.`FECHAPAGO`)=$P{mes}
+and extract(day from pagosnuevomed.`FECHAPAGO`)=$P{dia}]]>
 	</queryString>
 	<field name="pagosnuevomed_IDNUEVOMED" class="java.lang.Integer"/>
 	<field name="pagosnuevomed_IDMEDIDOR" class="java.lang.Integer"/>

@@ -2,14 +2,13 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="52cf8c1a-a0de-43a3-a2c3-f417148b57f3">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="297"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<parameterDescription><![CDATA[]]></parameterDescription>
-		<defaultValueExpression><![CDATA["C:\\Users\\JC-PC\\Documents\\NetBeansProjects\\jagua1\\jap\\src\\jap\\"]]></defaultValueExpression>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="anio" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -130,9 +129,6 @@ FROM
 		<band height="452" splitType="Stretch">
 			<subreport>
 				<reportElement x="6" y="11" width="527" height="100" uuid="e794806c-0771-4240-9179-ad3013ab407b"/>
-				<subreportParameter name="SUBREPORT_DIR">
-					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="mes">
 					<subreportParameterExpression><![CDATA[$P{mes}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -148,9 +144,6 @@ FROM
 			</subreport>
 			<subreport>
 				<reportElement x="6" y="116" width="527" height="100" uuid="f9e2db5e-d7d4-44f6-882b-d4fd24e3a292"/>
-				<subreportParameter name="SUBREPORT_DIR">
-					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="mes">
 					<subreportParameterExpression><![CDATA[$P{mes}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -166,9 +159,6 @@ FROM
 			</subreport>
 			<subreport>
 				<reportElement x="6" y="224" width="527" height="100" uuid="f0ca05ff-5549-452a-94e4-7c5c06c5d22b"/>
-				<subreportParameter name="SUBREPORT_DIR">
-					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="mes">
 					<subreportParameterExpression><![CDATA[$P{mes}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -184,7 +174,17 @@ FROM
 			</subreport>
 			<subreport>
 				<reportElement x="6" y="335" width="527" height="100" uuid="55b5873d-33c6-4aa1-9145-67904a9a3c2b"/>
+				<subreportParameter name="mes">
+					<subreportParameterExpression><![CDATA[$P{mes}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dia">
+					<subreportParameterExpression><![CDATA[$P{dia}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="anio">
+					<subreportParameterExpression><![CDATA[$P{anio}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="total" toVariable="totalGeneral" calculation="Sum"/>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "totalpagosmesdia_pagosnuevoMed.jasper"]]></subreportExpression>
 			</subreport>
 		</band>

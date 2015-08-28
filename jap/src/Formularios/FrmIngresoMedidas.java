@@ -7,6 +7,8 @@ package Formularios;
 
 import Controladores.ControlFormularios;
 import Controladores.classDetalleFactura;
+import Controladores.classMedidor;
+import static Formularios.frmDetalleFactura.tabla;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
@@ -27,6 +29,7 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
     }
     classDetalleFactura cdf = new classDetalleFactura();
     frmDetalleFactura f;
+    classMedidor cm=new classMedidor();
     ControlFormularios cf;
 
     /**
@@ -121,6 +124,7 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
 //                JOptionPane.showMessageDialog(null, "Esta Fecha ya se Registro\n " + mensaje, "Información", 1);
 //            }
                 cdf.cargarBusquedaAnioMes(frmDetalleFactura.jTable1, anioMes);
+                cm.cargarTablaMedidorDetalle(tabla, anioMes);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnNuevoActionPerformed

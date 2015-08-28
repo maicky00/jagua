@@ -35,7 +35,8 @@ public class ReportesControlador {
 
     public static void main(String[] args) {
         ReportesControlador b = new ReportesControlador();
-        b.totalesdia("anio","2015","mes","08","dia","25","totalpagosmesdia.jasper");
+//        b.reporte("us.jasper");
+        b.facturaPlanificacion("numfact", "2", "pagoPlanificacion.jasper");
     }
 
     public void reporte(String archivo) {
@@ -60,17 +61,22 @@ public class ReportesControlador {
 
     }
 
-    public void factura(String bddVar, String numfact, String archivo) {
+    public void factura(String bddVar, String numfact, String bddVar1, String id, String archivo) {
         try {
             JasperReport reporte = null;
+            URL in1 = null;
             try {
                 URL in = this.getClass().getResource(archivo);
+                in1 = this.getClass().getResource("");
                 reporte = (JasperReport) JRLoader.loadObject(in);
             } catch (JRException jr) {
-
+                System.out.println("Error .");
             }
             Map parametro = new HashMap();
+            parametro.put(bddVar1, id);
             parametro.put(bddVar, numfact);
+            parametro.put("SUBREPORT_DIR", "" + in1);
+
             JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametro, con.getCon());
             JasperViewer jv = new JasperViewer(jasperPrint, false);
             jv.setTitle("FACTURA");
@@ -81,33 +87,64 @@ public class ReportesControlador {
         }
 
     }
-    public void totalesMes(String bddVar1, String anio, String bddVar2, String mes,String archivo) {
+
+    public void facturaPlanificacion(String bddVar, String numfact, String archivo) {
         try {
             JasperReport reporte = null;
             try {
                 URL in = this.getClass().getResource(archivo);
                 reporte = (JasperReport) JRLoader.loadObject(in);
             } catch (JRException jr) {
+                System.out.println("Error .");
+            }
+            Map parametro = new HashMap();
+            parametro.put(bddVar, numfact);
 
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametro, con.getCon());
+            JasperViewer jv = new JasperViewer(jasperPrint, false);
+            jv.setTitle("FACTURA");
+            jv.setVisible(true);
+//            JasperPrintManager.printReport(jasperPrint, false); imprime
+
+        } catch (Exception e) {
+        }
+
+    }
+
+    public void totalesMes(String bddVar1, String anio, String bddVar2, String mes, String archivo) {
+        try {
+            JasperReport reporte = null;
+            URL in1 = null;
+            try {
+                URL in = this.getClass().getResource(archivo);
+                in1 = this.getClass().getResource("");
+                reporte = (JasperReport) JRLoader.loadObject(in);
+            } catch (JRException jr) {
+                System.out.println("Error ");
             }
             Map parametro = new HashMap();
             parametro.put(bddVar1, anio);
             parametro.put(bddVar2, mes);
+            parametro.put("dir1", in1);
             JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametro, con.getCon());
             JasperViewer jv = new JasperViewer(jasperPrint, false);
-            jv.setTitle("FACTURA");
+            jv.setTitle("REPORTE");
             jv.setVisible(true);
 //            JasperPrintManager.printReport(jasperPrint, false); imprime
 
         } catch (Exception e) {
+            System.out.println("Error al cargar reporte.");
         }
 
     }
-    public void totalesdia(String bddVar1, String anio, String bddVar2, String mes,String bddVar3, String dia,String archivo) {
+
+    public void totalesdia(String bddVar1, String anio, String bddVar2, String mes, String bddVar3, String dia, String archivo) {
         try {
             JasperReport reporte = null;
+            URL in1 = null;
             try {
                 URL in = this.getClass().getResource(archivo);
+                in1 = this.getClass().getResource("");
                 reporte = (JasperReport) JRLoader.loadObject(in);
             } catch (JRException jr) {
 
@@ -116,6 +153,7 @@ public class ReportesControlador {
             parametro.put(bddVar1, anio);
             parametro.put(bddVar2, mes);
             parametro.put(bddVar3, dia);
+            parametro.put("SUBREPORT_DIR", in1);
             JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametro, con.getCon());
             JasperViewer jv = new JasperViewer(jasperPrint, false);
             jv.setTitle("FACTURA");

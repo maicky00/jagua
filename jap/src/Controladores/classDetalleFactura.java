@@ -37,17 +37,17 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author JC-PC
  */
 public class classDetalleFactura {
-    
+
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("japPU");
     public DetallefacturaJpaController detallefacturaJpacontrolador = new DetallefacturaJpaController(emf);
     classMedidor cm = new classMedidor();
     classTarifas ct = new classTarifas();
     DefaultTableModel mod;
-    
+
     public List<Detallefactura> getDetallefactura() {
         return detallefacturaJpacontrolador.findDetallefacturaEntities();
     }
-    
+
     public void guardarDetallefactura(int idTarifas, int idMedidor, String anioMes, int medidaAnt, int medidaAct, int consumo, int medExcedido, float tarExcedido, float subtotal, float total, String observacion) {
         try {
             int i = 0;
@@ -62,7 +62,7 @@ public class classDetalleFactura {
             if (i == 1) {
                 JOptionPane.showMessageDialog(null, "Num. Medidor, Fecha Ya Estan Registrados", "Informacion", 1);
                 med = null;
-                
+
             } else {
                 Medidor idmed = cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor).getIdmedidor());
                 Tarifas idTar = ct.tarifasJpacontrolador.findTarifas(ct.buscarIdTarifas(idTarifas).getIdtarifas());
@@ -82,10 +82,10 @@ public class classDetalleFactura {
                 JOptionPane.showMessageDialog(null, "Guardado", "Información", 1);
             }
         } catch (Exception e) {
-            
+
         }
     }
-    
+
     public boolean modificarDetallefactura(int idDetallefactura, int idTarifas, int idMedidor, String anioMes, int medidaAnt, int medidaAct, int consumo, int medExcedido, float tarExcedido, float subtotal, float total) {
         try {
             Detallefactura dat = detallefacturaJpacontrolador.findDetallefactura(idDetallefactura);
@@ -106,24 +106,24 @@ public class classDetalleFactura {
             dat.setTotal(total);
             detallefacturaJpacontrolador.edit(dat);
             JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
-            
+
         } catch (Exception e) {
         }
         return true;
     }
-    
+
     public void eliminarDetallefactura(int idetallefactura) throws IllegalOrphanException {
-        
+
         try {
             detallefacturaJpacontrolador.destroy(idetallefactura);
             JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
         } catch (NonexistentEntityException ex) {
         }
-        
+
     }
-    
+
     public Detallefactura buscarIdDetallefactura(int idDetallefactura) {
-        
+
         for (Detallefactura dat : getDetallefactura()) {
             if (dat.getIddetallefac().equals(idDetallefactura)) {
                 return dat;
@@ -131,9 +131,9 @@ public class classDetalleFactura {
         }
         return null;
     }
-    
+
     public Detallefactura buscarNumMedDetallefactura(int numMedidor) {
-        
+
         for (Detallefactura dat : getDetallefactura()) {
             if (dat.getIdmedidor().getNummedidor().equals(numMedidor)) {
                 return dat;
@@ -141,9 +141,9 @@ public class classDetalleFactura {
         }
         return null;
     }
-    
+
     public Detallefactura buscarNumMedAnioMes(int numMedidor, String anioMes) {
-        
+
         for (Detallefactura dat : getDetallefactura()) {
             if (dat.getIdmedidor().getNummedidor().equals(numMedidor) && dat.getAniomes().equals(anioMes)) {
                 return dat;
@@ -151,7 +151,7 @@ public class classDetalleFactura {
         }
         return null;
     }
-    
+
     public int buscarAnioMes(String anioMes) {
         for (Detallefactura dat : getDetallefactura()) {
             if (dat.getAniomes().equals(anioMes)) {
@@ -160,7 +160,19 @@ public class classDetalleFactura {
         }
         return 0;
     }
+
+    public int buscardiferentes(int id, String anioMes) {
+
+        for (Detallefactura dat : getDetallefactura()) {
+            if (dat.getIdmedidor().getIdmedidor().equals(id) && dat.getAniomes().equals(anioMes)) {
+                return dat.getIdmedidor().getIdmedidor();
+            }
+        }
+        return 0;
+    }
+
     
+
     public int medidaAnterior(int idMedidor) {
         int r = 0;
         int r2 = 0;
@@ -175,9 +187,9 @@ public class classDetalleFactura {
         }
         return r;
     }
-    
+
     public TableModel tablaDetalles(JTable tabla, int numMedidor) {
-        
+
         DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
         dtm.setRowCount(0);
         diseñoTabla(tabla);
@@ -206,9 +218,10 @@ public class classDetalleFactura {
         FrmFactura.tabla2.setValueAt(iva * subtotal, 1, 1);
         total = (iva * subtotal) + subtotal;
         FrmFactura.tabla2.setValueAt(total, 2, 1);
+        FrmFactura.txtTotalgeneral.setText(String.valueOf(total));
         return dtm;
     }
-    
+
     public void diseñoTabla(JTable tabla) {
 //        tabla.getColumnModel().getColumn(0).setPreferredWidth(15);
         tabla.getColumn(tabla.getColumnName(0)).setWidth(0);
@@ -223,9 +236,9 @@ public class classDetalleFactura {
         tabla.getColumnModel().getColumn(6).setPreferredWidth(140);
         tabla.getColumnModel().getColumn(7).setPreferredWidth(180);
         tabla.getColumnModel().getColumn(8).setPreferredWidth(70);
-        
+
     }
-    
+
     public boolean modificarTransaccion(int idDetallefactura, String observacion) {
         try {
             Detallefactura dat = detallefacturaJpacontrolador.findDetallefactura(idDetallefactura);
@@ -234,7 +247,7 @@ public class classDetalleFactura {
             }
             dat.setObservacion(observacion);
             detallefacturaJpacontrolador.edit(dat);
-            
+
         } catch (Exception e) {
         }
         return true;
@@ -305,21 +318,21 @@ public class classDetalleFactura {
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-                
+
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(60);
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(90);
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(200);
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(170);
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(100);
                 frmDetalleFactura.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(100);
-                
+
                 modelo.addRow(fila);
             }
         }
     }
-    
+
     public void tablaCorte(JTable tabla) {
-        
+
         mod = new DefaultTableModel();
         tabla.setModel(mod);
         Object[] fila = new Object[4];
@@ -327,7 +340,7 @@ public class classDetalleFactura {
         mod.addColumn("idNum");
         mod.addColumn("Num medidor");
         mod.addColumn("observacion");
-        
+
         for (Detallefactura u : getDetallefactura()) {
             System.out.println(u.getIdmedidor().getNummedidor() + " " + u.getIdmedidor().getIdmedidor() + u.getObservacion());
             if (numContar(u.getIdmedidor().getIdmedidor()) > 3 && u.getObservacion().equals("NO")) {
@@ -339,12 +352,12 @@ public class classDetalleFactura {
             }
         }
         mod.addRow(fila);
-        
+
     }
-    
+
     public int numContar(int idNumMedidor) {
         int papitas = 0;
-        
+
         for (Detallefactura dat : getDetallefactura()) {
             if (dat.getIdmedidor().getIdmedidor().equals(idNumMedidor) && dat.getObservacion().equals("NO")) {
                 papitas = papitas + 1;
@@ -352,7 +365,7 @@ public class classDetalleFactura {
         }
         return papitas;
     }
-    
+
     public ArrayList<String> listaUltimosMeses(int idmed) {
         ArrayList<String> datos = new ArrayList<String>();
         for (Detallefactura s : getDetallefactura()) {
@@ -367,7 +380,7 @@ public class classDetalleFactura {
         }
         return datos;
     }
-    
+
     public ArrayList<String> listaUltimosMeses2(int idmed) {
         ArrayList<String> datos = new ArrayList<String>();
         for (int j = listaUltimosMeses(idmed).size() - 1; j >= listaUltimosMeses(idmed).size() - 5; j--) {
@@ -375,7 +388,7 @@ public class classDetalleFactura {
         }
         return datos;
     }
-    
+
     public void graficador(int numMedidor) {
         try {
             DefaultCategoryDataset datos = new DefaultCategoryDataset();
@@ -387,9 +400,9 @@ public class classDetalleFactura {
                         }
                     }
                 }
-                
+
             }
-            
+
             JFreeChart linea = ChartFactory.createBarChart3D("Historial de Consumo", "Fecha Correspondiente", "m3",
                     datos, PlotOrientation.VERTICAL, true, true, false);
             linea.setBackgroundPaint(Color.cyan);

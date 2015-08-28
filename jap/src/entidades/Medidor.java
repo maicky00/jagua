@@ -6,6 +6,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -19,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -36,6 +39,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Medidor.findByNummedidor", query = "SELECT m FROM Medidor m WHERE m.nummedidor = :nummedidor"),
     @NamedQuery(name = "Medidor.findByEstado", query = "SELECT m FROM Medidor m WHERE m.estado = :estado")})
 public class Medidor implements Serializable {
+    @Column(name = "FECHA")
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
     @OneToMany(mappedBy = "idmedidor")
     private List<Pagosnuevomed> pagosnuevomedList;
     @Column(name = "PAGADO")
@@ -198,6 +204,14 @@ public class Medidor implements Serializable {
 
     public void setPagosnuevomedList(List<Pagosnuevomed> pagosnuevomedList) {
         this.pagosnuevomedList = pagosnuevomedList;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
 

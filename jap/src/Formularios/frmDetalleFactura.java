@@ -41,9 +41,10 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         cdt = new classDetalleFactura();
         ct.cargarCmbTarifas(combotarifas);
 //        cm.medidoresTabla(tabla);
-        cm.cargarTablaMedidorDetalle(tabla);
         lblIdDetalle.setText("");
         lblIdDetalle.setVisible(false);
+        String anMes = lblanio.getText() + "-" + lblmes.getText();
+        cm.cargarTablaMedidorDetalle(tabla, anMes);
     }
     int comienzo = 0;
     classDetalleFactura cdf = new classDetalleFactura();
@@ -283,10 +284,18 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         txtApodo.setEditable(false);
 
         txtmedAnterior.setEditable(false);
+        txtmedAnterior.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtmedAnteriorKeyTyped(evt);
+            }
+        });
 
         txtmedAct.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtmedActKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtmedActKeyTyped(evt);
             }
         });
 
@@ -525,6 +534,12 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
 
         jLabel19.setText("Nro Medidor:");
 
+        txtBuscarNumMedidor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarNumMedidorKeyTyped(evt);
+            }
+        });
+
         jButton1.setText("Buscar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -642,7 +657,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        
+
         mostrar();
         limpiar();
 
@@ -669,6 +684,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                 } else if (lblIdDetalle.getText().equals("")) {
                     cdt.guardarDetallefactura(idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total, "NO");
                     limpiar();
+                    cm.cargarTablaMedidorDetalle(tabla, anioMes);
                 } else if (!lblIdDetalle.getText().equals("")) {
                     cdt.modificarDetallefactura(Integer.valueOf(lblIdDetalle.getText().toString()), idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total);
                     limpiar();
@@ -707,7 +723,11 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
 //
         try {
             cdt.eliminarDetallefactura(Integer.valueOf(lblIdDetalle.getText()));
+            String anMes = lblanio.getText() + "-" + lblmes.getText();
+            cm.cargarTablaMedidorDetalle(tabla, anMes);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se Puuede Eliminar", "Información", 1);
+
         }
 //        Medidor medidor = (Medidor) moverRegistros.getNext();
 //        setDatosMover(medidor, combotarifas.getSelectedItem().toString());
@@ -893,6 +913,30 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jTable1KeyReleased
+
+    private void txtmedAnteriorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmedAnteriorKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if ((caracter < '0') || (caracter > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtmedAnteriorKeyTyped
+
+    private void txtmedActKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmedActKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if ((caracter < '0') || (caracter > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtmedActKeyTyped
+
+    private void txtBuscarNumMedidorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarNumMedidorKeyTyped
+        // TODO add your handling code here:
+        char caracter = evt.getKeyChar();
+        if ((caracter < '0') || (caracter > '9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtBuscarNumMedidorKeyTyped
     private void setDatosMover(Medidor medidor, String descripTar) {
 //        classMedidor cm = new classMedidor();
 //        classusuario cu = new classusuario();

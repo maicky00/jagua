@@ -6,7 +6,7 @@
 package Controladores;
 
 import Formularios.FrmPlanificacion;
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
+
 import entidades.Corte;
 import entidades.Medidor;
 import entidades.Planificacion;

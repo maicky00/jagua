@@ -434,7 +434,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
         b = new ReportesControlador();
-        b.reporte("reporteMedidores.jasper");
+        b.reporte("usuarioMedidor.jasper");
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed

@@ -36,6 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pagosnuevomed.findByCantidadpagar", query = "SELECT p FROM Pagosnuevomed p WHERE p.cantidadpagar = :cantidadpagar"),
     @NamedQuery(name = "Pagosnuevomed.findByFechapago", query = "SELECT p FROM Pagosnuevomed p WHERE p.fechapago = :fechapago")})
 public class Pagosnuevomed implements Serializable {
+    @Column(name = "NUMFACT")
+    private Integer numfact;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -124,6 +126,14 @@ public class Pagosnuevomed implements Serializable {
     @Override
     public String toString() {
         return "entidades.Pagosnuevomed[ idnuevomed=" + idnuevomed + " ]";
+    }
+
+    public Integer getNumfact() {
+        return numfact;
+    }
+
+    public void setNumfact(Integer numfact) {
+        this.numfact = numfact;
     }
     
 }

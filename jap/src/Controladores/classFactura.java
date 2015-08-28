@@ -112,18 +112,21 @@ public class classFactura {
     public int numFactura() {
 //        Otrospagos op = new Otrospagos();
         classOtrosPagos cop = new classOtrosPagos();
+        classPagosNuevoMed cp = new classPagosNuevoMed();
         int i = 1;
         int r = 0;
-        
+
         for (Facturas dat : getFacturas()) {
             if (dat.getNumfactura() > i) {
                 i = dat.getNumfactura();
             }
         }
-        if (i >= cop.numFactura()) {
+        if (i >= cop.numFactura() && i >= cp.numFactura()) {
             r = i;
-        } else {
+        } else if (cop.numFactura() >= i && cop.numFactura() >= cp.numFactura()) {
             r = cop.numFactura();
+        } else if (cp.numFactura() >= i && cp.numFactura() >= cop.numFactura()) {
+            r = cp.numFactura();
         }
         return r;
     }
@@ -136,10 +139,7 @@ public class classFactura {
                 }
                 JOptionPane.showMessageDialog(null, "Realizado", "Información", 1);
 
-            } else {
-                JOptionPane.showMessageDialog(null, "No hay valores a Pagar", "Información", 1);
-
-            }
+            } 
         } catch (Exception ex) {
         }
 

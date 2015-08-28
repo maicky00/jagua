@@ -451,10 +451,10 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
                 String usActual = "ADMINISTR";
                 List<Pagosasistencia> tableData = cpa.getTable(jTable1, numFact, fechaActual, usActual, subtotal);
                 cpa.Ingresarlist(tableData);
-//                if (tableData.size() > 0) {
-//                    b.factura("numfact", String.valueOf(numFact), "factura.jasper");
-//
-//                }
+                if (tableData.size() > 0) {
+                    b.facturaPlanificacion("numfact", "" + numFact, "pagoPlanificacion.jasper");
+
+                }
                 limpiar();
                 txtnumMedidor.setText("");
 //            cft.getTableFacturas(jTable1, numFact, fecha, subtotal, iva, total, usActual);

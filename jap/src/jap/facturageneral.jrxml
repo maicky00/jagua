@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="913bd417-c9dc-49e2-ad77-becf59f9de89">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="numfact" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     institucion.`IDINSTITUCION` AS institucion_IDINSTITUCION,
+     institucion.`NOMBREINST` AS institucion_NOMBREINST,
+     institucion.`DIRECCION` AS institucion_DIRECCION,
+     institucion.`TELEFONO` AS institucion_TELEFONO,
+     institucion.`EMAIL` AS institucion_EMAIL,
+     institucion.`RUC` AS institucion_RUC,
+     institucion.`CELULAR` AS institucion_CELULAR,
+     institucion.`LOGO` AS institucion_LOGO,
+     usuarios.`IDUSUARIO` AS usuarios_IDUSUARIO,
+     usuarios.`IDINSTITUCION` AS usuarios_IDINSTITUCION,
+     usuarios.`RUCCI` AS usuarios_RUCCI,
+     usuarios.`PRIMERNOMBRE` AS usuarios_PRIMERNOMBRE,
+     usuarios.`SEGUNDONOMBRE` AS usuarios_SEGUNDONOMBRE,
+     usuarios.`PRIMERAPELLIDO` AS usuarios_PRIMERAPELLIDO,
+     usuarios.`SEGUNDOAPELLIDO` AS usuarios_SEGUNDOAPELLIDO,
+     usuarios.`APADOSN` AS usuarios_APADOSN,
+     usuarios.`DIRECCION` AS usuarios_DIRECCION,
+     usuarios.`TELEFONO` AS usuarios_TELEFONO,
+     usuarios.`CELULAR` AS usuarios_CELULAR,
+     usuarios.`SECTOR` AS usuarios_SECTOR,
+     usuarios.`REFERENCIA` AS usuarios_REFERENCIA,
+     usuarios.`FOTO` AS usuarios_FOTO,
+     usuarios.`OBSERVACION` AS usuarios_OBSERVACION
+FROM
+     `institucion` institucion INNER JOIN `usuarios` usuarios ON institucion.`IDINSTITUCION` = usuarios.`IDINSTITUCION`
+where  usuarios.`IDUSUARIO`=$P{id}]]>
+	</queryString>
+	<field name="institucion_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="institucion_NOMBREINST" class="java.lang.String"/>
+	<field name="institucion_DIRECCION" class="java.lang.String"/>
+	<field name="institucion_TELEFONO" class="java.lang.String"/>
+	<field name="institucion_EMAIL" class="java.lang.String"/>
+	<field name="institucion_RUC" class="java.lang.String"/>
+	<field name="institucion_CELULAR" class="java.lang.String"/>
+	<field name="institucion_LOGO" class="java.lang.Object"/>
+	<field name="usuarios_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="usuarios_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="usuarios_RUCCI" class="java.lang.String"/>
+	<field name="usuarios_PRIMERNOMBRE" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDONOMBRE" class="java.lang.String"/>
+	<field name="usuarios_PRIMERAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDOAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_APADOSN" class="java.lang.String"/>
+	<field name="usuarios_DIRECCION" class="java.lang.String"/>
+	<field name="usuarios_TELEFONO" class="java.lang.String"/>
+	<field name="usuarios_CELULAR" class="java.lang.String"/>
+	<field name="usuarios_SECTOR" class="java.lang.String"/>
+	<field name="usuarios_REFERENCIA" class="java.lang.String"/>
+	<field name="usuarios_FOTO" class="java.lang.Object"/>
+	<field name="usuarios_OBSERVACION" class="java.lang.String"/>
+	<variable name="totalgeneral" class="java.lang.Float" calculation="Sum"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="178" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="120" y="77" width="53" height="15" uuid="41fcb2a1-3eaf-4199-a89f-e75f5658d0ec"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CONTACTOS:]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="10" y="11" width="86" height="90" uuid="6b90fee7-3ccf-493f-b491-0d00599fac85"/>
+				<imageExpression><![CDATA[new ByteArrayInputStream((byte[])$F{institucion_LOGO})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement style="Detail" x="120" y="7" width="417" height="55" forecolor="#0000CC" uuid="66ca1546-9109-4c4c-ba70-6e6d5bf2cbfa"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion_NOMBREINST}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="433" y="79" width="104" height="15" uuid="c2763e73-655e-4af8-87fe-9a78690ee48a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion_EMAIL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="173" y="77" width="67" height="15" uuid="a5efab35-42b5-4af7-a310-1c590c20b678"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion_TELEFONO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="173" y="62" width="211" height="15" uuid="fcd30913-52c2-4e4a-b480-c426397a4d17"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion_DIRECCION}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="402" y="64" width="24" height="15" uuid="f8642b4e-0b98-4534-9329-948af3b2ec99"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RUC:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="433" y="62" width="104" height="15" uuid="756e204b-f0b0-4476-8541-ce6eef9602e0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion_RUC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="251" y="77" width="72" height="15" uuid="9577cb85-ed6f-44c2-b8d7-4067ce663ef3"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion_CELULAR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="402" y="79" width="24" height="15" uuid="abc914b5-b4a3-4d51-b565-39c612767908"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[EMAIL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="120" y="62" width="48" height="15" uuid="accbe15d-2442-47bf-b6cb-62bda34c0311"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DIRECCION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="20" y="121" width="44" height="15" uuid="7344aff6-2864-457f-a8b0-1ef52913344f"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[RUC/CI:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="64" y="121" width="84" height="15" uuid="b9653cc6-b67f-4a14-9a17-f8f0043e72cf"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_RUCCI}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="20" y="136" width="54" height="15" uuid="3ac63de8-2f64-4812-b306-f803ae0ab941"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="64" y="136" width="84" height="15" uuid="fae948b6-7557-4cd5-860b-2ccd93a3ae59"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_PRIMERNOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="64" y="151" width="84" height="15" uuid="ff34c996-0017-467e-b91d-664f511a0a86"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDONOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="159" y="136" width="75" height="15" uuid="80b88396-0ddc-4fff-933b-43ca31f08e24"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_PRIMERAPELLIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="159" y="151" width="75" height="15" uuid="36fdff1d-f5fd-4cc5-9426-37076bdd570a"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDOAPELLIDO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="255" y="121" width="61" height="15" uuid="304f446a-f606-417e-a35c-4aa1c5118589"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[DIRECCION:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="321" y="121" width="105" height="30" uuid="2fb65adc-5c06-4129-ad5a-82122226c24a"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_DIRECCION}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="255" y="151" width="61" height="15" uuid="2bb97984-cffb-4448-85c1-90fca62be1a7"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[SECTOR:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="323" y="151" width="103" height="26" uuid="4db190ab-ad0e-401d-a341-dc0a38371586"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_SECTOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="462" y="121" width="75" height="15" uuid="b664f981-278c-4aa2-950a-30c72494c47c"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{numfact}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="226" splitType="Stretch">
+			<subreport>
+				<reportElement x="2" y="122" width="551" height="100" uuid="9dc503ac-8197-4eb5-960f-254f0b1d0b89"/>
+				<subreportParameter name="numfact">
+					<subreportParameterExpression><![CDATA[$P{numfact}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="total" toVariable="totalgeneral" calculation="Sum"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "factura.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="1" width="269" height="110" uuid="f52cc67e-6f2c-4c54-83d0-8b0720b65dc2"/>
+				<subreportParameter name="numfact">
+					<subreportParameterExpression><![CDATA[$P{numfact}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="total" toVariable="totalgeneral" calculation="Sum"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "nuevoMed.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="277" y="3" width="276" height="108" uuid="088e75cc-86a0-4c4a-99cb-0e21e2e26f13"/>
+				<subreportParameter name="numfact">
+					<subreportParameterExpression><![CDATA[$P{numfact}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="total" toVariable="totalgeneral" calculation="Sum"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "facturaotrospagos.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="32e468c3-71a5-4e34-9aa7-25f5572c8afb"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="46db7cf3-a877-4ec0-8b45-1d6701c99830"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="21f92ea9-43ab-4406-b80c-f2ddc42de5f2"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="437" y="4" width="100" height="20" uuid="984abda1-6b52-41b3-ba2f-8041840902e6"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalgeneral}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="326" y="5" width="107" height="15" forecolor="#000000" uuid="9a8f5634-0c75-4bb7-8be0-cb05c324006d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[TOTAL A PAGAR:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
