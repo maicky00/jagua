@@ -237,7 +237,7 @@ public class FrmInventario extends javax.swing.JInternalFrame {
             }
         });
 
-        comboDepre.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "SI", "NO" }));
+        comboDepre.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SI", "NO" }));
         comboDepre.setEnabled(false);
         comboDepre.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
 

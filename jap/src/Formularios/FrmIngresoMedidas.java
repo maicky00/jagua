@@ -46,6 +46,9 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
         mchMes = new com.toedter.calendar.JMonthChooser();
         btnNuevo = new org.edisoncor.gui.button.ButtonNice();
 
+        setClosable(true);
+        setIconifiable(true);
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         btnNuevo.setBackground(new java.awt.Color(0, 102, 255));

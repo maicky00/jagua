@@ -248,7 +248,7 @@ public class FrmBusqueda extends javax.swing.JFrame {
             FrmMedidor.txtUsuarioCed.setEnabled(false);
             FrmMedidor.lblIdUsuario.setText(jTable1.getValueAt(n, 0).toString());
             FrmMedidor.txtvalorConexion.setText("0");
-            FrmMedidor.txtPagado.setText("0.0");
+            FrmMedidor.txtPagado.setText("SI");
             FrmMedidor.txtSaldo.setText("0.0");
             //FrmMedidor.txtMedidor.setText(null);
         } catch (Exception e) {

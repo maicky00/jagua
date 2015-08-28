@@ -176,7 +176,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem4);
 
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/monitor.png"))); // NOI18N
-        jMenuItem6.setText("Pagos de Mingas");
+        jMenuItem6.setText("Pago de Planificaciones");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
