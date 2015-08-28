@@ -17,6 +17,7 @@ import entidadesCruds.MedidorJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -39,7 +40,7 @@ public class classMedidor {
         return medidorJpacontrolador.findMedidorEntities();
     }
 
-    public void guardarMedidor(int idUsuario, String serie, int numMedidor, String estado, float valorConexion, String pagado, float saldo) {
+    public void guardarMedidor(int idUsuario, String serie, int numMedidor, String estado, float valorConexion, String pagado, float saldo,Date fecha) {
         int i = 0;
         Medidor med = new Medidor();
         try {
@@ -64,6 +65,7 @@ public class classMedidor {
                 dat.setValorporconexion(valorConexion);
                 dat.setPagado(pagado);
                 dat.setSaldo(saldo);
+                dat.setFecha(fecha);
                 medidorJpacontrolador.create(dat);
                 JOptionPane.showMessageDialog(null, "Registrado");
             }

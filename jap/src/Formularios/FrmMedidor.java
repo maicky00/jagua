@@ -8,8 +8,12 @@ package Formularios;
 import Controladores.ControlFormularios;
 import Controladores.classMedidor;
 import Controladores.classusuario;
+import static Formularios.FrmPagosAsistemcia.lblfecha;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import java.awt.Dimension;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -36,6 +40,10 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
         cm.cargarTablaMedidor(jTable1);
         ocultar();
+        Date fechaActual = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String hoy = formato.format(fechaActual);
+        lblfecha.setText(hoy);
     }
 
     ControlFormularios cf;
@@ -67,7 +75,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     }
 
     public void limpiar() {
-        
+
         txtNombre.setText("");
         txtUsuarioCed.setText("");
         txtSerie.setText("");
@@ -102,6 +110,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         mensaje = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnEditar1 = new org.edisoncor.gui.button.ButtonNice();
+        lblfecha = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -216,6 +225,8 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                 }
             });
 
+            lblfecha.setText("jLabel14");
+
             javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
             jPanel4.setLayout(jPanel4Layout);
             jPanel4Layout.setHorizontalGroup(
@@ -226,20 +237,22 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel4Layout.createSequentialGroup()
                             .addGap(10, 10, 10)
                             .addComponent(jLabel6)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblfecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(btnElimnar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                    .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
                     .addContainerGap())
             );
             jPanel4Layout.setVerticalGroup(
@@ -261,7 +274,8 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, Short.MAX_VALUE)
-                                .addComponent(jLabel6)))))
+                                .addComponent(jLabel6)
+                                .addComponent(lblfecha)))))
             );
 
             jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Registrar Medidor Nuevo"));
@@ -546,12 +560,11 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-        float saldo=cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getSaldo();
-        if(saldo!=200){
-            txtvalorConexion.setText(saldo+"");
+        float saldo = cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getSaldo();
+        if (saldo != 200) {
+            txtvalorConexion.setText(saldo + "");
             txtvalorConexion.setEnabled(false);
-        }
-        else{
+        } else {
             txtvalorConexion.setEnabled(true);
         }
         mostrar();
@@ -584,10 +597,12 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             float valorConx = Float.valueOf(txtvalorConexion.getText());
             String pagado = txtPagado.getText();
             float saldo = Float.valueOf(txtSaldo.getText());
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                Date fechaActual = formato.parse(lblfecha.getText());
             if (lblIdmedidor.getText().equals("")) {
                 int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    cm.guardarMedidor(idUsuario, serie, numMedidor, estado, valorConx, pagado, saldo);
+                    cm.guardarMedidor(idUsuario, serie, numMedidor, estado, valorConx, pagado, saldo,fechaActual);
                     cm.cargarTablaMedidor(jTable1);
                     limpiar();
                     ocultar();
@@ -700,19 +715,18 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void txtvalorConexionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalorConexionKeyReleased
-        try{
-        txtSaldo.setText(txtvalorConexion.getText());
+        try {
+            txtSaldo.setText(txtvalorConexion.getText());
 
-        float sald = Float.valueOf(txtSaldo.getText());
-        if (sald == 0) {
-            txtPagado.setText("SI");
-        } else if (sald != 0) {
-            txtPagado.setText("NO");
-        }
+            float sald = Float.valueOf(txtSaldo.getText());
+            if (sald == 0) {
+                txtPagado.setText("SI");
+            } else if (sald != 0) {
+                txtPagado.setText("NO");
+            }
 
-        }
-        catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
 
     }//GEN-LAST:event_txtvalorConexionKeyReleased
@@ -777,6 +791,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     public static javax.swing.JLabel label;
     public static javax.swing.JLabel lblIdUsuario;
     private javax.swing.JLabel lblIdmedidor;
+    private javax.swing.JLabel lblfecha;
     private javax.swing.JLabel mensaje;
     private javax.swing.JRadioButton rdbApellidosN;
     private javax.swing.JRadioButton rdbtodos;
