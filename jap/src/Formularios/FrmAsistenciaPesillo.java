@@ -139,59 +139,59 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnNuevo.setBackground(new java.awt.Color(0, 102, 255));
+        btnNuevo.setBackground(new java.awt.Color(34, 108, 101));
         btnNuevo.setForeground(new java.awt.Color(255, 255, 255));
         btnNuevo.setText("NUEVO");
         btnNuevo.setModelo(org.edisoncor.gui.button.ButtonNice.Modelo.ROUND_LEFT);
-        btnNuevo.setSegundoColor(new java.awt.Color(0, 51, 255));
+        btnNuevo.setSegundoColor(new java.awt.Color(8, 57, 61));
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
             }
         });
 
-        btnGuardar.setBackground(new java.awt.Color(0, 102, 255));
+        btnGuardar.setBackground(new java.awt.Color(34, 108, 101));
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("GUARDAR");
         btnGuardar.setEnabled(false);
         btnGuardar.setModelo(org.edisoncor.gui.button.ButtonNice.Modelo.RECT);
-        btnGuardar.setSegundoColor(new java.awt.Color(0, 51, 255));
+        btnGuardar.setSegundoColor(new java.awt.Color(8, 57, 61));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
 
-        btnEditar.setBackground(new java.awt.Color(0, 102, 255));
+        btnEditar.setBackground(new java.awt.Color(34, 108, 101));
         btnEditar.setForeground(new java.awt.Color(255, 255, 255));
         btnEditar.setText("EDITAR");
         btnEditar.setEnabled(false);
         btnEditar.setModelo(org.edisoncor.gui.button.ButtonNice.Modelo.RECT);
-        btnEditar.setSegundoColor(new java.awt.Color(0, 51, 255));
+        btnEditar.setSegundoColor(new java.awt.Color(8, 57, 61));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
             }
         });
 
-        btnEliminar.setBackground(new java.awt.Color(0, 102, 255));
+        btnEliminar.setBackground(new java.awt.Color(34, 108, 101));
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.setText("ELIMINAR");
         btnEliminar.setEnabled(false);
         btnEliminar.setModelo(org.edisoncor.gui.button.ButtonNice.Modelo.RECT);
-        btnEliminar.setSegundoColor(new java.awt.Color(0, 51, 255));
+        btnEliminar.setSegundoColor(new java.awt.Color(8, 57, 61));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
 
-        btnCancelar.setBackground(new java.awt.Color(0, 102, 255));
+        btnCancelar.setBackground(new java.awt.Color(34, 108, 101));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("CANCELAR");
         btnCancelar.setEnabled(false);
         btnCancelar.setModelo(org.edisoncor.gui.button.ButtonNice.Modelo.ROUND_RIGHT);
-        btnCancelar.setSegundoColor(new java.awt.Color(0, 51, 255));
+        btnCancelar.setSegundoColor(new java.awt.Color(8, 57, 61));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);

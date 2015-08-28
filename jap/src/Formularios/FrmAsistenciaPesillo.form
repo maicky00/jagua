@@ -131,7 +131,7 @@
         <Component class="org.edisoncor.gui.button.ButtonNice" name="btnNuevo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="66" red="0" type="rgb"/>
+              <Color blue="65" green="6c" red="22" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -141,7 +141,7 @@
               <Value id="ROUND_LEFT"/>
             </Property>
             <Property name="segundoColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="33" red="0" type="rgb"/>
+              <Color blue="3d" green="39" red="8" type="rgb"/>
             </Property>
           </Properties>
           <Events>
@@ -151,7 +151,7 @@
         <Component class="org.edisoncor.gui.button.ButtonNice" name="btnGuardar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="66" red="0" type="rgb"/>
+              <Color blue="65" green="6c" red="22" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -162,7 +162,7 @@
               <Value id="RECT"/>
             </Property>
             <Property name="segundoColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="33" red="0" type="rgb"/>
+              <Color blue="3d" green="39" red="8" type="rgb"/>
             </Property>
           </Properties>
           <Events>
@@ -172,7 +172,7 @@
         <Component class="org.edisoncor.gui.button.ButtonNice" name="btnEditar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="66" red="0" type="rgb"/>
+              <Color blue="65" green="6c" red="22" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -183,7 +183,7 @@
               <Value id="RECT"/>
             </Property>
             <Property name="segundoColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="33" red="0" type="rgb"/>
+              <Color blue="3d" green="39" red="8" type="rgb"/>
             </Property>
           </Properties>
           <Events>
@@ -193,7 +193,7 @@
         <Component class="org.edisoncor.gui.button.ButtonNice" name="btnEliminar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="66" red="0" type="rgb"/>
+              <Color blue="65" green="6c" red="22" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -204,7 +204,7 @@
               <Value id="RECT"/>
             </Property>
             <Property name="segundoColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="33" red="0" type="rgb"/>
+              <Color blue="3d" green="39" red="8" type="rgb"/>
             </Property>
           </Properties>
           <Events>
@@ -214,7 +214,7 @@
         <Component class="org.edisoncor.gui.button.ButtonNice" name="btnCancelar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="66" red="0" type="rgb"/>
+              <Color blue="65" green="6c" red="22" type="rgb"/>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -225,7 +225,7 @@
               <Value id="ROUND_RIGHT"/>
             </Property>
             <Property name="segundoColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="33" red="0" type="rgb"/>
+              <Color blue="3d" green="39" red="8" type="rgb"/>
             </Property>
           </Properties>
           <Events>
