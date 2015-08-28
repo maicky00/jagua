@@ -222,8 +222,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Nature_Icon_32.png"))); // NOI18N
         jMenu9.setText("Pesillo");
+        jMenu9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/application_view_tile.png"))); // NOI18N
         jMenuItem5.setText("Planificacion pesillo");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,6 +237,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu9.add(jMenuItem5);
 
+        jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/folder_user.png"))); // NOI18N
         jMenuItem16.setText("Asistencia Pesillo");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,6 +246,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu9.add(jMenuItem16);
 
+        jMenuItem20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/coins.png"))); // NOI18N
         jMenuItem20.setText("Factura");
         jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,6 +314,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem15);
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/chart_pie.png"))); // NOI18N
         jMenuItem1.setText("Reportes");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

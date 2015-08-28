@@ -131,11 +131,20 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu9">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icon/Nature_Icon_32.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Pesillo"/>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icon/icon16x16/application_view_tile.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Planificacion pesillo"/>
               </Properties>
               <Events>
@@ -144,6 +153,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem16">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icon/icon16x16/folder_user.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Asistencia Pesillo"/>
               </Properties>
               <Events>
@@ -152,6 +164,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem20">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icon/icon16x16/coins.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Factura"/>
               </Properties>
               <Events>
@@ -239,6 +254,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/icon/icon16x16/chart_pie.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Reportes"/>
               </Properties>
               <Events>
