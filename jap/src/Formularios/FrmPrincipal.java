@@ -36,7 +36,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         this.setExtendedState(MAXIMIZED_BOTH);
         setIconImage(new ImageIcon(this.getClass().getResource("Globe.png")).getImage());
-        ((fondoPrincipal)jDesktopPane1).setImagen("jap.jpg");
+        ((fondoPrincipal) jDesktopPane1).setImagen("jap.jpg");
 
         //menu
         FrmPrincipal.setDefaultLookAndFeelDecorated(true);
@@ -46,8 +46,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         UIManager.put("InternalFrame.activeTitleForeground", new ColorUIResource(Color.blue));
         UIManager.put("InternalFrame.titleFont", new Font("Dialog", Font.PLAIN, 11));
 
-        reloj r=new reloj();
-        
+        reloj r = new reloj();
+
         try {
 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -92,6 +92,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenuItem20 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -218,6 +222,34 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu9.setText("Pesillo");
+
+        jMenuItem5.setText("Planificacion pesillo");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem5);
+
+        jMenuItem16.setText("Asistencia Pesillo");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem16);
+
+        jMenuItem20.setText("Factura");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem20);
+
+        jMenuBar1.add(jMenu9);
+
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/settings.png"))); // NOI18N
         jMenu4.setText("Mantenimiento");
         jMenu4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -319,9 +351,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu7);
 
         jMenu8.setText("HORA:");
+        jMenu8.setEnabled(false);
         jMenuBar1.add(jMenu8);
 
         reloj.setText("reloj");
+        reloj.setEnabled(false);
         jMenuBar1.add(reloj);
 
         setJMenuBar(jMenuBar1);
@@ -421,7 +455,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         Login l = new Login();
         l.setVisible(true);
         this.setVisible(false);
-        
+
     }//GEN-LAST:event_jMenuItem13ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
@@ -441,14 +475,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         FrmPlanificacion as = new FrmPlanificacion();
         cf = new ControlFormularios();
         cf.ControlaInstancia(as);
-        
+
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
         FrmAsistenciaPlan as = new FrmAsistenciaPlan();
         cf = new ControlFormularios();
         cf.ControlaInstancia(as);
-        
+
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
@@ -464,6 +498,25 @@ public class FrmPrincipal extends javax.swing.JFrame {
         cf = new ControlFormularios();
         cf.ControlaInstancia(as);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        FrmPlanificacionPesillo as = new FrmPlanificacionPesillo();
+        cf = new ControlFormularios();
+        cf.ControlaInstancia(as);
+
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        FrmAsistenciaPlanPesillo as = new FrmAsistenciaPlanPesillo();
+        cf = new ControlFormularios();
+        cf.ControlaInstancia(as);
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+        frmPagoPesillo as = new frmPagoPesillo();
+        cf = new ControlFormularios();
+        cf.ControlaInstancia(as);
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -511,6 +564,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -519,12 +573,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
