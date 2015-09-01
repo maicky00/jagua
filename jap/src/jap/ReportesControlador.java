@@ -12,8 +12,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperPrintManager;
@@ -28,6 +31,14 @@ import net.sf.jasperreports.view.JasperViewer;
 public class ReportesControlador {
 
     Conexion con;
+
+    public void carpeta() {
+        File directorio = new File("C:\\papitas");
+        if (!directorio.exists() ) {
+                directorio.mkdir();
+        }
+
+    }
 
     public ReportesControlador() {
         con = new Conexion();
@@ -54,6 +65,7 @@ public class ReportesControlador {
             JasperViewer jv = new JasperViewer(jasperPrint, false);
             jv.setTitle("REPORTE");
             jv.setVisible(true);
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\papitas\\us.pdf");
 
         } catch (Exception e) {
             System.out.println("Error al cargar reporte.");

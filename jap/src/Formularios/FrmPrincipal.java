@@ -37,8 +37,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         setIconImage(new ImageIcon(this.getClass().getResource("Globe.png")).getImage());
         ((fondoPrincipal) jDesktopPane1).setImagen("jap.jpg");
-
+        ReportesControlador rc = new ReportesControlador();
+        rc.carpeta();
         //menu
+
         FrmPrincipal.setDefaultLookAndFeelDecorated(true);
         JDialog.setDefaultLookAndFeelDecorated(true);
 
