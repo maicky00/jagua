@@ -7,6 +7,9 @@ package Formularios;
 
 import Controladores.classCorte;
 import Controladores.classDetalleFactura;
+import static Controladores.classDisenio.tablahtml;
+import static Controladores.classDisenio.textoNota;
+import static Controladores.classDisenio.txthtml;
 import Controladores.classMedidor;
 import javax.swing.JOptionPane;
 
@@ -25,12 +28,37 @@ public class FrmCorte extends javax.swing.JInternalFrame {
      */
     public FrmCorte() {
         initComponents();
+        inicio();
+
+    }
+
+    private void inicio() {
+
         cm = new classMedidor();
         cdf = new classDetalleFactura();
         //cdf.tablaCorte(jTable1);
         cm.cargarCorte(jTable1);
         cc.cargarCorte(jTable2);
-
+        //titulos
+        String cad = "Seleccione SI para especificar a un usuario con corte"
+                + "<br>"
+                + "Seleccione NO para especificar usuario con multa por mora de 4 meses";
+        comboCorte.setToolTipText(txthtml(cad));
+        txtMedidor.setToolTipText(txthtml("Numero del medidor del usuario"));
+        txtCedula.setToolTipText(txthtml("Numero de cedula del usuario"));
+        txtUsuario.setToolTipText(txthtml("Nombre del usuario"));
+        txtApodo.setToolTipText(txthtml("Apodo"));
+        txtMesesDebe.setToolTipText(txthtml("Numero de meses pendientes por pagar"));
+        fecha.setToolTipText(txthtml("Seleccione la fecha de corte/multa por pago pendiente"));
+        txtObservacion.setToolTipText(txthtml("Ingrese el motivo de corte/mora"));
+        txtMulta.setToolTipText(txthtml("Ingrese el monto de la multa por corte/mora"));
+        txtMora.setToolTipText(txthtml("Numero de meses no pagados"));
+        jTable1.setToolTipText(tablahtml("Lista de usuarios no pagados con mas de 4 meses"));
+        jTable2.setToolTipText(tablahtml("Lista de usuarios con corte activo o con multas por mora"));
+//        btnNuevo.setToolTipText(btnhtml("Click para crear nuevo corte o mora"));
+//        btnGuardar.setToolTipText(btnhtml("Guardar nuevo corte o mora"));
+        jRadioButton1.setToolTipText(textoNota("Lista de todos los usuarios con corte", "Nota: aplica multa por reconexion"));
+        jRadioButton2.setToolTipText(textoNota("Lista de todos los usuarios con multa", "Nota: aplica multa a usuarios con mora"));
     }
 
     private void mostrar() {
