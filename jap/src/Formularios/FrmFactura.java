@@ -678,7 +678,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                     int idotr = cc.buscarMedNum(Integer.valueOf(txtnumMedidor.getText())).getIdcorte();
                     co.guardarOtrospagos(idotr, 0, Float.valueOf(txtIdCorte.getText()), 0, Float.valueOf(txtIdCorte.getText()), numFact, usActual, fechaActual);
                     cm.modificarEstado(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdmedidor(), "ACTIVO");
-                    cc.modificarPago(idotr, "NO");
+                    cc.modificarPago(idotr, "SI");
                 }
                 if (Float.valueOf(comboPagos.getSelectedItem().toString()) > 0) {
                     float r = cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() - Float.valueOf(comboPagos.getSelectedItem().toString());

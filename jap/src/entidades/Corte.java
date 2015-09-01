@@ -41,6 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Corte.findByMulta", query = "SELECT c FROM Corte c WHERE c.multa = :multa"),
     @NamedQuery(name = "Corte.findByMora", query = "SELECT c FROM Corte c WHERE c.mora = :mora")})
 public class Corte implements Serializable {
+    @Column(name = "PAGADO")
+    private String pagado;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -161,6 +163,14 @@ public class Corte implements Serializable {
     @Override
     public String toString() {
         return "entidades.Corte[ idcorte=" + idcorte + " ]";
+    }
+
+    public String getPagado() {
+        return pagado;
+    }
+
+    public void setPagado(String pagado) {
+        this.pagado = pagado;
     }
     
 }

@@ -570,7 +570,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                 int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     cc.guardarCorte(idMedidor, corte, fecha.getDate(), txtObservacion.getText(), Float.parseFloat(txtMulta.getText()),
-                            Integer.parseInt(txtMora.getText()));
+                            Integer.parseInt(txtMora.getText()), "NO");
                     String estado;
                     if (corte.equals("SI")) {
                         estado = "INACTIVO";
