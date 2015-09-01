@@ -475,7 +475,7 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
             FrmFactura.txtnumMedidor.setEnabled(false);
             FrmFactura.btnNuevo.setVisible(true);
             FrmFactura.tablaOtros.setVisible(true);
-            FrmFactura.btnMasDetalles.setVisible(true);
+//            FrmFactura.btnMasDetalles.setVisible(true);
 
             try {
 
@@ -496,8 +496,8 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                     cdf.graficador(Integer.valueOf(FrmFactura.txtnumMedidor.getText()));
                     FrmFactura.txtIdCorte.setText(txtIdCorte.getText());
                     FrmFactura.txtMultaReconexion.setText(txtMulta.getText());
-                    FrmFactura.txtDerecho.setText(txtDerecho.getText());
-                    FrmFactura.txtInteres.setText(txtInteres.getText());
+//                    FrmFactura.txtDerecho.setText(txtDerecho.getText());
+//                    FrmFactura.txtInteres.setText(txtInteres.getText());
 
                 }
             } catch (Exception e) {

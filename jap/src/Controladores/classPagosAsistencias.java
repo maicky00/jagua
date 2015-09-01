@@ -93,16 +93,16 @@ public class classPagosAsistencias {
         return null;
     }
 
-    public int buscar(int numMed, int idPlan) {
-
-        for (Pagosasistencia dat : getPagosasistencia()) {
-            if (dat.getIdasistencia().getIdmedidor().getNummedidor().equals(numMed)
-                    && dat.getIdasistencia().getIdplanificacion().getIdplanificacion().equals(idPlan)) {
-                return dat.getIdpagoasistencia();
-            }
-        }
-        return 0;
-    }
+//    public int buscar(int idnumMed, int idPlan) {
+//
+//        for (Pagosasistencia dat : getPagosasistencia()) {
+//            if (dat.getIdasistencia().g.equals(idnumMed)
+//                    && dat.getIdasistencia().getIdplanificacion().getIdplanificacion().equals(idPlan)) {
+//                return dat.getIdpagoasistencia();
+//            }
+//        }
+//        return 0;
+//    }
 
     public void Ingresarlist(List<Pagosasistencia> list) {
         try {

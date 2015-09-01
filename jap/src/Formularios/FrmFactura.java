@@ -7,10 +7,12 @@ package Formularios;
 
 import Controladores.ControlFormularios;
 import Controladores.classAsistencia;
+import Controladores.classCorte;
 import Controladores.classDetalleFactura;
 import Controladores.classFactura;
 import Controladores.classInstitucion;
 import Controladores.classMedidor;
+import Controladores.classOtrosConceptos;
 import Controladores.classOtrosPagos;
 import Controladores.classPagosNuevoMed;
 import Controladores.classusuario;
@@ -58,6 +60,8 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     classInstitucion ci = new classInstitucion();
     classAsistencia ca = new classAsistencia();
     classOtrosPagos co = new classOtrosPagos();
+    classCorte cc = new classCorte();
+    classOtrosConceptos coc = new classOtrosConceptos();
 
     public FrmFactura() {
         initComponents();
@@ -66,15 +70,12 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         cargarInf();
 //        tablaOtros.setTableHeader(null);
         btnNuevo.setVisible(false);
-        btnMasDetalles.setVisible(false);
-//        tablaOtros.setVisible(false);
-        labelVermas.setVisible(false);
+
 //        lbldescNuevoMed.setVisible(false);
 //        comboPagos.setVisible(false);
         txtIdCorte.setVisible(false);
         txtMultaReconexion.setVisible(false);
-        txtDerecho.setVisible(false);
-        txtInteres.setVisible(false);
+
     }
     classPagosNuevoMed cpnm = new classPagosNuevoMed();
     classMedidor cm = new classMedidor();
@@ -107,6 +108,10 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     }
 
     public void limpiar() {
+        txtMultaReconexion.setVisible(false);
+        txtIdCorte.setVisible(false);
+        txtMultaReconexion.setVisible(false);
+        txtIdCorte.setText("0");
         lbldescNuevoMed.setText("");
         comboPagos.removeAllItems();
         txtTotalgeneral.setText("");
@@ -169,16 +174,15 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         lblGrafico = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaOtros = new javax.swing.JTable();
-        btnMasDetalles = new javax.swing.JButton();
-        labelVermas = new javax.swing.JLabel();
-        lbldescNuevoMed = new javax.swing.JLabel();
-        comboPagos = new javax.swing.JComboBox();
-        txtMultaReconexion = new javax.swing.JLabel();
-        txtDerecho = new javax.swing.JLabel();
-        txtInteres = new javax.swing.JLabel();
-        txtIdCorte = new javax.swing.JLabel();
         txtTotalgeneral = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        lbldescNuevoMed = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        comboPagos = new javax.swing.JComboBox();
+        txtMultaReconexion = new javax.swing.JLabel();
+        txtIdCorte = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
 
         setClosable(true);
@@ -213,7 +217,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblInstitucion, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
+                    .addComponent(lblInstitucion, javax.swing.GroupLayout.DEFAULT_SIZE, 879, Short.MAX_VALUE)
                     .addComponent(lblInstitucion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2)
@@ -304,7 +308,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 334, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblfecha, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -429,28 +433,70 @@ public class FrmFactura extends javax.swing.JInternalFrame {
             tablaOtros.getColumnModel().getColumn(1).setHeaderValue(" ");
         }
 
-        btnMasDetalles.setText("Ver mas detalles");
+        jLabel1.setText("TOTAL A PAGAR:");
 
-        labelVermas.setText("Tiene Otros Pagos:");
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Otros Pagos"));
 
         lbldescNuevoMed.setText("jLabel1");
 
+        jLabel9.setText("Cantidad a Pagar ");
+
         comboPagos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        comboPagos.setBorder(javax.swing.BorderFactory.createTitledBorder("Seleccione"));
         comboPagos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboPagosActionPerformed(evt);
             }
         });
 
-        txtMultaReconexion.setText("jLabel1");
+        txtMultaReconexion.setText("MULTA POR RECONEXION:");
 
-        txtDerecho.setText("jLabel9");
+        txtIdCorte.setText("0");
 
-        txtInteres.setText("jLabel10");
+        jLabel10.setText("jLabel10");
 
-        txtIdCorte.setText("jLabel1");
-
-        jLabel1.setText("TOTAL A PAGAR:");
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(10, 10, 10)
+                        .addComponent(comboPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbldescNuevoMed, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(txtMultaReconexion)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtIdCorte)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel10)
+                .addGap(133, 133, 133))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(lbldescNuevoMed)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(comboPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9)))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMultaReconexion)
+                    .addComponent(txtIdCorte))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -460,26 +506,12 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 867, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1012, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lblGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbldescNuevoMed, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnMasDetalles)
-                                    .addComponent(labelVermas)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtMultaReconexion)
-                                    .addComponent(txtDerecho)
-                                    .addComponent(txtInteres)
-                                    .addComponent(txtIdCorte))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -494,36 +526,23 @@ public class FrmFactura extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(lbldescNuevoMed)
-                                .addGap(18, 18, 18)
-                                .addComponent(comboPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
-                                .addComponent(labelVermas)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnMasDetalles))
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtIdCorte)
-                            .addComponent(txtTotalgeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(txtMultaReconexion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDerecho)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtInteres))
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtTotalgeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(lblGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -584,12 +603,23 @@ public class FrmFactura extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        
         // TODO add your handling code here:
         try {
+
             limpiar();
+            
+        
+            if (cc.verificarOtrPagos(Integer.valueOf(txtnumMedidor.getText())) == true) {
+                int numM = Integer.valueOf(txtnumMedidor.getText());
+                txtIdCorte.setVisible(true);
+                txtMultaReconexion.setVisible(true);
+                txtIdCorte.setText(cc.buscarMedidorNumM(numM).getMulta().toString());
+            }
             if (cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() > 0) {
                 comboPagos.removeAllItems();
                 comboPagos.setVisible(true);
+                jLabel9.setVisible(true);
                 for (int i = 0; i < cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() + 1; i++) {
                     comboPagos.addItem(i + ".0");
                 }
@@ -599,6 +629,9 @@ public class FrmFactura extends javax.swing.JInternalFrame {
             } else {
                 lbldescNuevoMed.setText("");
                 comboPagos.setVisible(false);
+                jLabel9.setVisible(false);
+                comboPagos.removeAllItems();
+                comboPagos.addItem(0);
             }
             if (cdf.buscarNumMedDetallefactura(Integer.valueOf(txtnumMedidor.getText())).equals(null)) {
             } else {
@@ -637,37 +670,37 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         int i = JOptionPane.showConfirmDialog(this, "¿REAlIZAR TRANSACCION?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
 
-//            co.guardarOtrospagos(Integer.valueOf(txtIdCorte.getText()),
-//                    Float.valueOf(txtDerecho.getText()),
-//                    Float.valueOf(txtMultaReconexion.getText()),
-//                    Float.valueOf(txtInteres.getText()),
-//                    Float.valueOf(tablaOtros.getValueAt(0, 1).toString()),
-//                    Integer.parseInt(jLabel2.getText()), "", new Date());
             try {
-
+                int numFact = cft.numFactura() + 1;
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                 Date fechaActual = formato.parse(lblfecha.getText());
-                int numFact = cft.numFactura() + 1;
+                if (Float.valueOf(txtIdCorte.getText()) > 0) {
+                    int idotr = cc.buscarMedNum(Integer.valueOf(txtnumMedidor.getText())).getIdcorte();
+                    co.guardarOtrospagos(idotr, 0, Float.valueOf(txtIdCorte.getText()), 0, Float.valueOf(txtIdCorte.getText()), numFact, usActual, fechaActual);
+                    cm.modificarEstado(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdmedidor(), "ACTIVO");
+                    cc.modificarPago(idotr, "NO");
+                }
                 if (Float.valueOf(comboPagos.getSelectedItem().toString()) > 0) {
                     float r = cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() - Float.valueOf(comboPagos.getSelectedItem().toString());
                     cpnm.guardarPagosnuevomed(Integer.valueOf(txtnumMedidor.getText()), "Pago Por Coneccion", Float.valueOf(comboPagos.getSelectedItem().toString()), fechaActual, numFact);
                     cm.modificarValorConexion(Integer.valueOf(txtnumMedidor.getText()), r);
-                    if (Float.valueOf(txtTotalgeneral.getText()) > 0
-                            && Float.valueOf(tabla2.getValueAt(2, 1).toString()) == 0) {
-                        JOptionPane.showMessageDialog(null, "Realizado", "Información", 1);
-                    }
+                }
+                if (Float.valueOf(tabla2.getValueAt(2, 1).toString()) > 0) {
+                    float subtotal = Float.valueOf(tabla2.getValueAt(0, 1).toString());
+                    float iva = Float.valueOf(tabla2.getValueAt(1, 1).toString());
+                    float total = Float.valueOf(tabla2.getValueAt(2, 1).toString());
+
+                    List<Facturas> tableData = cft.getTableFacturas(jTable1, numFact, fechaActual, subtotal, iva, total, usActual);
+                    cft.IngresarlistFact(tableData);
                 }
 
-                float subtotal = Float.valueOf(tabla2.getValueAt(0, 1).toString());
-                float iva = Float.valueOf(tabla2.getValueAt(1, 1).toString());
-                float total = Float.valueOf(tabla2.getValueAt(2, 1).toString());
-
-                List<Facturas> tableData = cft.getTableFacturas(jTable1, numFact, fechaActual, subtotal, iva, total, usActual);
-                cft.IngresarlistFact(tableData);
                 if (Float.valueOf(txtTotalgeneral.getText()) > 0) {
+                    JOptionPane.showMessageDialog(null, "Pago Realizado Corectamente", "Información", 1);
                     String idr = "" + cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdusuario().getIdusuario();
                     b.factura("id", idr, "numfact", String.valueOf(numFact), "facturageneral.jasper");
 
+                } else {
+                    JOptionPane.showMessageDialog(null, "No hay Datos", "Información", 1);
                 }
                 limpiar();
                 txtnumMedidor.setText("");
@@ -690,10 +723,12 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                     subtotal = Float.valueOf(jTable1.getValueAt(i, 8).toString()) + subtotal;
                 }
                 tabla2.setValueAt(subtotal, 0, 1);
+                float recon = Float.valueOf(txtIdCorte.getText());
                 tabla2.setValueAt(subtotal * Float.valueOf(tabla2.getValueAt(1, 0).toString()), 1, 1);
                 tabla2.setValueAt(subtotal + Float.valueOf(tabla2.getValueAt(1, 1).toString()), 2, 1);
                 float tg = Float.valueOf(tabla2.getValueAt(2, 1).toString())
-                        + Float.valueOf(comboPagos.getSelectedItem().toString());
+                        + Float.valueOf(comboPagos.getSelectedItem().toString()) + recon;
+
                 txtTotalgeneral.setText(String.valueOf(tg));
             } else {
                 JOptionPane.showMessageDialog(null, "No se puede Eliminar\n Debe cancelar ", "Información", 1);
@@ -714,8 +749,9 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     private void comboPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboPagosActionPerformed
         // TODO add your handling code here:
         try {
+            float recon = Float.valueOf(txtIdCorte.getText());
             float r = Float.valueOf(tabla2.getValueAt(2, 1).toString())
-                    + Float.valueOf(comboPagos.getSelectedItem().toString());
+                    + Float.valueOf(comboPagos.getSelectedItem().toString()) + recon;
             txtTotalgeneral.setText(String.valueOf(r));
         } catch (Exception e) {
         }
@@ -724,13 +760,13 @@ public class FrmFactura extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JButton btnMasDetalles;
     public static javax.swing.JButton btnNuevo;
     public static javax.swing.JComboBox comboPagos;
     public static javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     public static javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -738,14 +774,15 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     public static javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     public static javax.swing.JTable jTable1;
-    private javax.swing.JLabel labelVermas;
     public static javax.swing.JLabel lblGrafico;
     private javax.swing.JLabel lblInstitucion;
     private javax.swing.JLabel lblInstitucion1;
@@ -754,9 +791,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     public static javax.swing.JTable tabla2;
     public static javax.swing.JTable tablaOtros;
     public static javax.swing.JTextField txtCliente;
-    public static javax.swing.JLabel txtDerecho;
     public static javax.swing.JLabel txtIdCorte;
-    public static javax.swing.JLabel txtInteres;
     public static javax.swing.JLabel txtMultaReconexion;
     public static javax.swing.JTextField txtRuc;
     public static javax.swing.JTextField txtTotalgeneral;

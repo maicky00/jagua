@@ -137,7 +137,6 @@ public class classFactura {
                 for (Facturas dat : listFact) {
                     facturasJpacontrolador.create(dat);
                 }
-                JOptionPane.showMessageDialog(null, "Realizado", "Información", 1);
 
             } 
         } catch (Exception ex) {

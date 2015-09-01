@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PAGO MULTAS" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a3382e96-4c84-40b7-9a53-671787bae0a9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="numfact" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     asistenciapesillo.`IDASISTENCIAPESILLO` AS asistenciapesillo_IDASISTENCIAPESILLO,
+     asistenciapesillo.`IDMEDIDOR` AS asistenciapesillo_IDMEDIDOR,
+     asistenciapesillo.`IDPLANIFICACIONPESILLO` AS asistenciapesillo_IDPLANIFICACIONPESILLO,
+     asistenciapesillo.`ASISTENCIA` AS asistenciapesillo_ASISTENCIA,
+     asistenciapesillo.`VALORMULTA` AS asistenciapesillo_VALORMULTA,
+     asistenciapesillo.`DESCRIPCION` AS asistenciapesillo_DESCRIPCION,
+     asistenciapesillo.`OBSERVACION` AS asistenciapesillo_OBSERVACION,
+     pagopesillo.`IDPAGOPESILLO` AS pagopesillo_IDPAGOPESILLO,
+     pagopesillo.`IDASISTENCIAPESILLO` AS pagopesillo_IDASISTENCIAPESILLO,
+     pagopesillo.`FECHAPAGO` AS pagopesillo_FECHAPAGO,
+     pagopesillo.`NUMMINGAS` AS pagopesillo_NUMMINGAS,
+     pagopesillo.`VALORMINGAS` AS pagopesillo_VALORMINGAS,
+     pagopesillo.`OBSERVACION` AS pagopesillo_OBSERVACION,
+     pagopesillo.`NUMFACTURA` AS pagopesillo_NUMFACTURA,
+     pagopesillo.`USUARIOACTUAL` AS pagopesillo_USUARIOACTUAL,
+     medidor.`IDMEDIDOR` AS medidor_IDMEDIDOR,
+     medidor.`IDUSUARIO` AS medidor_IDUSUARIO,
+     medidor.`SERIE` AS medidor_SERIE,
+     medidor.`NUMMEDIDOR` AS medidor_NUMMEDIDOR,
+     medidor.`ESTADO` AS medidor_ESTADO,
+     medidor.`VALORPORCONEXION` AS medidor_VALORPORCONEXION,
+     medidor.`PAGADO` AS medidor_PAGADO,
+     medidor.`SALDO` AS medidor_SALDO,
+     medidor.`FECHA` AS medidor_FECHA,
+     planificacionpesillo.`IDPLANIFICACIONPESILLO` AS planificacionpesillo_IDPLANIFICACIONPESILLO,
+     planificacionpesillo.`LUGAR` AS planificacionpesillo_LUGAR,
+     planificacionpesillo.`FECHA` AS planificacionpesillo_FECHA,
+     planificacionpesillo.`VALORMULTA` AS planificacionpesillo_VALORMULTA,
+     planificacionpesillo.`DESCRIPCION` AS planificacionpesillo_DESCRIPCION,
+     planificacionpesillo.`TIPOPLANPESILLO` AS planificacionpesillo_TIPOPLANPESILLO,
+     usuarios.`IDUSUARIO` AS usuarios_IDUSUARIO,
+     usuarios.`IDINSTITUCION` AS usuarios_IDINSTITUCION,
+     usuarios.`RUCCI` AS usuarios_RUCCI,
+     usuarios.`PRIMERNOMBRE` AS usuarios_PRIMERNOMBRE,
+     usuarios.`SEGUNDONOMBRE` AS usuarios_SEGUNDONOMBRE,
+     usuarios.`PRIMERAPELLIDO` AS usuarios_PRIMERAPELLIDO,
+     usuarios.`SEGUNDOAPELLIDO` AS usuarios_SEGUNDOAPELLIDO,
+     usuarios.`APADOSN` AS usuarios_APADOSN,
+     usuarios.`DIRECCION` AS usuarios_DIRECCION,
+     usuarios.`TELEFONO` AS usuarios_TELEFONO,
+     usuarios.`CELULAR` AS usuarios_CELULAR,
+     usuarios.`SECTOR` AS usuarios_SECTOR,
+     usuarios.`REFERENCIA` AS usuarios_REFERENCIA,
+     usuarios.`FOTO` AS usuarios_FOTO,
+     usuarios.`OBSERVACION` AS usuarios_OBSERVACION,
+     institucion.`IDINSTITUCION` AS institucion_IDINSTITUCION,
+     institucion.`NOMBREINST` AS institucion_NOMBREINST,
+     institucion.`DIRECCION` AS institucion_DIRECCION,
+     institucion.`TELEFONO` AS institucion_TELEFONO,
+     institucion.`EMAIL` AS institucion_EMAIL,
+     institucion.`RUC` AS institucion_RUC,
+     institucion.`CELULAR` AS institucion_CELULAR,
+     institucion.`LOGO` AS institucion_LOGO
+FROM
+     `asistenciapesillo` asistenciapesillo INNER JOIN `pagopesillo` pagopesillo ON asistenciapesillo.`IDASISTENCIAPESILLO` = pagopesillo.`IDASISTENCIAPESILLO`
+     INNER JOIN `medidor` medidor ON asistenciapesillo.`IDMEDIDOR` = medidor.`IDMEDIDOR`
+     INNER JOIN `planificacionpesillo` planificacionpesillo ON asistenciapesillo.`IDPLANIFICACIONPESILLO` = planificacionpesillo.`IDPLANIFICACIONPESILLO`
+     INNER JOIN `usuarios` usuarios ON medidor.`IDUSUARIO` = usuarios.`IDUSUARIO`
+     INNER JOIN `institucion` institucion ON usuarios.`IDINSTITUCION` = institucion.`IDINSTITUCION`
+where  pagopesillo.`NUMFACTURA`=$P{numfact}]]>
+	</queryString>
+	<field name="asistenciapesillo_IDASISTENCIAPESILLO" class="java.lang.Integer"/>
+	<field name="asistenciapesillo_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="asistenciapesillo_IDPLANIFICACIONPESILLO" class="java.lang.Integer"/>
+	<field name="asistenciapesillo_ASISTENCIA" class="java.lang.String"/>
+	<field name="asistenciapesillo_VALORMULTA" class="java.lang.Float"/>
+	<field name="asistenciapesillo_DESCRIPCION" class="java.lang.String"/>
+	<field name="asistenciapesillo_OBSERVACION" class="java.lang.String"/>
+	<field name="pagopesillo_IDPAGOPESILLO" class="java.lang.Integer"/>
+	<field name="pagopesillo_IDASISTENCIAPESILLO" class="java.lang.Integer"/>
+	<field name="pagopesillo_FECHAPAGO" class="java.sql.Date"/>
+	<field name="pagopesillo_NUMMINGAS" class="java.lang.Integer"/>
+	<field name="pagopesillo_VALORMINGAS" class="java.lang.Float"/>
+	<field name="pagopesillo_OBSERVACION" class="java.lang.String"/>
+	<field name="pagopesillo_NUMFACTURA" class="java.lang.Integer"/>
+	<field name="pagopesillo_USUARIOACTUAL" class="java.lang.String"/>
+	<field name="medidor_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="medidor_SERIE" class="java.lang.String"/>
+	<field name="medidor_NUMMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_ESTADO" class="java.lang.String"/>
+	<field name="medidor_VALORPORCONEXION" class="java.lang.Float"/>
+	<field name="medidor_PAGADO" class="java.lang.String"/>
+	<field name="medidor_SALDO" class="java.lang.Float"/>
+	<field name="medidor_FECHA" class="java.sql.Date"/>
+	<field name="planificacionpesillo_IDPLANIFICACIONPESILLO" class="java.lang.Integer"/>
+	<field name="planificacionpesillo_LUGAR" class="java.lang.String"/>
+	<field name="planificacionpesillo_FECHA" class="java.sql.Date"/>
+	<field name="planificacionpesillo_VALORMULTA" class="java.lang.Float"/>
+	<field name="planificacionpesillo_DESCRIPCION" class="java.lang.String"/>
+	<field name="planificacionpesillo_TIPOPLANPESILLO" class="java.lang.String"/>
+	<field name="usuarios_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="usuarios_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="usuarios_RUCCI" class="java.lang.String"/>
+	<field name="usuarios_PRIMERNOMBRE" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDONOMBRE" class="java.lang.String"/>
+	<field name="usuarios_PRIMERAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDOAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_APADOSN" class="java.lang.String"/>
+	<field name="usuarios_DIRECCION" class="java.lang.String"/>
+	<field name="usuarios_TELEFONO" class="java.lang.String"/>
+	<field name="usuarios_CELULAR" class="java.lang.String"/>
+	<field name="usuarios_SECTOR" class="java.lang.String"/>
+	<field name="usuarios_REFERENCIA" class="java.lang.String"/>
+	<field name="usuarios_FOTO" class="java.lang.Object"/>
+	<field name="usuarios_OBSERVACION" class="java.lang.String"/>
+	<field name="institucion_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="institucion_NOMBREINST" class="java.lang.String"/>
+	<field name="institucion_DIRECCION" class="java.lang.String"/>
+	<field name="institucion_TELEFONO" class="java.lang.String"/>
+	<field name="institucion_EMAIL" class="java.lang.String"/>
+	<field name="institucion_RUC" class="java.lang.String"/>
+	<field name="institucion_CELULAR" class="java.lang.String"/>
+	<field name="institucion_LOGO" class="java.lang.Object"/>
+	<variable name="total" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{pagopesillo_VALORMINGAS}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="130" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="10" y="85" width="60" height="15" uuid="542ce784-cb1e-4f6b-8d35-a3eda1c8cc67"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[USUARIO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="80" y="85" width="60" height="15" uuid="e0923911-c143-4c15-995e-a68aa6b2b7b2"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_PRIMERNOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="146" y="85" width="70" height="15" uuid="8211d929-aceb-4c9a-ba10-652d9b7ead01"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_PRIMERAPELLIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="146" y="100" width="70" height="15" uuid="2558a9e6-cb1f-41e8-aa8c-7f112267b4a6"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDOAPELLIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="80" y="100" width="60" height="15" uuid="e3a34dc0-142d-4ea0-b30d-379e125e8c89"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDONOMBRE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="10" y="60" width="50" height="15" uuid="8d0e3deb-bed7-438e-8122-8143e5acbf9f"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[RUC/CI:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="80" y="60" width="70" height="15" uuid="d2008137-eec7-439c-90cc-255686d8d77b"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_RUCCI}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="364" y="60" width="40" height="15" uuid="bc9022e7-68fa-4510-ac9d-436fa31c9d4e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[FECHA PAGO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="404" y="60" width="50" height="15" uuid="ce2a109f-2729-43ca-961e-4be01440f389"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pagopesillo_FECHAPAGO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="404" y="29" width="50" height="15" uuid="ad5b0ad3-addc-4aea-966e-9801634755e2"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pagopesillo_NUMFACTURA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="10" y="115" width="81" height="15" uuid="e2789a69-eb98-4a95-a52e-28ef7f94da72"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[NUM. MEDIDOR:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="91" y="115" width="55" height="15" uuid="da7cbbfa-d047-4a23-a297-b4d986fd37e6"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medidor_NUMMEDIDOR}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="32705f8d-e7c4-475a-b513-35c0c4a9ac54"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="6" y="19" width="64" height="15" uuid="dd4a9360-4add-4e29-a434-b788800891fb"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[ASISTENCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="71" y="19" width="69" height="15" uuid="0a9c6fc2-7e19-433d-b214-0480504760a5"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="392" y="19" width="72" height="15" uuid="f19d9c67-41df-49a8-b3c0-901a3cb0456a"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[VALOR MULTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="141" y="19" width="52" height="15" uuid="56c38952-2daf-4719-a076-539118b96c68"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[LUGAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="194" y="19" width="40" height="15" uuid="8ab42695-cab2-4c11-a46f-8a0e267dd58d"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="237" y="19" width="67" height="15" uuid="1946a204-747d-4314-b370-3612113a34a3"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="309" y="19" width="79" height="15" uuid="6e63ff4c-8a30-4e3a-bf30-c92d7043dfc5"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[TIPO DE EVENTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="fa83fc74-fc36-4f79-ae92-3cf2336ab38c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="6" y="0" width="29" height="15" uuid="681e1f67-1ba6-46b6-b831-f1ac92746c10"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{asistenciapesillo_ASISTENCIA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="71" y="0" width="69" height="15" uuid="b7d162e3-6914-4b83-b898-f5153f79bad0"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{asistenciapesillo_DESCRIPCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="414" y="0" width="27" height="15" uuid="859983b1-d1f1-46e2-a089-0deddc89e923"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pagopesillo_VALORMINGAS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="141" y="0" width="52" height="15" uuid="87ea03e3-25c0-41fe-8e50-99ad6caadd23"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{planificacionpesillo_LUGAR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="194" y="0" width="40" height="15" uuid="f32c1a99-eb87-4f86-ab27-ddcb2a41b6f2"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{planificacionpesillo_FECHA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="239" y="0" width="65" height="15" uuid="8e8d7d1d-a7b3-4e91-ba57-fede9ae3ff5c"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{planificacionpesillo_DESCRIPCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="311" y="0" width="67" height="15" uuid="19d21b76-9f54-453b-a77f-d468e2a0a4c5"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{planificacionpesillo_TIPOPLANPESILLO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="50" splitType="Immediate">
+			<textField>
+				<reportElement x="414" y="17" width="50" height="20" uuid="f05901c1-0f6d-4cdb-b8bd-316d6890d32d"/>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="91" y="22" width="73" height="15" uuid="9c467f4e-0901-41a5-bada-73a54de1ae4e"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[USUARIOACTUAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="91" y="7" width="73" height="15" uuid="2be3b1db-7b04-40bb-a2f2-ed66ff78d74d"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pagopesillo_USUARIOACTUAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="364" y="17" width="32" height="15" uuid="303617d3-8d4c-4998-ad9d-efe729b5a479"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

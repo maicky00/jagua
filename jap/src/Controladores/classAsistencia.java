@@ -15,6 +15,8 @@ import entidadesCruds.AsistenciaJpaController;
 import entidadesCruds.PagosasistenciaJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -158,6 +160,8 @@ public class classAsistencia {
         return i;
     }
 
+
+
     public void cargarTablaAsistencia(JTable tabla, int idPlan) {
 
         modelo = new DefaultTableModel();
@@ -221,15 +225,18 @@ public class classAsistencia {
 
         for (Asistencia u : getAsistencia()) {
             if (u.getObsevacion().equals("NO")
-                    && u.getAsistencia().equals("NO")
+                    //                    && u.getAsistencia().equals("NO")
                     && u.getIdmedidor().getNummedidor() == numMedidor) {
                 subtotal = subtotal + u.getValormulta();
 //                iva = u.getIdtarifas().getIva();
+                Date fechaActual = u.getIdplanificacion().getFecha();
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                String fec = formato.format(fechaActual);
                 dtm.addRow(new Object[]{
                     u.getIdasistencia(),
                     u.getValormulta(),
                     u.getObsevacion(),
-                    u.getIdplanificacion().getFecha(),
+                    fec,
                     u.getIdplanificacion().getTipoplanificacion(),
                     u.getIdplanificacion().getLugar()
                 });

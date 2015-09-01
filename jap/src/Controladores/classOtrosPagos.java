@@ -48,7 +48,6 @@ public class classOtrosPagos {
             dat.setUsuarioactual(usuarioActual);
             dat.setFechapago(fechaPago);
             otrospagosJpacontrolador.create(dat);
-            JOptionPane.showMessageDialog(null, "Pago realizado corectamente");
 
         } catch (Exception e) {
 

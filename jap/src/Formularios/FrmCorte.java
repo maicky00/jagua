@@ -528,22 +528,30 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
         mostrar();
         limpiar();
-        
-        
+
+
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         try {
             int idMedidor = cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdmedidor();
-            
+
             String corte = comboCorte.getSelectedItem().toString();
             if (lblId.getText().equals("")) {
                 int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     cc.guardarCorte(idMedidor, corte, fecha.getDate(), txtObservacion.getText(), Float.parseFloat(txtMulta.getText()),
                             Integer.parseInt(txtMora.getText()));
+                    String estado;
+                    if (corte.equals("SI")) {
+                        estado = "INACTIVO";
+                    } else {
+                        estado = "ACTIVO";
+                    }
+                    cm.modificarEstado(idMedidor, estado);
                     cc.cargarCorte(jTable2);
+
                     limpiar();
                     ocultar();
                 }
@@ -554,6 +562,13 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                     cc.modificarCorte(idC, idMedidor, corte, fecha.getDate(), txtObservacion.getText(), Float.parseFloat(txtMulta.getText()),
                             Integer.parseInt(txtMora.getText()));
                     cc.cargarCorte(jTable2);
+                    String estado;
+                    if (corte.equals("SI")) {
+                        estado = "INACTIVO";
+                    } else {
+                        estado = "ACTIVO";
+                    }
+                    cm.modificarEstado(idMedidor, estado);
                     limpiar();
                     ocultar();
                 }
@@ -630,8 +645,8 @@ public class FrmCorte extends javax.swing.JInternalFrame {
             lblId.setText(jTable2.getValueAt(n, 0).toString());
             txtMedidor.setText(jTable2.getValueAt(n, 1).toString());
             txtCedula.setText(cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getRucci());
-            String usuario = cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getPrimernombre()+" "
-                    + cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getPrimerapellido()+" "
+            String usuario = cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getPrimernombre() + " "
+                    + cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getPrimerapellido() + " "
                     + cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getSegundoapellido();
             txtUsuario.setText(usuario);
             txtApodo.setText(cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getApadosn());

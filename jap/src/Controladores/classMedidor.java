@@ -116,6 +116,22 @@ public class classMedidor {
         }
         return true;
     }
+     public boolean modificarEstado(int id, String estado) {
+        Medidor med = new Medidor();
+
+        try {
+            Medidor dat = medidorJpacontrolador.findMedidor(id);
+            if (dat == null) {
+                return false;
+            }
+
+            dat.setEstado(estado);
+            medidorJpacontrolador.edit(dat);
+
+        } catch (Exception e) {
+        }
+        return true;
+    }
 
     public void eliminarMedidor(int id) throws IllegalOrphanException {
 

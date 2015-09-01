@@ -81,6 +81,20 @@ public class classCorte {
         }
         return true;
     }
+    public boolean modificarPago(int id, String corte) {
+
+        try {
+            Corte dat = corteJpacontrolador.findCorte(id);
+            if (dat == null) {
+                return false;
+            }
+            dat.setCorte(corte);;
+            corteJpacontrolador.edit(dat);
+
+        } catch (Exception e) {
+        }
+        return true;
+    }
 
     public void eliminarCorte(int id) throws IllegalOrphanException {
 
@@ -101,7 +115,8 @@ public class classCorte {
         }
         return null;
     }
-        public Corte buscarMedidorNumM(int numMedidor) {
+
+    public Corte buscarMedidorNumM(int numMedidor) {
 
         for (Corte dat : getCorte()) {
             if (dat.getIdmedidor().getNummedidor().equals(numMedidor)) {
@@ -110,7 +125,16 @@ public class classCorte {
         }
         return null;
     }
+    public Corte buscarMedNum(int numMedidor) {
 
+        for (Corte dat : getCorte()) {
+            if (dat.getIdmedidor().getNummedidor().equals(numMedidor)
+                    && dat.getCorte().equals("SI")) {
+                return dat;
+            }
+        }
+        return null;
+    }
     public Corte buscarIdCorte(int idCorte) {
 
         for (Corte dat : getCorte()) {
@@ -119,6 +143,17 @@ public class classCorte {
             }
         }
         return null;
+    }
+
+    public boolean verificarOtrPagos(int idnumMed) {
+
+        for (Corte dat : getCorte()) {
+            if (dat.getIdmedidor().getNummedidor().equals(idnumMed)
+                    && dat.getCorte().equals("SI")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void cargarCorte(JTable tabla) {
@@ -132,19 +167,17 @@ public class classCorte {
         modelo.addColumn("Usuario");
         modelo.addColumn("Apodo");
         modelo.addColumn("multa");
-        
 
         for (Corte c : getCorte()) {
             if (c.getCorte().equals("SI")) {
                 fila[0] = c.getIdcorte();
                 fila[1] = c.getIdmedidor().getNummedidor();
                 fila[2] = c.getIdmedidor().getIdusuario().getRucci();
-                fila[3] = c.getIdmedidor().getIdusuario().getPrimernombre()+" "+
-                        c.getIdmedidor().getIdusuario().getPrimerapellido()+" "+
-                        c.getIdmedidor().getIdusuario().getSegundoapellido();
+                fila[3] = c.getIdmedidor().getIdusuario().getPrimernombre() + " "
+                        + c.getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                        + c.getIdmedidor().getIdusuario().getSegundoapellido();
                 fila[4] = c.getIdmedidor().getIdusuario().getApadosn();
                 fila[5] = c.getMulta();
-                
 
                 FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
                 FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
@@ -153,6 +186,7 @@ public class classCorte {
         }
 
     }
+
     public void cargarCorte2(JTable tabla) {
 //        classDetalleFactura cdf = new classDetalleFactura();
         modelo = new DefaultTableModel();

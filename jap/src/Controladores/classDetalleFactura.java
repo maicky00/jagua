@@ -171,8 +171,6 @@ public class classDetalleFactura {
         return 0;
     }
 
-    
-
     public int medidaAnterior(int idMedidor) {
         int r = 0;
         int r2 = 0;
@@ -217,8 +215,9 @@ public class classDetalleFactura {
         FrmFactura.tabla2.setValueAt(iva, 1, 0);
         FrmFactura.tabla2.setValueAt(iva * subtotal, 1, 1);
         total = (iva * subtotal) + subtotal;
+        float recon = Float.valueOf(FrmFactura.txtIdCorte.getText());
         FrmFactura.tabla2.setValueAt(total, 2, 1);
-        FrmFactura.txtTotalgeneral.setText(String.valueOf(total));
+        FrmFactura.txtTotalgeneral.setText(String.valueOf(total+recon));
         return dtm;
     }
 

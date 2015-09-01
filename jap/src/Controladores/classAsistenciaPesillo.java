@@ -6,11 +6,14 @@
 package Controladores;
 
 import Formularios.frmPagoPesillo;
+import static Formularios.frmPagoPesillo.lblfecha;
 import entidades.Asistenciapesillo;
 import entidades.Medidor;
 import entidades.Planificacionpesillo;
 import entidadesCruds.AsistenciapesilloJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -192,11 +195,14 @@ public class classAsistenciaPesillo {
                     && u.getIdmedidor().getNummedidor() == numMedidor) {
                 subtotal = subtotal + u.getValormulta();
 //                iva = u.getIdtarifas().getIva();
+                Date fechaActual = u.getIdplanificacionpesillo().getFecha();
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+                String fec = formato.format(fechaActual);
                 dtm.addRow(new Object[]{
                     u.getIdasistenciapesillo(),
                     u.getValormulta(),
                     u.getObservacion(),
-                    u.getIdplanificacionpesillo().getFecha(),
+                    fec,
                     u.getIdplanificacionpesillo().getTipoplanpesillo(),
                     u.getIdplanificacionpesillo().getLugar()
                 });

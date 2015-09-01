@@ -10,6 +10,7 @@ import Controladores.classAsistenciaPesillo;
 import Controladores.classInstitucion;
 import Controladores.classPagoPesillo;
 import entidades.Pagopesillo;
+import jap.ReportesControlador;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -35,17 +36,17 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
      * Creates new form frmPagoPesillo
      */
     classInstitucion ci = new classInstitucion();
-    classPagoPesillo cpp=new classPagoPesillo();
-    classAsistenciaPesillo cap=new classAsistenciaPesillo();
+    classPagoPesillo cpp = new classPagoPesillo();
+    classAsistenciaPesillo cap = new classAsistenciaPesillo();
     ControlFormularios cf;
 
     public frmPagoPesillo() {
         initComponents();
         ci = new classInstitucion();
-        cap=new classAsistenciaPesillo();
+        cap = new classAsistenciaPesillo();
         cargarInf();
     }
-
+    ReportesControlador rc = new ReportesControlador();
     BufferedImage img;
 
     public void cargarInf() {
@@ -72,7 +73,7 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
         }
     }
 
-     public void limpiar() {
+    public void limpiar() {
         txtRuc.setText("");
         txtCliente.setText("");
         txtdireccion.setText("");
@@ -85,12 +86,14 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
             tabla2.setValueAt("", i, 1);
         }
     }
+
     private ImageIcon ajustarImagen(BufferedImage ico) {
         ImageIcon tmpIconAux = new ImageIcon(ico);
         ImageIcon tmpIcon = new ImageIcon(tmpIconAux.getImage().getScaledInstance(97, 97, Image.SCALE_DEFAULT));
         return tmpIcon;
     }
-     public void buscarPago() {
+
+    public void buscarPago() {
         try {
             limpiar();
             int numMed = Integer.valueOf(txtnumMedidor.getText());
@@ -439,10 +442,9 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
                 String usActual = "ADMINISTR";
                 List<Pagopesillo> tableData = cpp.getTable(jTable1, numFact, fechaActual, usActual, subtotal);
                 cpp.Ingresarlist(tableData);
-                //                if (tableData.size() > 0) {
-                //                    b.factura("numfact", String.valueOf(numFact), "factura.jasper");
-                //
-                //                }
+                if (tableData.size() > 0) {
+                    rc.facturaPlanificacion("numfact", numFact+"", "facturaPesillo.jasper");
+                }
                 limpiar();
                 txtnumMedidor.setText("");
                 //            cft.getTableFacturas(jTable1, numFact, fecha, subtotal, iva, total, usActual);
