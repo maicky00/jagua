@@ -20,13 +20,14 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
      * Creates new form FrmAsistencia
      */
     classAsistencia ca = new classAsistencia();
+    classMedidor cm=new classMedidor();
 //    classMedidor cm = new classMedidor();
 
     public FrmAsistencia() {
         initComponents();
         classMedidor cm = new classMedidor();
         ca = new classAsistencia();
-        cm.cargarTablaMedidor2(tab1);
+//        cm.cargarTablaMedidorAsistencia(tab1,Integer.valueOf(lblIdPlan.getText()));
         lblId.setText("");
     }
 
@@ -550,6 +551,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
 
                 ca.guardarAsistencia(idPlan, idMedidor, asistencia, valor, descripcion, r);
                 ca.cargarTablaAsistencia(tab, idPlan);
+                cm.cargarTablaMedidorAsistencia(FrmAsistencia.tab1,Integer.valueOf(lblIdPlan.getText()));
             } else {
             }
         } else if (!lblId.getText().equals("")) {

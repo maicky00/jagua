@@ -7,7 +7,10 @@ package Formularios;
 
 import Controladores.ControlFormularios;
 import Controladores.classAsistencia;
+import Controladores.classMedidor;
 import Controladores.classPlanificacion;
+import static Formularios.FrmAsistencia.lblIdPlan;
+import static Formularios.FrmAsistencia.tab1;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +25,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
     classAsistencia ca = new classAsistencia();
     classPlanificacion cp = new classPlanificacion();
     ControlFormularios cf = new ControlFormularios();
+    classMedidor cm=new classMedidor();
 
     public FrmAsistenciaPlan() {
         initComponents();
@@ -240,6 +244,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
         try {
             if (!txtId.getText().equals("")) {
                 FrmAsistencia as = new FrmAsistencia();
@@ -256,6 +261,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
                 this.dispose();
                 cf.ControlaInstancia(as);
                 ca.cargarTablaAsistencia(FrmAsistencia.tab, Integer.parseInt(txtId.getText()));
+                cm.cargarTablaMedidorAsistencia(FrmAsistencia.tab1,Integer.valueOf(txtId.getText()));
             } else {
                 JOptionPane.showMessageDialog(null, "Debe especificar el tipo de planificacion");
             }

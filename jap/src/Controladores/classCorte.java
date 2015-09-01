@@ -173,7 +173,7 @@ public class classCorte {
         modelo.addColumn("multa");
         
         for (Corte c : getCorte()) {
-            if (c.getCorte().equals("SI")) {
+            if (c.getCorte().equals("SI")&&c.getPagado().equals("NO")) {
                 fila[0] = c.getIdcorte();
                 fila[1] = c.getIdmedidor().getNummedidor();
                 fila[2] = c.getIdmedidor().getIdusuario().getRucci();
@@ -240,7 +240,7 @@ public class classCorte {
         modelo.addColumn("mora");
         
         for (Corte c : getCorte()) {
-            if (c.getCorte().equals("NO")) {
+            if (c.getCorte().equals("NO")&&c.getPagado().equals("NO")) {
                 fila[0] = c.getIdcorte();
                 fila[1] = c.getIdmedidor().getIdmedidor();
                 fila[2] = c.getCorte();

@@ -160,8 +160,6 @@ public class classAsistencia {
         return i;
     }
 
-
-
     public void cargarTablaAsistencia(JTable tabla, int idPlan) {
 
         modelo = new DefaultTableModel();
@@ -250,4 +248,13 @@ public class classAsistencia {
         return dtm;
     }
 
+    public int buscardiferentes(int idMedidor, int idPlan) {
+
+        for (Asistencia dat : getAsistencia()) {
+            if (dat.getIdmedidor().getIdmedidor().equals(idMedidor) && dat.getIdplanificacion().getIdplanificacion().equals(idPlan)) {
+                return dat.getIdmedidor().getIdmedidor();
+            }
+        }
+        return 0;
+    }
 }

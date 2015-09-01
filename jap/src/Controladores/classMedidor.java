@@ -40,7 +40,7 @@ public class classMedidor {
         return medidorJpacontrolador.findMedidorEntities();
     }
 
-    public void guardarMedidor(int idUsuario, String serie, int numMedidor, String estado, float valorConexion, String pagado, float saldo,Date fecha) {
+    public void guardarMedidor(int idUsuario, String serie, int numMedidor, String estado, float valorConexion, String pagado, float saldo, Date fecha) {
         int i = 0;
         Medidor med = new Medidor();
         try {
@@ -116,7 +116,8 @@ public class classMedidor {
         }
         return true;
     }
-     public boolean modificarEstado(int id, String estado) {
+
+    public boolean modificarEstado(int id, String estado) {
         Medidor med = new Medidor();
 
         try {
@@ -358,6 +359,30 @@ public class classMedidor {
             fila[3] = u.getIdusuario().getApadosn();
 
             modelo.addRow(fila);
+        }
+    }
+
+    public void cargarTablaMedidorAsistencia(JTable tabla, int idPlan) {
+        classAsistencia ca = new classAsistencia();
+        DefaultTableModel modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[4];
+        modelo.addColumn("Nro medidor");
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Apodo");
+
+        for (Medidor u : getMedidor()) {
+
+            if (ca.buscardiferentes(u.getIdmedidor(), idPlan) != u.getIdmedidor()) {
+                fila[0] = u.getNummedidor();
+                fila[1] = u.getIdusuario().getRucci();
+                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                        + u.getIdusuario().getPrimernombre();
+                fila[3] = u.getIdusuario().getApadosn();
+
+                modelo.addRow(fila);
+            }
         }
     }
 
