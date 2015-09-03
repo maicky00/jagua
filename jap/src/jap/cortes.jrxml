@@ -7,7 +7,10 @@
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
-	<parameter name="estado" class="java.lang.String">
+	<parameter name="corte" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="pagado" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
@@ -49,12 +52,15 @@
      corte.`FECHA` AS corte_FECHA,
      corte.`OBSERVACION` AS corte_OBSERVACION,
      corte.`MULTA` AS corte_MULTA,
-     corte.`MORA` AS corte_MORA
+     corte.`MORA` AS corte_MORA,
+     corte.`PAGADO` AS corte_PAGADO,
+     medidor.`FECHA` AS medidor_FECHA
 FROM
      `institucion` institucion INNER JOIN `usuarios` usuarios ON institucion.`IDINSTITUCION` = usuarios.`IDINSTITUCION`
      INNER JOIN `medidor` medidor ON usuarios.`IDUSUARIO` = medidor.`IDUSUARIO`
      INNER JOIN `corte` corte ON medidor.`IDMEDIDOR` = corte.`IDMEDIDOR`
- WHERE   medidor.`ESTADO`=$P{estado}]]>
+WHERE
+     corte.`PAGADO` = $P{pagado} and corte.`CORTE`=$P{corte}]]>
 	</queryString>
 	<field name="institucion_IDINSTITUCION" class="java.lang.Integer"/>
 	<field name="institucion_NOMBREINST" class="java.lang.String"/>
@@ -253,13 +259,6 @@ FROM
 				<textFieldExpression><![CDATA[$F{usuarios_RUCCI}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="188" y="0" width="55" height="15" uuid="bd0338df-ba0d-4130-94d1-e72cb319e1b0"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usuarios_PRIMERAPELLIDO}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement style="Detail" x="304" y="1" width="76" height="15" uuid="2df05f31-f686-461f-8bd4-94e04164b924"/>
 				<textElement>
 					<font size="9"/>
@@ -267,11 +266,32 @@ FROM
 				<textFieldExpression><![CDATA[$F{medidor_NUMMEDIDOR}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="422" y="-57" width="109" height="15" uuid="5e3bfd60-1ec3-483c-8c13-0175f2e153fd"/>
+				<reportElement style="Detail" x="191" y="1" width="53" height="15" uuid="10816bbb-d44c-43c6-a3a0-c8feec6fe29a"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{medidor_ESTADO}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{usuarios_PRIMERAPELLIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="73" y="1" width="59" height="15" uuid="17046242-14df-492e-b8d0-a9f19d217751"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_PRIMERNOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="250" y="1" width="54" height="15" uuid="dd67f224-406f-4180-b17c-5282cd072cca"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDOAPELLIDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="133" y="1" width="54" height="15" uuid="144396cc-a79b-4c46-b482-23af74b83316"/>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDONOMBRE}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -283,27 +303,6 @@ FROM
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
-			<textField>
-				<reportElement style="Detail" x="130" y="-16" width="57" height="15" uuid="01f577f3-ab64-4332-a07e-0045d3406e44"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDONOMBRE}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="73" y="-16" width="57" height="15" uuid="33cd29e2-60bd-4c95-b944-4f13f7e0e322"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usuarios_PRIMERNOMBRE}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="250" y="-16" width="56" height="15" uuid="39f1ab08-e677-413b-b3dd-93393afe0764"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDOAPELLIDO}]]></textFieldExpression>
-			</textField>
 		</band>
 	</columnFooter>
 	<pageFooter>

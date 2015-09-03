@@ -6,6 +6,8 @@
 package Formularios;
 
 import Controladores.ControlFormularios;
+import Controladores.classMedidor;
+import static Formularios.FrmCorte.jTable1;
 import entidades.reloj;
 import jap.ReportesControlador;
 import jap.fondoPrincipal;
@@ -31,8 +33,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form FrmPrincipal
      */
+    classMedidor cm = new classMedidor();
+
     public FrmPrincipal() {
         initComponents();
+        inicio();
         this.setLocationRelativeTo(this);
         this.setExtendedState(MAXIMIZED_BOTH);
         setIconImage(new ImageIcon(this.getClass().getResource("Globe.png")).getImage());
@@ -60,7 +65,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
     ReportesControlador b = new ReportesControlador();
     ControlFormularios cf;
 
+    public void inicio() {
+
+        try {
+            cm.Ingresarlist();
+        } catch (Exception e) {
+        }
+    }
+
     //controlar ventanas
+
     public void mostrarVentanaDos() {
         FrmBusqueda lol = new FrmBusqueda();
         lol.setVisible(true);
@@ -413,6 +427,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         FrmCorte co = new FrmCorte();
         cf = new ControlFormularios();
         cf.ControlaInstancia(co);
+        cm.cargarCorte(FrmCorte.jTable1);
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
@@ -487,7 +502,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         // TODO add your handling code here:
         b = new ReportesControlador();
-        b.reporte("usuarioMedidor.jasper");
+        b.reporte("usuarioMedidor.jasper", "UsuariosConMedidor");
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed

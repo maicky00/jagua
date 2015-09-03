@@ -443,7 +443,7 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
                 List<Pagopesillo> tableData = cpp.getTable(jTable1, numFact, fechaActual, usActual, subtotal);
                 cpp.Ingresarlist(tableData);
                 if (tableData.size() > 0) {
-                    rc.facturaPlanificacion("numfact", numFact+"", "facturaPesillo.jasper");
+                    rc.facturaPlanificacion("numfact", numFact+"", "facturaPesillo.jasper","Pesillo "+lblfecha.getText(),"Num.Med "+txtnumMedidor.getText()+" Fact."+numFact);
                 }
                 limpiar();
                 txtnumMedidor.setText("");

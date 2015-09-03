@@ -68,6 +68,7 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lblid = new javax.swing.JLabel();
+        combo = new javax.swing.JComboBox();
 
         setClosable(true);
 
@@ -112,6 +113,8 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Num. Meses:");
 
+        combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ACTIVAR", "INACTIVAR" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,7 +133,8 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtCant, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtTiempo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblid, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblid, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -161,7 +165,9 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -177,11 +183,12 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
             String desc = txtDesc.getText();
             float valor = Float.valueOf(txtCant.getText());
             int tiempo = Integer.valueOf(txtTiempo.getText());
+            String act= combo.getSelectedItem().toString();
             if (coc.buscarOtrosconceptos(1).equals(null)) {
-                coc.guardarOtrosconceptos(desc, valor, tiempo);
+                coc.guardarOtrosconceptos(desc, valor, tiempo,act);
             } else if (!coc.buscarOtrosconceptos(1).equals(null)) {
                 int id = 1;
-                coc.modificarOtrosconceptos(id, desc, valor, tiempo);
+                coc.modificarOtrosconceptos(id, desc, valor, tiempo,act);
             }
             inicio();
             ocultar();
@@ -200,6 +207,7 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
     private org.edisoncor.gui.button.ButtonNice btnCancelar;
     private org.edisoncor.gui.button.ButtonNice btnEditar;
     private org.edisoncor.gui.button.ButtonNice btnNuevo;
+    private javax.swing.JComboBox combo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

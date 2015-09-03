@@ -26,13 +26,14 @@ public class classOtrosConceptos {
         return otrosconceptosJpacontrolador.findOtrosconceptosEntities();
     }
 
-    public void guardarOtrosconceptos(String descr, float cantidad, int tiempo) {
+    public void guardarOtrosconceptos(String descr, float cantidad, int tiempo,String activar) {
         try {
 
             Otrosconceptos lg = new Otrosconceptos();
             lg.setDescripcion(descr);
             lg.setCantidad(cantidad);
             lg.setTiempo(tiempo);
+            lg.setActivo(activar);
             otrosconceptosJpacontrolador.create(lg);
 
         } catch (Exception e) {
@@ -40,7 +41,7 @@ public class classOtrosConceptos {
         }
     }
 
-    public boolean modificarOtrosconceptos(int id, String descr, float cantidad, int tiempo) {
+    public boolean modificarOtrosconceptos(int id, String descr, float cantidad, int tiempo,String activar) {
 
         try {
 
@@ -51,6 +52,7 @@ public class classOtrosConceptos {
             dat.setDescripcion(descr);
             dat.setCantidad(cantidad);
             dat.setTiempo(tiempo);
+            dat.setActivo(activar);
             otrosconceptosJpacontrolador.edit(dat);
 
         } catch (Exception e) {

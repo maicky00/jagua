@@ -11,6 +11,7 @@ import Controladores.classMedidor;
 import Controladores.classPlanificacion;
 import static Formularios.FrmAsistencia.lblIdPlan;
 import static Formularios.FrmAsistencia.tab1;
+import jap.ReportesControlador;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,12 +26,13 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
     classAsistencia ca = new classAsistencia();
     classPlanificacion cp = new classPlanificacion();
     ControlFormularios cf = new ControlFormularios();
-    classMedidor cm=new classMedidor();
+    classMedidor cm = new classMedidor();
 
     public FrmAsistenciaPlan() {
         initComponents();
         ca = new classAsistencia();
     }
+    ReportesControlador rc = new ReportesControlador();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,6 +58,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -194,6 +197,13 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -204,6 +214,10 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addComponent(jButton3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +226,9 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -253,7 +269,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
                 int anio = jYearChooser1.getYear();
 
                 cf = new ControlFormularios();
-                
+
                 FrmAsistencia.lblIdPlan.setText(txtId.getText());
                 FrmAsistencia.txtValor.setText(jTable1.getValueAt(n, 4).toString());
                 FrmAsistencia.txtMes.setText(mes + "/" + anio);
@@ -261,7 +277,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
                 this.dispose();
                 cf.ControlaInstancia(as);
                 ca.cargarTablaAsistencia(FrmAsistencia.tab, Integer.parseInt(txtId.getText()));
-                cm.cargarTablaMedidorAsistencia(FrmAsistencia.tab1,Integer.valueOf(txtId.getText()));
+                cm.cargarTablaMedidorAsistencia(FrmAsistencia.tab1, Integer.valueOf(txtId.getText()));
             } else {
                 JOptionPane.showMessageDialog(null, "Debe especificar el tipo de planificacion");
             }
@@ -270,10 +286,17 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        rc.Planificacion("id",txtId.getText(), "usuarioasistencia.jasper");
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

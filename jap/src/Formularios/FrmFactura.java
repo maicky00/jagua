@@ -182,7 +182,6 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         comboPagos = new javax.swing.JComboBox();
         txtMultaReconexion = new javax.swing.JLabel();
         txtIdCorte = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
 
         setClosable(true);
@@ -453,8 +452,6 @@ public class FrmFactura extends javax.swing.JInternalFrame {
 
         txtIdCorte.setText("0");
 
-        jLabel10.setText("jLabel10");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -466,17 +463,13 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                         .addComponent(jLabel9)
                         .addGap(10, 10, 10)
                         .addComponent(comboPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(92, Short.MAX_VALUE))
                     .addComponent(lbldescNuevoMed, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(txtMultaReconexion)
                         .addGap(18, 18, 18)
                         .addComponent(txtIdCorte)
                         .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addGap(133, 133, 133))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,8 +486,6 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMultaReconexion)
                     .addComponent(txtIdCorte))
-                .addGap(28, 28, 28)
-                .addComponent(jLabel10)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -603,18 +594,17 @@ public class FrmFactura extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        
         // TODO add your handling code here:
         try {
 
             limpiar();
-            
-        
+
             if (cc.verificarOtrPagos(Integer.valueOf(txtnumMedidor.getText())) == true) {
                 int numM = Integer.valueOf(txtnumMedidor.getText());
                 txtIdCorte.setVisible(true);
                 txtMultaReconexion.setVisible(true);
-                txtIdCorte.setText(cc.buscarMedidorNumM(numM).getMulta().toString());
+                txtMultaReconexion.setText(cc.buscarMedNum(numM).getObservacion());
+                txtIdCorte.setText(cc.buscarMedNum(numM).getMulta().toString());
             }
             if (cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() > 0) {
                 comboPagos.removeAllItems();
@@ -675,8 +665,18 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                 Date fechaActual = formato.parse(lblfecha.getText());
                 if (Float.valueOf(txtIdCorte.getText()) > 0) {
+                    int numM = Integer.valueOf(txtnumMedidor.getText());
+                    float derCon=0;
+                    float mulRec=0;
+                    if (cc.buscarMedNum(numM).getCorte().equals("SI")) {
+                        mulRec = Float.valueOf(txtIdCorte.getText());
+                        derCon = 0;
+                    } else if (cc.buscarMedNum(numM).getCorte().equals("NO")) {
+                        mulRec = 0;
+                        derCon = Float.valueOf(txtIdCorte.getText());
+                    }
                     int idotr = cc.buscarMedNum(Integer.valueOf(txtnumMedidor.getText())).getIdcorte();
-                    co.guardarOtrospagos(idotr, 0, Float.valueOf(txtIdCorte.getText()), 0, Float.valueOf(txtIdCorte.getText()), numFact, usActual, fechaActual);
+                    co.guardarOtrospagos(idotr, derCon, mulRec, 0, Float.valueOf(txtIdCorte.getText()), numFact, usActual, fechaActual);
                     cm.modificarEstado(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdmedidor(), "ACTIVO");
                     cc.modificarPago(idotr, "SI");
                 }
@@ -697,7 +697,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                 if (Float.valueOf(txtTotalgeneral.getText()) > 0) {
                     JOptionPane.showMessageDialog(null, "Pago Realizado Corectamente", "Información", 1);
                     String idr = "" + cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdusuario().getIdusuario();
-                    b.factura("id", idr, "numfact", String.valueOf(numFact), "facturageneral.jasper");
+                    b.factura("id", idr, "numfact", String.valueOf(numFact), "facturageneral.jasper","Consumos "+lblfecha.getText(),"Num.Med "+txtnumMedidor.getText()+" Fact."+numFact);
 
                 } else {
                     JOptionPane.showMessageDialog(null, "No hay Datos", "Información", 1);
@@ -766,7 +766,6 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     public static javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

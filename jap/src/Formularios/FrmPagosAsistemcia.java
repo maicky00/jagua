@@ -452,7 +452,7 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
                 List<Pagosasistencia> tableData = cpa.getTable(jTable1, numFact, fechaActual, usActual, subtotal);
                 cpa.Ingresarlist(tableData);
                 if (tableData.size() > 0) {
-                    b.facturaPlanificacion("numfact", "" + numFact, "pagoPlanificacion.jasper");
+                    b.facturaPlanificacion("numfact", "" + numFact, "pagoPlanificacion.jasper","Planifinicaciones "+lblfecha.getText(),"Num.Med "+txtnumMedidor.getText()+" Fact."+numFact);
 
                 }
                 limpiar();

@@ -11,6 +11,7 @@ import static Controladores.classDisenio.tablahtml;
 import static Controladores.classDisenio.textoNota;
 import static Controladores.classDisenio.txthtml;
 import Controladores.classMedidor;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -89,8 +90,17 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         txtObservacion.setText("");
         txtMulta.setText("");
         lblId.setText("");
-        comboCorte.setSelectedIndex(0);
-//        txtMora.setText("");
+        comboCorte.setSelectedIndex(0);               
+            txtMedidor.setText("");
+            txtCedula.setText("");
+            txtUsuario.setText("");
+            txtApodo.setText("");
+            txtMesesDebe.setText("");
+            fecha.setDate(new Date());
+            txtObservacion.setText("");
+            txtMulta.setText("");
+            txtMora.setText("");
+
 
     }
 
@@ -105,11 +115,11 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel4 = new javax.swing.JPanel();
-        btnNuevo = new org.edisoncor.gui.button.ButtonNice();
         btnGuardar = new org.edisoncor.gui.button.ButtonNice();
         btnEditar = new org.edisoncor.gui.button.ButtonNice();
         btnCancelar = new org.edisoncor.gui.button.ButtonNice();
         mensaje = new javax.swing.JLabel();
+        btnNuevo = new org.edisoncor.gui.button.ButtonNice();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
@@ -162,17 +172,6 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnNuevo.setBackground(new java.awt.Color(0, 102, 255));
-        btnNuevo.setForeground(new java.awt.Color(255, 255, 255));
-        btnNuevo.setText("NUEVO");
-        btnNuevo.setModelo(org.edisoncor.gui.button.ButtonNice.Modelo.ROUND_LEFT);
-        btnNuevo.setSegundoColor(new java.awt.Color(0, 51, 255));
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
-            }
-        });
-
         btnGuardar.setBackground(new java.awt.Color(0, 102, 255));
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.setText("GUARDAR");
@@ -210,14 +209,25 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
         mensaje.setForeground(new java.awt.Color(204, 0, 0));
 
+        btnNuevo.setBackground(new java.awt.Color(0, 102, 255));
+        btnNuevo.setForeground(new java.awt.Color(255, 255, 255));
+        btnNuevo.setText("NUEVO");
+        btnNuevo.setModelo(org.edisoncor.gui.button.ButtonNice.Modelo.ROUND_LEFT);
+        btnNuevo.setSegundoColor(new java.awt.Color(0, 51, 255));
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,10 +247,10 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                         .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -249,18 +259,20 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Id:");
 
-        jLabel3.setText("Id Medidor:");
+        jLabel3.setText("N° de Medidor:");
 
         txtMedidor.setEditable(false);
 
         jLabel4.setText("Corte:");
 
         comboCorte.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione", "SI", "NO" }));
+        comboCorte.setToolTipText("");
         comboCorte.setEnabled(false);
         comboCorte.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
 
         jLabel5.setText("Fecha:");
 
+        fecha.setToolTipText("");
         fecha.setEnabled(false);
 
         jLabel6.setText("Observacion:");
@@ -315,11 +327,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addComponent(txtMesesDebe, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel4)
@@ -340,26 +348,31 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13)
                                     .addComponent(jLabel14)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel11))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtUsuario)
-                            .addComponent(txtApodo)
-                            .addComponent(txtCedula)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtMedidor, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                            .addComponent(txtMesesDebe, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel11))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtUsuario)
+                                .addComponent(txtApodo)
+                                .addComponent(txtCedula)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(txtMedidor, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButton1))))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,7 +401,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtMesesDebe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -601,6 +614,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
                     ocultar();
                 }
             }
+            cm.cargarCorte(jTable1);
         } catch (Exception e) {
         }
 
@@ -670,21 +684,23 @@ public class FrmCorte extends javax.swing.JInternalFrame {
             limpiar();
             txtMesesDebe.setText("");
             int n = jTable2.getSelectedRow();
+             int id = Integer.valueOf(jTable2.getValueAt(n, 0).toString().toString());          
             lblId.setText(jTable2.getValueAt(n, 0).toString());
-            txtMedidor.setText(jTable2.getValueAt(n, 1).toString());
-            txtCedula.setText(cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getRucci());
-            String usuario = cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getPrimernombre() + " "
-                    + cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getPrimerapellido() + " "
-                    + cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getSegundoapellido();
+            
+            txtMedidor.setText(cc.buscarIdCorte(id).getIdmedidor().getNummedidor().toString());
+            txtCedula.setText(cc.buscarIdCorte(id).getIdmedidor().getIdusuario().getRucci());
+            String usuario = cc.buscarIdCorte(id).getIdmedidor().getIdusuario().getPrimernombre() + " "
+                    + cc.buscarIdCorte(id).getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                    + cc.buscarIdCorte(id).getIdmedidor().getIdusuario().getSegundoapellido();
             txtUsuario.setText(usuario);
-            txtApodo.setText(cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdusuario().getApadosn());
-            txtMesesDebe.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable2.getValueAt(n, 1).toString())).getMora().toString());
-//            comboCorte.setSelectedItem(jTable2.getValueAt(n, 2).toString());
-//            txtObservacion.setText(jTable2.getValueAt(n, 4).toString());
-            comboCorte.setSelectedItem(cc.buscarMedidorNumM(Integer.valueOf(jTable2.getValueAt(n, 1).toString())).getCorte());
-            txtObservacion.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable2.getValueAt(n, 1).toString())).getObservacion());
-            txtMulta.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable2.getValueAt(n, 1).toString())).getMulta().toString());
-            txtMora.setText(cc.buscarMedidorNumM(Integer.valueOf(jTable2.getValueAt(n, 1).toString())).getMora().toString());
+            txtApodo.setText(cc.buscarIdCorte(id).getIdmedidor().getIdusuario().getApadosn());
+            txtMesesDebe.setText(String.valueOf(cdf.numContar(cc.buscarIdCorte(id).getIdmedidor().getIdmedidor())));
+
+            fecha.setDate(cc.buscarIdCorte(id).getFecha());
+            comboCorte.setSelectedItem(cc.buscarIdCorte(id).getCorte());
+            txtObservacion.setText(cc.buscarIdCorte(id).getObservacion());
+            txtMulta.setText(cc.buscarIdCorte(id).getMulta().toString());
+            txtMora.setText(String.valueOf(cdf.numContar(cc.buscarIdCorte(id).getIdmedidor().getIdmedidor())));
 
         } catch (Exception e) {
         }
