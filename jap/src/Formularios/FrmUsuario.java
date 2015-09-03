@@ -7,6 +7,7 @@ package Formularios;
 
 import Controladores.ControlFormularios;
 import Controladores.ValidarCedula;
+import Controladores.classDisenio;
 import Controladores.classInstitucion;
 import Controladores.classMoverRegistros;
 import Controladores.classusuario;
@@ -41,26 +42,46 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     ValidarCedula valCed = new ValidarCedula();
     classInstitucion ci = new classInstitucion();
     classusuario cu = new classusuario();
-
+    
     public FrmUsuario() {
         initComponents();
+        inicio();
+    }
+    classMoverRegistros moverRegistros = new classMoverRegistros(cu.getUsuarios());
+    ControlFormularios cf;
+    
+    JFileChooser seleccionado = new JFileChooser();
+    File archivo = null;
+    byte[] bytesImg = null;
+    String ruta, nombre;
+    BufferedImage img;
+    
+    public void inicio() {
         Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
         ci = new classInstitucion();
         cu = new classusuario();
         jLabel9.setText(ci.buscarIdInstitucion(1).getNombreinst().toString());
-
+        
+        jLabel1.setVisible(false);
+        id.setVisible(false);
         cu.cargarTablaUsuario2(tablaUsuarios);
+        txtRuc.setToolTipText(classDisenio.txthtml("Ingrese su numero de cedula, 10 digitos"));
+        txtDir.setToolTipText(classDisenio.txthtml("Ingrese la direccion de domicilio"));
+        txtNombre.setToolTipText(classDisenio.txthtml("Ingrese primer nombre, nombre paterno"));
+        txtNombre2.setToolTipText(classDisenio.txthtml("ingrese segundo nombre, nombre materno"));
+        txtApellido.setToolTipText(classDisenio.txthtml("Ingrese primer apellido, apellido paterno"));
+        txtApellido2.setToolTipText(classDisenio.txthtml("Ingrese segundo apellido, apellido materno"));
+        txtApodo.setToolTipText(classDisenio.txthtml("Ingrse apodo"));
+        txtTelefono.setToolTipText(classDisenio.txthtml("Ingrese telefono fijo 9 digitos"));
+        txtCelular.setToolTipText(classDisenio.txthtml("Ingrese numero de celular 10 digitos"));
+        comboSector.setToolTipText(classDisenio.txthtml("Seleccione el sector donde vive"));
+        txtReferencia.setToolTipText(classDisenio.txthtml("Referencia ejemplo: vive a lado de la pana"));
+        txtObservar.setToolTipText(classDisenio.txthtml("Observacion ejemplo: tercera edad, capacidades especiales, madre soltera"));
+        txtBuscar.setToolTipText(classDisenio.txthtml("Selecciona que tipo de busqueda realizar y digite la forma de busqueda seleccionada"));
+        tablaUsuarios.setToolTipText(classDisenio.tablahtml("Lista de tablas de usuarios"));
     }
-    classMoverRegistros moverRegistros = new classMoverRegistros(cu.getUsuarios());
-    ControlFormularios cf;
-
-    JFileChooser seleccionado = new JFileChooser();
-    File archivo = null;
-    byte[] bytesImg = null;
-    String ruta, nombre;
-    BufferedImage img;
 
     public void mostrar() {
         txtRuc.setEditable(true);
@@ -81,7 +102,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(true);
         btnCancelar.setEnabled(true);
     }
-
+    
     public void ocultar() {
         txtRuc.setEditable(false);
         txtDir.setEditable(false);
@@ -100,7 +121,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(false);
         btnCancelar.setEnabled(false);
     }
-
+    
     public void limpiar() {
         lblfoto.setIcon(null);
         id.setText("");
@@ -117,7 +138,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         txtApodo.setText("");
         comboSector.setSelectedIndex(0);
     }
-
+    
     private boolean letras(String str) {
         boolean respuesta = false;
         if ((str).matches("([a-z]|[A-Z])+")) {
@@ -171,7 +192,11 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaUsuarios = new javax.swing.JTable();
+        tablaUsuarios = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         rbtTodos = new javax.swing.JRadioButton();
         jLabel10 = new javax.swing.JLabel();
         rbtNombres = new javax.swing.JRadioButton();
@@ -759,7 +784,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+        
         ocultar();
         limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -785,12 +810,12 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
     private void txtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyTyped
         char c = evt.getKeyChar();
-
+        
         if (Character.isLetter(c)) {
             getToolkit().beep();
-
+            
             evt.consume();
-
+            
             mensaje.setText("error de ingreso, ingrese digitos");
         } else {
             mensaje.setText("");
@@ -798,14 +823,14 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtRucKeyTyped
 
     private void txtObservarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservarKeyTyped
-
+        
         char c = evt.getKeyChar();
-
+        
         if (Character.isDigit(c)) {
             getToolkit().beep();
-
+            
             evt.consume();
-
+            
             mensaje.setText("error de ingreso, ingrese letras!...");
         } else {
             mensaje.setText("");
@@ -813,7 +838,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtObservarKeyTyped
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
+        
         String insti = jLabel9.getText();
         String rucCi = txtRuc.getText();
         String primNombre = txtNombre.getText();
@@ -855,8 +880,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                 } else {
                 }
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un sector");
         }
         limpiar();
@@ -880,7 +904,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Por favor seleccione un archivo de imagen.");
                 }
             }
-
+            
         }
     }//GEN-LAST:event_buttonNice6ActionPerformed
 
@@ -889,7 +913,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         try {
             Usuarios usu = (Usuarios) moverRegistros.getNext();
             setDatosMover(usu);
-
+            
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -899,7 +923,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         try {
             Usuarios usu = (Usuarios) moverRegistros.getBack();
             setDatosMover(usu);
-
+            
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -911,16 +935,16 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                 cu.eliminarUsuario(Integer.valueOf(id.getText()));
                 cu.cargarTablaUsuario2(tablaUsuarios);
             }
-
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No Se Puede Eliminar", "Información", 1);
-
+            
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtApellido2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellido2KeyReleased
         String texto = txtApellido2.getText().toUpperCase();
-
+        
         Pattern patron = Pattern.compile("[^A-Za-z|Ñ|Á|É|Í|Ó|Ú]");
         Matcher encaja = patron.matcher(texto);
         if (!encaja.find()) {
@@ -936,7 +960,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         String texto = txtNombre.getText().toUpperCase();
-
+        
         Pattern patron = Pattern.compile("[^A-Za-z|Ñ|Á|É|Í|Ó|Ú]");
         Matcher encaja = patron.matcher(texto);
         if (!encaja.find()) {
@@ -951,7 +975,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
     private void txtNombre2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre2KeyReleased
         String texto = txtNombre2.getText().toUpperCase();
-
+        
         Pattern patron = Pattern.compile("[^A-Za-z|Ñ|Á|É|Í|Ó|Ú]");
         Matcher encaja = patron.matcher(texto);
         if (!encaja.find()) {
@@ -966,7 +990,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
     private void txtApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyReleased
         String texto = txtApellido.getText().toUpperCase();
-
+        
         Pattern patron = Pattern.compile("[^A-Za-z|Ñ|Á|É|Í|Ó|Ú]");
         Matcher encaja = patron.matcher(texto);
         if (!encaja.find()) {
@@ -980,7 +1004,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtApellidoKeyReleased
 
     private void txtTelefonoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyReleased
-
+        
         String texto = txtTelefono.getText();
         Pattern pat = Pattern.compile("[0-9]{7}");
         Matcher mat = pat.matcher(texto);
@@ -1000,7 +1024,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTelefonoMouseClicked
 
     private void txtCelularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCelularMouseClicked
-
+        
         txtCelular.setText("");
     }//GEN-LAST:event_txtCelularMouseClicked
 
@@ -1019,7 +1043,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCelularKeyReleased
 
     private void txtRucKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyReleased
-
+        
         if (valCed.validadorDeCedula(txtRuc.getText()) == true) {
             mensaje.setForeground(Color.green);
             mensaje.setText("cedula valida");
@@ -1068,7 +1092,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             int idb = Integer.valueOf(tablaUsuarios.getValueAt(n, 0).toString());
             id.setText(cu.buscarLoginId(idb).getIdusuario().toString());
             txtRuc.setText(cu.buscarLoginId(idb).getRucci().toString());
-
+            
             txtNombre.setText(cu.buscarLoginId(idb).getPrimernombre());
             txtNombre2.setText(cu.buscarLoginId(idb).getSegundonombre());
             txtApellido.setText(cu.buscarLoginId(idb).getPrimerapellido());
@@ -1080,7 +1104,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             comboSector.setSelectedItem(cu.buscarLoginId(idb).getSector().toString());
             txtReferencia.setText(cu.buscarLoginId(idb).getReferencia());
             txtObservar.setText(cu.buscarLoginId(idb).getObservacion());
-
+            
             byte[] data = cu.buscarLoginId(idb).getFoto();
             img = ImageIO.read(new ByteArrayInputStream(data));
             lblfoto.setIcon(new ImageIcon(img));
@@ -1119,7 +1143,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                 cu.cargarTablaUsuario2(tablaUsuarios);
             }
         } catch (Exception e) {
-
+            
         }
 
     }//GEN-LAST:event_txtBuscarKeyReleased
@@ -1147,12 +1171,12 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             } else {
                 lblfoto.setIcon(null);
             }
-
+            
         } catch (Exception e) {
         }
-
+        
     }
-
+    
     private ImageIcon ajustarImagen(BufferedImage ico) {
         ImageIcon tmpIconAux = new ImageIcon(ico);
         ImageIcon tmpIcon = new ImageIcon(tmpIconAux.getImage().getScaledInstance(143, 175, Image.SCALE_DEFAULT));

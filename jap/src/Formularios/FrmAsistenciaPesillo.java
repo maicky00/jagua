@@ -121,13 +121,21 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         txtBusqueda = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tab1 = new javax.swing.JTable();
+        tab1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         txtMes = new javax.swing.JTextField();
         txtTipo = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tab = new javax.swing.JTable();
+        tab = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
         jLabel12 = new javax.swing.JLabel();
         txtAnio = new javax.swing.JTextField();
 

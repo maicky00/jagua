@@ -99,12 +99,17 @@ public class FrmPlanificacionPesillo extends javax.swing.JInternalFrame {
         txtTipo = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false; //Disallow the editing of any cell
+            }
+        };
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("FORMULARIO DE PLANIFICACION EVENTO PESILLO");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
