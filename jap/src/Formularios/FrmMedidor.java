@@ -6,6 +6,7 @@
 package Formularios;
 
 import Controladores.ControlFormularios;
+import Controladores.classDisenio;
 import Controladores.classMedidor;
 import Controladores.classusuario;
 import static Formularios.FrmPagosAsistemcia.lblfecha;
@@ -32,6 +33,12 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
     public FrmMedidor() {
         initComponents();
+        inicio();
+    }
+
+    ControlFormularios cf;
+
+    private void inicio() {
         limpiar();
         Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
@@ -44,12 +51,24 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         String hoy = formato.format(fechaActual);
         lblfecha.setText(hoy);
+        
+        lblIdmedidor.setVisible(false);
+        jLabel1.setVisible(false);
+        lblIdUsuario.setToolTipText(classDisenio.txthtml("Numero de usuario, formulario usuario"));
+        txtUsuarioCed.setToolTipText(classDisenio.txthtml("Numero de cedula del usuario"));
+        txtNombre.setToolTipText(classDisenio.txthtml("Nombre del usuario"));
+        txtSerie.setToolTipText(classDisenio.txthtml("Ingrese el numero de serie del medidor"));
+        txtMedidor.setToolTipText(classDisenio.txthtml("Ingrese el numero del medidor"));
+        comboEstado.setToolTipText(classDisenio.txthtml("seleccione el estado de medidor"));
+        txtvalorConexion.setToolTipText(classDisenio.txthtml("Ingrese valor de conexion de un usuario nuevo"));
+        txtPagado.setToolTipText(classDisenio.txthtml("Pagado SI/NO"));
+        txtSaldo.setToolTipText(classDisenio.txthtml("Saldo a pagar de la nueva conexion"));
+        jTextField1.setToolTipText(classDisenio.txthtml("Seleccion busquda por apellido y luego digite el metodo de busqueda"));
+        jTable1.setToolTipText(classDisenio.tablahtml("Lista de medidores"));
     }
 
-    ControlFormularios cf;
-
     public void mostrar() {
-
+        txtUsuarioCed.setEnabled(true);
         txtvalorConexion.setEnabled(true);
         txtSerie.setEditable(true);
         txtMedidor.setEditable(true);
@@ -63,6 +82,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     }
 
     public void ocultar() {
+        txtUsuarioCed.setEnabled(false);
         txtvalorConexion.setEnabled(false);
         txtSerie.setEditable(false);
         txtMedidor.setEditable(false);
@@ -519,7 +539,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                         .addComponent(jLabel7))
                     .addGap(18, 18, 18)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(23, Short.MAX_VALUE))
+                    .addContainerGap(36, Short.MAX_VALUE))
             );
 
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -539,7 +559,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
+                    .addContainerGap()
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -598,11 +618,11 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             String pagado = txtPagado.getText();
             float saldo = Float.valueOf(txtSaldo.getText());
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-                Date fechaActual = formato.parse(lblfecha.getText());
+            Date fechaActual = formato.parse(lblfecha.getText());
             if (lblIdmedidor.getText().equals("")) {
                 int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
-                    cm.guardarMedidor(idUsuario, serie, numMedidor, estado, valorConx, pagado, saldo,fechaActual);
+                    cm.guardarMedidor(idUsuario, serie, numMedidor, estado, valorConx, pagado, saldo, fechaActual);
                     cm.cargarTablaMedidor(jTable1);
                     limpiar();
                     ocultar();
