@@ -20,6 +20,7 @@
     <class>entidades.Pagopesillo</class>
     <class>entidades.Planificacionpesillo</class>
     <class>entidades.Otrosconceptos</class>
+    <class>entidades.Historialfactura</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistemaagua2?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

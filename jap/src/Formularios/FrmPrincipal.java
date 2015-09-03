@@ -427,7 +427,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         FrmCorte co = new FrmCorte();
         cf = new ControlFormularios();
         cf.ControlaInstancia(co);
-        cm.cargarCorte(FrmCorte.jTable1);
+        try {
+             cm.cargarCorte(FrmCorte.jTable1);
+        } catch (Exception e) {
+        }
+       
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 

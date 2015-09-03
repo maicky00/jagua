@@ -10,6 +10,7 @@ import Controladores.classAsistencia;
 import Controladores.classCorte;
 import Controladores.classDetalleFactura;
 import Controladores.classFactura;
+import Controladores.classHistorialfactura;
 import Controladores.classInstitucion;
 import Controladores.classMedidor;
 import Controladores.classOtrosConceptos;
@@ -62,7 +63,8 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     classOtrosPagos co = new classOtrosPagos();
     classCorte cc = new classCorte();
     classOtrosConceptos coc = new classOtrosConceptos();
-
+    classHistorialfactura chf = new classHistorialfactura();
+    
     public FrmFactura() {
         initComponents();
         ci = new classInstitucion();
@@ -75,14 +77,14 @@ public class FrmFactura extends javax.swing.JInternalFrame {
 //        comboPagos.setVisible(false);
         txtIdCorte.setVisible(false);
         txtMultaReconexion.setVisible(false);
-
+        
     }
     classPagosNuevoMed cpnm = new classPagosNuevoMed();
     classMedidor cm = new classMedidor();
-
+    
     BufferedImage img;
     ReportesControlador b = new ReportesControlador();
-
+    
     public void cargarInf() {
         Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
@@ -92,13 +94,13 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         String hoy = formato.format(fechaActual);
         lblfecha.setText(hoy);
         lblInstitucion.setText(ci.buscarIdInstitucion(1).getNombreinst());
-
+        
         byte[] data = ci.buscarIdInstitucion(1).getLogo();
         if (data != null) {
             try {
                 img = ImageIO.read(new ByteArrayInputStream(data));
             } catch (IOException ex) {
-
+                
             }
             jLabel4.setIcon(ajustarImagen(img));
             jLabel4.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -106,7 +108,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
             jLabel4.setIcon(null);
         }
     }
-
+    
     public void limpiar() {
         txtMultaReconexion.setVisible(false);
         txtIdCorte.setVisible(false);
@@ -129,7 +131,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
             tabla2.setValueAt("", i, 1);
         }
     }
-
+    
     private ImageIcon ajustarImagen(BufferedImage ico) {
         ImageIcon tmpIconAux = new ImageIcon(ico);
         ImageIcon tmpIcon = new ImageIcon(tmpIconAux.getImage().getScaledInstance(97, 97, Image.SCALE_DEFAULT));
@@ -585,7 +587,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtRucKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRucKeyTyped
-
+        
         if (txtRuc.getText().equals("")) {
             FrmBusqueda bu = new FrmBusqueda();
             bu.setVisible(true);
@@ -596,9 +598,9 @@ public class FrmFactura extends javax.swing.JInternalFrame {
 
         // TODO add your handling code here:
         try {
-
+            
             limpiar();
-
+            
             if (cc.verificarOtrPagos(Integer.valueOf(txtnumMedidor.getText())) == true) {
                 int numM = Integer.valueOf(txtnumMedidor.getText());
                 txtIdCorte.setVisible(true);
@@ -656,18 +658,18 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String usActual = "ADMINISTR";
-
+        
         int i = JOptionPane.showConfirmDialog(this, "¿REAlIZAR TRANSACCION?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
-
+            
             try {
                 int numFact = cft.numFactura() + 1;
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                 Date fechaActual = formato.parse(lblfecha.getText());
                 if (Float.valueOf(txtIdCorte.getText()) > 0) {
                     int numM = Integer.valueOf(txtnumMedidor.getText());
-                    float derCon=0;
-                    float mulRec=0;
+                    float derCon = 0;
+                    float mulRec = 0;
                     if (cc.buscarMedNum(numM).getCorte().equals("SI")) {
                         mulRec = Float.valueOf(txtIdCorte.getText());
                         derCon = 0;
@@ -689,16 +691,17 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                     float subtotal = Float.valueOf(tabla2.getValueAt(0, 1).toString());
                     float iva = Float.valueOf(tabla2.getValueAt(1, 1).toString());
                     float total = Float.valueOf(tabla2.getValueAt(2, 1).toString());
-
+                    
                     List<Facturas> tableData = cft.getTableFacturas(jTable1, numFact, fechaActual, subtotal, iva, total, usActual);
                     cft.IngresarlistFact(tableData);
                 }
-
+                
                 if (Float.valueOf(txtTotalgeneral.getText()) > 0) {
+                    chf.guardarHistorial(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdusuario().getIdusuario(), numFact, fechaActual);
                     JOptionPane.showMessageDialog(null, "Pago Realizado Corectamente", "Información", 1);
                     String idr = "" + cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdusuario().getIdusuario();
-                    b.factura("id", idr, "numfact", String.valueOf(numFact), "facturageneral.jasper","Consumos "+lblfecha.getText(),"Num.Med "+txtnumMedidor.getText()+" Fact."+numFact);
-
+                    b.factura("id", idr, "numfact", String.valueOf(numFact), "facturageneral.jasper", "Consumos " + lblfecha.getText(), "Num.Med " + txtnumMedidor.getText() + " Fact." + numFact);
+                    
                 } else {
                     JOptionPane.showMessageDialog(null, "No hay Datos", "Información", 1);
                 }
@@ -728,12 +731,12 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                 tabla2.setValueAt(subtotal + Float.valueOf(tabla2.getValueAt(1, 1).toString()), 2, 1);
                 float tg = Float.valueOf(tabla2.getValueAt(2, 1).toString())
                         + Float.valueOf(comboPagos.getSelectedItem().toString()) + recon;
-
+                
                 txtTotalgeneral.setText(String.valueOf(tg));
             } else {
                 JOptionPane.showMessageDialog(null, "No se puede Eliminar\n Debe cancelar ", "Información", 1);
             }
-
+            
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
