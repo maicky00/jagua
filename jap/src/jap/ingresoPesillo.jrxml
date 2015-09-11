@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0164d087-8c34-4cb7-a654-97a849a80df2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="anio" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mes" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     pagopesillo.`IDPAGOPESILLO` AS pagopesillo_IDPAGOPESILLO,
+     pagopesillo.`IDASISTENCIAPESILLO` AS pagopesillo_IDASISTENCIAPESILLO,
+     pagopesillo.`FECHAPAGO` AS pagopesillo_FECHAPAGO,
+     pagopesillo.`NUMMINGAS` AS pagopesillo_NUMMINGAS,
+     pagopesillo.`VALORMINGAS` AS pagopesillo_VALORMINGAS,
+     pagopesillo.`OBSERVACION` AS pagopesillo_OBSERVACION,
+     pagopesillo.`NUMFACTURA` AS pagopesillo_NUMFACTURA,
+     pagopesillo.`USUARIOACTUAL` AS pagopesillo_USUARIOACTUAL
+FROM
+     `pagopesillo` pagopesillo
+where extract(year from pagopesillo.`FECHAPAGO`)=$P{anio} 
+and extract(month from pagopesillo.`FECHAPAGO`)=$P{mes}]]>
+	</queryString>
+	<field name="pagopesillo_IDPAGOPESILLO" class="java.lang.Integer"/>
+	<field name="pagopesillo_IDASISTENCIAPESILLO" class="java.lang.Integer"/>
+	<field name="pagopesillo_FECHAPAGO" class="java.sql.Date"/>
+	<field name="pagopesillo_NUMMINGAS" class="java.lang.Integer"/>
+	<field name="pagopesillo_VALORMINGAS" class="java.lang.Float"/>
+	<field name="pagopesillo_OBSERVACION" class="java.lang.String"/>
+	<field name="pagopesillo_NUMFACTURA" class="java.lang.Integer"/>
+	<field name="pagopesillo_USUARIOACTUAL" class="java.lang.String"/>
+	<variable name="total" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{pagopesillo_VALORMINGAS}]]></variableExpression>
+	</variable>
+	<variable name="anio" class="java.lang.String">
+		<variableExpression><![CDATA[$P{anio}+"-"+$P{mes}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="76" splitType="Stretch">
+			<staticText>
+				<reportElement style="SubTitle" x="171" y="0" width="174" height="22" uuid="f8bfd407-2783-485b-8f0c-0709bcf78803"/>
+				<text><![CDATA[Ingresos Pesillo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="36" y="36" width="174" height="22" uuid="7014c02a-183d-4013-8075-58f2ff24df67"/>
+				<text><![CDATA[Correspondiente a :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="210" y="36" width="100" height="36" uuid="0ff0d865-d19e-4f24-b4b6-4a0054a367eb"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{anio}+" - "+$P{mes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<summary>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="255" y="10" width="100" height="40" uuid="e180499b-6c88-42d1-bf68-713891420688"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="SubTitle" x="181" y="10" width="174" height="22" uuid="5b5d0329-b2fc-4973-97bd-4c33a36dac7c"/>
+				<text><![CDATA[Total $]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -403,7 +403,7 @@ public class classMedidor {
         
         for (Medidor u : getMedidor()) {
             // fila[0] = u.getIdmedidor();
-            if (cdf.numContar(u.getIdmedidor()) > coc.buscarOtrosconceptos(1).getTiempo()) {
+            if (cdf.numContar(u.getIdmedidor()) >= coc.buscarOtrosconceptos(1).getTiempo()) {
                 if (cc.verificarRepetidos(u.getIdmedidor()) != u.getIdmedidor()) {
                     
                     fila[0] = u.getNummedidor();
@@ -475,7 +475,7 @@ public class classMedidor {
         List<Corte> lst = new ArrayList<>();
         if (coc.buscarOtrosconceptos(1).getActivo().equals("ACTIVAR")) {
             for (Medidor u : getMedidor()) {
-                if (cdf.numContar(u.getIdmedidor()) > coc.buscarOtrosconceptos(1).getTiempo()) {
+                if (cdf.numContar(u.getIdmedidor()) >= coc.buscarOtrosconceptos(1).getTiempo()) {
                     if (cc.verificarRepetidos(u.getIdmedidor()) != u.getIdmedidor()) {
                         Corte dat = new Corte();
                         Medidor idmed = medidorJpacontrolador.findMedidor(u.getIdmedidor());

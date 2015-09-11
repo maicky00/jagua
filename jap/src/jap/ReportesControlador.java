@@ -54,6 +54,7 @@ public class ReportesControlador {
 
     public static void main(String[] args) {
         ReportesControlador b = new ReportesControlador();
+       
 //        b.reporte("us.jasper");
 //        b.facturaPlanificacion("numfact", "2", "pagoPlanificacion.jasper");
     }
@@ -109,7 +110,7 @@ public class ReportesControlador {
 
     }
 
-    public void facturaPlanificacion(String bddVar, String numfact, String archivo,String carpeta,String nom) {
+    public void facturaPlanificacion(String bddVar, String numfact, String archivo, String carpeta, String nom) {
         try {
             JasperReport reporte = null;
             try {
@@ -186,7 +187,8 @@ public class ReportesControlador {
         }
 
     }
-    public void Planificacion(String bddVar,String nvar, String archivo) {
+
+    public void Planificacion(String bddVar, String nvar, String archivo) {
         try {
             JasperReport reporte = null;
             try {
@@ -209,4 +211,17 @@ public class ReportesControlador {
 
     }
 
+//    public void manualUsuario(String archivo) {
+//        try {
+//            URL in = this.getClass().getResource(archivo);
+//            File objetofile = new File(archivo);
+//            Desktop.getDesktop().open(objetofile);
+//
+//        } catch (IOException ex) {
+//
+//            System.out.println(ex);
+//
+//        }
+//
+//    }
 }

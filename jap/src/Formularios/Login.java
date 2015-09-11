@@ -11,6 +11,7 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -259,7 +260,9 @@ public class Login extends javax.swing.JFrame {
         String password = new String(txtclave.getPassword());
         entidades.Login validarUsuario = cl.validarUsuario(usuario, password);
         if (validarUsuario == null) {
-
+JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta!.",
+                "Error de Auntetificación",
+                JOptionPane.ERROR_MESSAGE);
         } else {
             fp.show();
             String usact = cl.validarUsuario(usuario, password).getApellidos() + "  "
