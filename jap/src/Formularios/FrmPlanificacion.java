@@ -18,7 +18,8 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
     /**
      * Creates new form FrmPlanificacion
      */
-    classPlanificacion cp=new classPlanificacion();
+    classPlanificacion cp = new classPlanificacion();
+
     public FrmPlanificacion() {
         initComponents();
         cp.cargarTablaPlanificacion(jTable1);
@@ -30,28 +31,30 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
         btnEditar1.setEnabled(false);
         btnElimnar1.setEnabled(false);
         btnCancelar1.setEnabled(true);
-        
+
         comboTipo.setEnabled(true);
         txtLugar.setEnabled(true);
         fecha.setEnabled(true);
         txtValor.setEnabled(true);
         txtDescripcion.setEnabled(true);
-        
+
     }
-    private void ocultar(){
+
+    private void ocultar() {
         btnNuevo1.setEnabled(true);
         btnGuardar.setEnabled(false);
         btnEditar1.setEnabled(true);
         btnElimnar1.setEnabled(true);
         btnCancelar1.setEnabled(false);
-        
+
         comboTipo.setEnabled(false);
         txtLugar.setEnabled(false);
         fecha.setEnabled(false);
         txtValor.setEnabled(false);
         txtDescripcion.setEnabled(false);
     }
-    private void limpiar(){
+
+    private void limpiar() {
         comboTipo.setSelectedIndex(0);
         txtLugar.setText("");
         fecha.setToolTipText(null);
@@ -126,6 +129,11 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
         jLabel6.setText("Valor Multa:");
 
         txtValor.setEnabled(false);
+        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorKeyTyped(evt);
+            }
+        });
 
         jLabel7.setText("Descripcion:");
 
@@ -373,8 +381,8 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
             }
         } catch (Exception e) {
         }
-        
-        
+
+
     }//GEN-LAST:event_btnElimnar1ActionPerformed
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
@@ -384,35 +392,41 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            
-            String tipo=String.valueOf(comboTipo.getSelectedItem());
-            String lugar=txtLugar.getText();
-            String valor=txtValor.getText();
-            String descripcion=txtDescripcion.getText();
-            if(lblId.getText().equals("")){
-                int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if(i==0){
-                    cp.guardarPlanificacion(tipo, lugar, fecha.getDate(), Float.parseFloat(valor), descripcion);
-                    cp.cargarTablaPlanificacion(jTable1);
-                    limpiar();
-                    ocultar();
+
+            String tipo = String.valueOf(comboTipo.getSelectedItem());
+            String lugar = txtLugar.getText();
+            String valor = txtValor.getText();
+            String descripcion = txtDescripcion.getText();
+            if (!comboTipo.getSelectedItem().toString().equals("Seleccione")) {
+                if (!txtLugar.getText().equals("") && fecha.getDate() != null && !txtValor.getText().equals("") && !txtDescripcion.getText().equals("")) {
+                    if (lblId.getText().equals("")) {
+                        int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                        if (i == 0) {
+                            cp.guardarPlanificacion(tipo, lugar, fecha.getDate(), Float.parseFloat(valor), descripcion);
+                            cp.cargarTablaPlanificacion(jTable1);
+                            limpiar();
+                            ocultar();
+                        }
+                    } else if (!lblId.getText().equals("")) {
+                        int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                        if (i == 0) {
+                            int idPlan = Integer.valueOf(lblId.getText());
+                            cp.modificarPlanificacion(idPlan, tipo, lugar, fecha.getDate(), Float.parseFloat(valor), descripcion);
+                            cp.cargarTablaPlanificacion(jTable1);
+                            limpiar();
+                            ocultar();
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Debe llenar todos los campos");
                 }
-            }
-            else if(!lblId.getText().equals("")){
-                int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    int idPlan=Integer.valueOf(lblId.getText());
-                    cp.modificarPlanificacion(idPlan, tipo, lugar, fecha.getDate(), Float.parseFloat(valor), descripcion);
-                    cp.cargarTablaPlanificacion(jTable1);
-                    limpiar();
-                    ocultar();
-                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Debe seleccionar el tipo de panificacion");
             }
         } catch (Exception e) {
         }
-        
-        
-        
+
+
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
@@ -430,14 +444,29 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
             txtLugar.setText(jTable1.getValueAt(n, 2).toString());
 
             //txtMedidor.setText(cu.buscarUsuarioRucCi(txtUsuarioCed.getText()).getIdusuario().toString());
-            
             txtValor.setText(jTable1.getValueAt(n, 4).toString());
-            
+
             txtDescripcion.setText(jTable1.getValueAt(n, 5).toString());
-            
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
+        char c = evt.getKeyChar();
+        if (((c == ','))) {
+            evt.consume();
+        }
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            evt.consume();
+
+            mensaje.setText("error de ingreso, ingrese digitos");
+        } else {
+            mensaje.setText("");
+        }
+
+    }//GEN-LAST:event_txtValorKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

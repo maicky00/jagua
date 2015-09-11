@@ -374,23 +374,28 @@ public class FrmPlanificacionPesillo extends javax.swing.JInternalFrame {
             lugar = txtLugar.getText();
             valor = txtValor.getText();
             descripcion = txtDescripcion.getText();
-            if (lblId.getText().equals("")) {
-                int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    cpp.guardarPlanificacionPesillo(tipo, lugar, fecha.getDate(), Float.parseFloat(valor), descripcion);
-                    cpp.cargarTablaPlanificacionPesillo(jTable1);
-                    limpiar();
-                    ocultar();
+            if (!tipo.equals("")&&!lugar.equals("")&&!valor.equals("")&&!descripcion.equals("")&&fecha.getDate()!=null) {
+                if (lblId.getText().equals("")) {
+                    int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                    if (i == 0) {
+                        cpp.guardarPlanificacionPesillo(tipo, lugar, fecha.getDate(), Float.parseFloat(valor), descripcion);
+                        cpp.cargarTablaPlanificacionPesillo(jTable1);
+                        limpiar();
+                        ocultar();
+                    }
+                } else if (!lblId.getText().equals("")) {
+                    int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                    if (i == 0) {
+                        int idPlan = Integer.valueOf(lblId.getText());
+                        cpp.modificarPlanificacionPesillo(idPlan, tipo, lugar, fecha.getDate(), Float.parseFloat(valor), descripcion);
+                        cpp.cargarTablaPlanificacionPesillo(jTable1);
+                        limpiar();
+                        ocultar();
+                    }
                 }
-            } else if (!lblId.getText().equals("")) {
-                int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-                    int idPlan = Integer.valueOf(lblId.getText());
-                    cpp.modificarPlanificacionPesillo(idPlan, tipo, lugar, fecha.getDate(), Float.parseFloat(valor), descripcion);
-                    cpp.cargarTablaPlanificacionPesillo(jTable1);
-                    limpiar();
-                    ocultar();
-                }
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, "Debe ingresar todos los campos");
             }
         } catch (Exception e) {
         }
