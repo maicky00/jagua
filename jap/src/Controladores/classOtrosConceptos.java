@@ -12,6 +12,7 @@ import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,6 +36,7 @@ public class classOtrosConceptos {
             lg.setTiempo(tiempo);
             lg.setActivo(activar);
             otrosconceptosJpacontrolador.create(lg);
+            
 
         } catch (Exception e) {
 
@@ -54,6 +56,7 @@ public class classOtrosConceptos {
             dat.setTiempo(tiempo);
             dat.setActivo(activar);
             otrosconceptosJpacontrolador.edit(dat);
+            JOptionPane.showMessageDialog(null, "Listo!!!!");
 
         } catch (Exception e) {
         }

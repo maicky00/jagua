@@ -6,6 +6,8 @@
 package Formularios;
 
 import Controladores.classOtrosConceptos;
+import java.awt.Dimension;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,11 +22,20 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
 
     public FrmOtrosconceptos() {
         initComponents();
+        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
+        Dimension jInternalFrameSize = this.getSize();
+        this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
+//        
         inicio();
+
     }
 
     public void inicio() {
         try {
+            txtDesc.setEditable(false);
+            txtCant.setEditable(false);
+            txtTiempo.setEditable(false);
+
             txtDesc.setText(coc.buscarOtrosconceptos(1).getDescripcion());
             txtCant.setText(coc.buscarOtrosconceptos(1).getCantidad().toString());
             txtTiempo.setText(coc.buscarOtrosconceptos(1).getTiempo().toString());
@@ -71,6 +82,7 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
         lblid = new javax.swing.JLabel();
         combo = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -109,15 +121,21 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
             }
         });
 
+        txtCant.setText("0.0");
+
+        txtTiempo.setText("0");
+
         jLabel1.setText("Descripcion:");
 
         jLabel2.setText("Valor Multa:");
 
-        jLabel3.setText("Num. Meses:");
+        jLabel3.setText("Numero  de  Meses:");
 
         combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ACTIVAR", "INACTIVAR" }));
 
         jLabel4.setText("Multa Automatica por atrazos:");
+
+        jLabel5.setText("0.0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,9 +159,12 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtCant, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtTiempo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtCant, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtTiempo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel5))
                             .addComponent(lblid, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -165,7 +186,8 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,7 +196,7 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -182,30 +204,34 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         ocultar();
-
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-//        try {
+        try {
             String desc = txtDesc.getText();
             float valor = Float.valueOf(txtCant.getText());
             int tiempo = Integer.valueOf(txtTiempo.getText());
-            String act= combo.getSelectedItem().toString();
+            String act = combo.getSelectedItem().toString();
             if (coc.buscarOtrosconceptos(1).equals(null)) {
-                coc.guardarOtrosconceptos(desc, valor, tiempo,act);
+                coc.guardarOtrosconceptos(desc, valor, tiempo, act);
             } else if (!coc.buscarOtrosconceptos(1).equals(null)) {
                 int id = 1;
-                coc.modificarOtrosconceptos(id, desc, valor, tiempo,act);
+                coc.modificarOtrosconceptos(id, desc, valor, tiempo, act);
             }
             inicio();
             ocultar();
-
-//        } catch (Exception e) {
-//        }
+            this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Datos Incorrectos",
+                "Error de Ingreso",
+                JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         mostrar();
+        btnEditar.setEnabled(false);
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -219,6 +245,7 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblid;
     private javax.swing.JTextField txtCant;
     private javax.swing.JTextField txtDesc;
