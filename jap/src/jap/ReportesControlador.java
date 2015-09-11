@@ -6,6 +6,7 @@
 package jap;
 
 import Controladores.Conexion;
+import com.lowagie.text.pdf.hyphenation.TernaryTree;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class ReportesControlador {
 
     public static void main(String[] args) {
         ReportesControlador b = new ReportesControlador();
-       
+
 //        b.reporte("us.jasper");
 //        b.facturaPlanificacion("numfact", "2", "pagoPlanificacion.jasper");
     }
@@ -211,17 +212,15 @@ public class ReportesControlador {
 
     }
 
-//    public void manualUsuario(String archivo) {
-//        try {
-//            URL in = this.getClass().getResource(archivo);
-//            File objetofile = new File(archivo);
-//            Desktop.getDesktop().open(objetofile);
-//
-//        } catch (IOException ex) {
-//
-//            System.out.println(ex);
-//
-//        }
-//
-//    }
+
+    public void abrirManual() {
+
+        URL in = this.getClass().getResource("Fish.pdf");
+        try {
+            Runtime.getRuntime().exec("cmd /c start " + in);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
