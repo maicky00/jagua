@@ -435,11 +435,11 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
         int i = JOptionPane.showConfirmDialog(this, "¿REAlIZAR TRANSACCION?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             try {
+                String usActual = FrmPrincipal.menuUsuarioActual.getText();
                 int numFact = cpp.numFactura() + 1;
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                 Date fechaActual = formato.parse(lblfecha.getText());
                 float subtotal = Float.valueOf(tabla2.getValueAt(0, 1).toString());
-                String usActual = "ADMINISTR";
                 List<Pagopesillo> tableData = cpp.getTable(jTable1, numFact, fechaActual, usActual, subtotal);
                 cpp.Ingresarlist(tableData);
                 if (tableData.size() > 0) {

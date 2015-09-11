@@ -153,72 +153,23 @@ FROM
 			<staticText>
 				<reportElement style="Column header" x="3" y="19" width="36" height="15" uuid="110c4810-b3fb-43c4-9d2c-f969b84cb887"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<text><![CDATA[RUC/CI]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="80" y="19" width="56" height="15" uuid="96eb373c-9802-4329-8f39-19642700d977"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
-				<text><![CDATA[NOMBRES]]></text>
+				<text><![CDATA[Usuario]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="218" y="19" width="76" height="15" uuid="977d90e8-9f11-44ae-acc1-ea0ee213e412"/>
+				<reportElement style="Column header" x="310" y="19" width="40" height="15" uuid="2b697bb4-f09e-4c29-9485-04fd5995e4ee"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
-				<text><![CDATA[APELLIDOS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="360" y="19" width="24" height="15" uuid="2b697bb4-f09e-4c29-9485-04fd5995e4ee"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[usuarios_APADOSN]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="384" y="19" width="24" height="15" uuid="eb76fffa-22b1-4de9-9b39-cf059772f695"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[usuarios_DIRECCION]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="408" y="19" width="24" height="15" uuid="6228a1f1-f7ac-4845-96e8-5416c1470ede"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[usuarios_TELEFONO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="432" y="19" width="24" height="15" uuid="aff88636-bb88-4148-b17a-b233eccf5fc1"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[usuarios_CELULAR]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="456" y="19" width="24" height="15" uuid="c85dbeda-6053-46f7-beea-bc74603ba6be"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[usuarios_SECTOR]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="480" y="19" width="24" height="15" uuid="f3bb2bb4-8818-45c5-8ae9-c7510e9087ac"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[usuarios_REFERENCIA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="528" y="19" width="24" height="15" uuid="45549d95-9fff-453c-9ef4-eeb13db6fa0d"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[usuarios_OBSERVACION]]></text>
+				<text><![CDATA[Apodo]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -233,86 +184,44 @@ FROM
 			<textField>
 				<reportElement style="Detail" x="3" y="0" width="70" height="15" uuid="dbef9bbd-ec3c-492b-9ed5-a0b8e43a5181"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_RUCCI}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="79" y="0" width="68" height="15" uuid="e5f4e1ff-5127-446e-ac94-12dcf5143084"/>
+				<reportElement style="Detail" x="79" y="0" width="57" height="15" uuid="e5f4e1ff-5127-446e-ac94-12dcf5143084"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_PRIMERNOMBRE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="152" y="0" width="63" height="15" uuid="6bf050c1-37fe-48d0-8e48-e28020ba1ff7"/>
+				<reportElement style="Detail" x="141" y="0" width="56" height="15" uuid="6bf050c1-37fe-48d0-8e48-e28020ba1ff7"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDONOMBRE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="221" y="0" width="63" height="15" uuid="91521004-301f-4520-903b-f552ebab0ea3"/>
+				<reportElement style="Detail" x="203" y="0" width="48" height="15" uuid="91521004-301f-4520-903b-f552ebab0ea3"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_PRIMERAPELLIDO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="295" y="0" width="65" height="15" uuid="9a6a7152-6faa-4559-b58a-831cba3adb4e"/>
+				<reportElement style="Detail" x="261" y="0" width="49" height="15" uuid="9a6a7152-6faa-4559-b58a-831cba3adb4e"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDOAPELLIDO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="360" y="0" width="24" height="15" uuid="05889779-809c-4c90-9db2-f4d3fda4cb6e"/>
+				<reportElement style="Detail" x="310" y="0" width="40" height="15" uuid="05889779-809c-4c90-9db2-f4d3fda4cb6e"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_APADOSN}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="384" y="0" width="24" height="15" uuid="4f902860-27fc-42f6-bf23-83a1f7306f03"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usuarios_DIRECCION}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="408" y="0" width="24" height="15" uuid="28aec9c9-65c1-4312-aa11-6c5931d5c08e"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usuarios_TELEFONO}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="432" y="0" width="24" height="15" uuid="e413ef23-f5a8-4d70-8c42-eab8b60892f5"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usuarios_CELULAR}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="456" y="0" width="24" height="15" uuid="eb8dfc1c-0dea-4eeb-ad0e-fa711882d54b"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usuarios_SECTOR}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="480" y="0" width="24" height="15" uuid="2eac5c0f-4897-48ad-b68c-e2d6370aeb8b"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usuarios_REFERENCIA}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="528" y="0" width="24" height="15" uuid="bf2b1b38-a844-49dd-98db-6e1d5c1ad2d0"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{usuarios_OBSERVACION}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

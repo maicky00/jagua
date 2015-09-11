@@ -43,8 +43,7 @@
      medidor.`FECHA` AS medidor_FECHA
 FROM
      `institucion` institucion INNER JOIN `usuarios` usuarios ON institucion.`IDINSTITUCION` = usuarios.`IDINSTITUCION`
-     INNER JOIN `medidor` medidor ON usuarios.`IDUSUARIO` = medidor.`IDUSUARIO`
-]]>
+     INNER JOIN `medidor` medidor ON usuarios.`IDUSUARIO` = medidor.`IDUSUARIO`]]>
 	</queryString>
 	<field name="institucion_IDINSTITUCION" class="java.lang.Integer"/>
 	<field name="institucion_NOMBREINST" class="java.lang.String"/>
@@ -173,21 +172,21 @@ FROM
 			<staticText>
 				<reportElement style="Column header" x="3" y="19" width="68" height="15" uuid="c98cfbe3-57f1-47b3-9c80-43fadb86b4a0"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<text><![CDATA[RUC/CI]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="75" y="19" width="91" height="15" uuid="276639a0-9d4d-4e7d-8284-03346f2c3c46"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<text><![CDATA[USUARIOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="386" y="19" width="80" height="15" uuid="c6592b2a-0f4f-44f4-ae24-cecff05e9074"/>
+				<reportElement style="Column header" x="324" y="19" width="80" height="15" uuid="c6592b2a-0f4f-44f4-ae24-cecff05e9074"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<text><![CDATA[NUM- MEDIDOR]]></text>
 			</staticText>
@@ -204,42 +203,42 @@ FROM
 			<textField>
 				<reportElement style="Detail" x="3" y="0" width="68" height="15" uuid="90238565-7f3f-4005-be38-942a20aea164"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_RUCCI}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="75" y="0" width="72" height="15" uuid="9b609dcd-f3bd-43d9-81d8-a7967d57d15f"/>
+				<reportElement style="Detail" x="75" y="0" width="58" height="15" uuid="9b609dcd-f3bd-43d9-81d8-a7967d57d15f"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_PRIMERNOMBRE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="150" y="0" width="71" height="15" uuid="dc040a91-1ede-4610-8520-2aba8fe852d1"/>
+				<reportElement style="Detail" x="137" y="0" width="60" height="15" uuid="dc040a91-1ede-4610-8520-2aba8fe852d1"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDONOMBRE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="221" y="0" width="74" height="15" uuid="b49fcd9e-752a-4905-8db9-0b44fe445ef0"/>
+				<reportElement style="Detail" x="201" y="0" width="60" height="15" uuid="b49fcd9e-752a-4905-8db9-0b44fe445ef0"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_PRIMERAPELLIDO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="302" y="0" width="80" height="15" uuid="7148ed3f-91d4-4995-b464-2d1144d19922"/>
+				<reportElement style="Detail" x="264" y="0" width="57" height="15" uuid="7148ed3f-91d4-4995-b464-2d1144d19922"/>
 				<textElement>
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_SEGUNDOAPELLIDO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="386" y="0" width="70" height="15" uuid="f83158d6-22aa-4f06-a5fd-71765f1e9cb6"/>
+				<reportElement style="Detail" x="324" y="0" width="70" height="15" uuid="f83158d6-22aa-4f06-a5fd-71765f1e9cb6"/>
 				<textElement textAlignment="Center">
-					<font size="9"/>
+					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{medidor_NUMMEDIDOR}]]></textFieldExpression>
 			</textField>

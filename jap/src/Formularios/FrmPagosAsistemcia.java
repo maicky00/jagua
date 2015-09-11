@@ -156,6 +156,7 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
 
         lblInstitucion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblInstitucion.setForeground(new java.awt.Color(0, 0, 153));
+        lblInstitucion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblInstitucion.setText("jLabel4");
 
         jLabel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -444,11 +445,11 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
         int i = JOptionPane.showConfirmDialog(this, "¿REAlIZAR TRANSACCION?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             try {
+                String usActual = FrmPrincipal.menuUsuarioActual.getText();
                 int numFact = cpa.numFactura() + 1;
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                 Date fechaActual = formato.parse(lblfecha.getText());
                 float subtotal = Float.valueOf(tabla2.getValueAt(0, 1).toString());
-                String usActual = "ADMINISTR";
                 List<Pagosasistencia> tableData = cpa.getTable(jTable1, numFact, fechaActual, usActual, subtotal);
                 cpa.Ingresarlist(tableData);
                 if (tableData.size() > 0) {

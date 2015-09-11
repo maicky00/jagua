@@ -8,6 +8,7 @@ package Formularios;
 import Controladores.ControlFormularios;
 import Controladores.classAsistencia;
 import Controladores.classMedidor;
+import Controladores.classPlanificacion;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,7 +21,9 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
      * Creates new form FrmAsistencia
      */
     classAsistencia ca = new classAsistencia();
-    classMedidor cm=new classMedidor();
+    classMedidor cm = new classMedidor();
+    classPlanificacion cp=new classPlanificacion();
+   
 //    classMedidor cm = new classMedidor();
 
     public FrmAsistencia() {
@@ -43,6 +46,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         //txtValor.setEnabled(true);
         txtDescripcion.setEnabled(true);
 //        tablaUsuarios.setEnabled(true);
+        txtValor.setText(cp.buscarIdPlanificacion(Integer.valueOf(lblIdPlan.getText())).getValormulta().toString());
     }
 
     private void ocultar() {
@@ -548,25 +552,29 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         String descripcion = txtDescripcion.getText();
         String obs = comboObs.getSelectedItem().toString();
         String r;
+        float mult = 0;
         if (obs.equals("SI")) {
             r = "NO";
         } else {
             r = "SI";
         }
+        if (comboObs.getSelectedItem().equals("SI")) {
+            mult = Float.valueOf(txtValor.getText());
+        }
         if (lblId.getText().equals("")) {
             int j = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (j == 0) {
 
-                ca.guardarAsistencia(idPlan, idMedidor, asistencia, valor, descripcion, r);
+                ca.guardarAsistencia(idPlan, idMedidor, asistencia, mult, descripcion, r);
                 ca.cargarTablaAsistencia(tab, idPlan);
-                cm.cargarTablaMedidorAsistencia(FrmAsistencia.tab1,Integer.valueOf(lblIdPlan.getText()));
+                cm.cargarTablaMedidorAsistencia(FrmAsistencia.tab1, Integer.valueOf(lblIdPlan.getText()));
             } else {
             }
         } else if (!lblId.getText().equals("")) {
             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
 
-                ca.modificarAsistencia(Integer.parseInt(lblId.getText()), idPlan, idMedidor, asistencia, valor, descripcion, r);
+                ca.modificarAsistencia(Integer.parseInt(lblId.getText()), idPlan, idMedidor, asistencia, mult, descripcion, r);
 //                ca.cargarTablaAsistencia(jTable1);
             } else {
             }

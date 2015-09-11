@@ -128,6 +128,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem19 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         reloj = new javax.swing.JMenu();
+        menuUsuarioActual = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -391,6 +392,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         reloj.setEnabled(false);
         jMenuBar1.add(reloj);
 
+        menuUsuarioActual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user-1.png"))); // NOI18N
+        menuUsuarioActual.setText("User");
+        menuUsuarioActual.setEnabled(false);
+        menuUsuarioActual.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        menuUsuarioActual.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        menuUsuarioActual.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jMenuBar1.add(menuUsuarioActual);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -633,6 +642,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    public static javax.swing.JMenu menuUsuarioActual;
     public static javax.swing.JMenu reloj;
     // End of variables declaration//GEN-END:variables
 }

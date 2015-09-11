@@ -41,7 +41,7 @@ public class Login extends javax.swing.JFrame {
         panel.setBackground(Color.gray);
         panel.setOpaque(true);
 
-        panel2.setBackground(new Color(0,153,255));
+        panel2.setBackground(new Color(0, 153, 255));
         panel2.setOpaque(true);
     }
     int x, y;
@@ -262,6 +262,9 @@ public class Login extends javax.swing.JFrame {
 
         } else {
             fp.show();
+            String usact = cl.validarUsuario(usuario, password).getApellidos() + "  "
+                    + cl.validarUsuario(usuario, password).getNombres();
+            FrmPrincipal.menuUsuarioActual.setText(usact);
             this.dispose();
         }
     }//GEN-LAST:event_buttonAqua1ActionPerformed
@@ -311,7 +314,11 @@ public class Login extends javax.swing.JFrame {
 
             } else {
                 fp.show();
+                String usact = cl.validarUsuario(usuario, password).getApellidos() + "  "
+                        + cl.validarUsuario(usuario, password).getNombres();
+                FrmPrincipal.menuUsuarioActual.setText(usact);
                 this.dispose();
+
             }
 
         }
