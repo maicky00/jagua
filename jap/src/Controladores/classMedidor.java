@@ -377,14 +377,16 @@ public class classMedidor {
 
         for (Medidor u : getMedidor()) {
 
-            if (ca.buscardiferentes(u.getIdmedidor(), idPlan) != u.getIdmedidor()) {
-                fila[0] = u.getNummedidor();
-                fila[1] = u.getIdusuario().getRucci();
-                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-                        + u.getIdusuario().getPrimernombre();
-                fila[3] = u.getIdusuario().getApadosn();
+            if (!u.getEstado().equals("INACTIVO")) {
+                if (ca.buscardiferentes(u.getIdmedidor(), idPlan) != u.getIdmedidor()) {
+                    fila[0] = u.getNummedidor();
+                    fila[1] = u.getIdusuario().getRucci();
+                    fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                            + u.getIdusuario().getPrimernombre();
+                    fila[3] = u.getIdusuario().getApadosn();
 
-                modelo.addRow(fila);
+                    modelo.addRow(fila);
+                }
             }
         }
     }
