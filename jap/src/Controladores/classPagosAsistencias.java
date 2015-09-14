@@ -73,7 +73,7 @@ public class classPagosAsistencias {
         return true;
     }
 
-    public void eliminarPagosasistencia(int idPagosasistencia) throws IllegalOrphanException {
+    public void eliminarPagosasistencia(int idPagosasistencia) throws NonexistentEntityException {
 
         try {
             pagosasistenciaJpacontrolador.destroy(idPagosasistencia);

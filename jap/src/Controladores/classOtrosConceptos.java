@@ -63,7 +63,7 @@ public class classOtrosConceptos {
         return true;
     }
 
-    public void eliminarOtrosconceptos(int id) throws IllegalOrphanException {
+    public void eliminarOtrosconceptos(int id) throws NonexistentEntityException {
 
         try {
             otrosconceptosJpacontrolador.destroy(id);

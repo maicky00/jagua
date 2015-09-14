@@ -74,7 +74,7 @@ public class classPlanificacion {
         return true;
     }
 
-    public void eliminarPlanificacion(int idPlanificacion) throws IllegalOrphanException {
+    public void eliminarPlanificacion(int idPlanificacion) throws NonexistentEntityException{
 
         try {
             planificacionJpacontrolador.destroy(idPlanificacion);

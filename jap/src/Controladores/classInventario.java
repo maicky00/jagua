@@ -11,6 +11,7 @@ import entidades.Inventario;
 import entidades.Usuarios;
 import entidadesCruds.InventarioJpaController;
 import entidadesCruds.UsuariosJpaController;
+import entidadesCruds.exceptions.NonexistentEntityException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -94,7 +95,7 @@ public class classInventario {
         return true;
     }
 
-    public void eliminarInventario(int idInventario) {
+    public void eliminarInventario(int idInventario) throws NonexistentEntityException {
 
         try {
             inventarioJpacontrolador.destroy(idInventario);

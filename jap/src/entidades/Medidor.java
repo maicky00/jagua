@@ -39,6 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Medidor.findByNummedidor", query = "SELECT m FROM Medidor m WHERE m.nummedidor = :nummedidor"),
     @NamedQuery(name = "Medidor.findByEstado", query = "SELECT m FROM Medidor m WHERE m.estado = :estado")})
 public class Medidor implements Serializable {
+    @OneToMany(mappedBy = "idmedidor")
+    private List<Asistenciapesillo> asistenciapesilloList;
     @Column(name = "FECHA")
     @Temporal(TemporalType.DATE)
     private Date fecha;
@@ -212,6 +214,15 @@ public class Medidor implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    @XmlTransient
+    public List<Asistenciapesillo> getAsistenciapesilloList() {
+        return asistenciapesilloList;
+    }
+
+    public void setAsistenciapesilloList(List<Asistenciapesillo> asistenciapesilloList) {
+        this.asistenciapesilloList = asistenciapesilloList;
     }
 
 

@@ -71,12 +71,11 @@ public class classPagoPesillo {
         return true;
     }
 
-    public void eliminarPagoPesillo(int idPagoPes) throws IllegalOrphanException {
-        try {
+    public void eliminarPagoPesillo(int idPagoPes) throws NonexistentEntityException {
+
             pagopesilloJpaController.destroy(idPagoPes);
             JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
-        } catch (Exception e) {
-        }
+ 
     }
 
     public Pagopesillo buscarIdPagoPesillo(int idPagoPes) {

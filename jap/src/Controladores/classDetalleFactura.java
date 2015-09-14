@@ -112,7 +112,7 @@ public class classDetalleFactura {
         return true;
     }
 
-    public void eliminarDetallefactura(int idetallefactura) throws IllegalOrphanException {
+    public void eliminarDetallefactura(int idetallefactura) throws NonexistentEntityException {
 
         try {
             detallefacturaJpacontrolador.destroy(idetallefactura);

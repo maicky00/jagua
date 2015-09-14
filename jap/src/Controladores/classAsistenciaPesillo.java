@@ -12,6 +12,7 @@ import entidades.Medidor;
 import entidades.Planificacionpesillo;
 import entidadesCruds.AsistenciapesilloJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
+import entidadesCruds.exceptions.NonexistentEntityException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -102,12 +103,11 @@ public class classAsistenciaPesillo {
         return true;
     }
 
-    public void eliminarAsistenciaPesillo(int idAsistenciaPes) throws IllegalOrphanException {
-        try {
+    public void eliminarAsistenciaPesillo(int idAsistenciaPes) throws NonexistentEntityException{
+
             asistenciapesilloJpaController.destroy(idAsistenciaPes);
             JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
-        } catch (Exception e) {
-        }
+
     }
 
     public Asistenciapesillo buscarIdAsistenciaPes(int idAsistenciaPes) {

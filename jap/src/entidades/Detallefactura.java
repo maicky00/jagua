@@ -6,6 +6,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +42,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Detallefactura.findByTotal", query = "SELECT d FROM Detallefactura d WHERE d.total = :total"),
     @NamedQuery(name = "Detallefactura.findByObservacion", query = "SELECT d FROM Detallefactura d WHERE d.observacion = :observacion")})
 public class Detallefactura implements Serializable {
+    @OneToMany(mappedBy = "iddetallefac")
+    private List<Facturas> facturasList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -197,6 +202,15 @@ public class Detallefactura implements Serializable {
     @Override
     public String toString() {
         return "entidades.Detallefactura[ iddetallefac=" + iddetallefac + " ]";
+    }
+
+    @XmlTransient
+    public List<Facturas> getFacturasList() {
+        return facturasList;
+    }
+
+    public void setFacturasList(List<Facturas> facturasList) {
+        this.facturasList = facturasList;
     }
     
 }

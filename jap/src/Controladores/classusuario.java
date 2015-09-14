@@ -122,14 +122,11 @@ public class classusuario {
         return true;
     }
 
-    public void eliminarUsuario(int id) {
+    public void eliminarUsuario(int id) throws NonexistentEntityException{
 
-        try {
             usuariosJpacontrolador.destroy(id);
-            JOptionPane.showMessageDialog(null, "El Usuario se Elimino exitosamente", "InformaciÃ³n", 1);
-        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "El Usuario se Elimino exitosamente", "Informacion", 1);
 
-        }
 
     }
 

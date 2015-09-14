@@ -66,7 +66,7 @@ public class classPagosNuevoMed {
         return true;
     }
 
-    public void eliminarCorte(int id) throws IllegalOrphanException {
+    public void eliminarCorte(int id) throws NonexistentEntityException {
 
         try {
             pagosnuevomedJpacontrolador.destroy(id);

@@ -82,7 +82,7 @@ public class classTarifas {
         return true;
     }
 
-    public void eliminartarifa(int id) throws IllegalOrphanException {
+    public void eliminartarifa(int id) throws NonexistentEntityException {
 
         try {
             tarifasJpacontrolador.destroy(id);

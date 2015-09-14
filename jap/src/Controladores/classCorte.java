@@ -108,13 +108,11 @@ public class classCorte {
         return true;
     }
 
-    public void eliminarCorte(int id) throws IllegalOrphanException {
+    public void eliminarCorte(int id) throws NonexistentEntityException {
 
-        try {
             corteJpacontrolador.destroy(id);
             JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
-        } catch (NonexistentEntityException ex) {
-        }
+
 
     }
 

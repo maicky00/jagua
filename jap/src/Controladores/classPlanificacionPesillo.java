@@ -65,7 +65,7 @@ public class classPlanificacionPesillo {
         return true;
     }
 
-    public void eliminarPlanificacionPesillo(int idPes) throws IllegalOrphanException {
+    public void eliminarPlanificacionPesillo(int idPes) throws NonexistentEntityException {
         try {
             planificacionPesilloJpacontrolador.destroy(idPes);
             JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);

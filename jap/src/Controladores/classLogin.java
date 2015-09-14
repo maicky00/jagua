@@ -99,7 +99,7 @@ public class classLogin {
         return true;
     }
 
-    public void eliminarLogin(int id) throws IllegalOrphanException {
+    public void eliminarLogin(int id) throws NonexistentEntityException{
 
         try {
             loginJpacontrolador.destroy(id);

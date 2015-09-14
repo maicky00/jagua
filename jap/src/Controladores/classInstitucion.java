@@ -95,7 +95,7 @@ public class classInstitucion {
         return true;
     }
 
-    public void eliminarInstitucion(int idInstitucion) throws IllegalOrphanException {
+    public void eliminarInstitucion(int idInstitucion) throws NonexistentEntityException {
 
         try {
             institucionJpacontrolador.destroy(idInstitucion);

@@ -135,7 +135,7 @@ public class classMedidor {
         return true;
     }
 
-    public void eliminarMedidor(int id) throws IllegalOrphanException {
+    public void eliminarMedidor(int id) throws NonexistentEntityException {
 
         try {
             medidorJpacontrolador.destroy(id);

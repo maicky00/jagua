@@ -99,7 +99,7 @@ public class classOtrosPagos {
         return true;
     }
 
-    public void eliminarOtrospagos(int idOtrospagos) throws IllegalOrphanException {
+    public void eliminarOtrospagos(int idOtrospagos) throws NonexistentEntityException {
 
         try {
             otrospagosJpacontrolador.destroy(idOtrospagos);

@@ -119,13 +119,12 @@ public class classAsistencia {
         return true;
     }
 
-    public void eliminarAsistencia(int idAsistencia) throws IllegalOrphanException {
+    public void eliminarAsistencia(int idAsistencia) throws NonexistentEntityException  {
 
-        try {
+
             asistenciaJpacontrolador.destroy(idAsistencia);
             JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
-        } catch (Exception ex) {
-        }
+  
 
     }
 
