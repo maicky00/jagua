@@ -34,6 +34,10 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         ca = new classAsistencia();
 //        cm.cargarTablaMedidorAsistencia(tab1,Integer.valueOf(lblIdPlan.getText()));
         lblId.setText("");
+        jLabel1.setVisible(false);
+        lblId.setVisible(false);
+        jLabel3.setVisible(false);
+        lblIdPlan.setVisible(false);
     }
 
     private void mostrar() {

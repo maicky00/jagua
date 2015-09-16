@@ -363,7 +363,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jMenuItem12.setText("jMenuItem12");
+        jMenuItem12.setText("Sporte Tecnico");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem12ActionPerformed(evt);
@@ -490,6 +490,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         //mostrarVentanaDos();
+        limpiarPanel();
+        FrmAyuda f = new FrmAyuda();
+        cf = new ControlFormularios();
+        cf.ControlaInstancia(f);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed

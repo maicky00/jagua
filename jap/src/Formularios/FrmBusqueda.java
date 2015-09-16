@@ -23,6 +23,8 @@ public class FrmBusqueda extends javax.swing.JFrame {
         initComponents();
         us.cargarTablaUsuario(jTable1);
         //setLocationRelativeTo(null);
+        jLabel4.setVisible(false);
+        txtId.setVisible(false);
     }
     ControlFormularios cf;
 
@@ -65,6 +67,7 @@ public class FrmBusqueda extends javax.swing.JFrame {
         };
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("LISTA DE USUARIOS REGISTRADOS");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
