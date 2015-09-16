@@ -348,6 +348,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/application_view_detail.png"))); // NOI18N
         jMenuItem11.setText("Abrir Manual");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
