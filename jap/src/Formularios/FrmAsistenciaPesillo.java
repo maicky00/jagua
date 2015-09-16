@@ -288,7 +288,11 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Valor Multa:");
 
-        txtValor.setEnabled(false);
+        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorKeyTyped(evt);
+            }
+        });
 
         jLabel7.setText("Descripcion:");
 
@@ -743,6 +747,21 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         rc.Planificacion("id",lblIdPlan.getText(), "pesilloCant.jasper");
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
+        // TODO add your handling code here:
+        char c = evt.getKeyChar();
+        
+        if (Character.isLetter(c)) {
+            getToolkit().beep();
+            
+            evt.consume();
+            
+            mensaje.setText("error de ingreso, ingrese digitos");
+        } else {
+            mensaje.setText("");
+        }
+    }//GEN-LAST:event_txtValorKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

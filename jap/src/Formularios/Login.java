@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -27,7 +28,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         //setOpacity(0.9f);
-
+        setIconImage(new ImageIcon(this.getClass().getResource("Globe.png")).getImage());
         label.setBackground(Color.gray);
         label.setOpaque(true);
 
@@ -260,8 +261,8 @@ public class Login extends javax.swing.JFrame {
         String password = new String(txtclave.getPassword());
         entidades.Login validarUsuario = cl.validarUsuario(usuario, password);
         if (validarUsuario == null) {
-JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta!.",
-                "Error de Auntetificación",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta!.",
+                    "Error de Auntetificación", JOptionPane.ERROR_MESSAGE);
         } else {
             fp.show();
             String usact = cl.validarUsuario(usuario, password).getApellidos() + "  "
