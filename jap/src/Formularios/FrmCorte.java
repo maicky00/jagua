@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author Marco
  */
 public class FrmCorte extends javax.swing.JInternalFrame {
-    
+
     classDetalleFactura cdf = new classDetalleFactura();
     classMedidor cm = new classMedidor();
     classCorte cc = new classCorte();
@@ -31,9 +31,9 @@ public class FrmCorte extends javax.swing.JInternalFrame {
     public FrmCorte() {
         initComponents();
         inicio();
-        
+
     }
-    
+
     private void inicio() {
         lblId.setVisible(false);
         jLabel1.setVisible(false);
@@ -63,7 +63,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         jRadioButton1.setToolTipText(textoNota("Lista de todos los usuarios con corte", "Nota: aplica multa por reconexion"));
         jRadioButton2.setToolTipText(textoNota("Lista de todos los usuarios con multa", "Nota: aplica multa a usuarios con mora"));
     }
-    
+
     public void mostrar() {
         txtObservacion.setEnabled(true);
         txtMulta.setEnabled(true);
@@ -75,7 +75,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         comboCorte.setEnabled(true);
         fecha.setEnabled(true);
     }
-    
+
     private void ocultar() {
         txtObservacion.setEnabled(false);
         txtMulta.setEnabled(false);
@@ -87,12 +87,12 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         comboCorte.setEnabled(false);
         fecha.setEnabled(false);
     }
-    
+
     private void limpiar() {
         txtObservacion.setText("");
         txtMulta.setText("");
         lblId.setText("");
-        comboCorte.setSelectedIndex(0);        
+        comboCorte.setSelectedIndex(0);
         txtMedidor.setText("");
         txtCedula.setText("");
         txtUsuario.setText("");
@@ -102,7 +102,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         txtObservacion.setText("");
         txtMulta.setText("");
         txtMora.setText("");
-        
+
     }
 
     /**
@@ -562,33 +562,33 @@ public class FrmCorte extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        
+
         mostrar();
         limpiar();
-        
+
 
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
+
         try {
             int idMedidor = cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getIdmedidor();
-            
+
             String corte = comboCorte.getSelectedItem().toString();
             if (lblId.getText().equals("")) {
                 int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     cc.guardarCorte(idMedidor, corte, fecha.getDate(), txtObservacion.getText(), Float.parseFloat(txtMulta.getText()),
                             Integer.parseInt(txtMora.getText()), "NO");
-                    String estado;
-                    if (corte.equals("SI")) {
-                        estado = "INACTIVO";
-                    } else {
-                        estado = "ACTIVO";
-                    }
-                    cm.modificarEstado(idMedidor, estado);
+//                    String estado;
+//                    if (corte.equals("SI")) {
+//                        estado = "INACTIVO";
+//                    } else {
+//                        estado = "ACTIVO";
+//                    }
+//                    cm.modificarEstado(idMedidor, estado);
                     cc.cargarCorte(jTable2);
-                    
+
                     limpiar();
                     ocultar();
                 }
@@ -613,19 +613,19 @@ public class FrmCorte extends javax.swing.JInternalFrame {
             cm.cargarCorte(jTable1);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo Realizar!.",
-                "Error de Proceso",
-                JOptionPane.ERROR_MESSAGE);
+                    "Error de Proceso",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
+
         mostrar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+
         ocultar();
         limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -638,7 +638,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         if (Character.isLetter(c)) {
             getToolkit().beep();
             evt.consume();
-            
+
             mensaje.setText("error de ingreso, ingrese digitos");
         } else {
             mensaje.setText("");
@@ -647,12 +647,12 @@ public class FrmCorte extends javax.swing.JInternalFrame {
 
     private void txtMoraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMoraKeyTyped
         char c = evt.getKeyChar();
-        
+
         if (Character.isLetter(c)) {
             getToolkit().beep();
-            
+
             evt.consume();
-            
+
             mensaje.setText("error de ingreso, ingrese digitos");
         } else {
             mensaje.setText("");
@@ -683,9 +683,9 @@ public class FrmCorte extends javax.swing.JInternalFrame {
             limpiar();
             txtMesesDebe.setText("");
             int n = jTable2.getSelectedRow();
-            int id = Integer.valueOf(jTable2.getValueAt(n, 0).toString().toString());            
+            int id = Integer.valueOf(jTable2.getValueAt(n, 0).toString().toString());
             lblId.setText(jTable2.getValueAt(n, 0).toString());
-            
+
             txtMedidor.setText(cc.buscarIdCorte(id).getIdmedidor().getNummedidor().toString());
             txtCedula.setText(cc.buscarIdCorte(id).getIdmedidor().getIdusuario().getRucci());
             String usuario = cc.buscarIdCorte(id).getIdmedidor().getIdusuario().getPrimernombre() + " "
@@ -694,16 +694,16 @@ public class FrmCorte extends javax.swing.JInternalFrame {
             txtUsuario.setText(usuario);
             txtApodo.setText(cc.buscarIdCorte(id).getIdmedidor().getIdusuario().getApadosn());
             txtMesesDebe.setText(String.valueOf(cdf.numContar(cc.buscarIdCorte(id).getIdmedidor().getIdmedidor())));
-            
+
             fecha.setDate(cc.buscarIdCorte(id).getFecha());
             comboCorte.setSelectedItem(cc.buscarIdCorte(id).getCorte());
             txtObservacion.setText(cc.buscarIdCorte(id).getObservacion());
             txtMulta.setText(cc.buscarIdCorte(id).getMulta().toString());
             txtMora.setText(String.valueOf(cdf.numContar(cc.buscarIdCorte(id).getIdmedidor().getIdmedidor())));
-            
+
         } catch (Exception e) {
         }
-        
+
 
     }//GEN-LAST:event_jTable2MouseClicked
 

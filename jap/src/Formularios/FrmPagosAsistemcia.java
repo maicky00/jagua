@@ -10,7 +10,9 @@ import Controladores.classAsistencia;
 import Controladores.classDetalleFactura;
 import Controladores.classFactura;
 import Controladores.classInstitucion;
+import Controladores.classMedidor;
 import Controladores.classPagosAsistencias;
+import static Formularios.FrmFactura.txtnumMedidor;
 import entidades.Facturas;
 import entidades.Pagosasistencia;
 import jap.ReportesControlador;
@@ -56,6 +58,7 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
         cargarInf();
         jLabel2.setVisible(false);
     }
+    classMedidor cm = new classMedidor();
     BufferedImage img;
     ReportesControlador b = new ReportesControlador();
 
@@ -444,7 +447,18 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        pagar();
+        try {
+            if (cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getEstado().equals("INACTIVO")) {
+                JOptionPane.showMessageDialog(null, "Usuario INACTIVO!.",
+                        "INFORMACION", JOptionPane.ERROR_MESSAGE);
+
+            } else {
+
+                pagar();
+            }
+        } catch (Exception e) {
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -460,7 +474,7 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
                 List<Pagosasistencia> tableData = cpa.getTable(jTable1, numFact, fechaActual, usActual, subtotal);
                 cpa.Ingresarlist(tableData);
                 if (tableData.size() > 0) {
-                    b.facturaPlanificacion("numfact", "" + numFact, "pagoPlanificacion.jasper","Planifinicaciones "+lblfecha.getText(),"Num.Med "+txtnumMedidor.getText()+" Fact."+numFact);
+                    b.facturaPlanificacion("numfact", "" + numFact, "pagoPlanificacion.jasper", "Planifinicaciones " + lblfecha.getText(), "Num.Med " + txtnumMedidor.getText() + " Fact." + numFact);
 
                 }
                 limpiar();
@@ -468,7 +482,7 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
 //            cft.getTableFacturas(jTable1, numFact, fecha, subtotal, iva, total, usActual);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error En la Transaccion",
-                "Error",JOptionPane.ERROR_MESSAGE);
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed

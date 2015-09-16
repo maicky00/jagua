@@ -422,7 +422,9 @@ public class classMedidor {
             // fila[0] = u.getIdmedidor();
             if (cdf.numContar(u.getIdmedidor()) >= coc.buscarOtrosconceptos(1).getTiempo()) {
                 if (cc.verificarRepetidos(u.getIdmedidor()) != u.getIdmedidor()) {
-
+                    if (u.getEstado().equals("ACTIVO")) {
+                        
+                    
                     fila[0] = u.getNummedidor();
                     fila[1] = u.getIdusuario().getRucci();
                     fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
@@ -436,6 +438,7 @@ public class classMedidor {
                     FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(70);
                     FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
                     modelo.addRow(fila);
+                    }
                 }
             }
 

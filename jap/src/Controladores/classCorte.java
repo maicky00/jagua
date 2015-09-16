@@ -110,9 +110,8 @@ public class classCorte {
 
     public void eliminarCorte(int id) throws NonexistentEntityException {
 
-            corteJpacontrolador.destroy(id);
-            JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
-
+        corteJpacontrolador.destroy(id);
+        JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
 
     }
 
@@ -179,25 +178,26 @@ public class classCorte {
         modelo.addColumn("Usuario");
         modelo.addColumn("Apodo");
         modelo.addColumn("multa");
-        
 
         for (Corte c : getCorte()) {
             if (c.getCorte().equals("SI") && c.getPagado().equals("NO")) {
-                fila[0] = c.getIdcorte();
-                fila[1] = c.getIdmedidor().getNummedidor();
-                fila[2] = c.getIdmedidor().getIdusuario().getRucci();
-                fila[3] = c.getIdmedidor().getIdusuario().getPrimernombre() + " "
-                        + c.getIdmedidor().getIdusuario().getPrimerapellido() + " "
-                        + c.getIdmedidor().getIdusuario().getSegundoapellido();
-                fila[4] = c.getIdmedidor().getIdusuario().getApadosn();
-                fila[5] = c.getMulta();
+                if (c.getIdmedidor().getEstado().equals("ACTIVO")) {
 
-                FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-                modelo.addRow(fila);
+                    fila[0] = c.getIdcorte();
+                    fila[1] = c.getIdmedidor().getNummedidor();
+                    fila[2] = c.getIdmedidor().getIdusuario().getRucci();
+                    fila[3] = c.getIdmedidor().getIdusuario().getPrimernombre() + " "
+                            + c.getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                            + c.getIdmedidor().getIdusuario().getSegundoapellido();
+                    fila[4] = c.getIdmedidor().getIdusuario().getApadosn();
+                    fila[5] = c.getMulta();
+
+                    FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                    FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                    modelo.addRow(fila);
+                }
             }
         }
-
     }
 
     public void cargarCorte2(JTable tabla) {
@@ -250,17 +250,20 @@ public class classCorte {
 
         for (Corte c : getCorte()) {
             if (c.getCorte().equals("NO") && c.getPagado().equals("NO")) {
-                fila[0] = c.getIdcorte();
-                fila[1] = c.getIdmedidor().getIdmedidor();
-                fila[2] = c.getCorte();
-                fila[3] = c.getFecha();
-                fila[4] = c.getObservacion();
-                fila[5] = c.getMulta();
-                fila[6] = c.getMora();
+                if (c.getIdmedidor().getEstado().equals("ACTIVO")) {
 
-                FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-                modelo.addRow(fila);
+                    fila[0] = c.getIdcorte();
+                    fila[1] = c.getIdmedidor().getIdmedidor();
+                    fila[2] = c.getCorte();
+                    fila[3] = c.getFecha();
+                    fila[4] = c.getObservacion();
+                    fila[5] = c.getMulta();
+                    fila[6] = c.getMora();
+
+                    FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                    FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                    modelo.addRow(fila);
+                }
             }
         }
 
