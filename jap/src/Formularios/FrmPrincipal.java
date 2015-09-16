@@ -373,8 +373,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu6);
 
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/text_align_justity.png"))); // NOI18N
         jMenu7.setText("Inventario");
+        jMenu7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/application_view_detail.png"))); // NOI18N
         jMenuItem19.setText("Inventario de Articulos");
         jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

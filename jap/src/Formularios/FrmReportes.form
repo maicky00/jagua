@@ -128,7 +128,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Ingresos De Determinado Mes"/>
+            <TitledBorder title="Ingresos en USD De Determinado Mes"/>
           </Border>
         </Property>
       </Properties>
@@ -693,7 +693,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Ingresos De Determinado Mes Pesillo"/>
+            <TitledBorder title="Ingresos de USD De Determinado Mes Pesillo"/>
           </Border>
         </Property>
       </Properties>
@@ -748,7 +748,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Ingresos de Determinado Dia Pesillo"/>
+            <TitledBorder title="Ingresos de USD de Determinado Dia Pesillo"/>
           </Border>
         </Property>
       </Properties>
@@ -803,7 +803,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Ingresos de Determinado Dia"/>
+            <TitledBorder title="Ingresos en USD de Determinado Dia"/>
           </Border>
         </Property>
       </Properties>

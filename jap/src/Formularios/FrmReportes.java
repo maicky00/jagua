@@ -125,7 +125,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
 
         jCalendar1.setTodayButtonVisible(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresos De Determinado Mes"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresos en USD De Determinado Mes"));
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/rep.png"))); // NOI18N
         jButton1.setText("VER");
@@ -486,7 +486,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresos De Determinado Mes Pesillo"));
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresos de USD De Determinado Mes Pesillo"));
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/rep.png"))); // NOI18N
         jButton7.setText("VER");
@@ -520,7 +520,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresos de Determinado Dia Pesillo"));
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresos de USD de Determinado Dia Pesillo"));
 
         jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/rep.png"))); // NOI18N
         jButton20.setText("VER");
@@ -553,7 +553,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresos de Determinado Dia"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresos en USD de Determinado Dia"));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/rep.png"))); // NOI18N
         jButton2.setText("VER");

@@ -55,7 +55,7 @@ public class classusuario {
                 }
             }
             if (i == 1) {
-                JOptionPane.showMessageDialog(null, "Ruc/CI Existente", "InformaciÃ³n", 1);
+                JOptionPane.showMessageDialog(null, "Ruc/CI Existente", "Información", 1);
                 usu = null;
             } else {
 
@@ -115,7 +115,7 @@ public class classusuario {
                 dat.setFoto(foto);
             }
             usuariosJpacontrolador.edit(dat);
-            JOptionPane.showMessageDialog(null, "El Usuario se Modifico exitosamente", "InformaciÃ³n", 1);
+            JOptionPane.showMessageDialog(null, "El Usuario se Modifico exitosamente", "Información", 1);
 
         } catch (Exception e) {
         }
