@@ -10,6 +10,7 @@ import Controladores.classAsistencia;
 import Controladores.classMedidor;
 import Controladores.classPlanificacion;
 import jap.ReportesControlador;
+import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,6 +33,9 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         initComponents();
         classMedidor cm = new classMedidor();
         ca = new classAsistencia();
+        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
+        Dimension jInternalFrameSize = this.getSize();
+        this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
 //        cm.cargarTablaMedidorAsistencia(tab1,Integer.valueOf(lblIdPlan.getText()));
         lblId.setText("");
         jLabel1.setVisible(false);

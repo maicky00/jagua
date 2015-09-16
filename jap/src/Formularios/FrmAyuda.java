@@ -5,6 +5,8 @@
  */
 package Formularios;
 
+import java.awt.Dimension;
+
 /**
  *
  * @author JC-PC
@@ -16,6 +18,9 @@ public class FrmAyuda extends javax.swing.JInternalFrame {
      */
     public FrmAyuda() {
         initComponents();
+        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
+        Dimension jInternalFrameSize = this.getSize();
+        this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
     }
 
     /**
@@ -40,7 +45,7 @@ public class FrmAyuda extends javax.swing.JInternalFrame {
         setClosable(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("SOPORTE TECNICO");
+        jLabel1.setText("SOPORTE TÉCNICO");
 
         jLabel2.setText("Copyright 2015 . Todos los derechos reservados.");
 
@@ -102,7 +107,7 @@ public class FrmAyuda extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap())
         );
