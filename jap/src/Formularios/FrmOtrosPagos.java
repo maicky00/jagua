@@ -470,11 +470,11 @@ public class FrmOtrosPagos extends javax.swing.JInternalFrame {
                 FrmFactura.lbldescNuevoMed.setText("");
                 FrmFactura.comboPagos.setVisible(false);
             }
-            FrmFactura.tablaOtros.setValueAt(txtTotal.getText(), 0, 1);
+//            FrmFactura.tablaOtros.setValueAt(txtTotal.getText(), 0, 1);
             FrmFactura.txtnumMedidor.setText(txtMedidor.getText());
             FrmFactura.txtnumMedidor.setEnabled(false);
-            FrmFactura.btnNuevo.setVisible(true);
-            FrmFactura.tablaOtros.setVisible(true);
+       
+//            FrmFactura.tablaOtros.setVisible(true);
 //            FrmFactura.btnMasDetalles.setVisible(true);
 
             try {

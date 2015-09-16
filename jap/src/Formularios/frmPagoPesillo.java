@@ -45,6 +45,7 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
         ci = new classInstitucion();
         cap = new classAsistenciaPesillo();
         cargarInf();
+        jLabel2.setVisible(false);
     }
     ReportesControlador rc = new ReportesControlador();
     BufferedImage img;
@@ -146,22 +147,25 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
         btnRealizarPago = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("PAGO DE MULTAS PESILLO");
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 153));
-        jLabel1.setText("INGRESO DE COBRO MENSUAL");
+        jLabel1.setText("INGRESO DE COBRO EVENTOS PESILLO");
 
         jLabel2.setText("jLabel2");
 
         lblInstitucion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblInstitucion.setForeground(new java.awt.Color(0, 0, 153));
+        lblInstitucion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblInstitucion.setText("jLabel4");
 
         jLabel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -180,8 +184,8 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
                         .addGap(169, 169, 169))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(158, 158, 158)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(213, 213, 213)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addGap(77, 77, 77))))
         );
@@ -230,6 +234,7 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
 
         btnOk.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         btnOk.setForeground(new java.awt.Color(0, 0, 102));
+        btnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/door_in.png"))); // NOI18N
         btnOk.setText("OK");
         btnOk.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -259,7 +264,7 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtnumMedidor, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
-                        .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnOk)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -338,6 +343,7 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
         tabla2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane2.setViewportView(tabla2);
 
+        btnRealizarPago.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/rep.png"))); // NOI18N
         btnRealizarPago.setText("RALIZAR PAGO");
         btnRealizarPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -363,17 +369,17 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
-                .addComponent(btnRealizarPago, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addComponent(btnRealizarPago, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton3.setText("-");
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cd_delete.png"))); // NOI18N
         jButton3.setToolTipText("Eliminar Ultimo Mes Del Pago");
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -392,8 +398,8 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -449,7 +455,10 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
                 txtnumMedidor.setText("");
                 //            cft.getTableFacturas(jTable1, numFact, fecha, subtotal, iva, total, usActual);
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error En la Transaccion", "Información", 1);
+                JOptionPane.showMessageDialog(null, "Error En la Transaccion",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+
             }
         }
     }//GEN-LAST:event_btnRealizarPagoActionPerformed

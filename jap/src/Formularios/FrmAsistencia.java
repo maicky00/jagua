@@ -130,8 +130,6 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         mensaje = new javax.swing.JLabel();
         btnAtras1 = new org.edisoncor.gui.button.ButtonNice();
         jPanel3 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        txtBusqueda = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         tab1 = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -470,8 +468,6 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Usuarios"));
 
-        jLabel9.setText("Busqueda:");
-
         tab1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -494,12 +490,6 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBusqueda)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -508,11 +498,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -611,7 +597,9 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "No Se Puede Eliminar", "Información", 1);
+            JOptionPane.showMessageDialog(null, "No se pudo Eliminar!.",
+                "Error de Proceso",
+                JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -703,7 +691,6 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -717,7 +704,6 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
     private javax.swing.JLabel mensaje;
     public static javax.swing.JTable tab;
     public static javax.swing.JTable tab1;
-    private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextArea txtDescripcion;
     public static javax.swing.JTextField txtMes;

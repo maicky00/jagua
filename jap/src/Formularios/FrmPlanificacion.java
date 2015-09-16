@@ -380,6 +380,8 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
                 ocultar();
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Proceso no Realizado!.",
+                "Error",JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -418,10 +420,14 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(rootPane, "Debe llenar todos los campos");
+                    JOptionPane.showMessageDialog(null, "Debe llenar todos los campos",
+                "Error de Ingreso",
+                JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Debe seleccionar el tipo de panificacion");
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de panificacion",
+                "Error de Ingreso",
+                JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
         }

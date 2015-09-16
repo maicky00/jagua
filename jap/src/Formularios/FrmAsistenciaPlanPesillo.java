@@ -31,6 +31,8 @@ public class FrmAsistenciaPlanPesillo extends javax.swing.JInternalFrame {
         Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
+        jLabel3.setVisible(false);
+        txtId.setVisible(false);
     }
 
     /**
@@ -138,7 +140,7 @@ public class FrmAsistenciaPlanPesillo extends javax.swing.JInternalFrame {
                                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGap(18, 18, 18)
                                         .addComponent(jLabel6)))
                                 .addGap(9, 9, 9))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -174,20 +176,17 @@ public class FrmAsistenciaPlanPesillo extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
                         .addComponent(txtLugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(btnAsistencia)
                 .addContainerGap())
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -255,7 +254,9 @@ public class FrmAsistenciaPlanPesillo extends javax.swing.JInternalFrame {
                 cf.ControlaInstancia(as);
                 cap.cargarTablaAsistenciaPesillo(FrmAsistenciaPesillo.tab, Integer.parseInt(txtId.getText()));
             } else {
-                JOptionPane.showMessageDialog(null, "Debe especificar el tipo de planificacion");
+                JOptionPane.showMessageDialog(null, "Seleccione un Evento!.",
+                "Error de Proceso",
+                JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
 
@@ -286,7 +287,7 @@ public class FrmAsistenciaPlanPesillo extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JMonthChooser jMonthChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable jTable1;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtLugar;

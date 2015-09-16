@@ -395,7 +395,10 @@ public class FrmPlanificacionPesillo extends javax.swing.JInternalFrame {
                 }
             }
             else{
-                JOptionPane.showMessageDialog(rootPane, "Debe ingresar todos los campos");
+            
+                 JOptionPane.showMessageDialog(null, "Debe ingresar todos los campos",
+                "Error de Ingreso",
+                JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
         }
@@ -419,6 +422,9 @@ public class FrmPlanificacionPesillo extends javax.swing.JInternalFrame {
                 ocultar();
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Proceso no Realizado!.",
+                "Error",JOptionPane.ERROR_MESSAGE);
+
         }
 
     }//GEN-LAST:event_btnElimnarActionPerformed

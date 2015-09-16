@@ -18,6 +18,7 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -30,16 +31,18 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
      */
     classMedidor cm = new classMedidor();
     classusuario cu = new classusuario();
-
+    
     public FrmMedidor() {
         initComponents();
         inicio();
+        
     }
-
+    
     ControlFormularios cf;
-
+    
     private void inicio() {
         limpiar();
+
         Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
@@ -51,7 +54,8 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         String hoy = formato.format(fechaActual);
         lblfecha.setText(hoy);
-        
+        jLabel11.setVisible(false);
+        txtPagado.setVisible(false);
         lblIdmedidor.setVisible(false);
         jLabel1.setVisible(false);
         lblIdUsuario.setToolTipText(classDisenio.txthtml("Numero de usuario, formulario usuario"));
@@ -66,7 +70,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         jTextField1.setToolTipText(classDisenio.txthtml("Seleccion busquda por apellido y luego digite el metodo de busqueda"));
         jTable1.setToolTipText(classDisenio.tablahtml("Lista de medidores"));
     }
-
+    
     public void mostrar() {
         txtUsuarioCed.setEnabled(true);
         txtvalorConexion.setEnabled(true);
@@ -78,9 +82,9 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         btnCancelar.setEnabled(true);
         btnGuardar.setEnabled(true);
         jTable1.setEnabled(false);
-
+        
     }
-
+    
     public void ocultar() {
         txtUsuarioCed.setEnabled(false);
         txtvalorConexion.setEnabled(false);
@@ -93,9 +97,9 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(false);
         jTable1.setEnabled(true);
     }
-
+    
     public void limpiar() {
-
+        
         txtNombre.setText("");
         txtUsuarioCed.setText("");
         txtSerie.setText("");
@@ -245,6 +249,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                 }
             });
 
+            lblfecha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
             lblfecha.setText("jLabel14");
 
             javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -293,7 +298,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, Short.MAX_VALUE)
+                                .addComponent(btnEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, Short.MAX_VALUE)
                                 .addComponent(jLabel6)
                                 .addComponent(lblfecha)))))
             );
@@ -399,15 +404,15 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel12))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel13))
                                 .addComponent(txtPagado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtSaldo, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtvalorConexion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
+                                    .addComponent(txtvalorConexion, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel10)
-                                        .addComponent(jLabel13))))
+                                    .addComponent(jLabel10)))
                             .addGap(0, 0, Short.MAX_VALUE)))
                     .addContainerGap())
             );
@@ -446,13 +451,13 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                         .addComponent(jLabel10))
                     .addGap(18, 18, 18)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11)
-                        .addComponent(txtPagado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel12)
                         .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel13))
+                    .addGap(18, 18, 18)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(txtPagado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
 
@@ -539,7 +544,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                         .addComponent(jLabel7))
                     .addGap(18, 18, 18)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(36, Short.MAX_VALUE))
+                    .addContainerGap(40, Short.MAX_VALUE))
             );
 
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -572,35 +577,35 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-
+        
         txtUsuarioCed.setEnabled(true);
         mostrar();
         limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-
-        float saldo = cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getSaldo();
-        if (saldo != 200) {
-            txtvalorConexion.setText(saldo + "");
-            txtvalorConexion.setEnabled(false);
-        } else {
-            txtvalorConexion.setEnabled(true);
-        }
+        
+//        float saldo = cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getSaldo();
+//        if (saldo != 200) {
+//            txtvalorConexion.setText(saldo + "");
+//            txtvalorConexion.setEnabled(false);
+//        } else {
+//            txtvalorConexion.setEnabled(true);
+//        }
         mostrar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-
+        
         ocultar();
         limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
-
+        
         this.setVisible(false);
         FrmUsuario us = new FrmUsuario();
-
+        
         cf = new ControlFormularios();
         cf.ControlaInstancia(us);
 
@@ -609,7 +614,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         try {
-
+            
             int idUsuario = Integer.valueOf(lblIdUsuario.getText());
             String serie = txtSerie.getText();
             int numMedidor = Integer.valueOf(txtMedidor.getText());
@@ -627,7 +632,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     limpiar();
                     ocultar();
                 }
-
+                
             } else if (!lblIdmedidor.getText().equals("")) {
                 int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
@@ -637,9 +642,9 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     limpiar();
                     ocultar();
                 }
-
+                
             }
-
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
         }
@@ -654,14 +659,15 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                 cm.cargarTablaMedidor(jTable1);
                 JOptionPane.showMessageDialog(null, "Eliminado");
             }
-
+            
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "No Se Puede Eliminar");
+            JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",
+                "Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnElimnarActionPerformed
 
     private void txtUsuarioCedKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioCedKeyTyped
-
+        
         if (txtUsuarioCed.getText().equals("")) {
             FrmBusqueda bu = new FrmBusqueda();
             bu.setVisible(true);
@@ -670,6 +676,8 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         // TODO add your handling code here:
+        String cadena = (jTextField1.getText()).toUpperCase();
+        jTextField1.setText(cadena);
         if (rdbApellidosN.isSelected() == true) {
             cm.cargarTablaApellidosNombres(jTextField1.getText(), jTable1);
         } else {
@@ -696,9 +704,9 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             lblIdmedidor.setText(jTable1.getValueAt(n, 0).toString());
             txtUsuarioCed.setText(jTable1.getValueAt(n, 1).toString());
             txtNombre.setText(jTable1.getValueAt(n, 2).toString());
-
+            
             txtMedidor.setText(cu.buscarUsuarioRucCi(txtUsuarioCed.getText()).getIdusuario().toString());
-
+            
             txtSerie.setText(jTable1.getValueAt(n, 4).toString());
             comboEstado.setSelectedItem(jTable1.getValueAt(n, 5).toString());
             lblIdUsuario.setText(cu.buscarUsuarioRucCi(txtUsuarioCed.getText()).getIdusuario().toString());
@@ -713,12 +721,10 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         try {
             int n = jTable1.getSelectedRow();
             int numM = Integer.valueOf(jTable1.getValueAt(n, 6).toString());
-
+            
             lblIdmedidor.setText(jTable1.getValueAt(n, 0).toString());
             txtUsuarioCed.setText(jTable1.getValueAt(n, 1).toString());
             txtNombre.setText(jTable1.getValueAt(n, 2).toString());
-
-            //txtMedidor.setText(cu.buscarUsuarioRucCi(txtUsuarioCed.getText()).getIdusuario().toString());
             txtMedidor.setText(jTable1.getValueAt(n, 6).toString());
             txtSerie.setText(jTable1.getValueAt(n, 4).toString());
             comboEstado.setSelectedItem(jTable1.getValueAt(n, 5).toString());
@@ -727,7 +733,6 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             txtvalorConexion.setText(cm.buscarMedidorNumM(numM).getValorporconexion().toString());
             txtPagado.setText(cm.buscarMedidorNumM(numM).getPagado().toString());
             txtSaldo.setText(cm.buscarMedidorNumM(numM).getSaldo().toString());
-            //System.out.println(cm.buscarMedidorNumM(jTable1.getValueAt(n, 0).toString()));
 
         } catch (Exception e) {
         }
@@ -737,28 +742,28 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     private void txtvalorConexionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalorConexionKeyReleased
         try {
             txtSaldo.setText(txtvalorConexion.getText());
-
+            
             float sald = Float.valueOf(txtSaldo.getText());
             if (sald == 0) {
                 txtPagado.setText("SI");
             } else if (sald != 0) {
                 txtPagado.setText("NO");
             }
-
+            
         } catch (Exception e) {
-
+            
         }
 
     }//GEN-LAST:event_txtvalorConexionKeyReleased
 
     private void txtvalorConexionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalorConexionKeyTyped
         char c = evt.getKeyChar();
-
+        
         if (Character.isLetter(c)) {
             getToolkit().beep();
-
+            
             evt.consume();
-
+            
             mensaje.setText("error de ingreso, ingrese digitos");
         } else {
             mensaje.setText("");
@@ -767,12 +772,12 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
     private void txtMedidorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMedidorKeyTyped
         char c = evt.getKeyChar();
-
+        
         if (Character.isLetter(c)) {
             getToolkit().beep();
-
+            
             evt.consume();
-
+            
             mensaje.setText("error de ingreso, ingrese digitos");
         } else {
             mensaje.setText("");

@@ -31,6 +31,8 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
     public FrmAsistenciaPlan() {
         initComponents();
         ca = new classAsistencia();
+        txtId.setVisible(false);
+        jLabel3.setVisible(false);
     }
    
 
@@ -164,13 +166,10 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -266,7 +265,9 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
                 ca.cargarTablaAsistencia(FrmAsistencia.tab, Integer.parseInt(txtId.getText()));
                 cm.cargarTablaMedidorAsistencia(FrmAsistencia.tab1, Integer.valueOf(txtId.getText()));
             } else {
-                JOptionPane.showMessageDialog(null, "Debe especificar el tipo de planificacion");
+                JOptionPane.showMessageDialog(null, "Selecione un Evento!.",
+                "Error de Proceso",
+                JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
 
@@ -285,7 +286,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable jTable1;
     private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtLugar;

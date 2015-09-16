@@ -17,8 +17,11 @@ import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.ImageIcon;
@@ -217,7 +220,8 @@ public class classDetalleFactura {
         total = (iva * subtotal) + subtotal;
         float recon = Float.valueOf(FrmFactura.txtIdCorte.getText());
         FrmFactura.tabla2.setValueAt(total, 2, 1);
-        FrmFactura.txtTotalgeneral.setText(String.valueOf(total+recon));
+        FrmFactura.txtTotalgeneral.setText(String.valueOf(total + recon));
+        FrmFactura.txtTotalgeneral.setText(String.valueOf(total + recon));
         return dtm;
     }
 
@@ -414,5 +418,33 @@ public class classDetalleFactura {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
         }
+    }
+
+    public String mesMator(int idmedidor, int año, int mes) {
+        String cond = "";
+        java.sql.Date fe = new java.sql.Date(año, mes, 1);
+      
+        int r2 = 0;
+        classMedidor cm = new classMedidor();
+        for (Detallefactura dat : getDetallefactura()) {
+            String f[] = dat.getAniomes().split("-");
+            java.sql.Date fe1 = new java.sql.Date(Integer.valueOf(f[0]), Integer.valueOf(f[1]), 1);
+//            fe1.setYear(Integer.valueOf(f[0])-1900);
+//        fe1.setMonth(Integer.valueOf(f[1])-1);
+       
+
+            if (dat.getIdmedidor().getIdmedidor() == (cm.buscarMedidorNumM2(idmedidor)) && (dat.getIddetallefac() > r2)) {
+                if (fe.getDate() > fe1.getDate()) {
+                    r2 = dat.getIddetallefac();
+                    cond = fe.getDate() + "  "  + dat.getAniomes();
+                }
+            }
+        }
+        return cond;
+    }
+
+    public static void main(String[] args) {
+        classDetalleFactura f = new classDetalleFactura();
+        System.out.println("" + f.mesMator(1, 2015,5));
     }
 }

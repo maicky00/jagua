@@ -33,10 +33,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "medidor")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Medidor.findAll", query = "SELECT m FROM Medidor m"),
-    @NamedQuery(name = "Medidor.findByIdmedidor", query = "SELECT m FROM Medidor m WHERE m.idmedidor = :idmedidor"),
+    @NamedQuery(name = "Medidor.findAll", query = "SELECT m FROM Medidor m "),
+    @NamedQuery(name = "Medidor.findByIdmedidor", query = "SELECT m FROM Medidor m WHERE m.idmedidor = :idmedidor "),
     @NamedQuery(name = "Medidor.findBySerie", query = "SELECT m FROM Medidor m WHERE m.serie = :serie"),
-    @NamedQuery(name = "Medidor.findByNummedidor", query = "SELECT m FROM Medidor m WHERE m.nummedidor = :nummedidor"),
+    @NamedQuery(name = "Medidor.findByNummedidor", query = "SELECT m FROM Medidor m WHERE m.nummedidor = :nummedidor "),
     @NamedQuery(name = "Medidor.findByEstado", query = "SELECT m FROM Medidor m WHERE m.estado = :estado")})
 public class Medidor implements Serializable {
     @OneToMany(mappedBy = "idmedidor")

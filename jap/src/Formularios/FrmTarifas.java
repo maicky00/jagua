@@ -331,6 +331,8 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
             
             ocultar();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",
+                "Error",JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnGuardarActionPerformed

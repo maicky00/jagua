@@ -213,6 +213,11 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
             float valor = Float.valueOf(txtCant.getText());
             int tiempo = Integer.valueOf(txtTiempo.getText());
             String act = combo.getSelectedItem().toString();
+            if (desc.equals("")) {
+                JOptionPane.showMessageDialog(null, "Descripcion Nesesaria",
+                "Error de Ingreso",
+                JOptionPane.ERROR_MESSAGE);
+            }else
             if (coc.buscarOtrosconceptos(1).equals(null)) {
                 coc.guardarOtrosconceptos(desc, valor, tiempo, act);
             } else if (!coc.buscarOtrosconceptos(1).equals(null)) {

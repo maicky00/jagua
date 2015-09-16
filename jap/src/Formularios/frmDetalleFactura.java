@@ -718,7 +718,8 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
             String anMes = lblanio.getText() + "-" + lblmes.getText();
             cm.cargarTablaMedidorDetalle(tabla, anMes);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "No se Puuede Eliminar", "Información", 1);
+           JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",
+                "Error",JOptionPane.ERROR_MESSAGE);
 
         }
 //        Medidor medidor = (Medidor) moverRegistros.getNext();

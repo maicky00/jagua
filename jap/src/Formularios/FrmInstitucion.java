@@ -271,6 +271,8 @@ cargarInf();
             ci.modificarInstitucion(1, nombreInst, direccion, telefono, email, ruc, celular, bytesImg);
             this.dispose();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",
+                "Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnNuevoActionPerformed
 

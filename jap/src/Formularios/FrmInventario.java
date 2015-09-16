@@ -150,7 +150,7 @@ public class FrmInventario extends javax.swing.JInternalFrame {
         mensaje = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(102, 102, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -600,8 +600,8 @@ public class FrmInventario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtdescripcionKeyTyped
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
-        float valor = Float.valueOf(txtvalor.getText());
+        try {
+          float valor = Float.valueOf(txtvalor.getText());
         int cantidad = Integer.valueOf(txtCantidad.getText());
         String nombre = txtNombre.getText();
         Date fecha = txtfecha.getDate();
@@ -628,7 +628,13 @@ public class FrmInventario extends javax.swing.JInternalFrame {
         limpiar();
         ocultar();
         civ.tablaArti(tabla);
-
+  
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Datos Nesesarios",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void buttonNice6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNice6ActionPerformed
@@ -661,8 +667,8 @@ public class FrmInventario extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "No Se Puede Eliminar", "Información", 1);
-
+            JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",
+                "Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

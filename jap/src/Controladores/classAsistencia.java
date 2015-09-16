@@ -192,8 +192,8 @@ public class classAsistencia {
                 fila[7] = a.getDescripcion();
                 fila[8] = a.getIdmedidor().getNummedidor();
 
-                FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
-                FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(35);
+                FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                 FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
                 FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
                 FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);

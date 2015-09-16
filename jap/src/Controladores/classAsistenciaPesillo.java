@@ -5,6 +5,8 @@
  */
 package Controladores;
 
+import Formularios.FrmAsistenciaPesillo;
+import Formularios.FrmAsistenciaPlanPesillo;
 import Formularios.frmPagoPesillo;
 import static Formularios.frmPagoPesillo.lblfecha;
 import entidades.Asistenciapesillo;
@@ -132,18 +134,17 @@ public class classAsistenciaPesillo {
 
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
-        Object[] fila = new Object[7];
+        Object[] fila = new Object[10];
         modelo.addColumn("id");
         modelo.addColumn("idMed");
         modelo.addColumn("idPlan");
-
-//        modelo.addColumn("Usuario");
-//        modelo.addColumn("cedula");
         modelo.addColumn("Asistencia");
-
         modelo.addColumn("multa");
         modelo.addColumn("descripcion");
         modelo.addColumn("observacion");
+        modelo.addColumn("Num. Medidor");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Ruc/CI");
 
 //        Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
         for (Asistenciapesillo a : getAsistenciaPesillo()) {
@@ -152,16 +153,26 @@ public class classAsistenciaPesillo {
                 fila[0] = a.getIdasistenciapesillo();
                 fila[1] = a.getIdmedidor().getIdmedidor();
                 fila[2] = a.getIdplanificacionpesillo().getIdplanificacionpesillo();
-
-//                fila[3] = a.getIdmedidor().getIdusuario().getPrimernombre() + " " + a.getIdmedidor().getIdusuario().getPrimerapellido()
-//                        + " " + a.getIdmedidor().getIdusuario().getSegundoapellido();
-//                fila[4] = a.getIdmedidor().getIdusuario().getRucci();
                 fila[3] = a.getAsistencia();
 
                 fila[4] = a.getValormulta();
                 fila[5] = a.getDescripcion();
                 fila[6] = a.getObservacion();
-
+                fila[7] = a.getIdmedidor().getNummedidor();
+                String nom=a.getIdmedidor().getIdusuario().getPrimerapellido()+"  "+
+                        a.getIdmedidor().getIdusuario().getSegundoapellido()+"  "+
+                        a.getIdmedidor().getIdusuario().getPrimernombre()+"  "+
+                        a.getIdmedidor().getIdusuario().getSegundonombre();
+                fila[8] = nom;
+                fila[9] = a.getIdmedidor().getIdusuario().getRucci();
+                FrmAsistenciaPesillo.tab.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                FrmAsistenciaPesillo.tab.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                FrmAsistenciaPesillo.tab.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+                FrmAsistenciaPesillo.tab.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+                FrmAsistenciaPesillo.tab.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
+                FrmAsistenciaPesillo.tab.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
+                FrmAsistenciaPesillo.tab.getTableHeader().getColumnModel().getColumn(6).setMinWidth(0);
+                FrmAsistenciaPesillo.tab.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(0);
 //                FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
 //                FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(35);
 //                FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);

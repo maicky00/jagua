@@ -5,6 +5,7 @@
  */
 package Controladores;
 
+import Formularios.FrmAsistenciaPlan;
 import Formularios.FrmPlanificacion;
 
 import entidades.Corte;
@@ -74,7 +75,7 @@ public class classPlanificacion {
         return true;
     }
 
-    public void eliminarPlanificacion(int idPlanificacion) throws NonexistentEntityException{
+    public void eliminarPlanificacion(int idPlanificacion) throws NonexistentEntityException {
 
         try {
             planificacionJpacontrolador.destroy(idPlanificacion);
@@ -119,8 +120,8 @@ public class classPlanificacion {
             fila[4] = p.getValormulta();
             fila[5] = p.getDescripcion();
 
-            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(15);
-            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(20);
+            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
             FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(65);
             FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
             FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(45);
@@ -130,7 +131,7 @@ public class classPlanificacion {
         }
     }
 
-    public void cargarTablaPlanificacionPlan(JTable tabla, int mes,int anio) {
+    public void cargarTablaPlanificacionPlan(JTable tabla, int mes, int anio) {
 
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
@@ -145,9 +146,9 @@ public class classPlanificacion {
 
 //        Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
         for (Planificacion p : getPlanificacion()) {
-            System.out.println(p.getFecha().getYear()+1900);
-            if (p.getFecha().getMonth()+1 == mes&&p.getFecha().getYear()+1900==anio) {
-                
+            System.out.println(p.getFecha().getYear() + 1900);
+            if (p.getFecha().getMonth() + 1 == mes && p.getFecha().getYear() + 1900 == anio) {
+
                 Date fechaActual = p.getFecha();
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                 String hoy = formato.format(fechaActual);
@@ -159,7 +160,8 @@ public class classPlanificacion {
 
                 fila[4] = p.getValormulta();
 
-//            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(15);
+                FrmAsistenciaPlan.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                FrmAsistenciaPlan.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
 //            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(20);
 //            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(65);
 //            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);

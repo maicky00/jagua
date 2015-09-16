@@ -118,6 +118,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
         jPanel11 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/rep.png"))); // NOI18N

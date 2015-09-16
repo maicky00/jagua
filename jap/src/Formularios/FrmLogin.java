@@ -501,8 +501,8 @@ public class FrmLogin extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "No se Puede Eliminar", "Información", 1);
-
+           JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",
+                "Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

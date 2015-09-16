@@ -945,7 +945,9 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "No Se Puede Eliminar", "Información", 1);
+            JOptionPane.showMessageDialog(null, "No se pudo Eliminar!.",
+                "Error de Proceso",
+                JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -1142,6 +1144,8 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_rbtNombresActionPerformed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        String cadena = (txtBuscar.getText()).toUpperCase();
+        txtBuscar.setText(cadena);
         try {
             if (rbtNombres.isSelected() == true) {
                 cu.cargarTablaApellidoNombre(txtBuscar.getText(), tablaUsuarios);

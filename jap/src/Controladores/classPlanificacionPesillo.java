@@ -5,6 +5,8 @@
  */
 package Controladores;
 
+import Formularios.FrmAsistenciaPlanPesillo;
+import Formularios.FrmPlanificacionPesillo;
 import entidades.Planificacionpesillo;
 import entidadesCruds.PlanificacionpesilloJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
@@ -112,8 +114,8 @@ public class classPlanificacionPesillo {
             fila[3] = fecha;
             fila[4] = p.getValormulta();
             fila[5] = p.getDescripcion();
-//            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(15);
-//            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(20);
+            FrmPlanificacionPesillo.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+            FrmPlanificacionPesillo.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
 //            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(65);
 //            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
 //            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(45);
@@ -152,13 +154,9 @@ public class classPlanificacionPesillo {
                 fila[4] = p.getValormulta();
 
                 fila[5] = p.getDescripcion();
+                FrmAsistenciaPlanPesillo.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+            FrmAsistenciaPlanPesillo.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
 
-//            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(15);
-//            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(20);
-//            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(65);
-//            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
-//            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(45);
-//            FrmPlanificacion.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(55);
                 modelo.addRow(fila);
             }
         }
