@@ -219,7 +219,7 @@ public class ReportesControlador {
     public void abrirManual() throws IOException {
           
             try {
-                File path = new File(("Fish.pdf"));
+                File path = new File(("MANUAL.pdf"));
                 Desktop.getDesktop().open(path);
             } catch (Exception ex) {
                 
