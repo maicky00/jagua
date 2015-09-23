@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="806f4d6f-6ea4-45c2-a8aa-4c3b82bf2e04">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="numfact" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     institucion.`IDINSTITUCION` AS institucion_IDINSTITUCION,
+     institucion.`NOMBREINST` AS institucion_NOMBREINST,
+     institucion.`DIRECCION` AS institucion_DIRECCION,
+     institucion.`TELEFONO` AS institucion_TELEFONO,
+     institucion.`EMAIL` AS institucion_EMAIL,
+     institucion.`RUC` AS institucion_RUC,
+     institucion.`CELULAR` AS institucion_CELULAR,
+     institucion.`LOGO` AS institucion_LOGO,
+     usuarios.`IDUSUARIO` AS usuarios_IDUSUARIO,
+     usuarios.`RUCCI` AS usuarios_RUCCI,
+     usuarios.`PRIMERNOMBRE` AS usuarios_PRIMERNOMBRE,
+     usuarios.`SEGUNDONOMBRE` AS usuarios_SEGUNDONOMBRE,
+     usuarios.`PRIMERAPELLIDO` AS usuarios_PRIMERAPELLIDO,
+     usuarios.`SEGUNDOAPELLIDO` AS usuarios_SEGUNDOAPELLIDO,
+     usuarios.`APADOSN` AS usuarios_APADOSN,
+     usuarios.`DIRECCION` AS usuarios_DIRECCION,
+     medidor.`IDMEDIDOR` AS medidor_IDMEDIDOR,
+     medidor.`IDUSUARIO` AS medidor_IDUSUARIO,
+     medidor.`NUMMEDIDOR` AS medidor_NUMMEDIDOR,
+     medidor.`ESTADO` AS medidor_ESTADO,
+     detallefactura.`IDDETALLEFAC` AS detallefactura_IDDETALLEFAC,
+     detallefactura.`IDTARIFAS` AS detallefactura_IDTARIFAS,
+     detallefactura.`IDMEDIDOR` AS detallefactura_IDMEDIDOR,
+     detallefactura.`ANIOMES` AS detallefactura_ANIOMES,
+     detallefactura.`MEDIDAANT` AS detallefactura_MEDIDAANT,
+     detallefactura.`MEDIDAACT` AS detallefactura_MEDIDAACT,
+     detallefactura.`CONSUMO` AS detallefactura_CONSUMO,
+     detallefactura.`MEDEXCEDIDO` AS detallefactura_MEDEXCEDIDO,
+     detallefactura.`TAREXCEDIDO` AS detallefactura_TAREXCEDIDO,
+     detallefactura.`SUBTOTAL` AS detallefactura_SUBTOTAL,
+     detallefactura.`TOTAL` AS detallefactura_TOTAL,
+     detallefactura.`OBSERVACION` AS detallefactura_OBSERVACION,
+     facturas.`IDFACTURA` AS facturas_IDFACTURA,
+     facturas.`IDDETALLEFAC` AS facturas_IDDETALLEFAC,
+     facturas.`NUMFACTURA` AS facturas_NUMFACTURA,
+     facturas.`FECHAEMISION` AS facturas_FECHAEMISION,
+     facturas.`SUBTOTAL` AS facturas_SUBTOTAL,
+     facturas.`IVA` AS facturas_IVA,
+     facturas.`TOTAL` AS facturas_TOTAL,
+     tarifas.`IDTARIFAS` AS tarifas_IDTARIFAS,
+     tarifas.`TARBASE` AS tarifas_TARBASE,
+     tarifas.`VALOREXCESO` AS tarifas_VALOREXCESO,
+     tarifas.`ALCANTARRILLADO` AS tarifas_ALCANTARRILLADO,
+     usuarios.`IDINSTITUCION` AS usuarios_IDINSTITUCION,
+     tarifas.`DESCRIPCION` AS tarifas_DESCRIPCION,
+     tarifas.`BASE` AS tarifas_BASE,
+     facturas.`USUARIOACTUAL` AS facturas_USUARIOACTUAL
+FROM
+     `institucion` institucion INNER JOIN `usuarios` usuarios ON institucion.`IDINSTITUCION` = usuarios.`IDINSTITUCION`
+     INNER JOIN `medidor` medidor ON usuarios.`IDUSUARIO` = medidor.`IDUSUARIO`
+     INNER JOIN `detallefactura` detallefactura ON medidor.`IDMEDIDOR` = detallefactura.`IDMEDIDOR`
+     INNER JOIN `facturas` facturas ON detallefactura.`IDDETALLEFAC` = facturas.`IDDETALLEFAC`
+     INNER JOIN `tarifas` tarifas ON detallefactura.`IDTARIFAS` = tarifas.`IDTARIFAS`
+where facturas.`NUMFACTURA`=$P{numfact}]]>
+	</queryString>
+	<field name="institucion_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="institucion_NOMBREINST" class="java.lang.String"/>
+	<field name="institucion_DIRECCION" class="java.lang.String"/>
+	<field name="institucion_TELEFONO" class="java.lang.String"/>
+	<field name="institucion_EMAIL" class="java.lang.String"/>
+	<field name="institucion_RUC" class="java.lang.String"/>
+	<field name="institucion_CELULAR" class="java.lang.String"/>
+	<field name="institucion_LOGO" class="java.lang.Object"/>
+	<field name="usuarios_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="usuarios_RUCCI" class="java.lang.String"/>
+	<field name="usuarios_PRIMERNOMBRE" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDONOMBRE" class="java.lang.String"/>
+	<field name="usuarios_PRIMERAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDOAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_APADOSN" class="java.lang.String"/>
+	<field name="usuarios_DIRECCION" class="java.lang.String"/>
+	<field name="medidor_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="medidor_NUMMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_ESTADO" class="java.lang.String"/>
+	<field name="detallefactura_IDDETALLEFAC" class="java.lang.Integer"/>
+	<field name="detallefactura_IDTARIFAS" class="java.lang.Integer"/>
+	<field name="detallefactura_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="detallefactura_ANIOMES" class="java.lang.String"/>
+	<field name="detallefactura_MEDIDAANT" class="java.lang.Integer"/>
+	<field name="detallefactura_MEDIDAACT" class="java.lang.Integer"/>
+	<field name="detallefactura_CONSUMO" class="java.lang.Integer"/>
+	<field name="detallefactura_MEDEXCEDIDO" class="java.lang.Integer"/>
+	<field name="detallefactura_TAREXCEDIDO" class="java.lang.Float"/>
+	<field name="detallefactura_SUBTOTAL" class="java.lang.Float"/>
+	<field name="detallefactura_TOTAL" class="java.lang.Float"/>
+	<field name="detallefactura_OBSERVACION" class="java.lang.String"/>
+	<field name="facturas_IDFACTURA" class="java.lang.Integer"/>
+	<field name="facturas_IDDETALLEFAC" class="java.lang.Integer"/>
+	<field name="facturas_NUMFACTURA" class="java.lang.Integer"/>
+	<field name="facturas_FECHAEMISION" class="java.sql.Date"/>
+	<field name="facturas_SUBTOTAL" class="java.lang.Float"/>
+	<field name="facturas_IVA" class="java.lang.Float"/>
+	<field name="facturas_TOTAL" class="java.lang.Float"/>
+	<field name="tarifas_IDTARIFAS" class="java.lang.Integer"/>
+	<field name="tarifas_TARBASE" class="java.lang.Float"/>
+	<field name="tarifas_VALOREXCESO" class="java.lang.Float"/>
+	<field name="tarifas_ALCANTARRILLADO" class="java.lang.Float"/>
+	<field name="usuarios_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="tarifas_DESCRIPCION" class="java.lang.String"/>
+	<field name="tarifas_BASE" class="java.lang.Integer"/>
+	<field name="facturas_USUARIOACTUAL" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.String"/>
+	<variable name="total" class="java.lang.Float">
+		<variableExpression><![CDATA[$F{facturas_TOTAL}]]></variableExpression>
+	</variable>
+	<variable name="excedido" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{detallefactura_MEDEXCEDIDO}]]></variableExpression>
+	</variable>
+	<variable name="tarexcedido" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{detallefactura_TAREXCEDIDO}]]></variableExpression>
+	</variable>
+	<variable name="cantidadmeses" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{detallefactura_ANIOMES}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<summary>
+		<band height="69" splitType="Stretch">
+			<textField>
+				<reportElement style="Detail" x="104" y="44" width="70" height="15" forecolor="#000000" uuid="5653c4de-3b6d-4c85-afb1-b582c54c4963"/>
+				<textElement>
+					<font fontName="Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["("+$V{excedido}+" m3"+")"+ "  \$ "+ $V{tarexcedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" stretchType="RelativeToTallestObject" x="104" y="13" width="71" height="15" forecolor="#000000" uuid="10c7dc55-f215-4403-8bbe-667cd106f966"/>
+				<textElement>
+					<font fontName="Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["("+$F{tarifas_BASE}+" m3)"+"  \$ "+$F{tarifas_TARBASE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="4" y="13" width="82" height="15" forecolor="#000000" uuid="8d4a1528-b7b1-43e9-a73d-6fc5b1b49030"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<text><![CDATA[BASICO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="4" y="45" width="82" height="15" forecolor="#000000" uuid="f558fcb7-ad38-4b89-8a6a-ee542f171b54"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<text><![CDATA[EXCEDIDO]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

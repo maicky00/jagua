@@ -10,6 +10,7 @@ import Controladores.classAsistenciaPesillo;
 import Controladores.classMedidor;
 import Controladores.classPlanificacionPesillo;
 import static Formularios.FrmAsistencia.tab1;
+import static Formularios.FrmAsistencia.txtValor;
 import jap.ReportesControlador;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
@@ -27,7 +28,7 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
     classAsistenciaPesillo cap = new classAsistenciaPesillo();
     classMedidor cm = new classMedidor();
     classPlanificacionPesillo cpp = new classPlanificacionPesillo();
-    ReportesControlador rc=new ReportesControlador();
+    ReportesControlador rc = new ReportesControlador();
 
     public FrmAsistenciaPesillo() {
         initComponents();
@@ -38,7 +39,6 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
         Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
-        cm.cargarTablaMedidor2(tab1);
 
         comboAplica.setVisible(false);
         labelAplica.setVisible(false);
@@ -316,6 +316,11 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
                 comboAsistenciaItemStateChanged(evt);
             }
         });
+        comboAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAsistenciaActionPerformed(evt);
+            }
+        });
 
         labelAplica.setText("Aplica Multa:");
 
@@ -324,6 +329,11 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
         comboAplica.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboAplicaItemStateChanged(evt);
+            }
+        });
+        comboAplica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAplicaActionPerformed(evt);
             }
         });
 
@@ -598,42 +608,53 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-            
-     
-        //        String idAs = lblId.getText();
-        //        ca = new classAsistencia();
-        int idPlan = Integer.valueOf(lblIdPlan.getText());
-        int idMedidor = Integer.valueOf(lblIdMedidor.getText());
-        String asistencia = comboAsistencia.getSelectedItem().toString();
-        float valor = Float.valueOf(txtValor.getText());
-        String descripcion = txtDescripcion.getText();
-        if (!comboAsistencia.getSelectedItem().toString().equals("---")) {
-            if (lblId.getText().equals("")) {
-                int j = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (j == 0) {
 
-                    cap.guardarAsistenciaPesillo(idMedidor, idPlan, asistencia, valor, descripcion, "NO");
-                    cap.cargarTablaAsistenciaPesillo(tab, idPlan);
-                } else {
-                }
-            } else if (!lblId.getText().equals("")) {
-                int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                if (i == 0) {
-
-                    cap.modificarAsistenciaPesillo(Integer.parseInt(lblId.getText()), idMedidor, idPlan, asistencia, valor, descripcion, "NO");
-                    cap.cargarTablaAsistenciaPesillo(tab, idPlan);
-                } else {
-                }
+            //        String idAs = lblId.getText();
+            //        ca = new classAsistencia();
+            int idPlan = Integer.valueOf(lblIdPlan.getText());
+            int idMedidor = Integer.valueOf(lblIdMedidor.getText());
+            String asistencia = comboAsistencia.getSelectedItem().toString();
+            float valor = Float.valueOf(txtValor.getText());
+            String descripcion = txtDescripcion.getText();
+            String r;
+            String obs = comboAplica.getSelectedItem().toString();
+            float mult = Float.valueOf(txtValor.getText());;
+            if (obs.equals("SI") && asistencia.equals("NO")) {
+                r = "NO";
+            } else {
+                r = "SI";
             }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Debe seleccionar asistencia");
+            if (!comboAsistencia.getSelectedItem().toString().equals("---")) {
+                if (lblId.getText().equals("")) {
+                    int j = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                    if (j == 0) {
+
+                        cap.guardarAsistenciaPesillo(idMedidor, idPlan, asistencia, valor, descripcion, r);
+                        cap.cargarTablaAsistenciaPesillo(tab, idPlan);
+                        cm.cargarTablaMedidor2(FrmAsistenciaPesillo.tab1, Integer.valueOf(lblIdPlan.getText()));
+                    } else {
+                    }
+                } else if (!lblId.getText().equals("")) {
+                    int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                    if (i == 0) {
+
+                        cap.modificarAsistenciaPesillo(Integer.parseInt(lblId.getText()), idMedidor, idPlan, asistencia, valor, descripcion, r);
+                        cap.cargarTablaAsistenciaPesillo(tab, idPlan);
+                        cm.cargarTablaMedidor2(FrmAsistenciaPesillo.tab1, Integer.valueOf(lblIdPlan.getText()));
+
+                    } else {
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Debe seleccionar asistencia");
+            }
+            limpiar();
+            ocultar();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se Realizar!.",
+                    "Error de Proceso",
+                    JOptionPane.ERROR_MESSAGE);
         }
-        limpiar();
-        ocultar();
-        }catch(Exception e){
-        JOptionPane.showMessageDialog(null, "No se Realizar!.",
-                "Error de Proceso",
-                JOptionPane.ERROR_MESSAGE);}
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -648,14 +669,16 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
                 cap.eliminarAsistenciaPesillo(Integer.valueOf(lblId.getText()));
                 //                ca.cargarTablaAsistencia(jTable1);
                 cap.cargarTablaAsistenciaPesillo(tab, Integer.parseInt(lblIdPlan.getText()));
+                cm.cargarTablaMedidor2(FrmAsistenciaPesillo.tab1, Integer.valueOf(lblIdPlan.getText()));
+
                 limpiar();
                 ocultar();
             }
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se pudo Eliminar!.",
-                "Error de Proceso",
-                JOptionPane.ERROR_MESSAGE);
+                    "Error de Proceso",
+                    JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -702,6 +725,7 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
         try {
 
             int n = tab.getSelectedRow();
+            int id=Integer.valueOf(tab.getValueAt(n, 0).toString());
             lblId.setText(tab.getValueAt(n, 0).toString());
             lblIdPlan.setText(tab.getValueAt(n, 2).toString());
             lblIdMedidor.setText(tab.getValueAt(n, 1).toString());
@@ -711,6 +735,10 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
             txtUsuario.setText(tab.getValueAt(n, 8).toString());
             txtCedula.setText(tab.getValueAt(n, 9).toString());
             lblnuMed.setText(tab.getValueAt(n, 7).toString());
+            comboAsistencia.setSelectedItem(cap.buscarIdAsistenciaPes(id).getAsistencia());
+            comboAplica.setSelectedItem(cap.buscarIdAsistenciaPes(id).getObservacion());
+             txtValor.setText(cap.buscarIdAsistenciaPes(id).getValormulta().toString());
+
 
         } catch (Exception e) {
         }
@@ -740,28 +768,48 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        rc.Planificacion("id",lblIdPlan.getText(), "pesilloasist.jasper");
+        rc.Planificacion("id", lblIdPlan.getText(), "pesilloasist.jasper");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        rc.Planificacion("id",lblIdPlan.getText(), "pesilloCant.jasper");
+        rc.Planificacion("id", lblIdPlan.getText(), "pesilloCant.jasper");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        
+
         if (Character.isLetter(c)) {
             getToolkit().beep();
-            
+
             evt.consume();
-            
+
             mensaje.setText("error de ingreso, ingrese digitos");
         } else {
             mensaje.setText("");
         }
     }//GEN-LAST:event_txtValorKeyTyped
+
+    private void comboAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAsistenciaActionPerformed
+        // TODO add your handling code here:
+        if (comboAsistencia.getSelectedItem().equals("SI")) {
+            txtValor.setText("0.0");
+        } else {
+            comboAplica.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_comboAsistenciaActionPerformed
+
+    private void comboAplicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAplicaActionPerformed
+        // TODO add your handling code here:
+        if (comboAplica.getSelectedItem().equals("SI")) {
+            txtValor.setText(cap.buscarIdAsistenciaPes(Integer.valueOf(lblIdPlan.getText())).getValormulta().toString());
+
+        } else {
+            txtValor.setText("0.0");
+
+        }
+    }//GEN-LAST:event_comboAplicaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

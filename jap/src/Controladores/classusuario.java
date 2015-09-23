@@ -122,11 +122,10 @@ public class classusuario {
         return true;
     }
 
-    public void eliminarUsuario(int id) throws NonexistentEntityException{
+    public void eliminarUsuario(int id) throws NonexistentEntityException {
 
-            usuariosJpacontrolador.destroy(id);
-            JOptionPane.showMessageDialog(null, "El Usuario se Elimino exitosamente", "Informacion", 1);
-
+        usuariosJpacontrolador.destroy(id);
+        JOptionPane.showMessageDialog(null, "El Usuario se Elimino exitosamente", "Informacion", 1);
 
     }
 
@@ -204,7 +203,7 @@ public class classusuario {
         for (Usuarios u : getUsuarios()) {
             fila[0] = u.getIdusuario();
             fila[1] = u.getRucci();
-            fila[2] = u.getPrimernombre() + " " + u.getPrimerapellido();
+            fila[2] = u.getPrimernombre() + " " + u.getSegundonombre() + " " + u.getPrimerapellido() + " " + u.getSegundoapellido();
             fila[3] = u.getApadosn();
             fila[4] = u.getDireccion();
             fila[5] = u.getTelefono();
@@ -229,6 +228,57 @@ public class classusuario {
             FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(9).setMinWidth(0);
             FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(9).setMaxWidth(0);
             modelo.addRow(fila);
+        }
+    }
+
+    public void cargarTablaUsuarioBuscar(JTable tabla, String nombres) {
+
+        modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[10];
+        modelo.addColumn("N°");//id
+        modelo.addColumn("CI/RUC");
+        modelo.addColumn("Nombres");
+        modelo.addColumn("Apodo");
+        modelo.addColumn("Dir");
+        modelo.addColumn("tel");
+        modelo.addColumn("cel");
+        modelo.addColumn("sector");
+        modelo.addColumn("Ref");
+        modelo.addColumn("Observacion");
+//        
+
+//        Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
+        for (Usuarios u : getUsuarios()) {
+            if (u.buscarUsuarios(u.elimiEspacio(nombres))) {
+                fila[0] = u.getIdusuario();
+                fila[1] = u.getRucci();
+                fila[2] = u.getPrimernombre() + " " + u.getSegundonombre() + " " + u.getPrimerapellido() + " " + u.getSegundoapellido();
+                fila[3] = u.getApadosn();
+                fila[4] = u.getDireccion();
+                fila[5] = u.getTelefono();
+                fila[6] = u.getCelular();
+                fila[7] = u.getSector();
+                fila[8] = u.getReferencia();
+                fila[9] = u.getObservacion();
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(40);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(75);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(80);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(0);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(0);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(9).setMinWidth(0);
+                FrmBusqueda.jTable1.getTableHeader().getColumnModel().getColumn(9).setMaxWidth(0);
+                modelo.addRow(fila);
+            }
         }
     }
 

@@ -449,15 +449,17 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
                 List<Pagopesillo> tableData = cpp.getTable(jTable1, numFact, fechaActual, usActual, subtotal);
                 cpp.Ingresarlist(tableData);
                 if (tableData.size() > 0) {
-                    rc.facturaPlanificacion("numfact", numFact+"", "facturaPesillo.jasper","Pesillo "+lblfecha.getText(),"Num.Med "+txtnumMedidor.getText()+" Fact."+numFact);
+                    rc.facturaPlanificacion("numfact", numFact + "", "facturaPesillo.jasper", "Pesillo " + lblfecha.getText(), "Num.Med " + txtnumMedidor.getText() + " Fact." + numFact);
+                    rc.imprimirfacturaPlanificacion("numfact", numFact + "", "imprifacturaPesillo.jasper");
+
                 }
                 limpiar();
                 txtnumMedidor.setText("");
                 //            cft.getTableFacturas(jTable1, numFact, fecha, subtotal, iva, total, usActual);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error En la Transaccion",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
 
             }
         }

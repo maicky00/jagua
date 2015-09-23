@@ -857,7 +857,6 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                     int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (i == 0) {
 
-//                bytesImg = cu.AbrirAImagen(archivo);
                         cu.guardarUsuarios(insti, rucCi, primNombre, segNombre, primApell, segApellidos, apodo, direccion, telefono, celular, sector, referencia, bytesImg, direccion);
                         cu.cargarTablaUsuario2(tablaUsuarios);
 //                int j = JOptionPane.showConfirmDialog(this, "¿Asignar Medidor ?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -887,11 +886,13 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar un sector");
+                JOptionPane.showMessageDialog(null,"Debe seleccionar un sector",
+                    "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "El campo nombre y apellido es obligatorio");
+            JOptionPane.showMessageDialog(null,"El campo nombre y apellido es obligatorio",
+                    "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnGuardarActionPerformed

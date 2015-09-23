@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="41f18c73-0ca7-47c3-817d-f175f0451603">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="numfact" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     institucion.`IDINSTITUCION` AS institucion_IDINSTITUCION,
+     institucion.`NOMBREINST` AS institucion_NOMBREINST,
+     institucion.`DIRECCION` AS institucion_DIRECCION,
+     institucion.`TELEFONO` AS institucion_TELEFONO,
+     institucion.`EMAIL` AS institucion_EMAIL,
+     institucion.`RUC` AS institucion_RUC,
+     institucion.`CELULAR` AS institucion_CELULAR,
+     institucion.`LOGO` AS institucion_LOGO,
+     usuarios.`IDUSUARIO` AS usuarios_IDUSUARIO,
+     usuarios.`IDINSTITUCION` AS usuarios_IDINSTITUCION,
+     usuarios.`RUCCI` AS usuarios_RUCCI,
+     usuarios.`PRIMERNOMBRE` AS usuarios_PRIMERNOMBRE,
+     usuarios.`SEGUNDONOMBRE` AS usuarios_SEGUNDONOMBRE,
+     usuarios.`PRIMERAPELLIDO` AS usuarios_PRIMERAPELLIDO,
+     usuarios.`SEGUNDOAPELLIDO` AS usuarios_SEGUNDOAPELLIDO,
+     usuarios.`APADOSN` AS usuarios_APADOSN,
+     usuarios.`DIRECCION` AS usuarios_DIRECCION,
+     usuarios.`TELEFONO` AS usuarios_TELEFONO,
+     usuarios.`CELULAR` AS usuarios_CELULAR,
+     usuarios.`SECTOR` AS usuarios_SECTOR,
+     usuarios.`REFERENCIA` AS usuarios_REFERENCIA,
+     usuarios.`FOTO` AS usuarios_FOTO,
+     usuarios.`OBSERVACION` AS usuarios_OBSERVACION,
+     medidor.`IDMEDIDOR` AS medidor_IDMEDIDOR,
+     medidor.`IDUSUARIO` AS medidor_IDUSUARIO,
+     medidor.`SERIE` AS medidor_SERIE,
+     medidor.`NUMMEDIDOR` AS medidor_NUMMEDIDOR,
+     medidor.`ESTADO` AS medidor_ESTADO,
+     medidor.`VALORPORCONEXION` AS medidor_VALORPORCONEXION,
+     medidor.`PAGADO` AS medidor_PAGADO,
+     medidor.`SALDO` AS medidor_SALDO,
+     asistencia.`IDASISTENCIA` AS asistencia_IDASISTENCIA,
+     asistencia.`IDPLANIFICACION` AS asistencia_IDPLANIFICACION,
+     asistencia.`IDMEDIDOR` AS asistencia_IDMEDIDOR,
+     asistencia.`ASISTENCIA` AS asistencia_ASISTENCIA,
+     asistencia.`VALORMULTA` AS asistencia_VALORMULTA,
+     asistencia.`DESCRIPCION` AS asistencia_DESCRIPCION,
+     asistencia.`OBSEVACION` AS asistencia_OBSEVACION,
+     planificacion.`IDPLANIFICACION` AS planificacion_IDPLANIFICACION,
+     planificacion.`TIPOPLANIFICACION` AS planificacion_TIPOPLANIFICACION,
+     planificacion.`LUGAR` AS planificacion_LUGAR,
+     planificacion.`FECHA` AS planificacion_FECHA,
+     planificacion.`VALORMULTA` AS planificacion_VALORMULTA,
+     planificacion.`DESCRIPCION` AS planificacion_DESCRIPCION,
+     pagosasistencia.`IDPAGOASISTENCIA` AS pagosasistencia_IDPAGOASISTENCIA,
+     pagosasistencia.`IDASISTENCIA` AS pagosasistencia_IDASISTENCIA,
+     pagosasistencia.`FECHAPAGO` AS pagosasistencia_FECHAPAGO,
+     pagosasistencia.`NUMMINGAS` AS pagosasistencia_NUMMINGAS,
+     pagosasistencia.`VALORMINGAS` AS pagosasistencia_VALORMINGAS,
+     pagosasistencia.`OBSERVACION` AS pagosasistencia_OBSERVACION,
+     pagosasistencia.`USUARIOACTUAL` AS pagosasistencia_USUARIOACTUAL,
+     pagosasistencia.`NUMFACTURA` AS pagosasistencia_NUMFACTURA
+FROM
+     `institucion` institucion INNER JOIN `usuarios` usuarios ON institucion.`IDINSTITUCION` = usuarios.`IDINSTITUCION`
+     INNER JOIN `medidor` medidor ON usuarios.`IDUSUARIO` = medidor.`IDUSUARIO`
+     INNER JOIN `asistencia` asistencia ON medidor.`IDMEDIDOR` = asistencia.`IDMEDIDOR`
+     INNER JOIN `planificacion` planificacion ON asistencia.`IDPLANIFICACION` = planificacion.`IDPLANIFICACION`
+     INNER JOIN `pagosasistencia` pagosasistencia ON asistencia.`IDASISTENCIA` = pagosasistencia.`IDASISTENCIA` 
+where pagosasistencia.`NUMFACTURA`=$P{numfact}]]>
+	</queryString>
+	<field name="institucion_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="institucion_NOMBREINST" class="java.lang.String"/>
+	<field name="institucion_DIRECCION" class="java.lang.String"/>
+	<field name="institucion_TELEFONO" class="java.lang.String"/>
+	<field name="institucion_EMAIL" class="java.lang.String"/>
+	<field name="institucion_RUC" class="java.lang.String"/>
+	<field name="institucion_CELULAR" class="java.lang.String"/>
+	<field name="institucion_LOGO" class="java.lang.Object"/>
+	<field name="usuarios_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="usuarios_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="usuarios_RUCCI" class="java.lang.String"/>
+	<field name="usuarios_PRIMERNOMBRE" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDONOMBRE" class="java.lang.String"/>
+	<field name="usuarios_PRIMERAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDOAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_APADOSN" class="java.lang.String"/>
+	<field name="usuarios_DIRECCION" class="java.lang.String"/>
+	<field name="usuarios_TELEFONO" class="java.lang.String"/>
+	<field name="usuarios_CELULAR" class="java.lang.String"/>
+	<field name="usuarios_SECTOR" class="java.lang.String"/>
+	<field name="usuarios_REFERENCIA" class="java.lang.String"/>
+	<field name="usuarios_FOTO" class="java.lang.Object"/>
+	<field name="usuarios_OBSERVACION" class="java.lang.String"/>
+	<field name="medidor_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="medidor_SERIE" class="java.lang.String"/>
+	<field name="medidor_NUMMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_ESTADO" class="java.lang.String"/>
+	<field name="medidor_VALORPORCONEXION" class="java.lang.Float"/>
+	<field name="medidor_PAGADO" class="java.lang.String"/>
+	<field name="medidor_SALDO" class="java.lang.Float"/>
+	<field name="asistencia_IDASISTENCIA" class="java.lang.Integer"/>
+	<field name="asistencia_IDPLANIFICACION" class="java.lang.Integer"/>
+	<field name="asistencia_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="asistencia_ASISTENCIA" class="java.lang.String"/>
+	<field name="asistencia_VALORMULTA" class="java.lang.Float"/>
+	<field name="asistencia_DESCRIPCION" class="java.lang.String"/>
+	<field name="asistencia_OBSEVACION" class="java.lang.String"/>
+	<field name="planificacion_IDPLANIFICACION" class="java.lang.Integer"/>
+	<field name="planificacion_TIPOPLANIFICACION" class="java.lang.String"/>
+	<field name="planificacion_LUGAR" class="java.lang.String"/>
+	<field name="planificacion_FECHA" class="java.sql.Date"/>
+	<field name="planificacion_VALORMULTA" class="java.lang.Float"/>
+	<field name="planificacion_DESCRIPCION" class="java.lang.String"/>
+	<field name="pagosasistencia_IDPAGOASISTENCIA" class="java.lang.Integer"/>
+	<field name="pagosasistencia_IDASISTENCIA" class="java.lang.Integer"/>
+	<field name="pagosasistencia_FECHAPAGO" class="java.sql.Date"/>
+	<field name="pagosasistencia_NUMMINGAS" class="java.lang.Integer"/>
+	<field name="pagosasistencia_VALORMINGAS" class="java.lang.Float"/>
+	<field name="pagosasistencia_OBSERVACION" class="java.lang.String"/>
+	<field name="pagosasistencia_USUARIOACTUAL" class="java.lang.String"/>
+	<field name="pagosasistencia_NUMFACTURA" class="java.lang.Integer"/>
+	<variable name="total" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{pagosasistencia_VALORMINGAS}]]></variableExpression>
+	</variable>
+	<variable name="numMingas" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{asistencia_IDASISTENCIA}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="178" height="1" forecolor="#000000" uuid="09d9eb90-f781-4393-99f0-c9ab34899f35"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="4" y="19" width="75" height="15" forecolor="#000000" uuid="4cb7bcba-bdbb-4d8d-8a8e-be5210cc51f8"/>
+				<textElement>
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<text><![CDATA[PLANIFICACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="64" y="19" width="49" height="15" forecolor="#000000" uuid="deb32a94-b43b-4c1f-bd2d-dafcdd0fda74"/>
+				<textElement>
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="118" y="19" width="74" height="15" forecolor="#000000" uuid="b16cb9b7-6e3f-4ca3-b7c2-ef1731cf1c00"/>
+				<textElement>
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<text><![CDATA[VALOR MULTA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Immediate">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="178" height="1" forecolor="#000000" uuid="ae41a94e-b785-4da8-a6e0-2e7bab6aabc3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="4" y="0" width="75" height="15" forecolor="#000000" uuid="6dd45767-9ba8-4264-bff4-1816720293da"/>
+				<textElement>
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{planificacion_TIPOPLANIFICACION}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy/MM/dd">
+				<reportElement style="Detail" x="63" y="0" width="50" height="15" forecolor="#000000" uuid="1f556d02-3904-4394-b48c-a4b57a6a6ada"/>
+				<textElement>
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{planificacion_FECHA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="118" y="0" width="74" height="15" forecolor="#000000" uuid="38f9526a-a3ed-4404-959e-585900d47dcf"/>
+				<textElement>
+					<font fontName="Consolas" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pagosasistencia_VALORMINGAS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

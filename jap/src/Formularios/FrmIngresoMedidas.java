@@ -129,6 +129,7 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
                 cf.ControlaInstancia(f);
                 frmDetalleFactura.lblanio.setText(String.valueOf(chsAnio.getYear()));
                 frmDetalleFactura.lblmes.setText(String.valueOf(mchMes.getMonth() + 1));
+                f.setMaximum(true);
                 this.dispose();
 //            } else {
 //                String mensaje = "Año:  " + chsAnio.getYear() + "  Mes:  " + mes;

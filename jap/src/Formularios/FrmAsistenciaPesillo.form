@@ -499,6 +499,7 @@
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboAsistenciaItemStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboAsistenciaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="labelAplica">
@@ -520,6 +521,7 @@
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comboAplicaItemStateChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboAplicaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lblnuMed">

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nuevoMed" language="groovy" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e81a8a0d-e5a3-45fe-a3ea-d911f261ccad">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="numfact" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     institucion.`IDINSTITUCION` AS institucion_IDINSTITUCION,
+     institucion.`NOMBREINST` AS institucion_NOMBREINST,
+     institucion.`DIRECCION` AS institucion_DIRECCION,
+     institucion.`TELEFONO` AS institucion_TELEFONO,
+     institucion.`EMAIL` AS institucion_EMAIL,
+     institucion.`RUC` AS institucion_RUC,
+     institucion.`CELULAR` AS institucion_CELULAR,
+     institucion.`LOGO` AS institucion_LOGO,
+     usuarios.`IDUSUARIO` AS usuarios_IDUSUARIO,
+     usuarios.`IDINSTITUCION` AS usuarios_IDINSTITUCION,
+     usuarios.`RUCCI` AS usuarios_RUCCI,
+     usuarios.`PRIMERNOMBRE` AS usuarios_PRIMERNOMBRE,
+     usuarios.`SEGUNDONOMBRE` AS usuarios_SEGUNDONOMBRE,
+     usuarios.`PRIMERAPELLIDO` AS usuarios_PRIMERAPELLIDO,
+     usuarios.`SEGUNDOAPELLIDO` AS usuarios_SEGUNDOAPELLIDO,
+     usuarios.`APADOSN` AS usuarios_APADOSN,
+     usuarios.`DIRECCION` AS usuarios_DIRECCION,
+     usuarios.`TELEFONO` AS usuarios_TELEFONO,
+     usuarios.`CELULAR` AS usuarios_CELULAR,
+     usuarios.`SECTOR` AS usuarios_SECTOR,
+     usuarios.`REFERENCIA` AS usuarios_REFERENCIA,
+     usuarios.`FOTO` AS usuarios_FOTO,
+     usuarios.`OBSERVACION` AS usuarios_OBSERVACION,
+     medidor.`IDMEDIDOR` AS medidor_IDMEDIDOR,
+     medidor.`IDUSUARIO` AS medidor_IDUSUARIO,
+     medidor.`SERIE` AS medidor_SERIE,
+     medidor.`NUMMEDIDOR` AS medidor_NUMMEDIDOR,
+     medidor.`ESTADO` AS medidor_ESTADO,
+     medidor.`VALORPORCONEXION` AS medidor_VALORPORCONEXION,
+     medidor.`PAGADO` AS medidor_PAGADO,
+     medidor.`SALDO` AS medidor_SALDO,
+     medidor.`FECHA` AS medidor_FECHA,
+     pagosnuevomed.`IDNUEVOMED` AS pagosnuevomed_IDNUEVOMED,
+     pagosnuevomed.`IDMEDIDOR` AS pagosnuevomed_IDMEDIDOR,
+     pagosnuevomed.`OBSERCION` AS pagosnuevomed_OBSERCION,
+     pagosnuevomed.`CANTIDADPAGAR` AS pagosnuevomed_CANTIDADPAGAR,
+     pagosnuevomed.`FECHAPAGO` AS pagosnuevomed_FECHAPAGO,
+     pagosnuevomed.`NUMFACT` AS pagosnuevomed_NUMFACT
+FROM
+     `institucion` institucion INNER JOIN `usuarios` usuarios ON institucion.`IDINSTITUCION` = usuarios.`IDINSTITUCION`
+     INNER JOIN `medidor` medidor ON usuarios.`IDUSUARIO` = medidor.`IDUSUARIO`
+     INNER JOIN `pagosnuevomed` pagosnuevomed ON medidor.`IDMEDIDOR` = pagosnuevomed.`IDMEDIDOR`
+where pagosnuevomed.`NUMFACT`=$P{numfact}]]>
+	</queryString>
+	<field name="institucion_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="institucion_NOMBREINST" class="java.lang.String"/>
+	<field name="institucion_DIRECCION" class="java.lang.String"/>
+	<field name="institucion_TELEFONO" class="java.lang.String"/>
+	<field name="institucion_EMAIL" class="java.lang.String"/>
+	<field name="institucion_RUC" class="java.lang.String"/>
+	<field name="institucion_CELULAR" class="java.lang.String"/>
+	<field name="institucion_LOGO" class="java.lang.Object"/>
+	<field name="usuarios_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="usuarios_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="usuarios_RUCCI" class="java.lang.String"/>
+	<field name="usuarios_PRIMERNOMBRE" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDONOMBRE" class="java.lang.String"/>
+	<field name="usuarios_PRIMERAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDOAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_APADOSN" class="java.lang.String"/>
+	<field name="usuarios_DIRECCION" class="java.lang.String"/>
+	<field name="usuarios_TELEFONO" class="java.lang.String"/>
+	<field name="usuarios_CELULAR" class="java.lang.String"/>
+	<field name="usuarios_SECTOR" class="java.lang.String"/>
+	<field name="usuarios_REFERENCIA" class="java.lang.String"/>
+	<field name="usuarios_FOTO" class="java.lang.Object"/>
+	<field name="usuarios_OBSERVACION" class="java.lang.String"/>
+	<field name="medidor_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="medidor_SERIE" class="java.lang.String"/>
+	<field name="medidor_NUMMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_ESTADO" class="java.lang.String"/>
+	<field name="medidor_VALORPORCONEXION" class="java.lang.Float"/>
+	<field name="medidor_PAGADO" class="java.lang.String"/>
+	<field name="medidor_SALDO" class="java.lang.Float"/>
+	<field name="medidor_FECHA" class="java.sql.Date"/>
+	<field name="pagosnuevomed_IDNUEVOMED" class="java.lang.Integer"/>
+	<field name="pagosnuevomed_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="pagosnuevomed_OBSERCION" class="java.lang.String"/>
+	<field name="pagosnuevomed_CANTIDADPAGAR" class="java.lang.Float"/>
+	<field name="pagosnuevomed_FECHAPAGO" class="java.sql.Date"/>
+	<field name="pagosnuevomed_NUMFACT" class="java.lang.Integer"/>
+	<variable name="total" class="java.lang.Float">
+		<variableExpression><![CDATA[$F{pagosnuevomed_CANTIDADPAGAR}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<summary>
+		<band height="41" splitType="Stretch">
+			<textField>
+				<reportElement x="104" y="18" width="62" height="20" forecolor="#000000" uuid="6fdf8b67-0bab-4611-b0ee-e9dbbe067aef"/>
+				<textElement>
+					<font fontName="Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="104" y="3" width="167" height="15" forecolor="#000000" uuid="cccc95bb-188d-4f4f-918a-df83a9470939"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pagosnuevomed_OBSERCION}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="4" y="18" width="82" height="15" forecolor="#000000" uuid="07caf257-b35c-4eeb-8b4d-f4ac0ffcaddf"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<text><![CDATA[OTROS:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -24,11 +24,10 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
      */
     classAsistencia ca = new classAsistencia();
     classMedidor cm = new classMedidor();
-    classPlanificacion cp=new classPlanificacion();
-     ReportesControlador rc = new ReportesControlador();
-   
-//    classMedidor cm = new classMedidor();
+    classPlanificacion cp = new classPlanificacion();
+    ReportesControlador rc = new ReportesControlador();
 
+//    classMedidor cm = new classMedidor();
     public FrmAsistencia() {
         initComponents();
         classMedidor cm = new classMedidor();
@@ -42,6 +41,14 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         lblId.setVisible(false);
         jLabel3.setVisible(false);
         lblIdPlan.setVisible(false);
+
+        if (comboAsistencia.getSelectedItem().equals("SI")) {
+            comboObs.setVisible(false);
+            jLabel11.setVisible(false);
+        } else {
+            comboObs.setVisible(true);
+            jLabel11.setVisible(true);
+        }
     }
 
     private void mostrar() {
@@ -56,7 +63,6 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         //txtValor.setEnabled(true);
         txtDescripcion.setEnabled(true);
 //        tablaUsuarios.setEnabled(true);
-        txtValor.setText(cp.buscarIdPlanificacion(Integer.valueOf(lblIdPlan.getText())).getValormulta().toString());
     }
 
     private void ocultar() {
@@ -86,6 +92,11 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         txtCedula.setText("");
         txtDescripcion.setText("");
         lblIdMedidor.setText("");
+        jLabel11.setVisible(false);
+        comboObs.setVisible(false);
+        comboAsistencia.setSelectedIndex(0);
+        comboObs.setSelectedIndex(0);
+        txtValor.setText("0.0");
 
     }
 
@@ -194,6 +205,11 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
 
         comboAsistencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboAsistencia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SI", "NO" }));
+        comboAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAsistenciaActionPerformed(evt);
+            }
+        });
 
         comboObs.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SI", "NO" }));
         comboObs.addActionListener(new java.awt.event.ActionListener() {
@@ -329,6 +345,11 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         jScrollPane3.setViewportView(tab);
 
         jButton3.setText("ver lista de asistencia");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Lista de Asistencia");
 
@@ -572,14 +593,11 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         String descripcion = txtDescripcion.getText();
         String obs = comboObs.getSelectedItem().toString();
         String r;
-        float mult = 0;
-        if (obs.equals("SI")) {
+        float mult = Float.valueOf(txtValor.getText());;
+        if (obs.equals("SI")&&asistencia.equals("NO")) {
             r = "NO";
         } else {
             r = "SI";
-        }
-        if (comboObs.getSelectedItem().equals("SI")) {
-            mult = Float.valueOf(txtValor.getText());
         }
         if (lblId.getText().equals("")) {
             int j = JOptionPane.showConfirmDialog(this, "¿Realmente desea Registrar?", "Confirmar", JOptionPane.YES_NO_OPTION);
@@ -612,17 +630,18 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         try {
             int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
+                int idPlan = Integer.valueOf(lblIdPlan.getText());
                 ca.eliminarAsistencia(Integer.valueOf(lblId.getText()));
-//                ca.cargarTablaAsistencia(jTable1);
-                ca.cargarTablaAsistencia(tab, Integer.parseInt(lblIdPlan.getText()));
-                limpiar();
+                ca.cargarTablaAsistencia(tab, idPlan);
+                cm.cargarTablaMedidorAsistencia(FrmAsistencia.tab1, Integer.valueOf(lblIdPlan.getText()));
+           limpiar();
                 ocultar();
             }
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se pudo Eliminar!.",
-                "Error de Proceso",
-                JOptionPane.ERROR_MESSAGE);
+                    "Error de Proceso",
+                    JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -666,47 +685,71 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
             lblId.setText(tab.getValueAt(n, 0).toString());
             lblIdPlan.setText(tab.getValueAt(n, 1).toString());
             lblIdMedidor.setText(tab.getValueAt(n, 8).toString());
-            //            txtNombre.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getPrimernombre());
-            //            txtNombre2.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getSegundonombre());
-            //            txtApellido.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getPrimerapellido());
-            //            txtApellido2.setText(cu.buscarUsuarioRucCi(tablaUsuarios.getValueAt(n, 1).toString()).getSegundoapellido());
-
             comboAsistencia.setSelectedItem(tab.getValueAt(n, 5).toString());
             txtUsuario.setText(tab.getValueAt(n, 3).toString());
             txtCedula.setText(tab.getValueAt(n, 4).toString());
-            txtValor.setText(tab.getValueAt(n, 6).toString());
-            txtDescripcion.setText(ca.buscarIdAsistencia(Integer.valueOf(tab.getValueAt(n, 0).toString())).getDescripcion());
+              txtDescripcion.setText(ca.buscarIdAsistencia(Integer.valueOf(tab.getValueAt(n, 0).toString())).getDescripcion());
             String r;
             if (ca.buscarIdAsistencia(id).getObsevacion().equals("SI")) {
                 r = "NO";
             } else {
                 r = "SI";
             }
-            comboObs.setSelectedItem(r);
+            
             comboAsistencia.setSelectedItem(ca.buscarIdAsistencia(id).getAsistencia());
+            comboObs.setSelectedItem(r);
+             txtValor.setText(ca.buscarIdAsistencia(id).getValormulta().toString());
+         
         } catch (Exception e) {
         }
     }//GEN-LAST:event_tabMouseClicked
 
     private void comboObsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboObsActionPerformed
         // TODO add your handling code here:
+        if (comboObs.getSelectedItem().equals("SI")) {
+            txtValor.setText(cp.buscarIdPlanificacion(Integer.valueOf(lblIdPlan.getText())).getValormulta().toString());
 
+        } else {
+            txtValor.setText("0.0");
+
+        }
     }//GEN-LAST:event_comboObsActionPerformed
 
     private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
         // TODO add your handling code here:
         char c = evt.getKeyChar();
-        
+
         if (Character.isLetter(c)) {
             getToolkit().beep();
-            
+
             evt.consume();
-            
+
             mensaje.setText("error de ingreso, ingrese digitos");
         } else {
             mensaje.setText("");
         }
     }//GEN-LAST:event_txtValorKeyTyped
+
+    private void comboAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAsistenciaActionPerformed
+        // TODO add your handling code here:
+        if (comboAsistencia.getSelectedItem().equals("SI")) {
+            comboObs.setVisible(false);
+            jLabel11.setVisible(false);
+            txtValor.setText("0.0");
+        } else {
+            comboObs.setVisible(true);
+            jLabel11.setVisible(true);
+            comboObs.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_comboAsistenciaActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        try {
+            rc.Planificacion("id", lblIdPlan.getText(), "usuarioasistencia.jasper");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

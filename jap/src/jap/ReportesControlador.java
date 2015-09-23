@@ -115,18 +115,48 @@ public class ReportesControlador {
 
     }
 
-    public void facturaPlanificacion(String bddVar, String numfact, String archivo, String carpeta, String nom) {
+    public void facturaImprimir(String bddVar, String numfact, String bddVar1, String id, String archivo) {
         try {
             JasperReport reporte = null;
+            URL in1 = null;
             try {
                 URL in = this.getClass().getResource(archivo);
+                in1 = this.getClass().getResource("");
                 reporte = (JasperReport) JRLoader.loadObject(in);
             } catch (JRException jr) {
                 System.out.println("Error .");
             }
             Map parametro = new HashMap();
+            parametro.put(bddVar1, id);
             parametro.put(bddVar, numfact);
+            parametro.put("SUBREPORT_DIR", "" + in1);
 
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametro, con.getCon());
+            JasperViewer jv = new JasperViewer(jasperPrint, false);
+            jv.setTitle("FACTURA");
+//            jv.setVisible(true);
+            JasperPrintManager.printReport(jasperPrint, false);
+        } catch (Exception e) {
+        }
+
+    }
+
+    public void facturaPlanificacion(String bddVar, String numfact, String archivo, String carpeta, String nom) {
+        try {
+            JasperReport reporte = null;
+            URL in1 = null;
+            try {
+                URL in = this.getClass().getResource(archivo);
+                reporte = (JasperReport) JRLoader.loadObject(in);
+                in1 = this.getClass().getResource("");
+                
+            } catch (JRException jr) {
+                System.out.println("Error .");
+            }
+            Map parametro = new HashMap();
+            parametro.put(bddVar, numfact);
+           
+            parametro.put("SUBREPORT_DIR", "" + in1);
             JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametro, con.getCon());
             JasperViewer jv = new JasperViewer(jasperPrint, false);
             jv.setTitle("FACTURA");
@@ -139,6 +169,32 @@ public class ReportesControlador {
 
     }
 
+    public void imprimirfacturaPlanificacion(String bddVar, String numfact, String archivo) {
+        try {
+            JasperReport reporte = null;
+            URL in1 = null;
+            try {
+                URL in = this.getClass().getResource(archivo);
+                reporte = (JasperReport) JRLoader.loadObject(in);
+                in1 = this.getClass().getResource("");
+                
+            } catch (JRException jr) {
+                System.out.println("Error .");
+            }
+            Map parametro = new HashMap();
+            parametro.put(bddVar, numfact);
+           
+            parametro.put("SUBREPORT_DIR", "" + in1);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametro, con.getCon());
+            JasperViewer jv = new JasperViewer(jasperPrint, false);
+            jv.setTitle("FACTURA");
+         
+            JasperPrintManager.printReport(jasperPrint, false); 
+            
+        } catch (Exception e) {
+        }
+
+    }
     public void totalesMes(String bddVar1, String anio, String bddVar2, String mes, String archivo) {
         try {
             JasperReport reporte = null;
@@ -217,14 +273,14 @@ public class ReportesControlador {
     }
 
     public void abrirManual() throws IOException {
-          
-            try {
-                File path = new File(("MANUAL.pdf"));
-                Desktop.getDesktop().open(path);
-            } catch (Exception ex) {
-                
-            }
- 
+
+        try {
+            File path = new File(("MANUAL.pdf"));
+            Desktop.getDesktop().open(path);
+        } catch (Exception ex) {
+
+        }
+
     }
 //
 //    public void abrirManual() {

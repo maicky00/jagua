@@ -20,6 +20,7 @@ import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
@@ -238,27 +239,27 @@ public class classMedidor {
         modelo.addColumn("N° Medidor");
         for (Medidor u : getMedidor()) {
             if (u.getIdusuario().buscarUsuarios(u.getIdusuario().elimiEspacio(txt))) {
-                            fila[0] = u.getIdmedidor();
-            fila[1] = u.getIdusuario().getRucci();
-            fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-                    + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre();
-            fila[3] = u.getIdusuario().getApadosn();
-            fila[4] = u.getSerie();
-            fila[5] = u.getEstado();
-            fila[6] = u.getNummedidor();
+                fila[0] = u.getIdmedidor();
+                fila[1] = u.getIdusuario().getRucci();
+                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                        + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre();
+                fila[3] = u.getIdusuario().getApadosn();
+                fila[4] = u.getSerie();
+                fila[5] = u.getEstado();
+                fila[6] = u.getNummedidor();
 
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(60);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(65);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(70);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(85);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(40);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(45);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(45);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(70);
+                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(60);
+                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(65);
+                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(70);
+                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(85);
+                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(40);
+                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(45);
+                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(45);
+                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(70);
 
-            modelo.addRow(fila);
+                modelo.addRow(fila);
 
             }
         }
@@ -357,7 +358,8 @@ public class classMedidor {
         }
     }
 
-    public void cargarTablaMedidor2(JTable tabla) {
+    public void cargarTablaMedidor2(JTable tabla, int idPlan) {
+        classAsistenciaPesillo ca = new classAsistenciaPesillo();
         DefaultTableModel modelo = new DefaultTableModel();
         tabla.setModel(modelo);
         Object[] fila = new Object[4];
@@ -367,14 +369,15 @@ public class classMedidor {
         modelo.addColumn("Apodo");
 
         for (Medidor u : getMedidor()) {
+            if (ca.buscardiferentes(u.getIdmedidor(), idPlan) != u.getIdmedidor()) {
+                fila[0] = u.getNummedidor();
+                fila[1] = u.getIdusuario().getRucci();
+                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                        + u.getIdusuario().getPrimernombre();
+                fila[3] = u.getIdusuario().getApadosn();
 
-            fila[0] = u.getNummedidor();
-            fila[1] = u.getIdusuario().getRucci();
-            fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-                    + u.getIdusuario().getPrimernombre();
-            fila[3] = u.getIdusuario().getApadosn();
-
-            modelo.addRow(fila);
+                modelo.addRow(fila);
+            }
         }
     }
 
@@ -423,21 +426,20 @@ public class classMedidor {
             if (cdf.numContar(u.getIdmedidor()) >= coc.buscarOtrosconceptos(1).getTiempo()) {
                 if (cc.verificarRepetidos(u.getIdmedidor()) != u.getIdmedidor()) {
                     if (u.getEstado().equals("ACTIVO")) {
-                        
-                    
-                    fila[0] = u.getNummedidor();
-                    fila[1] = u.getIdusuario().getRucci();
-                    fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-                            + u.getIdusuario().getPrimernombre();
-                    fila[3] = u.getIdusuario().getApadosn();
-                    fila[4] = cdf.numContar(u.getIdmedidor());
-                    fila[5] = u.getIdmedidor();
 
-                    FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(50);
-                    FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(55);
-                    FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(70);
-                    FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
-                    modelo.addRow(fila);
+                        fila[0] = u.getNummedidor();
+                        fila[1] = u.getIdusuario().getRucci();
+                        fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                                + u.getIdusuario().getPrimernombre();
+                        fila[3] = u.getIdusuario().getApadosn();
+                        fila[4] = cdf.numContar(u.getIdmedidor());
+                        fila[5] = u.getIdmedidor();
+
+                        FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(50);
+                        FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(55);
+                        FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(70);
+                        FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
+                        modelo.addRow(fila);
                     }
                 }
             }

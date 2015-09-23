@@ -89,7 +89,7 @@ public class classDetalleFactura {
         }
     }
 
-    public boolean modificarDetallefactura(int idDetallefactura, int idTarifas, int idMedidor, String anioMes, int medidaAnt, int medidaAct, int consumo, int medExcedido, float tarExcedido, float subtotal, float total) {
+    public boolean modificarDetallefactura(int idDetallefactura, int idTarifas, int idMedidor, String anioMes, int medidaAnt, int medidaAct, int consumo, int medExcedido, float tarExcedido, float subtotal, float total, String observacion) {
         try {
             Detallefactura dat = detallefacturaJpacontrolador.findDetallefactura(idDetallefactura);
             if (dat == null) {
@@ -107,6 +107,7 @@ public class classDetalleFactura {
             dat.setTarexcedido(tarExcedido);
             dat.setSubtotal(subtotal);
             dat.setTotal(total);
+            dat.setObservacion(observacion);
             detallefacturaJpacontrolador.edit(dat);
             JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
 
@@ -420,31 +421,41 @@ public class classDetalleFactura {
         }
     }
 
-    public String mesMator(int idmedidor, int año, int mes) {
-        String cond = "";
-        java.sql.Date fe = new java.sql.Date(año, mes, 1);
-      
-        int r2 = 0;
+    public boolean ingresoMesMayor(int idMedidor, int año, int mes) {
+        boolean retorno = false;
+        String re = "0-0";
+        int re2 = 0;
         classMedidor cm = new classMedidor();
         for (Detallefactura dat : getDetallefactura()) {
-            String f[] = dat.getAniomes().split("-");
-            java.sql.Date fe1 = new java.sql.Date(Integer.valueOf(f[0]), Integer.valueOf(f[1]), 1);
-//            fe1.setYear(Integer.valueOf(f[0])-1900);
-//        fe1.setMonth(Integer.valueOf(f[1])-1);
-       
-
-            if (dat.getIdmedidor().getIdmedidor() == (cm.buscarMedidorNumM2(idmedidor)) && (dat.getIddetallefac() > r2)) {
-                if (fe.getDate() > fe1.getDate()) {
-                    r2 = dat.getIddetallefac();
-                    cond = fe.getDate() + "  "  + dat.getAniomes();
-                }
+            if (dat.getIdmedidor().getIdmedidor() == (cm.buscarMedidorNumM(idMedidor).getIdmedidor()) && (dat.getIddetallefac() > re2)) {
+                re2 = dat.getIddetallefac();
+                re = dat.getAniomes();
             }
         }
-        return cond;
+
+        String r = "";
+        String fechaing = año + "" + mes;
+        int añoIng = Integer.valueOf(fechaing);
+        String r1[] = re.split("-");
+
+        String fechaRec = r1[0] + r1[1];
+        int añoRec = Integer.valueOf(fechaRec);
+
+        if (añoIng > añoRec) {
+            retorno = true;
+            r = añoIng + "  " + añoRec;
+        } else {
+            retorno = false;
+            JOptionPane.showMessageDialog(null, "Medidor Tiene Registro Superior \nal que desea ingresar\n "
+                    + "Elimine el Registro " + re+" y vuleva a intentar",
+                    "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
+
+        }
+        return retorno;
     }
 
     public static void main(String[] args) {
-        classDetalleFactura f = new classDetalleFactura();
-        System.out.println("" + f.mesMator(1, 2015,5));
+        classDetalleFactura c = new classDetalleFactura();
+        System.out.println("" + c.ingresoMesMayor(1, 2016, 3));
     }
 }

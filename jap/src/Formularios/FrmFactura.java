@@ -17,7 +17,6 @@ import Controladores.classOtrosConceptos;
 import Controladores.classOtrosPagos;
 import Controladores.classPagosNuevoMed;
 import Controladores.classusuario;
-import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
 import entidades.Facturas;
 import jap.ReportesControlador;
 import java.awt.Color;
@@ -583,7 +582,16 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                         "INFORMACION", JOptionPane.ERROR_MESSAGE);
 
             } else {
-
+                if (ca.buscarMultaPagado(Integer.valueOf(txtnumMedidor.getText())) > 0) {
+                    int i = JOptionPane.showConfirmDialog(this, "¿Tiene Multas Pendientes\n Ver Detalles?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                    if (i == 0) {
+                        FrmPagosAsistemcia pago = new FrmPagosAsistemcia();
+                        cf = new ControlFormularios();
+                        cf.ControlaInstancia(pago);
+                        FrmPagosAsistemcia.txtnumMedidor.setText(txtnumMedidor.getText());
+                        pago.pagar();
+                    }
+                }
                 if (cc.verificarOtrPagos(Integer.valueOf(txtnumMedidor.getText())) == true) {
                     int numM = Integer.valueOf(txtnumMedidor.getText());
                     txtIdCorte.setVisible(true);
@@ -624,16 +632,6 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                     txtdireccion.setText(direccioN);
                     cdf.graficador(Integer.valueOf(txtnumMedidor.getText()));
 
-                    if (ca.buscarMultaPagado(Integer.valueOf(txtnumMedidor.getText())) > 0) {
-                        int i = JOptionPane.showConfirmDialog(this, "¿Tiene Multas Pendientes\n Ver Detalles?", "Confirmar", JOptionPane.YES_NO_OPTION);
-                        if (i == 0) {
-                            FrmPagosAsistemcia pago = new FrmPagosAsistemcia();
-                            cf = new ControlFormularios();
-                            cf.ControlaInstancia(pago);
-                            FrmPagosAsistemcia.txtnumMedidor.setText(txtnumMedidor.getText());
-                            pago.pagar();
-                        }
-                    }
                 }
             }
         } catch (Exception e) {
@@ -641,8 +639,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        String usActual = FrmPrincipal.menuUsuarioActual.getText();
+               String usActual = FrmPrincipal.menuUsuarioActual.getText();
 
         int i = JOptionPane.showConfirmDialog(this, "¿REAlIZAR TRANSACCION?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
@@ -686,7 +683,8 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                     chf.guardarHistorial(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdusuario().getIdusuario(), numFact, fechaActual);
                     JOptionPane.showMessageDialog(null, "Pago Realizado Corectamente", "Información", 1);
                     String idr = "" + cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdusuario().getIdusuario();
-                    b.factura("id", idr, "numfact", String.valueOf(numFact), "facturageneral.jasper", "Consumos " + lblfecha.getText(), "Num.Med " + txtnumMedidor.getText() + " Fact." + numFact);
+                    b.factura("id", idr, "numfact", String.valueOf(numFact), "verfacturageneral.jasper", "Consumos " + lblfecha.getText(), "Num.Med " + txtnumMedidor.getText() + " Fact." + numFact);
+                    b.facturaImprimir("id", idr, "numfact", String.valueOf(numFact), "facturageneral.jasper");
 
                 } else {
                     JOptionPane.showMessageDialog(null, "No hay Datos", "Información", 1);

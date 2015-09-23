@@ -103,116 +103,22 @@ where pagosnuevomed.`NUMFACT`=$P{numfact}]]>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
-	<columnHeader>
-		<band height="75" splitType="Stretch">
-			<staticText>
-				<reportElement style="Column header" x="26" y="14" width="60" height="15" forecolor="#000000" uuid="be5432c6-2746-4b7b-a114-9167eb7497f2"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[NUM.MEDIDOR:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="26" y="25" width="97" height="15" forecolor="#000000" uuid="9479061d-cf76-4f93-ba1c-c355040b1791"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[VALOR POR CONEXION: $]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="26" y="37" width="36" height="15" forecolor="#000000" uuid="4549ec3d-622e-4346-a2cc-ca160ef55962"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[SALDO: $]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="26" y="4" width="60" height="15" forecolor="#000000" uuid="16324f36-a0cf-4199-954d-2a0af1284fb4"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[DESCRIPCION:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="26" y="60" width="82" height="15" forecolor="#000000" uuid="292a1d20-788f-415c-b055-cef50da8580f"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[CANTIDAD DE PAGO: $]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="26" y="48" width="75" height="15" forecolor="#000000" uuid="f3b920d4-d98c-4292-ac17-b2f2ae3b1fd7"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[FECHA DE PAGO.]]></text>
-			</staticText>
+	<summary>
+		<band height="41" splitType="Stretch">
 			<textField>
-				<reportElement style="Detail" x="94" y="12" width="63" height="15" forecolor="#000000" uuid="311ee419-a3f4-42a7-a0a5-a0eeba7ca470"/>
+				<reportElement x="6" y="17" width="62" height="20" forecolor="#000000" uuid="6fdf8b67-0bab-4611-b0ee-e9dbbe067aef"/>
 				<textElement>
-					<font size="7"/>
+					<font fontName="Serif" size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{medidor_NUMMEDIDOR}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="136" y="25" width="52" height="15" forecolor="#000000" uuid="da3ff824-e6dc-4a18-a514-605d0d40f815"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{medidor_VALORPORCONEXION}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="68" y="37" width="41" height="15" forecolor="#000000" uuid="bded0822-aaba-40c6-a403-52456b46655d"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{medidor_SALDO}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="101" y="4" width="87" height="15" forecolor="#000000" uuid="cccc95bb-188d-4f4f-918a-df83a9470939"/>
+				<reportElement style="Detail" x="6" y="3" width="167" height="15" forecolor="#000000" uuid="cccc95bb-188d-4f4f-918a-df83a9470939"/>
 				<textElement>
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pagosnuevomed_OBSERCION}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement style="Detail" x="119" y="60" width="67" height="15" forecolor="#000000" uuid="19f7d801-4047-45ef-a9f1-431a7800f26f"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{pagosnuevomed_CANTIDADPAGAR}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="109" y="48" width="30" height="15" forecolor="#000000" uuid="d51ad62e-6966-405c-bb44-6dcdf0cc5c41"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{pagosnuevomed_FECHAPAGO}]]></textFieldExpression>
-			</textField>
-		</band>
-	</columnHeader>
-	<summary>
-		<band height="33" splitType="Stretch">
-			<textField>
-				<reportElement x="158" y="2" width="62" height="20" forecolor="#000000" uuid="6fdf8b67-0bab-4611-b0ee-e9dbbe067aef"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement style="Column header" x="21" y="3" width="136" height="15" forecolor="#000000" uuid="48a974e0-a2be-4339-b117-8ad0c6ee933a"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[TOTAL POR CONEXION:     $]]></text>
-			</staticText>
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="25" width="555" height="1" forecolor="#000000" uuid="33173674-9f84-433e-bd11-93073d72ea75"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
 		</band>
 	</summary>
 </jasperReport>

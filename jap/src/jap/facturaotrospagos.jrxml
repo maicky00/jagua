@@ -124,151 +124,21 @@ where otrospagos.`NUMFACTURA`=$P{numfact}]]>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
-	<columnHeader>
-		<band height="75" splitType="Stretch">
-			<staticText>
-				<reportElement style="Column header" x="5" y="19" width="79" height="15" forecolor="#000000" uuid="6105e0e0-7557-4c01-89b1-ce22c56cb904"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[NUM- MEDIDOR:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="5" y="30" width="44" height="15" forecolor="#000000" uuid="effde20b-51bc-4c63-b816-8af6cad4cb38"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[CORTE:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="5" y="40" width="79" height="15" forecolor="#000000" uuid="6527dba6-cb4f-4c81-8944-a855b106bbfa"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[FECHA MULTA:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="6" y="50" width="79" height="15" forecolor="#000000" uuid="e8bc4827-5594-42a3-8a40-c6e51facc4ba"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[VALOR MULTA:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="141" y="32" width="72" height="15" forecolor="#000000" uuid="061ef796-2644-42fa-8615-2fdf2c283597"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[DER.CONEXION: $]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="141" y="45" width="89" height="15" forecolor="#000000" uuid="ed97c566-7eeb-4037-b99c-d88c5bfa490a"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[MULTA RECONEXION: $]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="141" y="58" width="77" height="15" forecolor="#000000" uuid="b4414ae5-f9c6-495b-a27e-72694c847557"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[INTERES:                $]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="6" y="59" width="79" height="15" forecolor="#000000" uuid="2ef971bb-98b6-44d9-aedb-80eebdb2e054"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[FECHA PAGO:]]></text>
-			</staticText>
-			<textField>
-				<reportElement style="Detail" x="88" y="19" width="63" height="15" forecolor="#000000" uuid="d3e11510-0b3a-4137-9e53-feda6a347a5a"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{medidor_NUMMEDIDOR}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="49" y="30" width="66" height="15" forecolor="#000000" uuid="3823378d-1d38-4774-beb0-70ba7a95404e"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{corte_CORTE}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="84" y="40" width="35" height="15" forecolor="#000000" uuid="a42d65ab-b246-4c62-988c-40b1e8232a03"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{corte_FECHA}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="89" y="50" width="38" height="15" forecolor="#000000" uuid="4a759ecf-675d-462b-9c07-7629927456b6"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{corte_MULTA}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="213" y="32" width="41" height="15" forecolor="#000000" uuid="a09f35f4-cf1c-4342-8e21-d7afb3651776"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{otrospagos_DERCONX}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="230" y="45" width="42" height="15" forecolor="#000000" uuid="39dbf5b7-c891-4abc-aee7-ab4bc56c0811"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{otrospagos_MULRECX}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="219" y="58" width="53" height="15" forecolor="#000000" uuid="b1552bde-3007-4085-9754-134aa5247559"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{otrospagos_INTERES}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="Detail" x="84" y="60" width="35" height="15" forecolor="#000000" uuid="93f7ac24-da0a-4caa-a072-56130d8d1b35"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{otrospagos_FECHAPAGO}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement style="Column header" x="6" y="10" width="77" height="15" forecolor="#000000" uuid="98b27bf9-0ebe-4e79-974c-4aeaf8d5af5f"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<text><![CDATA[DESCRIPCION:]]></text>
-			</staticText>
-			<textField>
-				<reportElement style="Detail" x="87" y="10" width="166" height="15" forecolor="#000000" uuid="b36ac4a5-0056-42f3-9963-52f94dbc5c44"/>
-				<textElement>
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{corte_OBSERVACION}]]></textFieldExpression>
-			</textField>
-		</band>
-	</columnHeader>
 	<summary>
-		<band height="26" splitType="Stretch">
-			<staticText>
-				<reportElement style="Column header" x="49" y="4" width="114" height="15" forecolor="#000000" uuid="324b78b2-361c-43da-8b3e-b7661350dbce"/>
-				<textElement>
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[TOTAL OTROS PAGOS: $]]></text>
-			</staticText>
+		<band height="57" splitType="Stretch">
 			<textField>
-				<reportElement x="167" y="4" width="100" height="20" forecolor="#000000" uuid="1000b79c-1d08-4bf6-9038-766cbb7de6e7"/>
+				<reportElement x="6" y="17" width="100" height="20" forecolor="#000000" uuid="1000b79c-1d08-4bf6-9038-766cbb7de6e7"/>
 				<textElement>
-					<font size="9"/>
+					<font fontName="Serif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="6" y="4" width="185" height="15" forecolor="#000000" uuid="b36ac4a5-0056-42f3-9963-52f94dbc5c44"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{corte_OBSERVACION}+" Con Corte: "+$F{corte_CORTE}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

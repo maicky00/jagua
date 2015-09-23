@@ -471,10 +471,11 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                 Date fechaActual = formato.parse(lblfecha.getText());
                 float subtotal = Float.valueOf(tabla2.getValueAt(0, 1).toString());
-                List<Pagosasistencia> tableData = cpa.getTable(jTable1, numFact, fechaActual, usActual, subtotal);
+                List<Pagosasistencia> tableData = cpa.getTable(jTable1, numFact, fechaActual, usActual);
                 cpa.Ingresarlist(tableData);
                 if (tableData.size() > 0) {
-                    b.facturaPlanificacion("numfact", "" + numFact, "pagoPlanificacion.jasper", "Planifinicaciones " + lblfecha.getText(), "Num.Med " + txtnumMedidor.getText() + " Fact." + numFact);
+                    b.facturaPlanificacion("numfact", "" + numFact, "verpagoPlanificacion.jasper", "Planifinicaciones " + lblfecha.getText(), "Num.Med " + txtnumMedidor.getText() + " Fact." + numFact);
+                   b.imprimirfacturaPlanificacion("numfact", "" + numFact, "pagoPlanificacion.jasper");
 
                 }
                 limpiar();

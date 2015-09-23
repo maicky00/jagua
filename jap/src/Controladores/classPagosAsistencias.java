@@ -103,7 +103,6 @@ public class classPagosAsistencias {
 //        }
 //        return 0;
 //    }
-
     public void Ingresarlist(List<Pagosasistencia> list) {
         try {
             if (list.size() > 0) {
@@ -121,7 +120,7 @@ public class classPagosAsistencias {
 
     }
 
-    public List<Pagosasistencia> getTable(JTable table, int numFact, Date fechaEmision, String usuarioActual, float valor) {
+    public List<Pagosasistencia> getTable(JTable table, int numFact, Date fechaEmision, String usuarioActual) {
 
         classAsistencia cdf = new classAsistencia();
         DefaultTableModel dtm = (DefaultTableModel) table.getModel();
@@ -135,7 +134,7 @@ public class classPagosAsistencias {
             dat.setIdasistencia(idAsis);
             dat.setFechapago(fechaEmision);
             dat.setNummingas(1);
-            dat.setValormingas(valor);
+            dat.setValormingas(Float.valueOf(dtm.getValueAt(i, 1).toString()));
             dat.setObservacion(dtm.getValueAt(i, 2).toString());
             dat.setUsuarioactual(usuarioActual);
             dat.setNumfactura(numFact);
@@ -144,6 +143,8 @@ public class classPagosAsistencias {
         }
         return lst;
     }
+
+   
 
     public int numFactura() {
         int i = 0;

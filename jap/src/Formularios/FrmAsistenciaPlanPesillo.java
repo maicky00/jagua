@@ -7,6 +7,7 @@ package Formularios;
 
 import Controladores.ControlFormularios;
 import Controladores.classAsistenciaPesillo;
+import Controladores.classMedidor;
 import Controladores.classPlanificacionPesillo;
 import jap.ReportesControlador;
 import java.awt.Dimension;
@@ -24,6 +25,7 @@ public class FrmAsistenciaPlanPesillo extends javax.swing.JInternalFrame {
     classPlanificacionPesillo cpp = new classPlanificacionPesillo();
     classAsistenciaPesillo cap=new classAsistenciaPesillo();
     ControlFormularios cf;
+    classMedidor cm=new classMedidor();
     
 
     public FrmAsistenciaPlanPesillo() {
@@ -253,6 +255,7 @@ public class FrmAsistenciaPlanPesillo extends javax.swing.JInternalFrame {
                 this.dispose();
                 cf.ControlaInstancia(as);
                 cap.cargarTablaAsistenciaPesillo(FrmAsistenciaPesillo.tab, Integer.parseInt(txtId.getText()));
+                cm.cargarTablaMedidor2(FrmAsistenciaPesillo.tab1,Integer.valueOf(txtId.getText()));
             } else {
                 JOptionPane.showMessageDialog(null, "Seleccione un Evento!.",
                 "Error de Proceso",

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="facturaotrospagos" language="groovy" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9760d7d9-c26c-43e9-a873-8a2210fd5d7d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="numfact" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     institucion.`IDINSTITUCION` AS institucion_IDINSTITUCION,
+     institucion.`NOMBREINST` AS institucion_NOMBREINST,
+     institucion.`DIRECCION` AS institucion_DIRECCION,
+     institucion.`TELEFONO` AS institucion_TELEFONO,
+     institucion.`EMAIL` AS institucion_EMAIL,
+     institucion.`RUC` AS institucion_RUC,
+     institucion.`CELULAR` AS institucion_CELULAR,
+     institucion.`LOGO` AS institucion_LOGO,
+     usuarios.`IDUSUARIO` AS usuarios_IDUSUARIO,
+     usuarios.`IDINSTITUCION` AS usuarios_IDINSTITUCION,
+     usuarios.`RUCCI` AS usuarios_RUCCI,
+     usuarios.`PRIMERNOMBRE` AS usuarios_PRIMERNOMBRE,
+     usuarios.`SEGUNDONOMBRE` AS usuarios_SEGUNDONOMBRE,
+     usuarios.`PRIMERAPELLIDO` AS usuarios_PRIMERAPELLIDO,
+     usuarios.`SEGUNDOAPELLIDO` AS usuarios_SEGUNDOAPELLIDO,
+     usuarios.`APADOSN` AS usuarios_APADOSN,
+     usuarios.`DIRECCION` AS usuarios_DIRECCION,
+     usuarios.`TELEFONO` AS usuarios_TELEFONO,
+     usuarios.`CELULAR` AS usuarios_CELULAR,
+     usuarios.`SECTOR` AS usuarios_SECTOR,
+     usuarios.`REFERENCIA` AS usuarios_REFERENCIA,
+     usuarios.`FOTO` AS usuarios_FOTO,
+     usuarios.`OBSERVACION` AS usuarios_OBSERVACION,
+     medidor.`IDMEDIDOR` AS medidor_IDMEDIDOR,
+     medidor.`IDUSUARIO` AS medidor_IDUSUARIO,
+     medidor.`SERIE` AS medidor_SERIE,
+     medidor.`NUMMEDIDOR` AS medidor_NUMMEDIDOR,
+     medidor.`ESTADO` AS medidor_ESTADO,
+     medidor.`VALORPORCONEXION` AS medidor_VALORPORCONEXION,
+     medidor.`PAGADO` AS medidor_PAGADO,
+     medidor.`SALDO` AS medidor_SALDO,
+     medidor.`FECHA` AS medidor_FECHA,
+     corte.`IDCORTE` AS corte_IDCORTE,
+     corte.`IDMEDIDOR` AS corte_IDMEDIDOR,
+     corte.`CORTE` AS corte_CORTE,
+     corte.`FECHA` AS corte_FECHA,
+     corte.`OBSERVACION` AS corte_OBSERVACION,
+     corte.`MULTA` AS corte_MULTA,
+     corte.`MORA` AS corte_MORA,
+     otrospagos.`IDOTPAGOS` AS otrospagos_IDOTPAGOS,
+     otrospagos.`IDCORTE` AS otrospagos_IDCORTE,
+     otrospagos.`DERCONX` AS otrospagos_DERCONX,
+     otrospagos.`MULRECX` AS otrospagos_MULRECX,
+     otrospagos.`INTERES` AS otrospagos_INTERES,
+     otrospagos.`TOTAL` AS otrospagos_TOTAL,
+     otrospagos.`NUMFACTURA` AS otrospagos_NUMFACTURA,
+     otrospagos.`USUARIOACTUAL` AS otrospagos_USUARIOACTUAL,
+     otrospagos.`FECHAPAGO` AS otrospagos_FECHAPAGO
+FROM
+     `institucion` institucion INNER JOIN `usuarios` usuarios ON institucion.`IDINSTITUCION` = usuarios.`IDINSTITUCION`
+     INNER JOIN `medidor` medidor ON usuarios.`IDUSUARIO` = medidor.`IDUSUARIO`
+     INNER JOIN `corte` corte ON medidor.`IDMEDIDOR` = corte.`IDMEDIDOR`
+     INNER JOIN `otrospagos` otrospagos ON corte.`IDCORTE` = otrospagos.`IDCORTE`
+where otrospagos.`NUMFACTURA`=$P{numfact}]]>
+	</queryString>
+	<field name="institucion_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="institucion_NOMBREINST" class="java.lang.String"/>
+	<field name="institucion_DIRECCION" class="java.lang.String"/>
+	<field name="institucion_TELEFONO" class="java.lang.String"/>
+	<field name="institucion_EMAIL" class="java.lang.String"/>
+	<field name="institucion_RUC" class="java.lang.String"/>
+	<field name="institucion_CELULAR" class="java.lang.String"/>
+	<field name="institucion_LOGO" class="java.lang.Object"/>
+	<field name="usuarios_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="usuarios_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="usuarios_RUCCI" class="java.lang.String"/>
+	<field name="usuarios_PRIMERNOMBRE" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDONOMBRE" class="java.lang.String"/>
+	<field name="usuarios_PRIMERAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDOAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_APADOSN" class="java.lang.String"/>
+	<field name="usuarios_DIRECCION" class="java.lang.String"/>
+	<field name="usuarios_TELEFONO" class="java.lang.String"/>
+	<field name="usuarios_CELULAR" class="java.lang.String"/>
+	<field name="usuarios_SECTOR" class="java.lang.String"/>
+	<field name="usuarios_REFERENCIA" class="java.lang.String"/>
+	<field name="usuarios_FOTO" class="java.lang.Object"/>
+	<field name="usuarios_OBSERVACION" class="java.lang.String"/>
+	<field name="medidor_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="medidor_SERIE" class="java.lang.String"/>
+	<field name="medidor_NUMMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_ESTADO" class="java.lang.String"/>
+	<field name="medidor_VALORPORCONEXION" class="java.lang.Float"/>
+	<field name="medidor_PAGADO" class="java.lang.String"/>
+	<field name="medidor_SALDO" class="java.lang.Float"/>
+	<field name="medidor_FECHA" class="java.sql.Date"/>
+	<field name="corte_IDCORTE" class="java.lang.Integer"/>
+	<field name="corte_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="corte_CORTE" class="java.lang.String"/>
+	<field name="corte_FECHA" class="java.sql.Date"/>
+	<field name="corte_OBSERVACION" class="java.lang.String"/>
+	<field name="corte_MULTA" class="java.lang.Float"/>
+	<field name="corte_MORA" class="java.lang.Integer"/>
+	<field name="otrospagos_IDOTPAGOS" class="java.lang.Integer"/>
+	<field name="otrospagos_IDCORTE" class="java.lang.Integer"/>
+	<field name="otrospagos_DERCONX" class="java.lang.Float"/>
+	<field name="otrospagos_MULRECX" class="java.lang.Float"/>
+	<field name="otrospagos_INTERES" class="java.lang.Float"/>
+	<field name="otrospagos_TOTAL" class="java.lang.Float"/>
+	<field name="otrospagos_NUMFACTURA" class="java.lang.Long"/>
+	<field name="otrospagos_USUARIOACTUAL" class="java.lang.String"/>
+	<field name="otrospagos_FECHAPAGO" class="java.sql.Date"/>
+	<variable name="total" class="java.lang.Float">
+		<variableExpression><![CDATA[$F{otrospagos_TOTAL}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<summary>
+		<band height="57" splitType="Stretch">
+			<textField>
+				<reportElement x="103" y="19" width="100" height="20" forecolor="#000000" uuid="1000b79c-1d08-4bf6-9038-766cbb7de6e7"/>
+				<textElement>
+					<font fontName="Serif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="103" y="5" width="220" height="15" forecolor="#000000" uuid="b36ac4a5-0056-42f3-9963-52f94dbc5c44"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{corte_OBSERVACION}+" Con Corte: "+$F{corte_CORTE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="4" y="19" width="99" height="15" forecolor="#000000" uuid="aaf6f9e3-be59-481c-bb62-e419bcf26818"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<text><![CDATA[MULTA RECONEXION]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -458,8 +458,11 @@ public class FrmLogin extends javax.swing.JInternalFrame {
             } else if (estado.equals("Seleccione")) {
                 JOptionPane.showMessageDialog(null, "Seleccione el Estado del Usuario", "Información", 1);
 
+            } else if (txtnombres.getText().equals("") && txtUsuario.getText().equals("") && txtClave.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Nombres\nUsuario\nClave", "Datos Nesesarios", 1);
+
             } else {
-                int i = JOptionPane.showConfirmDialog(this, "Gguardar", "Confirmar", JOptionPane.YES_NO_OPTION);
+                int i = JOptionPane.showConfirmDialog(this, "Guardar", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
                     cl.guardarLogin(nombres, apellidos, cedula, nombreUsuario, clave, tipo, estado);
                     cl.cargarTablaLogin(tabusuarios);
@@ -501,8 +504,8 @@ public class FrmLogin extends javax.swing.JInternalFrame {
             }
 
         } catch (Exception ex) {
-           JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",
-                "Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

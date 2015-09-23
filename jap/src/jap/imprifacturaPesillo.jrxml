@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PAGO MULTAS" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a3382e96-4c84-40b7-9a53-671787bae0a9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="numfact" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     asistenciapesillo.`IDASISTENCIAPESILLO` AS asistenciapesillo_IDASISTENCIAPESILLO,
+     asistenciapesillo.`IDMEDIDOR` AS asistenciapesillo_IDMEDIDOR,
+     asistenciapesillo.`IDPLANIFICACIONPESILLO` AS asistenciapesillo_IDPLANIFICACIONPESILLO,
+     asistenciapesillo.`ASISTENCIA` AS asistenciapesillo_ASISTENCIA,
+     asistenciapesillo.`VALORMULTA` AS asistenciapesillo_VALORMULTA,
+     asistenciapesillo.`DESCRIPCION` AS asistenciapesillo_DESCRIPCION,
+     asistenciapesillo.`OBSERVACION` AS asistenciapesillo_OBSERVACION,
+     pagopesillo.`IDPAGOPESILLO` AS pagopesillo_IDPAGOPESILLO,
+     pagopesillo.`IDASISTENCIAPESILLO` AS pagopesillo_IDASISTENCIAPESILLO,
+     pagopesillo.`FECHAPAGO` AS pagopesillo_FECHAPAGO,
+     pagopesillo.`NUMMINGAS` AS pagopesillo_NUMMINGAS,
+     pagopesillo.`VALORMINGAS` AS pagopesillo_VALORMINGAS,
+     pagopesillo.`OBSERVACION` AS pagopesillo_OBSERVACION,
+     pagopesillo.`NUMFACTURA` AS pagopesillo_NUMFACTURA,
+     pagopesillo.`USUARIOACTUAL` AS pagopesillo_USUARIOACTUAL,
+     medidor.`IDMEDIDOR` AS medidor_IDMEDIDOR,
+     medidor.`IDUSUARIO` AS medidor_IDUSUARIO,
+     medidor.`SERIE` AS medidor_SERIE,
+     medidor.`NUMMEDIDOR` AS medidor_NUMMEDIDOR,
+     medidor.`ESTADO` AS medidor_ESTADO,
+     medidor.`VALORPORCONEXION` AS medidor_VALORPORCONEXION,
+     medidor.`PAGADO` AS medidor_PAGADO,
+     medidor.`SALDO` AS medidor_SALDO,
+     medidor.`FECHA` AS medidor_FECHA,
+     planificacionpesillo.`IDPLANIFICACIONPESILLO` AS planificacionpesillo_IDPLANIFICACIONPESILLO,
+     planificacionpesillo.`LUGAR` AS planificacionpesillo_LUGAR,
+     planificacionpesillo.`FECHA` AS planificacionpesillo_FECHA,
+     planificacionpesillo.`VALORMULTA` AS planificacionpesillo_VALORMULTA,
+     planificacionpesillo.`DESCRIPCION` AS planificacionpesillo_DESCRIPCION,
+     planificacionpesillo.`TIPOPLANPESILLO` AS planificacionpesillo_TIPOPLANPESILLO,
+     usuarios.`IDUSUARIO` AS usuarios_IDUSUARIO,
+     usuarios.`IDINSTITUCION` AS usuarios_IDINSTITUCION,
+     usuarios.`RUCCI` AS usuarios_RUCCI,
+     usuarios.`PRIMERNOMBRE` AS usuarios_PRIMERNOMBRE,
+     usuarios.`SEGUNDONOMBRE` AS usuarios_SEGUNDONOMBRE,
+     usuarios.`PRIMERAPELLIDO` AS usuarios_PRIMERAPELLIDO,
+     usuarios.`SEGUNDOAPELLIDO` AS usuarios_SEGUNDOAPELLIDO,
+     usuarios.`APADOSN` AS usuarios_APADOSN,
+     usuarios.`DIRECCION` AS usuarios_DIRECCION,
+     usuarios.`TELEFONO` AS usuarios_TELEFONO,
+     usuarios.`CELULAR` AS usuarios_CELULAR,
+     usuarios.`SECTOR` AS usuarios_SECTOR,
+     usuarios.`REFERENCIA` AS usuarios_REFERENCIA,
+     usuarios.`FOTO` AS usuarios_FOTO,
+     usuarios.`OBSERVACION` AS usuarios_OBSERVACION,
+     institucion.`IDINSTITUCION` AS institucion_IDINSTITUCION,
+     institucion.`NOMBREINST` AS institucion_NOMBREINST,
+     institucion.`DIRECCION` AS institucion_DIRECCION,
+     institucion.`TELEFONO` AS institucion_TELEFONO,
+     institucion.`EMAIL` AS institucion_EMAIL,
+     institucion.`RUC` AS institucion_RUC,
+     institucion.`CELULAR` AS institucion_CELULAR,
+     institucion.`LOGO` AS institucion_LOGO
+FROM
+     `asistenciapesillo` asistenciapesillo INNER JOIN `pagopesillo` pagopesillo ON asistenciapesillo.`IDASISTENCIAPESILLO` = pagopesillo.`IDASISTENCIAPESILLO`
+     INNER JOIN `medidor` medidor ON asistenciapesillo.`IDMEDIDOR` = medidor.`IDMEDIDOR`
+     INNER JOIN `planificacionpesillo` planificacionpesillo ON asistenciapesillo.`IDPLANIFICACIONPESILLO` = planificacionpesillo.`IDPLANIFICACIONPESILLO`
+     INNER JOIN `usuarios` usuarios ON medidor.`IDUSUARIO` = usuarios.`IDUSUARIO`
+     INNER JOIN `institucion` institucion ON usuarios.`IDINSTITUCION` = institucion.`IDINSTITUCION`
+where  pagopesillo.`NUMFACTURA`=$P{numfact}]]>
+	</queryString>
+	<field name="asistenciapesillo_IDASISTENCIAPESILLO" class="java.lang.Integer"/>
+	<field name="asistenciapesillo_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="asistenciapesillo_IDPLANIFICACIONPESILLO" class="java.lang.Integer"/>
+	<field name="asistenciapesillo_ASISTENCIA" class="java.lang.String"/>
+	<field name="asistenciapesillo_VALORMULTA" class="java.lang.Float"/>
+	<field name="asistenciapesillo_DESCRIPCION" class="java.lang.String"/>
+	<field name="asistenciapesillo_OBSERVACION" class="java.lang.String"/>
+	<field name="pagopesillo_IDPAGOPESILLO" class="java.lang.Integer"/>
+	<field name="pagopesillo_IDASISTENCIAPESILLO" class="java.lang.Integer"/>
+	<field name="pagopesillo_FECHAPAGO" class="java.sql.Date"/>
+	<field name="pagopesillo_NUMMINGAS" class="java.lang.Integer"/>
+	<field name="pagopesillo_VALORMINGAS" class="java.lang.Float"/>
+	<field name="pagopesillo_OBSERVACION" class="java.lang.String"/>
+	<field name="pagopesillo_NUMFACTURA" class="java.lang.Integer"/>
+	<field name="pagopesillo_USUARIOACTUAL" class="java.lang.String"/>
+	<field name="medidor_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="medidor_SERIE" class="java.lang.String"/>
+	<field name="medidor_NUMMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_ESTADO" class="java.lang.String"/>
+	<field name="medidor_VALORPORCONEXION" class="java.lang.Float"/>
+	<field name="medidor_PAGADO" class="java.lang.String"/>
+	<field name="medidor_SALDO" class="java.lang.Float"/>
+	<field name="medidor_FECHA" class="java.sql.Date"/>
+	<field name="planificacionpesillo_IDPLANIFICACIONPESILLO" class="java.lang.Integer"/>
+	<field name="planificacionpesillo_LUGAR" class="java.lang.String"/>
+	<field name="planificacionpesillo_FECHA" class="java.sql.Date"/>
+	<field name="planificacionpesillo_VALORMULTA" class="java.lang.Float"/>
+	<field name="planificacionpesillo_DESCRIPCION" class="java.lang.String"/>
+	<field name="planificacionpesillo_TIPOPLANPESILLO" class="java.lang.String"/>
+	<field name="usuarios_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="usuarios_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="usuarios_RUCCI" class="java.lang.String"/>
+	<field name="usuarios_PRIMERNOMBRE" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDONOMBRE" class="java.lang.String"/>
+	<field name="usuarios_PRIMERAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDOAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_APADOSN" class="java.lang.String"/>
+	<field name="usuarios_DIRECCION" class="java.lang.String"/>
+	<field name="usuarios_TELEFONO" class="java.lang.String"/>
+	<field name="usuarios_CELULAR" class="java.lang.String"/>
+	<field name="usuarios_SECTOR" class="java.lang.String"/>
+	<field name="usuarios_REFERENCIA" class="java.lang.String"/>
+	<field name="usuarios_FOTO" class="java.lang.Object"/>
+	<field name="usuarios_OBSERVACION" class="java.lang.String"/>
+	<field name="institucion_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="institucion_NOMBREINST" class="java.lang.String"/>
+	<field name="institucion_DIRECCION" class="java.lang.String"/>
+	<field name="institucion_TELEFONO" class="java.lang.String"/>
+	<field name="institucion_EMAIL" class="java.lang.String"/>
+	<field name="institucion_RUC" class="java.lang.String"/>
+	<field name="institucion_CELULAR" class="java.lang.String"/>
+	<field name="institucion_LOGO" class="java.lang.Object"/>
+	<variable name="total" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{pagopesillo_VALORMINGAS}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="274" splitType="Stretch">
+			<textField>
+				<reportElement style="Detail" x="137" y="139" width="262" height="15" uuid="352a3a32-0cc9-4462-a7fc-d93291c09e10"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_DIRECCION}+" Sector: "+$F{usuarios_SECTOR}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="137" y="94" width="178" height="15" uuid="b88963e5-a187-4654-be64-dedfde490790"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="416" y="109" width="84" height="15" uuid="59118425-26c1-40cc-92c2-2cfbdc33898c"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medidor_NUMMEDIDOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="137" y="122" width="264" height="15" uuid="15da593a-4dce-4c45-be1c-0fc48c45db34"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_PRIMERAPELLIDO}+"  "+$F{usuarios_SEGUNDOAPELLIDO}+"  "+$F{usuarios_PRIMERNOMBRE}+"  "+$F{usuarios_SEGUNDONOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="416" y="94" width="84" height="15" uuid="2b87b549-ed5a-4909-a8a1-8898ffc4f4a4"/>
+				<textElement>
+					<font fontName="Serif" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_RUCCI}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="6" y="164" width="200" height="100" uuid="0e65266d-bb7e-4b48-ae82-2d3f36062dfb"/>
+				<subreportParameter name="numfact">
+					<subreportParameterExpression><![CDATA[$P{numfact}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "imprdetfacturaPesillo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<summary>
+		<band height="50" splitType="Immediate">
+			<textField>
+				<reportElement x="405" y="17" width="50" height="20" forecolor="#000000" uuid="f05901c1-0f6d-4cdb-b8bd-316d6890d32d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="398" y="2" width="80" height="15" forecolor="#000000" uuid="10b60602-984e-4260-88b3-14d3ac3ae554"/>
+				<textElement>
+					<font fontName="Serif" size="10"/>
+				</textElement>
+				<text><![CDATA[Multa Pesillo]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

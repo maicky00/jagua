@@ -30,18 +30,18 @@ import javax.swing.table.TableModel;
 // * @author JC-PC
 // */
 public class classAsistencia {
-
+    
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("japPU");
     public AsistenciaJpaController asistenciaJpacontrolador = new AsistenciaJpaController(emf);
     classPlanificacion cp = new classPlanificacion();
     classMedidor cm = new classMedidor();
 //    classusuario cu = new classusuario();
     DefaultTableModel modelo;
-
+    
     public List<Asistencia> getAsistencia() {
         return asistenciaJpacontrolador.findAsistenciaEntities();
     }
-
+    
     public void guardarAsistencia(int idPlanificacion, int NumMedidor, String asistencia, float valorMulta, String descripcion, String obSservacion) {
         int i = 0;
         Asistencia a = new Asistencia();
@@ -77,12 +77,12 @@ public class classAsistencia {
 //
 //        }
     }
-
+    
     public static void main(String[] args) {
         classAsistencia ca = new classAsistencia();
 //        ca.guardarAsistencia(1, 2, "NO", 20, "Hola mundo");
     }
-
+    
     public boolean modificarAsistencia(int idAsistencia, int idPlanificacion, int NumMedidor, String asistencia, float valorMulta, String descripcion, String obSservacion) {
         try {
             Asistencia dat = asistenciaJpacontrolador.findAsistencia(idAsistencia);
@@ -99,37 +99,35 @@ public class classAsistencia {
             dat.setObsevacion(obSservacion);
             asistenciaJpacontrolador.edit(dat);
             JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
-
+            
         } catch (Exception e) {
         }
         return true;
     }
-
+    
     public boolean modificarAsistencia(int idAsistencia, String obSservacion) {
         try {
             Asistencia dat = asistenciaJpacontrolador.findAsistencia(idAsistencia);
             if (dat == null) {
                 return false;
             }
-
+            
             dat.setObsevacion(obSservacion);
             asistenciaJpacontrolador.edit(dat);
         } catch (Exception e) {
         }
         return true;
     }
-
-    public void eliminarAsistencia(int idAsistencia) throws NonexistentEntityException  {
-
-
-            asistenciaJpacontrolador.destroy(idAsistencia);
-            JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
-  
-
+    
+    public void eliminarAsistencia(int idAsistencia) throws NonexistentEntityException {
+        
+        asistenciaJpacontrolador.destroy(idAsistencia);
+        JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
+        
     }
-
+    
     public Asistencia buscarIdAsistencia(int idAsistencia) {
-
+        
         for (Asistencia dat : getAsistencia()) {
             if (dat.getIdasistencia().equals(idAsistencia)) {
                 return dat;
@@ -137,9 +135,9 @@ public class classAsistencia {
         }
         return null;
     }
-
+    
     public Asistencia buscarNumMed(int idNumMed) {
-
+        
         for (Asistencia dat : getAsistencia()) {
             if (dat.getIdmedidor().getNummedidor().equals(idNumMed)) {
                 return dat;
@@ -147,7 +145,7 @@ public class classAsistencia {
         }
         return null;
     }
-
+    
     public int buscarMultaPagado(int idNumMed) {
         int i = 0;
         for (Asistencia dat : getAsistencia()) {
@@ -158,20 +156,20 @@ public class classAsistencia {
         }
         return i;
     }
-
+    
     public void cargarTablaAsistencia(JTable tabla, int idPlan) {
-
+        
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
         Object[] fila = new Object[9];
         modelo.addColumn("id");
         modelo.addColumn("idPlan");
         modelo.addColumn("idMed");
-
+        
         modelo.addColumn("Usuario");
         modelo.addColumn("cedula");
         modelo.addColumn("Asistencia");
-
+        
         modelo.addColumn("multa");
         modelo.addColumn("descripcion");
         modelo.addColumn("Nro Medidor");
@@ -182,16 +180,16 @@ public class classAsistencia {
                 fila[0] = a.getIdasistencia();
                 fila[1] = a.getIdplanificacion().getIdplanificacion();
                 fila[2] = a.getIdmedidor().getIdmedidor();
-
+                
                 fila[3] = a.getIdmedidor().getIdusuario().getPrimernombre() + " " + a.getIdmedidor().getIdusuario().getPrimerapellido()
                         + " " + a.getIdmedidor().getIdusuario().getSegundoapellido();
                 fila[4] = a.getIdmedidor().getIdusuario().getRucci();
                 fila[5] = a.getAsistencia();
-
+                
                 fila[6] = a.getValormulta();
                 fila[7] = a.getDescripcion();
                 fila[8] = a.getIdmedidor().getNummedidor();
-
+                
                 FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
                 FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                 FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
@@ -206,16 +204,24 @@ public class classAsistencia {
                 FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(45);
                 FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
                 FrmAsistencia.tab.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
-
+                
                 modelo.addRow(fila);
             }
         }
     }
 
-    public TableModel tablaAsistencias(JTable tabla, int numMedidor) {
+    public void diseño(JTable table) {
+        table.getColumn(table.getColumnName(0)).setWidth(0);
+        table.getColumn(table.getColumnName(0)).setMinWidth(0);
+        table.getColumn(table.getColumnName(0)).setMaxWidth(0);
+        
+    }
 
+    public TableModel tablaAsistencias(JTable tabla, int numMedidor) {
+        
         DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
         dtm.setRowCount(0);
+        diseño(tabla);
         float subtotal = 0;
 //        float iva = 0;
 //        float total = 0;
@@ -246,9 +252,9 @@ public class classAsistencia {
 //        FrmPagosAsistemcia.tabla2.setValueAt(total, 2, 1);
         return dtm;
     }
-
+    
     public int buscardiferentes(int idMedidor, int idPlan) {
-
+        
         for (Asistencia dat : getAsistencia()) {
             if (dat.getIdmedidor().getIdmedidor().equals(idMedidor) && dat.getIdplanificacion().getIdplanificacion().equals(idPlan)) {
                 return dat.getIdmedidor().getIdmedidor();

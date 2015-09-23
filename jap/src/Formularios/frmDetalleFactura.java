@@ -16,6 +16,7 @@ import entidades.Medidor;
 import entidades.Tarifas;
 import entidades.Usuarios;
 import java.awt.Dimension;
+import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,6 +46,8 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         lblIdDetalle.setVisible(false);
         String anMes = lblanio.getText() + "-" + lblmes.getText();
         cm.cargarTablaMedidorDetalle(tabla, anMes);
+        combopagado.setVisible(false);
+        jLabel22.setVisible(false);
     }
     int comienzo = 0;
     classDetalleFactura cdf = new classDetalleFactura();
@@ -60,6 +63,9 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         btnElimnar.setEnabled(false);
         btnCancelar.setEnabled(true);
         txtmedAct.setEnabled(true);
+        combopagado.setEnabled(true);
+        jTable1.setEnabled(false);
+        tabla.setEnabled(true);
     }
 
     private void ocultar() {
@@ -70,6 +76,8 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         btnElimnar.setEnabled(true);
         btnCancelar.setEnabled(false);
         txtmedAct.setEnabled(false);
+        combopagado.setEnabled(false);
+
     }
 
     private void limpiar() {
@@ -88,6 +96,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         txtSubTotal.setText("");
         txtTotal.setText("");
         lblIdDetalle.setText("");
+        combopagado.setSelectedIndex(0);
 
     }
 
@@ -141,6 +150,8 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         jLabel18 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
         lblIdDetalle = new javax.swing.JLabel();
+        combopagado = new javax.swing.JComboBox();
+        jLabel22 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jLabel20 = new javax.swing.JLabel();
@@ -161,6 +172,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("REGISTRO DE CONSUMOS");
+        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/Formularios/Globe.png"))); // NOI18N
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -284,12 +296,14 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         txtApodo.setEditable(false);
 
         txtmedAnterior.setEditable(false);
+        txtmedAnterior.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtmedAnterior.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtmedAnteriorKeyTyped(evt);
             }
         });
 
+        txtmedAct.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtmedAct.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtmedActKeyReleased(evt);
@@ -329,15 +343,15 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
 
         jLabel12.setText("Tarifa por m3");
 
-        jLabel13.setText("Excedidos;");
+        jLabel13.setText("Excedidos:                             $");
 
-        jLabel14.setText("Valor tarifa Base:");
+        jLabel14.setText("Valor tarifa Base:                   $");
 
-        jLabel15.setText("Total Por Consumo:");
+        jLabel15.setText("Total Por Consumo:                $");
 
         txtalcanta.setEditable(false);
 
-        jLabel3.setText("Valor Alcantarillado:");
+        jLabel3.setText("Valor Alcantarillado:                $");
 
         txtrucCi.setEditable(false);
 
@@ -348,6 +362,12 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         txtEstado.setEditable(false);
 
         lblIdDetalle.setText("id");
+
+        combopagado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        combopagado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NO", "SI" }));
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel22.setText("Consumo del Mes  Pagado:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -365,7 +385,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtmedAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
@@ -378,24 +398,27 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                             .addComponent(jLabel11)
                             .addComponent(jLabel12)
                             .addComponent(jLabel13)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel14))
-                        .addGap(50, 50, 50)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMedExcedido, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtconsumoag, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblIdDetalle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtrucCi)
-                            .addComponent(txtalcanta)
-                            .addComponent(txtApodo)
-                            .addComponent(txtSerie)
-                            .addComponent(txtUsuario)
-                            .addComponent(txtnumMedidor)
-                            .addComponent(combotarifas, 0, 178, Short.MAX_VALUE)
-                            .addComponent(txtEstado)
-                            .addComponent(txtTarexcedido, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(combopagado, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtMedExcedido, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtconsumoag, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblIdDetalle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtrucCi)
+                                .addComponent(txtalcanta)
+                                .addComponent(txtApodo)
+                                .addComponent(txtSerie)
+                                .addComponent(txtUsuario)
+                                .addComponent(txtnumMedidor)
+                                .addComponent(combotarifas, 0, 178, Short.MAX_VALUE)
+                                .addComponent(txtEstado)
+                                .addComponent(txtTarexcedido, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -468,9 +491,14 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(combopagado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tabla.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -585,7 +613,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblmes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 76, Short.MAX_VALUE)))
+                        .addGap(0, 23, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -605,7 +633,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                     .addComponent(txtBuscarNumMedidor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel19))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -624,7 +652,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(4, 4, 4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -652,6 +680,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
 
         mostrar();
         limpiar();
+        jTable1.setEnabled(false);
 
     }//GEN-LAST:event_btnNuevoActionPerformed
 
@@ -671,19 +700,24 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                 float tarExcedido = Float.valueOf(txtTarexcedido.getText());
                 float sutotal = Float.valueOf(txtSubTotal.getText()) + alcant;
                 float total = Float.valueOf(txtTotal.getText());
-                if (medActual < medAnterior) {
-                    JOptionPane.showMessageDialog(null, "Error, Registro De Consumo Actual\n es mayor al Anterior ", "Información", 1);
-                } else if (lblIdDetalle.getText().equals("")) {
-                    cdt.guardarDetallefactura(idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total, "NO");
-                    limpiar();
-                    cm.cargarTablaMedidorDetalle(tabla, anioMes);
-                } else if (!lblIdDetalle.getText().equals("")) {
-                    cdt.modificarDetallefactura(Integer.valueOf(lblIdDetalle.getText().toString()), idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total);
-                    limpiar();
+                String obser = combopagado.getSelectedItem().toString();
+                if (cdt.ingresoMesMayor(idMed, Integer.valueOf(lblanio.getText()), Integer.valueOf(lblmes.getText()))==true) {
+                    if (medActual < medAnterior) {
+                        JOptionPane.showMessageDialog(null, "Error, Registro De Consumo Actual\n es mayor al Anterior ", "Información", 1);
+                    } else if (lblIdDetalle.getText().equals("")) {
+                        cdt.guardarDetallefactura(idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total, obser);
+                        limpiar();
+                        cm.cargarTablaMedidorDetalle(tabla, anioMes);
+                    } else if (!lblIdDetalle.getText().equals("")) {
+                        cdt.modificarDetallefactura(Integer.valueOf(lblIdDetalle.getText().toString()), idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total, obser);
+                        limpiar();
+                    }
                 }
+
                 cdf.cargarBusquedaAnioMes(jTable1, anioMes);
                 ocultar();
                 limpiar();
+                jTable1.setEnabled(true);
             }
 
         } catch (Exception e) {
@@ -717,9 +751,10 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
             cdt.eliminarDetallefactura(Integer.valueOf(lblIdDetalle.getText()));
             String anMes = lblanio.getText() + "-" + lblmes.getText();
             cm.cargarTablaMedidorDetalle(tabla, anMes);
+            limpiar();
         } catch (Exception e) {
-           JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",
-                "Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
 
         }
 //        Medidor medidor = (Medidor) moverRegistros.getNext();
@@ -731,11 +766,13 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
 
         ocultar();
         limpiar();
+        jTable1.setEnabled(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtmedActKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmedActKeyReleased
 
         try {
+
             int medExc = 0;
             float valorExced = 0;
             float total = 0;
@@ -833,6 +870,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                 txtTarexcedido.setText(cdt.buscarNumMedAnioMes(numMed, anioMes).getTarexcedido().toString());
                 txtSubTotal.setText(cdt.buscarNumMedAnioMes(numMed, anioMes).getSubtotal().toString());
                 txtTotal.setText(cdt.buscarNumMedAnioMes(numMed, anioMes).getTotal().toString());
+                combopagado.setSelectedItem(cdt.buscarNumMedAnioMes(numMed, anioMes).getObservacion());
                 JOptionPane.showMessageDialog(null, "Datos Encontrados", "Información", 1);
             }
         } catch (Exception e) {
@@ -874,6 +912,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
             txtTarexcedido.setText(cdt.buscarIdDetallefactura(idDetalle).getTarexcedido().toString());
             txtSubTotal.setText(cdt.buscarIdDetallefactura(idDetalle).getSubtotal().toString());
             txtTotal.setText(cdt.buscarIdDetallefactura(idDetalle).getTotal().toString());
+            combopagado.setSelectedItem(cdt.buscarIdDetallefactura(idDetalle).getObservacion());
 
         } catch (Exception e) {
         }
@@ -902,6 +941,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
             txtTarexcedido.setText(cdt.buscarIdDetallefactura(idDetalle).getTarexcedido().toString());
             txtSubTotal.setText(cdt.buscarIdDetallefactura(idDetalle).getSubtotal().toString());
             txtTotal.setText(cdt.buscarIdDetallefactura(idDetalle).getTotal().toString());
+            combopagado.setSelectedItem(cdt.buscarIdDetallefactura(idDetalle).getObservacion());
 
         } catch (Exception e) {
         }
@@ -953,6 +993,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     private org.edisoncor.gui.button.ButtonNice btnElimnar;
     private org.edisoncor.gui.button.ButtonNice btnGuardar;
     private org.edisoncor.gui.button.ButtonNice btnNuevo;
+    private javax.swing.JComboBox combopagado;
     private javax.swing.JComboBox combotarifas;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -969,6 +1010,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
