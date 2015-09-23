@@ -138,14 +138,14 @@ where facturas.`NUMFACTURA`=$P{numfact}]]>
 			<textField>
 				<reportElement style="Detail" x="5" y="43" width="70" height="15" forecolor="#000000" uuid="5653c4de-3b6d-4c85-afb1-b582c54c4963"/>
 				<textElement>
-					<font fontName="SansSerif" size="8"/>
+					<font fontName="SansSerif" size="8" isBold="false" isStrikeThrough="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["("+$V{excedido}+" m3"+")"+ "  \$ "+ $V{tarexcedido}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="5" y="13" width="71" height="15" forecolor="#000000" uuid="10c7dc55-f215-4403-8bbe-667cd106f966"/>
 				<textElement>
-					<font fontName="SansSerif" size="8"/>
+					<font fontName="SansSerif" size="8" isBold="false" isStrikeThrough="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["("+$F{tarifas_BASE}+" m3)"+"  \$ "+$F{tarifas_TARBASE}]]></textFieldExpression>
 			</textField>
