@@ -6,6 +6,7 @@
 package Formularios;
 
 import Controladores.classPlanificacion;
+import java.awt.Dimension;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -23,6 +24,10 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
     public FrmPlanificacion() {
         initComponents();
         cp.cargarTablaPlanificacion(jTable1);
+        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
+        Dimension jInternalFrameSize = this.getSize();
+        this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
+//       
     }
 
     private void mostrar() {
@@ -101,6 +106,7 @@ public class FrmPlanificacion extends javax.swing.JInternalFrame {
             }
         };
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);

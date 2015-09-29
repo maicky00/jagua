@@ -604,6 +604,7 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         limpiar();
         mostrar();
+        comboAsistencia.setSelectedIndex(0);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -735,6 +736,12 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
             txtUsuario.setText(tab.getValueAt(n, 8).toString());
             txtCedula.setText(tab.getValueAt(n, 9).toString());
             lblnuMed.setText(tab.getValueAt(n, 7).toString());
+            String r;
+            if (cap.buscarIdAsistenciaPes(id).getValormulta()>0.0) {
+                r = "SI";
+            } else {
+                r = "NO";
+            }
             comboAsistencia.setSelectedItem(cap.buscarIdAsistenciaPes(id).getAsistencia());
             comboAplica.setSelectedItem(cap.buscarIdAsistenciaPes(id).getObservacion());
              txtValor.setText(cap.buscarIdAsistenciaPes(id).getValormulta().toString());

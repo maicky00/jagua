@@ -84,7 +84,9 @@ public class FrmOtrosconceptos extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
+        setTitle("Aplicacion de Multas Por Atrazo de Pagos");
 
         btnEditar.setBackground(new java.awt.Color(34, 108, 101));
         btnEditar.setForeground(new java.awt.Color(255, 255, 255));

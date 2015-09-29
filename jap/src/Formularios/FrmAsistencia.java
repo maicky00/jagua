@@ -594,7 +594,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
         String obs = comboObs.getSelectedItem().toString();
         String r;
         float mult = Float.valueOf(txtValor.getText());;
-        if (obs.equals("SI")&&asistencia.equals("NO")) {
+        if (obs.equals("SI") && asistencia.equals("NO")) {
             r = "NO";
         } else {
             r = "SI";
@@ -634,7 +634,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                 ca.eliminarAsistencia(Integer.valueOf(lblId.getText()));
                 ca.cargarTablaAsistencia(tab, idPlan);
                 cm.cargarTablaMedidorAsistencia(FrmAsistencia.tab1, Integer.valueOf(lblIdPlan.getText()));
-           limpiar();
+                limpiar();
                 ocultar();
             }
 
@@ -685,21 +685,21 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
             lblId.setText(tab.getValueAt(n, 0).toString());
             lblIdPlan.setText(tab.getValueAt(n, 1).toString());
             lblIdMedidor.setText(tab.getValueAt(n, 8).toString());
-            comboAsistencia.setSelectedItem(tab.getValueAt(n, 5).toString());
             txtUsuario.setText(tab.getValueAt(n, 3).toString());
             txtCedula.setText(tab.getValueAt(n, 4).toString());
-              txtDescripcion.setText(ca.buscarIdAsistencia(Integer.valueOf(tab.getValueAt(n, 0).toString())).getDescripcion());
-            String r;
-            if (ca.buscarIdAsistencia(id).getObsevacion().equals("SI")) {
-                r = "NO";
-            } else {
-                r = "SI";
-            }
-            
+            txtDescripcion.setText(ca.buscarIdAsistencia(Integer.valueOf(tab.getValueAt(n, 0).toString())).getDescripcion());
             comboAsistencia.setSelectedItem(ca.buscarIdAsistencia(id).getAsistencia());
+            
+            String r="";
+            if (ca.buscarIdAsistencia(id).getValormulta() > 0.0) {
+                r = "SI";
+            } else if(ca.buscarIdAsistencia(id).getValormulta() <1){
+                r = "NO";
+            }
+
             comboObs.setSelectedItem(r);
-             txtValor.setText(ca.buscarIdAsistencia(id).getValormulta().toString());
-         
+            txtValor.setText(ca.buscarIdAsistencia(id).getValormulta().toString());
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_tabMouseClicked

@@ -122,6 +122,7 @@ public class FrmLogin extends javax.swing.JInternalFrame {
         btnEliminar = new org.edisoncor.gui.button.ButtonAero();
         btnCancelar = new org.edisoncor.gui.button.ButtonAero();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);

@@ -43,6 +43,22 @@ public class classMedidor {
 
     public List<Medidor> getMedidor() {
         return medidorJpacontrolador.findMedidorEntities();
+
+    }
+
+    public List<Medidor> ListaOrdenada() {
+        List<Medidor> lista = new ArrayList<>();
+        for (Medidor m1 : medidorJpacontrolador.findMedidorEntities()) {
+            lista.add(m1);
+        }
+        Collections.sort(lista, new Comparator<Medidor>() {
+
+            @Override
+            public int compare(Medidor o1, Medidor o2) {
+                return o1.getNummedidor().compareTo(o2.getNummedidor());
+            }
+        });
+        return lista;
     }
 
     public void guardarMedidor(int idUsuario, String serie, int numMedidor, String estado, float valorConexion, String pagado, float saldo, Date fecha) {
@@ -194,7 +210,7 @@ public class classMedidor {
         modelo.addColumn("Serie");
         modelo.addColumn("estado");
         modelo.addColumn("N° Medidor");
-        for (Medidor u : getMedidor()) {
+        for (Medidor u : ListaOrdenada()) {
             fila[0] = u.getIdmedidor();
             fila[1] = u.getIdusuario().getRucci();
             fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
@@ -237,7 +253,7 @@ public class classMedidor {
         modelo.addColumn("Serie");
         modelo.addColumn("estado");
         modelo.addColumn("N° Medidor");
-        for (Medidor u : getMedidor()) {
+        for (Medidor u : ListaOrdenada()) {
             if (u.getIdusuario().buscarUsuarios(u.getIdusuario().elimiEspacio(txt))) {
                 fila[0] = u.getIdmedidor();
                 fila[1] = u.getIdusuario().getRucci();
@@ -283,7 +299,7 @@ public class classMedidor {
         DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
         dtm.setRowCount(0);
         diseñoTabla(tabla);
-        for (Medidor u : getMedidor()) {
+        for (Medidor u : ListaOrdenada()) {
             dtm.addRow(new Object[]{
                 u.getIdmedidor(),
                 u.getNummedidor(),
@@ -324,7 +340,7 @@ public class classMedidor {
         modelo.addColumn("Apodo");
         modelo.addColumn("Serie");
         modelo.addColumn("estado");
-        for (Medidor u : getMedidor()) {
+        for (Medidor u : ListaOrdenada()) {
             if (!u.getEstado().equals("INACTIVO")) {
                 if (cdf.buscardiferentes(u.getIdmedidor(), aniomes) != u.getIdmedidor()) {
 
@@ -368,7 +384,7 @@ public class classMedidor {
         modelo.addColumn("Usuario");
         modelo.addColumn("Apodo");
 
-        for (Medidor u : getMedidor()) {
+        for (Medidor u : ListaOrdenada()) {
             if (ca.buscardiferentes(u.getIdmedidor(), idPlan) != u.getIdmedidor()) {
                 fila[0] = u.getNummedidor();
                 fila[1] = u.getIdusuario().getRucci();
@@ -391,7 +407,7 @@ public class classMedidor {
         modelo.addColumn("Usuario");
         modelo.addColumn("Apodo");
 
-        for (Medidor u : getMedidor()) {
+        for (Medidor u : ListaOrdenada()) {
 
             if (!u.getEstado().equals("INACTIVO")) {
                 if (ca.buscardiferentes(u.getIdmedidor(), idPlan) != u.getIdmedidor()) {

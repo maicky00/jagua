@@ -34,18 +34,17 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
 
     public frmDetalleFactura() {
         initComponents();
-        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
-        Dimension jInternalFrameSize = this.getSize();
-        this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
-        cm = new classMedidor();
+//        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
+//        Dimension jInternalFrameSize = this.getSize();
+//        this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
+//        cm = new classMedidor();
         ct = new classTarifas();
         cdt = new classDetalleFactura();
         ct.cargarCmbTarifas(combotarifas);
-//        cm.medidoresTabla(tabla);
         lblIdDetalle.setText("");
         lblIdDetalle.setVisible(false);
-        String anMes = lblanio.getText() + "-" + lblmes.getText();
-        cm.cargarTablaMedidorDetalle(tabla, anMes);
+//        String anMes = lblanio.getText() + "-" + lblmes.getText();
+//        cm.cargarTablaMedidorDetalle(tabla, anMes);
         combopagado.setVisible(false);
         jLabel22.setVisible(false);
     }

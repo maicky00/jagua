@@ -441,7 +441,7 @@ public class classDetalleFactura {
         String fechaRec = r1[0] + r1[1];
         int añoRec = Integer.valueOf(fechaRec);
 
-        if (añoIng > añoRec) {
+        if (añoIng >= añoRec) {
             retorno = true;
             r = añoIng + "  " + añoRec;
         } else {
@@ -454,8 +454,5 @@ public class classDetalleFactura {
         return retorno;
     }
 
-    public static void main(String[] args) {
-        classDetalleFactura c = new classDetalleFactura();
-        System.out.println("" + c.ingresoMesMayor(1, 2016, 3));
-    }
+
 }

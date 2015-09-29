@@ -7,6 +7,7 @@ package Formularios;
 
 import Controladores.ControlFormularios;
 import Controladores.classusuario;
+import java.awt.Dimension;
 
 /**
  *
@@ -21,6 +22,10 @@ public class FrmBusqueda extends javax.swing.JFrame {
      */
     public FrmBusqueda() {
         initComponents();
+        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
+        Dimension jInternalFrameSize = this.getSize();
+        this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
+//       
         us.cargarTablaUsuario(jTable1);
         //setLocationRelativeTo(null);
         jLabel4.setVisible(false);

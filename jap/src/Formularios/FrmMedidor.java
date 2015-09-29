@@ -169,6 +169,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             rdbtodos = new javax.swing.JRadioButton();
             rdbApellidosN = new javax.swing.JRadioButton();
 
+            setBackground(new java.awt.Color(255, 255, 255));
             setClosable(true);
             setIconifiable(true);
             setMaximizable(true);
@@ -321,6 +322,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                 }
             });
 
+            txtUsuarioCed.setBorder(javax.swing.BorderFactory.createTitledBorder("Presione una Tecla dentro de este campo"));
             txtUsuarioCed.setEnabled(false);
             txtUsuarioCed.addKeyListener(new java.awt.event.KeyAdapter() {
                 public void keyTyped(java.awt.event.KeyEvent evt) {

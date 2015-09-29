@@ -105,6 +105,7 @@ public class FrmPlanificacionPesillo extends javax.swing.JInternalFrame {
             }
         };
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);

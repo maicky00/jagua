@@ -109,6 +109,9 @@ cargarInf();
         jLabel1 = new javax.swing.JLabel();
         buttonNice6 = new org.edisoncor.gui.button.ButtonNice();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+        setTitle("DATOS INFORMATIVOS");
+
         panelReflect1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         txtnombreInst.setColumns(20);

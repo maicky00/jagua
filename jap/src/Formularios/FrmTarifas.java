@@ -99,6 +99,7 @@ public class FrmTarifas extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         txtIva = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setResizable(true);

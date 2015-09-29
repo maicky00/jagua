@@ -12,6 +12,7 @@ import Controladores.classPlanificacion;
 import static Formularios.FrmAsistencia.lblIdPlan;
 import static Formularios.FrmAsistencia.tab1;
 import jap.ReportesControlador;
+import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,6 +34,10 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
         ca = new classAsistencia();
         txtId.setVisible(false);
         jLabel3.setVisible(false);
+        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
+        Dimension jInternalFrameSize = this.getSize();
+        this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
+//       
     }
    
 
@@ -61,6 +66,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setMaximizable(true);
         setTitle("FORMULARIO DE BUSQUEDA DE PLANIFICACION");
@@ -88,6 +94,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Lugar");
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/group.png"))); // NOI18N
         jButton2.setText("ASISTENCIA");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,7 +221,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();

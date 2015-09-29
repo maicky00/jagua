@@ -12,6 +12,7 @@ import static Controladores.classDisenio.tablahtml;
 import static Controladores.classDisenio.textoNota;
 import static Controladores.classDisenio.txthtml;
 import Controladores.classMedidor;
+import java.awt.Dimension;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -31,7 +32,10 @@ public class FrmCorte extends javax.swing.JInternalFrame {
     public FrmCorte() {
         initComponents();
         inicio();
-
+Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
+        Dimension jInternalFrameSize = this.getSize();
+        this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
+//       
     }
 
     private void inicio() {
@@ -39,10 +43,8 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         jLabel1.setVisible(false);
         cm = new classMedidor();
         cdf = new classDetalleFactura();
-        //cdf.tablaCorte(jTable1);
-        cm.cargarCorte(jTable1);
-        cc.cargarCorte(jTable2);
-        //titulos
+//        cm.cargarCorte(jTable1);
+//        cc.cargarCorte(jTable2);
         String cad = "Seleccione SI para especificar a un usuario con corte"
                 + "<br>"
                 + "Seleccione NO para especificar usuario con multa por mora de 4 meses";
@@ -58,8 +60,6 @@ public class FrmCorte extends javax.swing.JInternalFrame {
         txtMora.setToolTipText(txthtml("Numero de meses no pagados"));
         jTable1.setToolTipText(tablahtml("Lista de usuarios no pagados con mas de 4 meses"));
         jTable2.setToolTipText(tablahtml("Lista de usuarios con corte activo o con multas por mora"));
-//        btnNuevo.setToolTipText(btnhtml("Click para crear nuevo corte o mora"));
-//        btnGuardar.setToolTipText(btnhtml("Guardar nuevo corte o mora"));
         jRadioButton1.setToolTipText(textoNota("Lista de todos los usuarios con corte", "Nota: aplica multa por reconexion"));
         jRadioButton2.setToolTipText(textoNota("Lista de todos los usuarios con multa", "Nota: aplica multa a usuarios con mora"));
     }
