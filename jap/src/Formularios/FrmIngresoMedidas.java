@@ -29,7 +29,7 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
     }
     classDetalleFactura cdf = new classDetalleFactura();
     frmDetalleFactura f;
-    classMedidor cm=new classMedidor();
+    classMedidor cm = new classMedidor();
     ControlFormularios cf;
 
     /**
@@ -122,22 +122,17 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
         try {
             int mes = mchMes.getMonth() + 1;
             String anioMes = chsAnio.getYear() + "-" + mes;
+            f = new frmDetalleFactura();
+            cf = new ControlFormularios();
+            cf.ControlaInstancia(f);
+            frmDetalleFactura.lblanio.setText(String.valueOf(chsAnio.getYear()));
+            frmDetalleFactura.lblmes.setText(String.valueOf(mchMes.getMonth() + 1));
+            f.setMaximum(true);
+            cdf.cargarBusquedaAnioMes(frmDetalleFactura.jTable1, anioMes);
+            cm.cargarTablaMedidorDetalle(tabla, anioMes);
 
-//            if (cdf.buscarAnioMes(anioMes) == 0) {
-                f = new frmDetalleFactura();
-                cf = new ControlFormularios();
-                cf.ControlaInstancia(f);
-                frmDetalleFactura.lblanio.setText(String.valueOf(chsAnio.getYear()));
-                frmDetalleFactura.lblmes.setText(String.valueOf(mchMes.getMonth() + 1));
-                f.setMaximum(true);
-                this.dispose();
-//            } else {
-//                String mensaje = "Año:  " + chsAnio.getYear() + "  Mes:  " + mes;
-//
-//                JOptionPane.showMessageDialog(null, "Esta Fecha ya se Registro\n " + mensaje, "Información", 1);
-//            }
-                cdf.cargarBusquedaAnioMes(frmDetalleFactura.jTable1, anioMes);
-                cm.cargarTablaMedidorDetalle(tabla, anioMes);
+            this.dispose();
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnNuevoActionPerformed

@@ -134,32 +134,18 @@ where facturas.`NUMFACTURA`=$P{numfact}]]>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<summary>
-		<band height="69" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<textField>
-				<reportElement style="Detail" x="104" y="44" width="70" height="15" forecolor="#000000" uuid="5653c4de-3b6d-4c85-afb1-b582c54c4963"/>
+				<reportElement style="Detail" x="104" y="9" width="70" height="15" forecolor="#000000" uuid="5653c4de-3b6d-4c85-afb1-b582c54c4963"/>
 				<textElement>
-					<font fontName="Serif" size="10"/>
+					<font fontName="SansSerif" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["("+$V{excedido}+" m3"+")"+ "  \$ "+ $V{tarexcedido}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement style="Detail" stretchType="RelativeToTallestObject" x="104" y="13" width="71" height="15" forecolor="#000000" uuid="10c7dc55-f215-4403-8bbe-667cd106f966"/>
-				<textElement>
-					<font fontName="Serif" size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA["("+$F{tarifas_BASE}+" m3)"+"  \$ "+$F{tarifas_TARBASE}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement style="Column header" x="4" y="13" width="82" height="15" forecolor="#000000" uuid="8d4a1528-b7b1-43e9-a73d-6fc5b1b49030"/>
+				<reportElement style="Column header" x="39" y="10" width="55" height="15" forecolor="#000000" uuid="f558fcb7-ad38-4b89-8a6a-ee542f171b54"/>
 				<textElement>
-					<font fontName="Serif" size="8"/>
-				</textElement>
-				<text><![CDATA[BASICO:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="4" y="45" width="82" height="15" forecolor="#000000" uuid="f558fcb7-ad38-4b89-8a6a-ee542f171b54"/>
-				<textElement>
-					<font fontName="Serif" size="8"/>
+					<font fontName="SansSerif" size="9" isBold="false"/>
 				</textElement>
 				<text><![CDATA[EXCEDIDO]]></text>
 			</staticText>

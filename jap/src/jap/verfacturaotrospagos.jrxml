@@ -125,25 +125,25 @@ where otrospagos.`NUMFACTURA`=$P{numfact}]]>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<summary>
-		<band height="57" splitType="Stretch">
+		<band height="46" splitType="Stretch">
 			<textField>
-				<reportElement x="103" y="19" width="100" height="20" forecolor="#000000" uuid="1000b79c-1d08-4bf6-9038-766cbb7de6e7"/>
+				<reportElement x="108" y="19" width="100" height="20" forecolor="#000000" uuid="1000b79c-1d08-4bf6-9038-766cbb7de6e7"/>
 				<textElement>
-					<font fontName="Serif" size="10"/>
+					<font fontName="SansSerif" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="103" y="5" width="220" height="15" forecolor="#000000" uuid="b36ac4a5-0056-42f3-9963-52f94dbc5c44"/>
+				<reportElement style="Detail" x="108" y="5" width="220" height="15" forecolor="#000000" uuid="b36ac4a5-0056-42f3-9963-52f94dbc5c44"/>
 				<textElement>
-					<font fontName="Serif" size="8"/>
+					<font fontName="SansSerif" size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{corte_OBSERVACION}+" Con Corte: "+$F{corte_CORTE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="Column header" x="4" y="19" width="99" height="15" forecolor="#000000" uuid="aaf6f9e3-be59-481c-bb62-e419bcf26818"/>
+				<reportElement style="Column header" x="35" y="8" width="68" height="38" forecolor="#000000" uuid="aaf6f9e3-be59-481c-bb62-e419bcf26818"/>
 				<textElement>
-					<font fontName="Serif" size="8"/>
+					<font fontName="SansSerif" size="9"/>
 				</textElement>
 				<text><![CDATA[MULTA RECONEXION]]></text>
 			</staticText>

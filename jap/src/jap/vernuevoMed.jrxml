@@ -108,21 +108,21 @@ where pagosnuevomed.`NUMFACT`=$P{numfact}]]>
 			<textField>
 				<reportElement x="104" y="18" width="62" height="20" forecolor="#000000" uuid="6fdf8b67-0bab-4611-b0ee-e9dbbe067aef"/>
 				<textElement>
-					<font fontName="Serif" size="10"/>
+					<font fontName="SansSerif" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Detail" x="104" y="3" width="167" height="15" forecolor="#000000" uuid="cccc95bb-188d-4f4f-918a-df83a9470939"/>
 				<textElement>
-					<font fontName="Serif" size="8"/>
+					<font fontName="SansSerif" size="9" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{pagosnuevomed_OBSERCION}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="Column header" x="4" y="18" width="82" height="15" forecolor="#000000" uuid="07caf257-b35c-4eeb-8b4d-f4ac0ffcaddf"/>
+				<reportElement style="Column header" x="38" y="18" width="43" height="15" forecolor="#000000" uuid="07caf257-b35c-4eeb-8b4d-f4ac0ffcaddf"/>
 				<textElement>
-					<font fontName="Serif" size="8"/>
+					<font fontName="SansSerif" size="9" isBold="false"/>
 				</textElement>
 				<text><![CDATA[OTROS:]]></text>
 			</staticText>
