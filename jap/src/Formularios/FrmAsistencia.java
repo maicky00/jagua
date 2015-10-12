@@ -605,7 +605,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
 
                 ca.guardarAsistencia(idPlan, idMedidor, asistencia, mult, descripcion, r);
                 ca.cargarTablaAsistencia(tab, idPlan);
-                cm.cargarTablaMedidorAsistencia(FrmAsistencia.tab1, Integer.valueOf(lblIdPlan.getText()));
+                ca.cargarTablaMedidorAsistencia(FrmAsistencia.tab1, Integer.valueOf(lblIdPlan.getText()));
             } else {
             }
         } else if (!lblId.getText().equals("")) {
@@ -633,7 +633,7 @@ public class FrmAsistencia extends javax.swing.JInternalFrame {
                 int idPlan = Integer.valueOf(lblIdPlan.getText());
                 ca.eliminarAsistencia(Integer.valueOf(lblId.getText()));
                 ca.cargarTablaAsistencia(tab, idPlan);
-                cm.cargarTablaMedidorAsistencia(FrmAsistencia.tab1, Integer.valueOf(lblIdPlan.getText()));
+                ca.cargarTablaMedidorAsistencia(FrmAsistencia.tab1, Integer.valueOf(lblIdPlan.getText()));
                 limpiar();
                 ocultar();
             }

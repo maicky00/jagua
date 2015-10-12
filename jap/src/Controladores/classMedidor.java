@@ -175,16 +175,15 @@ public class classMedidor {
         return null;
     }
 
-    public int buscarMedidorNumM2(int numMedidor) {
-        int n = 0;
-        for (Medidor dat : getMedidor()) {
-            if (dat.getNummedidor().equals(numMedidor)) {
-                n = dat.getIdmedidor();
-            }
-        }
-        return n;
-    }
-
+//    public int buscarMedidorNumM2(int numMedidor) {
+//        int n = 0;
+//        for (Medidor dat : getMedidor()) {
+//            if (dat.getNummedidor().equals(numMedidor)) {
+//                n = dat.getIdmedidor();
+//            }
+//        }
+//        return n;
+//    }
     public Medidor buscarMedidorId(int idMedidor) {
 
         for (Medidor dat : getMedidor()) {
@@ -220,24 +219,24 @@ public class classMedidor {
             fila[5] = u.getEstado();
             fila[6] = u.getNummedidor();
 
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(60);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(65);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(70);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(85);
-
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(40);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(45);
-
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(45);
-            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(70);
             //fila[6] = u.getIdusuario().getIdusuario();
             //FrmMedidor.label.setText(u.getIdusuario().getIdusuario().toString());
             modelo.addRow(fila);
 
         }
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(60);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(65);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(70);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(85);
+
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(40);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(45);
+
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(45);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(70);
 
     }
 
@@ -264,20 +263,21 @@ public class classMedidor {
                 fila[5] = u.getEstado();
                 fila[6] = u.getNummedidor();
 
-                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(60);
-                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(65);
-                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(70);
-                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(85);
-                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(40);
-                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(45);
-                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(45);
-                FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(70);
-
                 modelo.addRow(fila);
 
             }
+
+            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(60);
+            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(65);
+            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(70);
+            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(85);
+            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(40);
+            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(45);
+            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(45);
+            FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(70);
+
         }
     }
 
@@ -326,107 +326,145 @@ public class classMedidor {
         return null;
     }
 
-    public void cargarTablaMedidorDetalle(JTable tabla, String aniomes) {
-
-        classDetalleFactura cdf = new classDetalleFactura();
-        DefaultTableModel modelo = new DefaultTableModel();
-        tabla.setModel(modelo);
-        Object[] fila = new Object[7];
-        //modelo.addColumn("Nro");
-        modelo.addColumn("#");
-        modelo.addColumn("N° Medidor");
-        modelo.addColumn("Cedula");
-        modelo.addColumn("Usuario");
-        modelo.addColumn("Apodo");
-        modelo.addColumn("Serie");
-        modelo.addColumn("estado");
-        for (Medidor u : ListaOrdenada()) {
-            if (!u.getEstado().equals("INACTIVO")) {
-                if (cdf.buscardiferentes(u.getIdmedidor(), aniomes) != u.getIdmedidor()) {
-
-                    // fila[0] = u.getIdmedidor();
-                    fila[0] = u.getIdmedidor();
-                    fila[1] = u.getNummedidor();
-                    fila[2] = u.getIdusuario().getRucci();
-                    fila[3] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-                            + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre();
-                    fila[4] = u.getIdusuario().getApadosn();
-                    fila[5] = u.getSerie();
-                    fila[6] = u.getEstado();
-
-                    frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                    frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                    frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-//            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(20);
-//            frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(20);
-                    frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(1).setMinWidth(45);
-                    frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(90);
-                    frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(2).setMinWidth(60);
-                    frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(65);
-                    frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(5).setMinWidth(60);
-                    frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(85);
-                    frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(6).setMinWidth(40);
-                    frmDetalleFactura.tabla.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(45);
-
-                    modelo.addRow(fila);
-                }
-            }
-        }
-    }
-
-    public void cargarTablaMedidor2(JTable tabla, int idPlan) {
-        classAsistenciaPesillo ca = new classAsistenciaPesillo();
-        DefaultTableModel modelo = new DefaultTableModel();
-        tabla.setModel(modelo);
-        Object[] fila = new Object[4];
-        modelo.addColumn("Nro medidor");
-        modelo.addColumn("Cedula");
-        modelo.addColumn("Usuario");
-        modelo.addColumn("Apodo");
-
-        for (Medidor u : ListaOrdenada()) {
-            if (ca.buscardiferentes(u.getIdmedidor(), idPlan) != u.getIdmedidor()) {
-                fila[0] = u.getNummedidor();
-                fila[1] = u.getIdusuario().getRucci();
-                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-                        + u.getIdusuario().getPrimernombre();
-                fila[3] = u.getIdusuario().getApadosn();
-
-                modelo.addRow(fila);
-            }
-        }
-    }
-
-    public void cargarTablaMedidorAsistencia(JTable tabla, int idPlan) {
-        classAsistencia ca = new classAsistencia();
-        DefaultTableModel modelo = new DefaultTableModel();
-        tabla.setModel(modelo);
-        Object[] fila = new Object[4];
-        modelo.addColumn("Nro medidor");
-        modelo.addColumn("Cedula");
-        modelo.addColumn("Usuario");
-        modelo.addColumn("Apodo");
-
-        for (Medidor u : ListaOrdenada()) {
-
-            if (!u.getEstado().equals("INACTIVO")) {
-                if (ca.buscardiferentes(u.getIdmedidor(), idPlan) != u.getIdmedidor()) {
-                    fila[0] = u.getNummedidor();
-                    fila[1] = u.getIdusuario().getRucci();
-                    fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-                            + u.getIdusuario().getPrimernombre();
-                    fila[3] = u.getIdusuario().getApadosn();
-
-                    modelo.addRow(fila);
-                }
-            }
-        }
-    }
-
+//    public List<Medidor> listaMed(String aniomes) {
+//        try {
+//            classDetalleFactura cdf = new classDetalleFactura();
+//            List<Medidor> datos = new ArrayList<Medidor>();
+//            for (Medidor e : ListaOrdenada()) {
+//                if (!e.getEstado().equals("INACTIVO")) {
+//                    if (cdf.buscardiferentes(e.getIdmedidor(), aniomes) != e.getIdmedidor()) {
+//                        datos.add(e);
+//                    }
+//                }
+//            }
+//            return datos;
+//        } catch (Exception e) {
+//        }
+//        return null;
+//    }
+//
+//    public void cargarTablaMedidorDetalle(JTable tabla, String aniomes, List<Medidor> listaMed) {
+//
+//        DefaultTableModel modelo = new DefaultTableModel();
+//        tabla.setModel(modelo);
+//        Object[] fila = new Object[7];
+//        //modelo.addColumn("Nro");
+//        modelo.addColumn("#");
+//        modelo.addColumn("N° Medidor");
+//        modelo.addColumn("Cedula");
+//        modelo.addColumn("Usuario");
+//        modelo.addColumn("Apodo");
+//        modelo.addColumn("Serie");
+//        modelo.addColumn("estado");
+//        tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+//        tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+//        tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+//        tabla.getTableHeader().getColumnModel().getColumn(1).setMinWidth(45);
+//        tabla.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(90);
+//        tabla.getTableHeader().getColumnModel().getColumn(2).setMinWidth(60);
+//        tabla.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(65);
+//        tabla.getTableHeader().getColumnModel().getColumn(5).setMinWidth(60);
+//        tabla.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(85);
+//        tabla.getTableHeader().getColumnModel().getColumn(6).setMinWidth(40);
+//        tabla.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(45);
+//
+//        for (Medidor u : listaMed) {
+//
+//            fila[0] = u.getIdmedidor();
+//            fila[1] = u.getNummedidor();
+//            fila[2] = u.getIdusuario().getRucci();
+//            fila[3] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+//                    + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre();
+//            fila[4] = u.getIdusuario().getApadosn();
+//            fila[5] = u.getSerie();
+//            fila[6] = u.getEstado();
+//            modelo.addRow(fila);
+//
+//        }
+//
+//    }
+//    public void cargarTablaMedidor2(JTable tabla, int idPlan) {
+//        classAsistenciaPesillo ca = new classAsistenciaPesillo();
+//        DefaultTableModel modelo = new DefaultTableModel();
+//        tabla.setModel(modelo);
+//        Object[] fila = new Object[4];
+//        modelo.addColumn("Nro medidor");
+//        modelo.addColumn("Cedula");
+//        modelo.addColumn("Usuario");
+//        modelo.addColumn("Apodo");
+//
+//        for (Medidor u : ListaOrdenada()) {
+//            if (ca.buscardiferentes(u.getIdmedidor(), idPlan) != u.getIdmedidor()) {
+//                fila[0] = u.getNummedidor();
+//                fila[1] = u.getIdusuario().getRucci();
+//                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+//                        + u.getIdusuario().getPrimernombre();
+//                fila[3] = u.getIdusuario().getApadosn();
+//
+//                modelo.addRow(fila);
+//            }
+//        }
+//    }
+//    public void cargarTablaMedidorAsistencia(JTable tabla, int idPlan) {
+//        classAsistencia ca = new classAsistencia();
+//        DefaultTableModel modelo = new DefaultTableModel();
+//        tabla.setModel(modelo);
+//        Object[] fila = new Object[4];
+//        modelo.addColumn("Nro medidor");
+//        modelo.addColumn("Cedula");
+//        modelo.addColumn("Usuario");
+//        modelo.addColumn("Apodo");
+//
+//        for (Medidor u : ListaOrdenada()) {
+//
+//            if (!u.getEstado().equals("INACTIVO")) {
+//                if (ca.buscardiferentes(u.getIdmedidor(), idPlan) != u.getIdmedidor()) {
+//                    fila[0] = u.getNummedidor();
+//                    fila[1] = u.getIdusuario().getRucci();
+//                    fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+//                            + u.getIdusuario().getPrimernombre();
+//                    fila[3] = u.getIdusuario().getApadosn();
+//
+//                    modelo.addRow(fila);
+//                }
+//            }
+//        }
+//    }
     public void cargarCorte(JTable tabla) {
         classDetalleFactura cdf = new classDetalleFactura();
         classOtrosConceptos coc = new classOtrosConceptos();
         classCorte cc = new classCorte();
+        int papitas;
+        List<Detallefactura> ldt = new ArrayList<Detallefactura>();
+        for (Detallefactura dat : cdf.getDetallefactura()) {
+            if (dat.getObservacion().equals("NO")) {
+                ldt.add(dat);
+            }
+        }
+        List<Medidor> datosDet = new ArrayList<Medidor>();
+        for (Medidor dat : getMedidor()) {
+            papitas = 0;
+            for (Detallefactura data : ldt) {
+                if (data.getIdmedidor().getIdmedidor().equals(dat.getIdmedidor()) && data.getObservacion().equals("NO")) {
+                    papitas = papitas + 1;
+                }
+            }
+            if (papitas >= coc.buscarOtrosconceptos(1).getTiempo()) {
+                datosDet.add(dat);
+            }
+        }
+        int i = 0;
+        List<Medidor> datos = new ArrayList<Medidor>();
+        for (Medidor e : datosDet) {
+            for (Corte dat : cc.getCorte()) {
+                if (dat.getIdmedidor().getIdmedidor() == (e.getIdmedidor()) && dat.getPagado().equals("NO")) {
+                    i = dat.getIdmedidor().getIdmedidor();
+                }
+            }
+            if (i != e.getIdmedidor()) {
+                datos.add(e);
+            }
+        }
         DefaultTableModel modelo = new DefaultTableModel();
         tabla.setModel(modelo);
         Object[] fila = new Object[6];
@@ -437,59 +475,60 @@ public class classMedidor {
         modelo.addColumn("Meses no pagados");
         modelo.addColumn("id");
 
-        for (Medidor u : getMedidor()) {
+        for (Medidor u : datos) {
             // fila[0] = u.getIdmedidor();
-            if (cdf.numContar(u.getIdmedidor()) >= coc.buscarOtrosconceptos(1).getTiempo()) {
-                if (cc.verificarRepetidos(u.getIdmedidor()) != u.getIdmedidor()) {
-                    if (u.getEstado().equals("ACTIVO")) {
+//            if (cdf.numContar(u.getIdmedidor()) >= coc.buscarOtrosconceptos(1).getTiempo()) {
+//                if (cc.verificarRepetidos(u.getIdmedidor()) != u.getIdmedidor()) {
+            if (u.getEstado().equals("ACTIVO")) {
 
-                        fila[0] = u.getNummedidor();
-                        fila[1] = u.getIdusuario().getRucci();
-                        fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-                                + u.getIdusuario().getPrimernombre();
-                        fila[3] = u.getIdusuario().getApadosn();
-                        fila[4] = cdf.numContar(u.getIdmedidor());
-                        fila[5] = u.getIdmedidor();
+                fila[0] = u.getNummedidor();
+                fila[1] = u.getIdusuario().getRucci();
+                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                        + u.getIdusuario().getPrimernombre();
+                fila[3] = u.getIdusuario().getApadosn();
+                fila[4] = cdf.numContar(u.getIdmedidor());
+                fila[5] = u.getIdmedidor();
 
-                        FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(50);
-                        FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(55);
-                        FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(70);
-                        FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
-                        modelo.addRow(fila);
-                    }
-                }
+                modelo.addRow(fila);
             }
+//                }
+//            }
 
         }
+        FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(50);
+        FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(55);
+        FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(70);
+        FrmCorte.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
+
     }
-//
-//    public void cargarTablaMedidorUsuarioDebe(JTable tabla) {
-//        DefaultTableModel modelo = new DefaultTableModel();
-//        tabla.setModel(modelo);
-//        Object[] fila = new Object[4];
-//        modelo.addColumn("N° Medidor");
-//        modelo.addColumn("Cedula");
-//        modelo.addColumn("Usuario");
-//        modelo.addColumn("Apodo");
-//        float valor = 0;
-//        for (Medidor u : getMedidor()) {
-//
-//            valor = u.getValorporconexion();
-//            if (valor > 0) {
-//                fila[0] = u.getNummedidor();
-//                fila[1] = u.getIdusuario().getRucci();
-//                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-//                        + u.getIdusuario().getPrimernombre();
-//                fila[3] = u.getIdusuario().getApadosn();
-//                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
-//                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(45);
-//                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(65);
-//                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
-//
-//                modelo.addRow(fila);
-//            }
-//        }
-//    }
+    //
+    //    public void cargarTablaMedidorUsuarioDebe(JTable tabla) {
+    //        DefaultTableModel modelo = new DefaultTableModel();
+    //        tabla.setModel(modelo);
+    //        Object[] fila = new Object[4];
+    //        modelo.addColumn("N° Medidor");
+    //        modelo.addColumn("Cedula");
+    //        modelo.addColumn("Usuario");
+    //        modelo.addColumn("Apodo");
+    //        float valor = 0;
+    //        for (Medidor u : getMedidor()) {
+    //
+    //            valor = u.getValorporconexion();
+    //            if (valor > 0) {
+    //                fila[0] = u.getNummedidor();
+    //                fila[1] = u.getIdusuario().getRucci();
+    //                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+    //                        + u.getIdusuario().getPrimernombre();
+    //                fila[3] = u.getIdusuario().getApadosn();
+    //                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
+    //                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(45);
+    //                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(65);
+    //                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
+    //
+    //                modelo.addRow(fila);
+    //            }
+    //        }
+    //    }
 
     public void Ingresarlist() {
         classCorte cc = new classCorte();
@@ -507,26 +546,53 @@ public class classMedidor {
 
     public List<Corte> getlista() {
         classDetalleFactura cdf = new classDetalleFactura();
-        classCorte cc = new classCorte();
         classOtrosConceptos coc = new classOtrosConceptos();
-
+        classCorte cc = new classCorte();
+        int papitas;
+        List<Detallefactura> ldt = new ArrayList<Detallefactura>();
+        for (Detallefactura dat : cdf.getDetallefactura()) {
+            if (dat.getObservacion().equals("NO")) {
+                ldt.add(dat);
+            }
+        }
+        List<Medidor> datosDet = new ArrayList<Medidor>();
+        for (Medidor dat : getMedidor()) {
+            papitas = 0;
+            for (Detallefactura data : ldt) {
+                if (data.getIdmedidor().getIdmedidor().equals(dat.getIdmedidor()) && data.getObservacion().equals("NO")) {
+                    papitas = papitas + 1;
+                }
+            }
+            if (papitas >= coc.buscarOtrosconceptos(1).getTiempo()) {
+                datosDet.add(dat);
+            }
+        }
+        int i = 0;
+        List<Medidor> datos = new ArrayList<Medidor>();
+        for (Medidor e : datosDet) {
+            for (Corte dat : cc.getCorte()) {
+                if (dat.getIdmedidor().getIdmedidor() == (e.getIdmedidor()) && dat.getPagado().equals("NO")) {
+                    i = dat.getIdmedidor().getIdmedidor();
+                }
+            }
+            if (i != e.getIdmedidor()) {
+                datos.add(e);
+            }
+        }
         List<Corte> lst = new ArrayList<>();
         if (coc.buscarOtrosconceptos(1).getActivo().equals("ACTIVAR")) {
-            for (Medidor u : getMedidor()) {
-                if (cdf.numContar(u.getIdmedidor()) >= coc.buscarOtrosconceptos(1).getTiempo()) {
-                    if (cc.verificarRepetidos(u.getIdmedidor()) != u.getIdmedidor()) {
-                        Corte dat = new Corte();
-                        Medidor idmed = medidorJpacontrolador.findMedidor(u.getIdmedidor());
-                        dat.setIdmedidor(idmed);
-                        dat.setCorte("NO");
-                        dat.setFecha(new Date());
-                        dat.setObservacion(coc.buscarOtrosconceptos(1).getDescripcion());
-                        dat.setMulta(coc.buscarOtrosconceptos(1).getCantidad());
-                        dat.setMora(cdf.numContar(u.getIdmedidor()));
-                        dat.setPagado("NO");
-                        lst.add(dat);
-                    }
-                }
+            for (Medidor u : datos) {
+
+                Corte dat = new Corte();
+                Medidor idmed = medidorJpacontrolador.findMedidor(u.getIdmedidor());
+                dat.setIdmedidor(idmed);
+                dat.setCorte("NO");
+                dat.setFecha(new Date());
+                dat.setObservacion(coc.buscarOtrosconceptos(1).getDescripcion());
+                dat.setMulta(coc.buscarOtrosconceptos(1).getCantidad());
+                dat.setMora(cdf.numContar(u.getIdmedidor()));
+                dat.setPagado("NO");
+                lst.add(dat);
             }
         }
 

@@ -257,7 +257,7 @@ public class FrmAsistenciaPlanPesillo extends javax.swing.JInternalFrame {
                 this.dispose();
                 cf.ControlaInstancia(as);
                 cap.cargarTablaAsistenciaPesillo(FrmAsistenciaPesillo.tab, Integer.parseInt(txtId.getText()));
-                cm.cargarTablaMedidor2(FrmAsistenciaPesillo.tab1,Integer.valueOf(txtId.getText()));
+                cap.cargarTablaMedidor2(FrmAsistenciaPesillo.tab1,Integer.valueOf(txtId.getText()));
             } else {
                 JOptionPane.showMessageDialog(null, "Seleccione un Evento!.",
                 "Error de Proceso",

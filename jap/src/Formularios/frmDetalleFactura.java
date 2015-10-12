@@ -37,9 +37,8 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
 //        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
 //        Dimension jInternalFrameSize = this.getSize();
 //        this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
-//        cm = new classMedidor();
         ct = new classTarifas();
-        cdt = new classDetalleFactura();
+//        cdt = new classDetalleFactura();
         ct.cargarCmbTarifas(combotarifas);
         lblIdDetalle.setText("");
         lblIdDetalle.setVisible(false);
@@ -49,10 +48,10 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         jLabel22.setVisible(false);
     }
     int comienzo = 0;
-    classDetalleFactura cdf = new classDetalleFactura();
-    classMoverRegistros moverRegistros = new classMoverRegistros(cm.getMedidor());
-    classMoverRegistros moverRegistros2;
-    int mes = FrmIngresoMedidas.mchMes.getMonth() + 1;
+//    classDetalleFactura cdf = new classDetalleFactura();
+//    classMoverRegistros moverRegistros = new classMoverRegistros(cm.getMedidor());
+//    classMoverRegistros moverRegistros2;
+//    int mes = FrmIngresoMedidas.mchMes.getMonth() + 1;
 
     private void mostrar() {
         tabla.setEnabled(true);
@@ -700,20 +699,19 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
                 float sutotal = Float.valueOf(txtSubTotal.getText()) + alcant;
                 float total = Float.valueOf(txtTotal.getText());
                 String obser = combopagado.getSelectedItem().toString();
-                if (cdt.ingresoMesMayor(idMed, Integer.valueOf(lblanio.getText()), Integer.valueOf(lblmes.getText()))==true) {
+                if (cdt.ingresoMesMayor(idMed, Integer.valueOf(lblanio.getText()), Integer.valueOf(lblmes.getText())) == true) {
                     if (medActual < medAnterior) {
                         JOptionPane.showMessageDialog(null, "Error, Registro De Consumo Actual\n es mayor al Anterior ", "Información", 1);
                     } else if (lblIdDetalle.getText().equals("")) {
                         cdt.guardarDetallefactura(idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total, obser);
                         limpiar();
-                        cm.cargarTablaMedidorDetalle(tabla, anioMes);
+                        cdt.cargarTablaMedidorDetalle(tabla, anioMes, cdt.listaMed(anioMes));
                     } else if (!lblIdDetalle.getText().equals("")) {
                         cdt.modificarDetallefactura(Integer.valueOf(lblIdDetalle.getText().toString()), idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total, obser);
                         limpiar();
                     }
                 }
-
-                cdf.cargarBusquedaAnioMes(jTable1, anioMes);
+                cdt.cargarBusquedaAnioMes(jTable1, anioMes);
                 ocultar();
                 limpiar();
                 jTable1.setEnabled(true);
@@ -749,16 +747,14 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         try {
             cdt.eliminarDetallefactura(Integer.valueOf(lblIdDetalle.getText()));
             String anMes = lblanio.getText() + "-" + lblmes.getText();
-            cm.cargarTablaMedidorDetalle(tabla, anMes);
+            cdt.cargarTablaMedidorDetalle(tabla, anMes, cdt.listaMed(anMes));
             limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",
                     "Error", JOptionPane.ERROR_MESSAGE);
 
         }
-//        Medidor medidor = (Medidor) moverRegistros.getNext();
-//        setDatosMover(medidor, combotarifas.getSelectedItem().toString());
-//        txtmedAnterior.setText(String.valueOf(cdt.medidaAnterior(Integer.valueOf(txtnumMedidor.getText()))));
+
     }//GEN-LAST:event_btnElimnarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -805,6 +801,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         try {
             limpiar();
             int n = tabla.getSelectedRow();
+            int idmed = Integer.valueOf(tabla.getValueAt(n, 0).toString());
             txtnumMedidor.setText(tabla.getValueAt(n, 1).toString());
             txtrucCi.setText(tabla.getValueAt(n, 2).toString());
             txtUsuario.setText(tabla.getValueAt(n, 3).toString());
@@ -813,13 +810,13 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
             txtEstado.setText(tabla.getValueAt(n, 6).toString());
             txtalcanta.setText(ct.buscarTarifaDescrip(combotarifas.getSelectedItem().toString()).getAlcantarrillado().toString());
 
-            if (cdt.medidaAnterior(Integer.valueOf(txtnumMedidor.getText())) == 0) {
+            if (cdt.medidaAnterior(idmed) == 0) {
                 txtmedAnterior.setEditable(true);
             } else {
                 txtmedAnterior.setEditable(false);
             }
 
-            txtmedAnterior.setText(String.valueOf(cdt.medidaAnterior(Integer.valueOf(txtnumMedidor.getText()))));
+            txtmedAnterior.setText(String.valueOf(cdt.medidaAnterior(idmed)));
 
         } catch (Exception e) {
         }
@@ -830,6 +827,7 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         try {
             limpiar();
             int n = tabla.getSelectedRow();
+            int idmed = Integer.valueOf(tabla.getValueAt(n, 0).toString());
             txtnumMedidor.setText(tabla.getValueAt(n, 1).toString());
             txtrucCi.setText(tabla.getValueAt(n, 2).toString());
             txtUsuario.setText(tabla.getValueAt(n, 3).toString());
@@ -837,7 +835,14 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
             txtSerie.setText(tabla.getValueAt(n, 5).toString());
             txtEstado.setText(tabla.getValueAt(n, 6).toString());
             txtalcanta.setText(ct.buscarTarifaDescrip(combotarifas.getSelectedItem().toString()).getAlcantarrillado().toString());
-            txtmedAnterior.setText(String.valueOf(cdt.medidaAnterior(Integer.valueOf(txtnumMedidor.getText()))));
+
+            if (cdt.medidaAnterior(idmed) == 0) {
+                txtmedAnterior.setEditable(true);
+            } else {
+                txtmedAnterior.setEditable(false);
+            }
+
+            txtmedAnterior.setText(String.valueOf(cdt.medidaAnterior(idmed)));
 
         } catch (Exception e) {
         }

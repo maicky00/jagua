@@ -178,7 +178,7 @@ public class classCorte {
         modelo.addColumn("Usuario");
         modelo.addColumn("Apodo");
         modelo.addColumn("multa");
-
+        
         for (Corte c : getCorte()) {
             if (c.getCorte().equals("SI") && c.getPagado().equals("NO")) {
                 if (c.getIdmedidor().getEstado().equals("ACTIVO")) {
@@ -192,12 +192,13 @@ public class classCorte {
                     fila[4] = c.getIdmedidor().getIdusuario().getApadosn();
                     fila[5] = c.getMulta();
 
-                    FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                    FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                     modelo.addRow(fila);
                 }
             }
         }
+        FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+        FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+
     }
 
     public void cargarCorte2(JTable tabla) {
@@ -225,13 +226,13 @@ public class classCorte {
 //                fila[5] = c.getMulta();
 //                fila[6] = c.getMora();
 
-                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
-                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(45);
-                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(65);
-                FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
                 modelo.addRow(fila);
             }
         }
+        FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(35);
+        FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(45);
+        FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(65);
+        FrmOtrosPagos.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(75);
 
     }
 
@@ -241,7 +242,7 @@ public class classCorte {
         tabla.setModel(modelo);
         Object[] fila = new Object[7];
         modelo.addColumn("id");
-        modelo.addColumn("idmed");
+        modelo.addColumn("Med");
         modelo.addColumn("corte");
         modelo.addColumn("fecha");
         modelo.addColumn("observacion");
@@ -253,19 +254,19 @@ public class classCorte {
                 if (c.getIdmedidor().getEstado().equals("ACTIVO")) {
 
                     fila[0] = c.getIdcorte();
-                    fila[1] = c.getIdmedidor().getIdmedidor();
+                    fila[1] = c.getIdmedidor().getNummedidor();
                     fila[2] = c.getCorte();
                     fila[3] = c.getFecha();
                     fila[4] = c.getObservacion();
                     fila[5] = c.getMulta();
                     fila[6] = c.getMora();
 
-                    FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-                    FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
                     modelo.addRow(fila);
                 }
             }
         }
+        FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+        FrmCorte.jTable2.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
 
     }
 

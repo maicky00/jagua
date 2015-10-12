@@ -129,7 +129,7 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
             frmDetalleFactura.lblmes.setText(String.valueOf(mchMes.getMonth() + 1));
             f.setMaximum(true);
             cdf.cargarBusquedaAnioMes(frmDetalleFactura.jTable1, anioMes);
-            cm.cargarTablaMedidorDetalle(tabla, anioMes);
+            cdf.cargarTablaMedidorDetalle(tabla, anioMes,cdf.listaMed(anioMes));
 
             this.dispose();
 

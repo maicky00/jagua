@@ -261,8 +261,8 @@ public class Login extends javax.swing.JFrame {
         String password = new String(txtclave.getPassword());
         entidades.Login validarUsuario = cl.validarUsuario(usuario, password);
         if (validarUsuario == null) {
-            JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta!.",
-                    "Error de Auntetificación", JOptionPane.ERROR_MESSAGE);
+//            JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta!.",
+//                    "Error de Auntetificación", JOptionPane.ERROR_MESSAGE);
         } else {
             fp.show();
             String usact = cl.validarUsuario(usuario, password).getApellidos() + "  "

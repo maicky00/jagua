@@ -632,7 +632,7 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
 
                         cap.guardarAsistenciaPesillo(idMedidor, idPlan, asistencia, valor, descripcion, r);
                         cap.cargarTablaAsistenciaPesillo(tab, idPlan);
-                        cm.cargarTablaMedidor2(FrmAsistenciaPesillo.tab1, Integer.valueOf(lblIdPlan.getText()));
+                        cap.cargarTablaMedidor2(FrmAsistenciaPesillo.tab1, Integer.valueOf(lblIdPlan.getText()));
                     } else {
                     }
                 } else if (!lblId.getText().equals("")) {
@@ -641,7 +641,7 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
 
                         cap.modificarAsistenciaPesillo(Integer.parseInt(lblId.getText()), idMedidor, idPlan, asistencia, valor, descripcion, r);
                         cap.cargarTablaAsistenciaPesillo(tab, idPlan);
-                        cm.cargarTablaMedidor2(FrmAsistenciaPesillo.tab1, Integer.valueOf(lblIdPlan.getText()));
+                        cap.cargarTablaMedidor2(FrmAsistenciaPesillo.tab1, Integer.valueOf(lblIdPlan.getText()));
 
                     } else {
                     }
@@ -670,7 +670,7 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
                 cap.eliminarAsistenciaPesillo(Integer.valueOf(lblId.getText()));
                 //                ca.cargarTablaAsistencia(jTable1);
                 cap.cargarTablaAsistenciaPesillo(tab, Integer.parseInt(lblIdPlan.getText()));
-                cm.cargarTablaMedidor2(FrmAsistenciaPesillo.tab1, Integer.valueOf(lblIdPlan.getText()));
+                cap.cargarTablaMedidor2(FrmAsistenciaPesillo.tab1, Integer.valueOf(lblIdPlan.getText()));
 
                 limpiar();
                 ocultar();
@@ -809,12 +809,15 @@ public class FrmAsistenciaPesillo extends javax.swing.JInternalFrame {
 
     private void comboAplicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAplicaActionPerformed
         // TODO add your handling code here:
-        if (comboAplica.getSelectedItem().equals("SI")) {
+        try {
+             if (comboAplica.getSelectedItem().equals("SI")) {
             txtValor.setText(cap.buscarIdAsistenciaPes(Integer.valueOf(lblIdPlan.getText())).getValormulta().toString());
 
         } else {
             txtValor.setText("0.0");
 
+        }
+        } catch (Exception e) {
         }
     }//GEN-LAST:event_comboAplicaActionPerformed
 

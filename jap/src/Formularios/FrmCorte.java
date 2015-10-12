@@ -32,7 +32,7 @@ public class FrmCorte extends javax.swing.JInternalFrame {
     public FrmCorte() {
         initComponents();
         inicio();
-Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
+        Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
 //       
@@ -43,8 +43,8 @@ Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         jLabel1.setVisible(false);
         cm = new classMedidor();
         cdf = new classDetalleFactura();
-//        cm.cargarCorte(jTable1);
-//        cc.cargarCorte(jTable2);
+        cm.cargarCorte(jTable1);
+        cc.cargarCorte(jTable2);
         String cad = "Seleccione SI para especificar a un usuario con corte"
                 + "<br>"
                 + "Seleccione NO para especificar usuario con multa por mora de 4 meses";
@@ -599,13 +599,13 @@ Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
                     cc.modificarCorte(idC, idMedidor, corte, fecha.getDate(), txtObservacion.getText(), Float.parseFloat(txtMulta.getText()),
                             Integer.parseInt(txtMora.getText()));
                     cc.cargarCorte(jTable2);
-                    String estado;
-                    if (corte.equals("SI")) {
-                        estado = "INACTIVO";
-                    } else {
-                        estado = "ACTIVO";
-                    }
-                    cm.modificarEstado(idMedidor, estado);
+//                    String estado;
+//                    if (corte.equals("SI")) {
+//                        estado = "INACTIVO";
+//                    } else {
+//                        estado = "ACTIVO";
+//                    }
+//                    cm.modificarEstado(idMedidor, estado);
                     limpiar();
                     ocultar();
                 }

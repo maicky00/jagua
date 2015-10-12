@@ -270,7 +270,7 @@ public class FrmAsistenciaPlan extends javax.swing.JInternalFrame {
                 this.dispose();
                 cf.ControlaInstancia(as);
                 ca.cargarTablaAsistencia(FrmAsistencia.tab, Integer.parseInt(txtId.getText()));
-                cm.cargarTablaMedidorAsistencia(FrmAsistencia.tab1, Integer.valueOf(txtId.getText()));
+                ca.cargarTablaMedidorAsistencia(FrmAsistencia.tab1, Integer.valueOf(txtId.getText()));
             } else {
                 JOptionPane.showMessageDialog(null, "Selecione un Evento!.",
                 "Error de Proceso",

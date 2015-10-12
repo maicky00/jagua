@@ -31,15 +31,15 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
      */
     classMedidor cm = new classMedidor();
     classusuario cu = new classusuario();
-    
+
     public FrmMedidor() {
         initComponents();
         inicio();
-        
+
     }
-    
+
     ControlFormularios cf;
-    
+
     private void inicio() {
         limpiar();
 
@@ -70,7 +70,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         jTextField1.setToolTipText(classDisenio.txthtml("Seleccion busquda por apellido y luego digite el metodo de busqueda"));
         jTable1.setToolTipText(classDisenio.tablahtml("Lista de medidores"));
     }
-    
+
     public void mostrar() {
         txtUsuarioCed.setEnabled(true);
         txtvalorConexion.setEnabled(true);
@@ -82,9 +82,9 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         btnCancelar.setEnabled(true);
         btnGuardar.setEnabled(true);
         jTable1.setEnabled(false);
-        
+
     }
-    
+
     public void ocultar() {
         txtUsuarioCed.setEnabled(false);
         txtvalorConexion.setEnabled(false);
@@ -97,9 +97,9 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         btnGuardar.setEnabled(false);
         jTable1.setEnabled(true);
     }
-    
+
     public void limpiar() {
-        
+
         txtNombre.setText("");
         txtUsuarioCed.setText("");
         txtSerie.setText("");
@@ -579,14 +579,14 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        
+
         txtUsuarioCed.setEnabled(true);
         mostrar();
         limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
+
 //        float saldo = cm.buscarMedidorNumM(Integer.valueOf(txtMedidor.getText())).getSaldo();
 //        if (saldo != 200) {
 //            txtvalorConexion.setText(saldo + "");
@@ -598,16 +598,16 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+
         ocultar();
         limpiar();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
-        
+
         this.setVisible(false);
         FrmUsuario us = new FrmUsuario();
-        
+
         cf = new ControlFormularios();
         cf.ControlaInstancia(us);
 
@@ -616,7 +616,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         try {
-            
+
             int idUsuario = Integer.valueOf(lblIdUsuario.getText());
             String serie = txtSerie.getText();
             int numMedidor = Integer.valueOf(txtMedidor.getText());
@@ -634,7 +634,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     limpiar();
                     ocultar();
                 }
-                
+
             } else if (!lblIdmedidor.getText().equals("")) {
                 int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (i == 0) {
@@ -644,9 +644,9 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     limpiar();
                     ocultar();
                 }
-                
+
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error");
         }
@@ -661,15 +661,15 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                 cm.cargarTablaMedidor(jTable1);
                 JOptionPane.showMessageDialog(null, "Eliminado");
             }
-            
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",
-                "Error",JOptionPane.ERROR_MESSAGE);
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnElimnarActionPerformed
 
     private void txtUsuarioCedKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioCedKeyTyped
-        
+
         if (txtUsuarioCed.getText().equals("")) {
             FrmBusqueda bu = new FrmBusqueda();
             bu.setVisible(true);
@@ -703,15 +703,16 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         try {
             int n = jTable1.getSelectedRow();
+            int id = Integer.valueOf(jTable1.getValueAt(n, 0).toString());
             lblIdmedidor.setText(jTable1.getValueAt(n, 0).toString());
             txtUsuarioCed.setText(jTable1.getValueAt(n, 1).toString());
             txtNombre.setText(jTable1.getValueAt(n, 2).toString());
-            
-            txtMedidor.setText(cu.buscarUsuarioRucCi(txtUsuarioCed.getText()).getIdusuario().toString());
-            
+
+            txtMedidor.setText(cm.buscarMedidorId(id).getNummedidor().toString());
+
             txtSerie.setText(jTable1.getValueAt(n, 4).toString());
             comboEstado.setSelectedItem(jTable1.getValueAt(n, 5).toString());
-            lblIdUsuario.setText(cu.buscarUsuarioRucCi(txtUsuarioCed.getText()).getIdusuario().toString());
+            lblIdUsuario.setText(cm.buscarMedidorId(id).getIdusuario().getIdusuario().toString());
             txtUsuarioCed.setEnabled(false);
         } catch (Exception e) {
         }
@@ -719,53 +720,48 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1KeyReleased
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
         try {
             int n = jTable1.getSelectedRow();
-            int numM = Integer.valueOf(jTable1.getValueAt(n, 6).toString());
-            
+            int id = Integer.valueOf(jTable1.getValueAt(n, 0).toString());
             lblIdmedidor.setText(jTable1.getValueAt(n, 0).toString());
             txtUsuarioCed.setText(jTable1.getValueAt(n, 1).toString());
             txtNombre.setText(jTable1.getValueAt(n, 2).toString());
-            txtMedidor.setText(jTable1.getValueAt(n, 6).toString());
+
+            txtMedidor.setText(cm.buscarMedidorId(id).getNummedidor().toString());
+
             txtSerie.setText(jTable1.getValueAt(n, 4).toString());
             comboEstado.setSelectedItem(jTable1.getValueAt(n, 5).toString());
-            lblIdUsuario.setText(cu.buscarUsuarioRucCi(txtUsuarioCed.getText()).getIdusuario().toString());
+            lblIdUsuario.setText(cm.buscarMedidorId(id).getIdusuario().getIdusuario().toString());
             txtUsuarioCed.setEnabled(false);
-            txtvalorConexion.setText(cm.buscarMedidorNumM(numM).getValorporconexion().toString());
-            txtPagado.setText(cm.buscarMedidorNumM(numM).getPagado().toString());
-            txtSaldo.setText(cm.buscarMedidorNumM(numM).getSaldo().toString());
-
         } catch (Exception e) {
         }
-
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void txtvalorConexionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalorConexionKeyReleased
         try {
             txtSaldo.setText(txtvalorConexion.getText());
-            
+
             float sald = Float.valueOf(txtSaldo.getText());
             if (sald == 0) {
                 txtPagado.setText("SI");
             } else if (sald != 0) {
                 txtPagado.setText("NO");
             }
-            
+
         } catch (Exception e) {
-            
+
         }
 
     }//GEN-LAST:event_txtvalorConexionKeyReleased
 
     private void txtvalorConexionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalorConexionKeyTyped
         char c = evt.getKeyChar();
-        
+
         if (Character.isLetter(c)) {
             getToolkit().beep();
-            
+
             evt.consume();
-            
+
             mensaje.setText("error de ingreso, ingrese digitos");
         } else {
             mensaje.setText("");
@@ -774,12 +770,12 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
     private void txtMedidorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMedidorKeyTyped
         char c = evt.getKeyChar();
-        
+
         if (Character.isLetter(c)) {
             getToolkit().beep();
-            
+
             evt.consume();
-            
+
             mensaje.setText("error de ingreso, ingrese digitos");
         } else {
             mensaje.setText("");

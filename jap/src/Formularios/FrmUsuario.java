@@ -876,7 +876,6 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                     int i = JOptionPane.showConfirmDialog(this, "¿Realmente desea Modificar?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (i == 0) {
 
-//                bytesImg = cu.AbrirAImagen(archivo);
                         cu.modificarUsuario(Integer.valueOf(id.getText()), rucCi, primNombre, segNombre, primApell, segApellidos, apodo, direccion, telefono, celular, sector, referencia, bytesImg, direccion);
                         cu.cargarTablaUsuario2(tablaUsuarios);
                         limpiar();

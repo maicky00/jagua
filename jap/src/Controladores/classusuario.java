@@ -129,28 +129,28 @@ public class classusuario {
 
     }
 
-    public Usuarios buscarUsuarioCed(String cedula) {
+//    public Usuarios buscarUsuarioCed(String cedula) {
+//
+//        for (Usuarios us : usuariosJpacontrolador.findUsuariosEntities()) {
+//            if (us.getRucci().equals(cedula)) {
+//                return us;
+//            }
+//            if (us == null) {
+//                JOptionPane.showMessageDialog(null, "No se encontro", "Información", 1);
+//            }
+//        }
+//        return null;
+//    }
 
-        for (Usuarios us : usuariosJpacontrolador.findUsuariosEntities()) {
-            if (us.getRucci().equals(cedula)) {
-                return us;
-            }
-            if (us == null) {
-                JOptionPane.showMessageDialog(null, "No se encontro", "Información", 1);
-            }
-        }
-        return null;
-    }
-
-    public Usuarios buscarUsuarioRucCi(String rucCi) {
-
-        for (Usuarios dat : getUsuarios()) {
-            if (dat.getRucci().equals(rucCi)) {
-                return dat;
-            }
-        }
-        return null;
-    }
+//    public Usuarios buscarUsuarioRucCi(String rucCi) {
+//
+//        for (Usuarios dat : getUsuarios()) {
+//            if (dat.getRucci().equals(rucCi)) {
+//                return dat;
+//            }
+//        }
+//        return null;
+//    }
 
     public Usuarios buscarLoginId(int idUsuario) {
 

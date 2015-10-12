@@ -17,6 +17,7 @@ import entidadesCruds.AsistenciapesilloJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
@@ -31,17 +32,17 @@ import javax.swing.table.TableModel;
  * @author Marco
  */
 public class classAsistenciaPesillo {
-    
+
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("japPU");
     public AsistenciapesilloJpaController asistenciapesilloJpaController = new AsistenciapesilloJpaController(emf);
     classPlanificacionPesillo cpp = new classPlanificacionPesillo();
     classMedidor cm = new classMedidor();
     DefaultTableModel modelo;
-    
+
     public List<Asistenciapesillo> getAsistenciaPesillo() {
         return asistenciapesilloJpaController.findAsistenciapesilloEntities();
     }
-    
+
     public void guardarAsistenciaPesillo(int numMedidor, int idPlanificacionPes, String asistencia, float valorMulta, String descripcion, String observacion) {
         int i = 0;
         Asistenciapesillo ap = new Asistenciapesillo();
@@ -51,7 +52,7 @@ public class classAsistenciaPesillo {
                 ap = as;
                 break;
             }
-            
+
         }
         if (i == 1) {
             ap = null;
@@ -70,7 +71,7 @@ public class classAsistenciaPesillo {
             JOptionPane.showMessageDialog(null, "Guardado", "Información", 1);
         }
     }
-    
+
     public boolean modificarAsistenciaPesillo(int idAsistenciaPes, int numMedidor, int idPlanificacionPes, String asistencia, float valorMulta, String descripcion, String observacion) {
         try {
             Asistenciapesillo dat = asistenciapesilloJpaController.findAsistenciapesillo(idAsistenciaPes);
@@ -87,12 +88,12 @@ public class classAsistenciaPesillo {
             dat.setObservacion(observacion);
             asistenciapesilloJpaController.edit(dat);
             JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
-            
+
         } catch (Exception e) {
         }
         return true;
     }
-    
+
     public boolean modificarAsistenciaPesillo(int idAsistencia, String observacion) {
         try {
             Asistenciapesillo dat = asistenciapesilloJpaController.findAsistenciapesillo(idAsistencia);
@@ -105,14 +106,14 @@ public class classAsistenciaPesillo {
         }
         return true;
     }
-    
+
     public void eliminarAsistenciaPesillo(int idAsistenciaPes) throws NonexistentEntityException {
-        
+
         asistenciapesilloJpaController.destroy(idAsistenciaPes);
         JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
-        
+
     }
-    
+
     public Asistenciapesillo buscarIdAsistenciaPes(int idAsistenciaPes) {
         for (Asistenciapesillo dat : getAsistenciaPesillo()) {
             if (dat.getIdasistenciapesillo().equals(idAsistenciaPes)) {
@@ -121,7 +122,7 @@ public class classAsistenciaPesillo {
         }
         return null;
     }
-    
+
     public Asistenciapesillo buscarNumMed(int idNumMed) {
         for (Asistenciapesillo dat : getAsistenciaPesillo()) {
             if (dat.getIdmedidor().getNummedidor().equals(idNumMed)) {
@@ -130,9 +131,9 @@ public class classAsistenciaPesillo {
         }
         return null;
     }
-    
+
     public void cargarTablaAsistenciaPesillo(JTable tabla, int idPlan) {
-        
+
         modelo = new DefaultTableModel();
         tabla.setModel(modelo);
         Object[] fila = new Object[10];
@@ -150,12 +151,12 @@ public class classAsistenciaPesillo {
 //        Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
         for (Asistenciapesillo a : getAsistenciaPesillo()) {
             if (a.getIdplanificacionpesillo().getIdplanificacionpesillo() == idPlan) {
-                
+
                 fila[0] = a.getIdasistenciapesillo();
                 fila[1] = a.getIdmedidor().getIdmedidor();
                 fila[2] = a.getIdplanificacionpesillo().getIdplanificacionpesillo();
                 fila[3] = a.getAsistencia();
-                
+
                 fila[4] = a.getValormulta();
                 fila[5] = a.getDescripcion();
                 fila[6] = a.getObservacion();
@@ -197,11 +198,11 @@ public class classAsistenciaPesillo {
         table.getColumn(table.getColumnName(0)).setWidth(0);
         table.getColumn(table.getColumnName(0)).setMinWidth(0);
         table.getColumn(table.getColumnName(0)).setMaxWidth(0);
-        
+
     }
-    
+
     public TableModel tablaAsistenciaPesillo(JTable tabla, int numMedidor) {
-        
+
         DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
         dtm.setRowCount(0);
         diseño(tabla);
@@ -231,8 +232,9 @@ public class classAsistenciaPesillo {
         frmPagoPesillo.tabla2.setValueAt(subtotal, 0, 1);
         return dtm;
     }
+
     public int buscardiferentes(int idMedidor, int idPlan) {
-        
+
         for (Asistenciapesillo dat : getAsistenciaPesillo()) {
             if (dat.getIdmedidor().getIdmedidor().equals(idMedidor) && dat.getIdplanificacionpesillo().getIdplanificacionpesillo().equals(idPlan)) {
                 return dat.getIdmedidor().getIdmedidor();
@@ -240,4 +242,45 @@ public class classAsistenciaPesillo {
         }
         return 0;
     }
+
+    public void cargarTablaMedidor2(JTable tabla, int idPlan) {
+        classMedidor cm = new classMedidor();
+        List<Asistenciapesillo> datosDet = new ArrayList<Asistenciapesillo>();
+        for (Asistenciapesillo dat : getAsistenciaPesillo()) {
+            if (idPlan == (dat.getIdplanificacionpesillo().getIdplanificacionpesillo())) {
+                datosDet.add(dat);
+            }
+        }
+        int i = 0;
+        List<Medidor> datos = new ArrayList<Medidor>();
+        for (Medidor e : cm.ListaOrdenada()) {
+            for (Asistenciapesillo dat : datosDet) {
+                if (dat.getIdmedidor().getIdmedidor().equals(e.getIdmedidor())) {
+                    i = dat.getIdmedidor().getIdmedidor();
+                }
+            }
+            if (i != e.getIdmedidor()) {
+                datos.add(e);
+            }
+        }
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        tabla.setModel(modelo);
+        Object[] fila = new Object[4];
+        modelo.addColumn("Nro medidor");
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Apodo");
+
+        for (Medidor u : datos) {
+                fila[0] = u.getNummedidor();
+                fila[1] = u.getIdusuario().getRucci();
+                fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                        + u.getIdusuario().getPrimernombre();
+                fila[3] = u.getIdusuario().getApadosn();
+
+                modelo.addRow(fila);
+        }
+    }
+
 }

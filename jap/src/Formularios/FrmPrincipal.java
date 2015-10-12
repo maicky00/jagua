@@ -6,6 +6,7 @@
 package Formularios;
 
 import Controladores.ControlFormularios;
+import Controladores.classCorte;
 import Controladores.classMedidor;
 import static Formularios.FrmCorte.jTable1;
 import entidades.reloj;
@@ -34,6 +35,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
      * Creates new form FrmPrincipal
      */
     classMedidor cm = new classMedidor();
+    classCorte cc=new classCorte();
 
     public FrmPrincipal() {
         initComponents();
