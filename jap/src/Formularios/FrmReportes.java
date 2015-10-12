@@ -83,7 +83,6 @@ public class FrmReportes extends javax.swing.JInternalFrame {
         jDateChooser3 = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton22 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         Inicio2 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
@@ -95,7 +94,6 @@ public class FrmReportes extends javax.swing.JInternalFrame {
         jDateChooser4 = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton23 = new javax.swing.JButton();
         jPanel9 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jMonthChooser4 = new com.toedter.calendar.JMonthChooser();
@@ -117,7 +115,6 @@ public class FrmReportes extends javax.swing.JInternalFrame {
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jLabel12 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton21 = new javax.swing.JButton();
         jPanel11 = new javax.swing.JPanel();
         jButton6 = new javax.swing.JButton();
 
@@ -318,15 +315,6 @@ public class FrmReportes extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Medidor");
 
-        jButton22.setForeground(new java.awt.Color(0, 0, 204));
-        jButton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/printer.png"))); // NOI18N
-        jButton22.setToolTipText("Imprimir");
-        jButton22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton22ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -357,22 +345,18 @@ public class FrmReportes extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton22)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton15)))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Inicio1)
-                        .addComponent(jButton12)
-                        .addComponent(jButton13)
-                        .addComponent(jButton14)
-                        .addComponent(jButton15))
-                    .addComponent(jButton22))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Inicio1)
+                    .addComponent(jButton12)
+                    .addComponent(jButton13)
+                    .addComponent(jButton14)
+                    .addComponent(jButton15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
@@ -444,15 +428,6 @@ public class FrmReportes extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Factura");
 
-        jButton23.setForeground(new java.awt.Color(0, 0, 204));
-        jButton23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/printer.png"))); // NOI18N
-        jButton23.setToolTipText("Imprimir");
-        jButton23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton23ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -479,16 +454,12 @@ public class FrmReportes extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton23))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(jButton19))
+                            .addComponent(jDateChooser4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8)))
-                .addContainerGap())
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,8 +469,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
                     .addComponent(jButton16)
                     .addComponent(jButton17)
                     .addComponent(jButton18)
-                    .addComponent(jButton19)
-                    .addComponent(jButton23))
+                    .addComponent(jButton19))
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -674,15 +644,6 @@ public class FrmReportes extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Medidor");
 
-        jButton21.setForeground(new java.awt.Color(0, 0, 204));
-        jButton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/printer.png"))); // NOI18N
-        jButton21.setToolTipText("Imprimir");
-        jButton21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton21ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -707,18 +668,14 @@ public class FrmReportes extends javax.swing.JInternalFrame {
                                 .addComponent(jButton8)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jButton9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton21)))
-                .addContainerGap())
+                        .addComponent(jButton11)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -728,8 +685,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
                     .addComponent(jButton8)
                     .addComponent(jButton9)
                     .addComponent(jButton10)
-                    .addComponent(jButton11)
-                    .addComponent(jButton21))
+                    .addComponent(jButton11))
                 .addGap(4, 4, 4)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -1083,32 +1039,6 @@ public class FrmReportes extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButton20ActionPerformed
-
-    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        // TODO add your handling code here:
-        try {
-            rc.facturaImprimir("id", jLabel1.getText(), "numfact", jLabel2.getText(), "facturageneral.jasper");
-
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButton21ActionPerformed
-
-    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        // TODO add your handling code here:
-        try {
-               rc.imprimirfacturaPlanificacion("numfact", jLabel4.getText(), "pagoPlanificacion.jasper");
-
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButton22ActionPerformed
-
-    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        // TODO add your handling code here:
-        try {
-            rc.imprimirfacturaPlanificacion("numfact", jLabel6.getText()+"", "imprifacturaPesillo.jasper");
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButton23ActionPerformed
     private void setDatosMover(Historialfactura fact) {
 
         try {
@@ -1159,9 +1089,6 @@ public class FrmReportes extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton21;
-    private javax.swing.JButton jButton22;
-    private javax.swing.JButton jButton23;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
