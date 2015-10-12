@@ -152,7 +152,9 @@ public class classFactura {
         int nRow = dtm.getRowCount(), nCol = dtm.getColumnCount();
 
         for (int i = 0; i < nRow; i++) {
-            Detallefactura idFact = cdf.detallefacturaJpacontrolador.findDetallefactura(cdf.buscarIdDetallefactura(Integer.valueOf(dtm.getValueAt(i, 0).toString())).getIddetallefac());
+                 cdf.modificarTransaccion(cdf.buscarIdDetallefactura(Integer.valueOf(dtm.getValueAt(i, 0).toString())).getIddetallefac(), "SI");
+        }
+        Detallefactura idFact = cdf.detallefacturaJpacontrolador.findDetallefactura(cdf.buscarIdDetallefactura(Integer.valueOf(dtm.getValueAt(0, 0).toString())).getIddetallefac());
 
             Facturas dat = new Facturas();
             dat.setIddetallefac(idFact);
@@ -163,8 +165,7 @@ public class classFactura {
             dat.setTotal(total);
             dat.setUsuarioactual(usuarioActual);
             lst.add(dat);
-            cdf.modificarTransaccion(cdf.buscarIdDetallefactura(Integer.valueOf(dtm.getValueAt(i, 0).toString())).getIddetallefac(), "SI");
-        }
+       
         return lst;
     }
 }

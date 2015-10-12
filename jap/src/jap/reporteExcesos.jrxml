@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2e571e6e-1ed4-4e13-8c1e-c81c5715dab8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="mes" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     institucion.`IDINSTITUCION` AS institucion_IDINSTITUCION,
+     institucion.`NOMBREINST` AS institucion_NOMBREINST,
+     institucion.`DIRECCION` AS institucion_DIRECCION,
+     institucion.`TELEFONO` AS institucion_TELEFONO,
+     institucion.`EMAIL` AS institucion_EMAIL,
+     institucion.`RUC` AS institucion_RUC,
+     institucion.`CELULAR` AS institucion_CELULAR,
+     institucion.`LOGO` AS institucion_LOGO,
+     usuarios.`IDUSUARIO` AS usuarios_IDUSUARIO,
+     usuarios.`IDINSTITUCION` AS usuarios_IDINSTITUCION,
+     usuarios.`RUCCI` AS usuarios_RUCCI,
+     usuarios.`PRIMERNOMBRE` AS usuarios_PRIMERNOMBRE,
+     usuarios.`SEGUNDONOMBRE` AS usuarios_SEGUNDONOMBRE,
+     usuarios.`PRIMERAPELLIDO` AS usuarios_PRIMERAPELLIDO,
+     usuarios.`SEGUNDOAPELLIDO` AS usuarios_SEGUNDOAPELLIDO,
+     usuarios.`APADOSN` AS usuarios_APADOSN,
+     usuarios.`DIRECCION` AS usuarios_DIRECCION,
+     usuarios.`TELEFONO` AS usuarios_TELEFONO,
+     usuarios.`CELULAR` AS usuarios_CELULAR,
+     usuarios.`SECTOR` AS usuarios_SECTOR,
+     usuarios.`REFERENCIA` AS usuarios_REFERENCIA,
+     usuarios.`FOTO` AS usuarios_FOTO,
+     usuarios.`OBSERVACION` AS usuarios_OBSERVACION,
+     medidor.`IDMEDIDOR` AS medidor_IDMEDIDOR,
+     medidor.`IDUSUARIO` AS medidor_IDUSUARIO,
+     medidor.`SERIE` AS medidor_SERIE,
+     medidor.`NUMMEDIDOR` AS medidor_NUMMEDIDOR,
+     medidor.`ESTADO` AS medidor_ESTADO,
+     medidor.`VALORPORCONEXION` AS medidor_VALORPORCONEXION,
+     medidor.`PAGADO` AS medidor_PAGADO,
+     medidor.`SALDO` AS medidor_SALDO,
+     medidor.`FECHA` AS medidor_FECHA,
+     detallefactura.`IDDETALLEFAC` AS detallefactura_IDDETALLEFAC,
+     detallefactura.`IDTARIFAS` AS detallefactura_IDTARIFAS,
+     detallefactura.`IDMEDIDOR` AS detallefactura_IDMEDIDOR,
+     detallefactura.`ANIOMES` AS detallefactura_ANIOMES,
+     detallefactura.`MEDIDAANT` AS detallefactura_MEDIDAANT,
+     detallefactura.`MEDIDAACT` AS detallefactura_MEDIDAACT,
+     detallefactura.`CONSUMO` AS detallefactura_CONSUMO,
+     detallefactura.`MEDEXCEDIDO` AS detallefactura_MEDEXCEDIDO,
+     detallefactura.`TAREXCEDIDO` AS detallefactura_TAREXCEDIDO,
+     detallefactura.`SUBTOTAL` AS detallefactura_SUBTOTAL,
+     detallefactura.`TOTAL` AS detallefactura_TOTAL,
+     detallefactura.`OBSERVACION` AS detallefactura_OBSERVACION
+FROM
+     `institucion` institucion INNER JOIN `usuarios` usuarios ON institucion.`IDINSTITUCION` = usuarios.`IDINSTITUCION`
+     INNER JOIN `medidor` medidor ON usuarios.`IDUSUARIO` = medidor.`IDUSUARIO`
+     INNER JOIN `detallefactura` detallefactura ON medidor.`IDMEDIDOR` = detallefactura.`IDMEDIDOR`
+where detallefactura.`ANIOMES`=$P{mes}]]>
+	</queryString>
+	<field name="institucion_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="institucion_NOMBREINST" class="java.lang.String"/>
+	<field name="institucion_DIRECCION" class="java.lang.String"/>
+	<field name="institucion_TELEFONO" class="java.lang.String"/>
+	<field name="institucion_EMAIL" class="java.lang.String"/>
+	<field name="institucion_RUC" class="java.lang.String"/>
+	<field name="institucion_CELULAR" class="java.lang.String"/>
+	<field name="institucion_LOGO" class="java.lang.Object"/>
+	<field name="usuarios_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="usuarios_IDINSTITUCION" class="java.lang.Integer"/>
+	<field name="usuarios_RUCCI" class="java.lang.String"/>
+	<field name="usuarios_PRIMERNOMBRE" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDONOMBRE" class="java.lang.String"/>
+	<field name="usuarios_PRIMERAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_SEGUNDOAPELLIDO" class="java.lang.String"/>
+	<field name="usuarios_APADOSN" class="java.lang.String"/>
+	<field name="usuarios_DIRECCION" class="java.lang.String"/>
+	<field name="usuarios_TELEFONO" class="java.lang.String"/>
+	<field name="usuarios_CELULAR" class="java.lang.String"/>
+	<field name="usuarios_SECTOR" class="java.lang.String"/>
+	<field name="usuarios_REFERENCIA" class="java.lang.String"/>
+	<field name="usuarios_FOTO" class="java.lang.Object"/>
+	<field name="usuarios_OBSERVACION" class="java.lang.String"/>
+	<field name="medidor_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_IDUSUARIO" class="java.lang.Integer"/>
+	<field name="medidor_SERIE" class="java.lang.String"/>
+	<field name="medidor_NUMMEDIDOR" class="java.lang.Integer"/>
+	<field name="medidor_ESTADO" class="java.lang.String"/>
+	<field name="medidor_VALORPORCONEXION" class="java.lang.Float"/>
+	<field name="medidor_PAGADO" class="java.lang.String"/>
+	<field name="medidor_SALDO" class="java.lang.Float"/>
+	<field name="medidor_FECHA" class="java.sql.Date"/>
+	<field name="detallefactura_IDDETALLEFAC" class="java.lang.Integer"/>
+	<field name="detallefactura_IDTARIFAS" class="java.lang.Integer"/>
+	<field name="detallefactura_IDMEDIDOR" class="java.lang.Integer"/>
+	<field name="detallefactura_ANIOMES" class="java.lang.String"/>
+	<field name="detallefactura_MEDIDAANT" class="java.lang.Integer"/>
+	<field name="detallefactura_MEDIDAACT" class="java.lang.Integer"/>
+	<field name="detallefactura_CONSUMO" class="java.lang.Integer"/>
+	<field name="detallefactura_MEDEXCEDIDO" class="java.lang.Integer"/>
+	<field name="detallefactura_TAREXCEDIDO" class="java.lang.Float"/>
+	<field name="detallefactura_SUBTOTAL" class="java.lang.Float"/>
+	<field name="detallefactura_TOTAL" class="java.lang.Float"/>
+	<field name="detallefactura_OBSERVACION" class="java.lang.String"/>
+	<variable name="sumaTotalm3" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{detallefactura_CONSUMO}]]></variableExpression>
+	</variable>
+	<variable name="totalexceso" class="java.lang.Float" calculation="Sum">
+		<variableExpression><![CDATA[$F{detallefactura_TAREXCEDIDO}]]></variableExpression>
+	</variable>
+	<variable name="SUMAEXCEDIDOM3" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{detallefactura_MEDEXCEDIDO}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="108" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="402" y="65" width="24" height="15" uuid="f6d2cde9-6d06-4d1a-96ab-c150608491d1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[RUC:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="433" y="63" width="104" height="15" uuid="b903a7fc-0f89-49ea-b616-b695bfee4ad0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion_RUC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="120" y="10" width="417" height="55" forecolor="#0000CC" uuid="a33f5b39-c1ba-4db3-8a32-2f98509e20c2"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion_NOMBREINST}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="120" y="63" width="48" height="15" uuid="1bd22410-768d-4aa1-9dff-2aee06c3860e"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[DIRECCION:]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="10" y="14" width="86" height="90" uuid="7e291876-f107-4d3e-a2a8-454c8ee6bf54"/>
+				<imageExpression><![CDATA[new ByteArrayInputStream((byte[])$F{institucion_LOGO})]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement style="Detail" x="433" y="80" width="104" height="15" uuid="6542a809-9e40-4052-819c-4bf567cda635"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion_EMAIL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="251" y="80" width="72" height="15" uuid="f98bdf92-ae2b-4837-8230-86d67593a58d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion_CELULAR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="120" y="78" width="53" height="15" uuid="207b80a4-e3da-4320-8aa6-63b13a3c44e6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[CONTACTOS:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="173" y="78" width="67" height="15" uuid="0d5768a9-3340-4067-9937-925f5ac253f1"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion_TELEFONO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="402" y="82" width="24" height="15" uuid="8dbb5f7d-9d98-497e-be19-61fa85563a13"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[EMAIL:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Detail" x="173" y="63" width="211" height="15" uuid="61075674-5bb1-4fb3-82cf-a3a5842c159c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{institucion_DIRECCION}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<summary>
+		<band height="114" splitType="Stretch">
+			<textField>
+				<reportElement x="68" y="78" width="100" height="20" uuid="0d6c65c3-238c-43f8-9d0c-92ffdeb6ee6c"/>
+				<textFieldExpression><![CDATA[$V{sumaTotalm3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="203" y="78" width="100" height="20" uuid="a7d16247-ddf2-4d32-8070-6aa2ede409b0"/>
+				<textFieldExpression><![CDATA[$V{totalexceso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="Column header" x="68" y="45" width="74" height="15" uuid="d315b2df-fd46-4347-9d82-1cace6fa1815"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SUMA TOTAL M3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="203" y="45" width="120" height="15" uuid="7ef006e3-a5af-49e6-9cdc-d9ed4b4e3c73"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SUMA TOTAL EXCESO USD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="349" y="45" width="124" height="15" uuid="6c09b54c-8320-4b22-9d3b-3456b18f4f0a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[SUMA TOTAL EXEDIDO M3]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="350" y="85" width="100" height="20" uuid="231624a1-faf9-4ee3-a3d1-5d6c0ff4e879"/>
+				<textFieldExpression><![CDATA[$V{SUMAEXCEDIDOM3}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

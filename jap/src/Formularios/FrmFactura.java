@@ -684,7 +684,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Pago Realizado Corectamente", "Información", 1);
                     String idr = "" + cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdusuario().getIdusuario();
                     b.factura("id", idr, "numfact", String.valueOf(numFact), "verfacturageneral.jasper", "Consumos " + lblfecha.getText(), "Num.Med " + txtnumMedidor.getText() + " Fact." + numFact);
-                    b.facturaImprimir("id", idr, "numfact", String.valueOf(numFact), "facturageneral.jasper");
+//                    b.facturaImprimir("id", idr, "numfact", String.valueOf(numFact), "facturageneral.jasper");
 
                 } else {
                     JOptionPane.showMessageDialog(null, "No hay Datos", "Información", 1);
