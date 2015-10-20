@@ -101,24 +101,35 @@ public class classMedidor {
 
         try {
 
-            Usuarios usua = cu.usuariosJpacontrolador.findUsuarios(cu.buscarLoginId(idusuario).getIdusuario());
-            Medidor dat = medidorJpacontrolador.findMedidor(id);
-            if (dat == null) {
-                return false;
-            }
-            dat.setIdusuario(usua);
-            dat.setSerie(serie);
-            dat.setNummedidor(numMedidor);
-            dat.setEstado(estado);
-            dat.setValorporconexion(valorConexion);
-            dat.setPagado(pagado);
-            dat.setSaldo(saldo);
-            medidorJpacontrolador.edit(dat);
-            JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
+                Usuarios usua = cu.usuariosJpacontrolador.findUsuarios(cu.buscarLoginId(idusuario).getIdusuario());
+                Medidor dat = medidorJpacontrolador.findMedidor(id);
+                if (dat == null) {
+                    return false;
+                }
+                dat.setIdusuario(usua);
+                dat.setSerie(serie);
+                dat.setNummedidor(numMedidor);
+                dat.setEstado(estado);
+                dat.setValorporconexion(valorConexion);
+                dat.setPagado(pagado);
+                dat.setSaldo(saldo);
+                medidorJpacontrolador.edit(dat);
+                JOptionPane.showMessageDialog(null, "Se Modifico exitosamente", "Información", 1);
+
 
         } catch (Exception e) {
         }
         return true;
+    }
+
+    public int medOcupado(int numMed) {
+        int r = 0;
+        for (Medidor col : getMedidor()) {
+            if (col.getNummedidor() == numMed) {
+                r = r + 1;
+            }
+        }
+        return r;
     }
 
     public boolean modificarValorConexion(int numMed, float valorConexion) {

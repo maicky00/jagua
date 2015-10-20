@@ -630,7 +630,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                     txtCliente.setText(client);
                     cdf.tablaDetalles(jTable1, numMed);
                     txtdireccion.setText(direccioN);
-                    cdf.graficador(Integer.valueOf(txtnumMedidor.getText()));
+                    cdf.graficador(cm.buscarMedidorNumM(Integer.valueOf(numMed)).getIdmedidor());
 
                 }
             }

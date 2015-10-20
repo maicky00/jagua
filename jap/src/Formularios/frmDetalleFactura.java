@@ -729,25 +729,12 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnElimnarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimnarActionPerformed
-        // TODO add your handling code here:
-//        int idTar = ct.buscarTarifaDescrip(combotarifas.getSelectedItem().toString()).getIdtarifas();
-//        float alcant = ct.buscarTarifaDescrip(combotarifas.getSelectedItem().toString()).getAlcantarrillado();
-//        int idMed = cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdmedidor();
-//        String anioMes = lblanio.getText() + "-" + lblmes.getText();
-//        int medAnterior = Integer.valueOf(txtmedAnterior.getText());
-//        int medActual = Integer.valueOf(txtmedAct.getText());
-//        int consumo = Integer.valueOf(txtconsumoag.getText());
-//        int medExcedido = Integer.valueOf(txtMedExcedido.getText());
-//        float tarExcedido = Float.valueOf(txtTarexcedido.getText());
-//        float sutotal = Float.valueOf(txtSubTotal.getText()) + alcant;
-//        float total = Float.valueOf(txtTotal.getText());
-//
-//        cdt.guardarDetallefactura(idTar, idMed, anioMes, medAnterior, medActual, consumo, medExcedido, tarExcedido, sutotal, total, "NO");
-//
+  
         try {
             cdt.eliminarDetallefactura(Integer.valueOf(lblIdDetalle.getText()));
             String anMes = lblanio.getText() + "-" + lblmes.getText();
             cdt.cargarTablaMedidorDetalle(tabla, anMes, cdt.listaMed(anMes));
+             cdt.cargarBusquedaAnioMes(jTable1, anMes);
             limpiar();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Proceso No Realizado!.",

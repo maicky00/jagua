@@ -138,7 +138,7 @@ public class classFactura {
                     facturasJpacontrolador.create(dat);
                 }
 
-            } 
+            }
         } catch (Exception ex) {
         }
 
@@ -152,20 +152,22 @@ public class classFactura {
         int nRow = dtm.getRowCount(), nCol = dtm.getColumnCount();
 
         for (int i = 0; i < nRow; i++) {
-                 cdf.modificarTransaccion(cdf.buscarIdDetallefactura(Integer.valueOf(dtm.getValueAt(i, 0).toString())).getIddetallefac(), "SI");
-        }
-        Detallefactura idFact = cdf.detallefacturaJpacontrolador.findDetallefactura(cdf.buscarIdDetallefactura(Integer.valueOf(dtm.getValueAt(0, 0).toString())).getIddetallefac());
+            Detallefactura idFact = cdf.detallefacturaJpacontrolador.findDetallefactura(cdf.buscarIdDetallefactura(Integer.valueOf(dtm.getValueAt(i, 0).toString())).getIddetallefac());
 
             Facturas dat = new Facturas();
             dat.setIddetallefac(idFact);
             dat.setNumfactura(numFactura);
             dat.setFechaemision(fechaEmision);
-            dat.setSubtotal(subtotal);
-            dat.setIva(iva);
-            dat.setTotal(total);
+            dat.setSubtotal(Float.valueOf(dtm.getValueAt(i, 7).toString()));
+            float iv = Float.valueOf(dtm.getValueAt(i, 7).toString()) * idFact.getIdtarifas().getIva();
+            dat.setIva(Float.valueOf(iv));
+            dat.setTotal(Float.valueOf(dtm.getValueAt(i, 8).toString())+iv);
             dat.setUsuarioactual(usuarioActual);
             lst.add(dat);
-       
+
+            cdf.modificarTransaccion(cdf.buscarIdDetallefactura(Integer.valueOf(dtm.getValueAt(i, 0).toString())).getIddetallefac(), "SI");
+        }
+
         return lst;
     }
 }

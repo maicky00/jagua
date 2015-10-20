@@ -208,9 +208,9 @@ WHERE
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<detail>
-		<band height="123" splitType="Stretch">
+		<band height="115" splitType="Stretch">
 			<subreport>
-				<reportElement x="312" y="103" width="213" height="17" uuid="9dc503ac-8197-4eb5-960f-254f0b1d0b89"/>
+				<reportElement x="151" y="21" width="179" height="17" uuid="9dc503ac-8197-4eb5-960f-254f0b1d0b89"/>
 				<subreportParameter name="numfact">
 					<subreportParameterExpression><![CDATA[$P{numfact}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -219,7 +219,7 @@ WHERE
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "verfactura.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="312" y="68" width="213" height="34" uuid="f52cc67e-6f2c-4c54-83d0-8b0720b65dc2"/>
+				<reportElement x="312" y="75" width="213" height="34" uuid="f52cc67e-6f2c-4c54-83d0-8b0720b65dc2"/>
 				<subreportParameter name="numfact">
 					<subreportParameterExpression><![CDATA[$P{numfact}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -228,7 +228,7 @@ WHERE
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "vernuevoMed.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="311" y="34" width="214" height="34" uuid="088e75cc-86a0-4c4a-99cb-0e21e2e26f13"/>
+				<reportElement x="311" y="41" width="214" height="34" uuid="088e75cc-86a0-4c4a-99cb-0e21e2e26f13"/>
 				<subreportParameter name="numfact">
 					<subreportParameterExpression><![CDATA[$P{numfact}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -237,7 +237,7 @@ WHERE
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "verfacturaotrospagos.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="0" y="46" width="226" height="74" uuid="62bcacff-45a8-42cb-826d-0fb6b8642877"/>
+				<reportElement x="0" y="46" width="226" height="67" uuid="62bcacff-45a8-42cb-826d-0fb6b8642877"/>
 				<subreportParameter name="numfact">
 					<subreportParameterExpression><![CDATA[$P{numfact}]]></subreportParameterExpression>
 				</subreportParameter>

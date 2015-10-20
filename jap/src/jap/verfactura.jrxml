@@ -115,7 +115,7 @@ where facturas.`NUMFACTURA`=$P{numfact}]]>
 	<field name="tarifas_BASE" class="java.lang.Integer"/>
 	<field name="facturas_USUARIOACTUAL" class="java.lang.String"/>
 	<variable name="variable1" class="java.lang.String"/>
-	<variable name="total" class="java.lang.Float">
+	<variable name="total" class="java.lang.Float" calculation="Sum">
 		<variableExpression><![CDATA[$F{facturas_TOTAL}]]></variableExpression>
 	</variable>
 	<variable name="excedido" class="java.lang.Integer" calculation="Sum">

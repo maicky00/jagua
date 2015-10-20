@@ -96,6 +96,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         btnCancelar.setEnabled(false);
         btnGuardar.setEnabled(false);
         jTable1.setEnabled(true);
+        txtSaldo.setEditable(false);
     }
 
     public void limpiar() {
@@ -595,6 +596,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 //            txtvalorConexion.setEnabled(true);
 //        }
         mostrar();
+        txtSaldo.setEditable(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -714,6 +716,9 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             comboEstado.setSelectedItem(jTable1.getValueAt(n, 5).toString());
             lblIdUsuario.setText(cm.buscarMedidorId(id).getIdusuario().getIdusuario().toString());
             txtUsuarioCed.setEnabled(false);
+            
+            txtvalorConexion.setText(cm.buscarMedidorId(id).getValorporconexion().toString());
+            txtSaldo.setText(cm.buscarMedidorId(id).getSaldo().toString());
         } catch (Exception e) {
         }
 
@@ -733,6 +738,8 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             comboEstado.setSelectedItem(jTable1.getValueAt(n, 5).toString());
             lblIdUsuario.setText(cm.buscarMedidorId(id).getIdusuario().getIdusuario().toString());
             txtUsuarioCed.setEnabled(false);
+            txtvalorConexion.setText(cm.buscarMedidorId(id).getValorporconexion().toString());
+            txtSaldo.setText(cm.buscarMedidorId(id).getSaldo().toString());
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jTable1MouseClicked

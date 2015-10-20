@@ -450,7 +450,7 @@ public class frmPagoPesillo extends javax.swing.JInternalFrame {
                 cpp.Ingresarlist(tableData);
                 if (tableData.size() > 0) {
                     rc.facturaPlanificacion("numfact", numFact + "", "facturaPesillo.jasper", "Pesillo " + lblfecha.getText(), "Num.Med " + txtnumMedidor.getText() + " Fact." + numFact);
-                    rc.imprimirfacturaPlanificacion("numfact", numFact + "", "imprifacturaPesillo.jasper");
+//                    rc.imprimirfacturaPlanificacion("numfact", numFact + "", "imprifacturaPesillo.jasper");
 
                 }
                 limpiar();

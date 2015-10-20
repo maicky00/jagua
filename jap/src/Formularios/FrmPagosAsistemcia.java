@@ -475,7 +475,7 @@ public class FrmPagosAsistemcia extends javax.swing.JInternalFrame {
                 cpa.Ingresarlist(tableData);
                 if (tableData.size() > 0) {
                     b.facturaPlanificacion("numfact", "" + numFact, "verpagoPlanificacion.jasper", "Planifinicaciones " + lblfecha.getText(), "Num.Med " + txtnumMedidor.getText() + " Fact." + numFact);
-                   b.imprimirfacturaPlanificacion("numfact", "" + numFact, "pagoPlanificacion.jasper");
+//                   b.imprimirfacturaPlanificacion("numfact", "" + numFact, "pagoPlanificacion.jasper");
 
                 }
                 limpiar();
