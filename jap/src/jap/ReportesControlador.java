@@ -60,27 +60,38 @@ public class ReportesControlador {
     public static void main(String[] args) {
         ReportesControlador b = new ReportesControlador();
 
-//        b.reporte("us.jasper");
-//        b.facturaPlanificacion("numfact", "2", "pagoPlanificacion.jasper");
+        //b.reporte("usuarioMedidor.jasper","UsuariosConMedidor");
+        b.reporte("usuariosConMedidorActivos.jasper","UsuariosActivos");
+        //b.facturaPlanificacion("numfact", "2", "pagoPlanificacion.jasper");
     }
 
     public void reporte(String archivo, String nom) {
+        System.out.println(archivo);
+        System.out.println(nom);
         try {
 
             JasperReport reporte = null;
             try {
                 URL in = this.getClass().getResource(archivo);
+                System.out.println(in);
                 reporte = (JasperReport) JRLoader.loadObject(in);
+                System.out.println(reporte);
             } catch (JRException jr) {
                 System.out.println("Error al cargar ." + jr.getMessage());
             }
             Map parametro = new HashMap();
+            System.out.println("-----------------------------");
+            System.out.println(reporte);
+            System.out.println(parametro);
+            System.out.println(con.getCon());
             JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametro, con.getCon());
+            System.out.println("Aqui archivo");
+            
             JasperViewer jv = new JasperViewer(jasperPrint, false);
             jv.setTitle("REPORTE");
             jv.setVisible(true);
             JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Archivos\\" + nom + ".pdf");
-
+            
         } catch (Exception e) {
             System.out.println("Error al cargar reporte.");
         }

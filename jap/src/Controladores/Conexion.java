@@ -36,6 +36,10 @@ public class Conexion {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection(url, user, pass);
+            
+            if(con!=null){
+                System.out.println("Conexion exitosa");
+            }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException ex) {

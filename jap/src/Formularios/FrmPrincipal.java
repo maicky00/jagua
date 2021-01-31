@@ -121,6 +121,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem22 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
@@ -333,6 +334,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem15);
+
+        jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/status_online.png"))); // NOI18N
+        jMenuItem22.setText("Usuarios Activos");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem22);
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/chart_pie.png"))); // NOI18N
         jMenuItem1.setText("Reportes");
@@ -588,6 +598,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
+    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
+        // TODO add your handling code here:
+        b = new ReportesControlador();
+        b.reporte("usuariosConMedidorActivos.jasper", "UsuariosActivos");
+    }//GEN-LAST:event_jMenuItem22ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -650,6 +666,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
+    private javax.swing.JMenuItem jMenuItem22;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
