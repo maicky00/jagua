@@ -700,8 +700,10 @@
                       <Component id="btnEliminar" min="-2" pref="108" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnCancelar" min="-2" pref="108" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="mensaje" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnNuevo1" min="-2" pref="108" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="mensaje" min="-2" pref="466" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -722,6 +724,7 @@
                                   <Component id="btnEditar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                                   <Component id="btnEliminar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                                   <Component id="btnCancelar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="btnNuevo1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -840,6 +843,23 @@
                   <Color blue="0" green="0" red="cc" type="rgb"/>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="org.edisoncor.gui.button.ButtonNice" name="btnNuevo1">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="37" green="37" red="9d" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="REPORTES"/>
+                <Property name="segundoColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="73" green="69" red="bb" type="rgb"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevo1ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -13,6 +13,7 @@ import Controladores.classMoverRegistros;
 import Controladores.classusuario;
 import entidades.Usuarios;
 import entidadesCruds.exceptions.IllegalOrphanException;
+import jap.ReportesControlador;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -49,6 +50,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     }
     classMoverRegistros moverRegistros = new classMoverRegistros(cu.getUsuarios());
     ControlFormularios cf;
+    ReportesControlador b = new ReportesControlador();
 
     JFileChooser seleccionado = new JFileChooser();
     File archivo = null;
@@ -209,6 +211,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         btnEliminar = new org.edisoncor.gui.button.ButtonNice();
         btnCancelar = new org.edisoncor.gui.button.ButtonNice();
         mensaje = new javax.swing.JLabel();
+        btnNuevo1 = new org.edisoncor.gui.button.ButtonNice();
         jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -681,6 +684,16 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
         mensaje.setForeground(new java.awt.Color(204, 0, 0));
 
+        btnNuevo1.setBackground(new java.awt.Color(157, 55, 55));
+        btnNuevo1.setForeground(new java.awt.Color(255, 255, 255));
+        btnNuevo1.setText("REPORTES");
+        btnNuevo1.setSegundoColor(new java.awt.Color(187, 105, 115));
+        btnNuevo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevo1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -696,8 +709,10 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNuevo1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -714,7 +729,8 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                             .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNuevo1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -885,12 +901,12 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null,"Debe seleccionar un sector",
-                    "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un sector",
+                        "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
             }
 
         } else {
-            JOptionPane.showMessageDialog(null,"El campo nombre y apellido es obligatorio",
+            JOptionPane.showMessageDialog(null, "El campo nombre y apellido es obligatorio",
                     "Error de Ingreso", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -946,8 +962,8 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se pudo Eliminar!.",
-                "Error de Proceso",
-                JOptionPane.ERROR_MESSAGE);
+                    "Error de Proceso",
+                    JOptionPane.ERROR_MESSAGE);
 
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -1068,7 +1084,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         try {
             lblfoto.setIcon(null);
             int n = tablaUsuarios.getSelectedRow();
-            int idus=Integer.valueOf(tablaUsuarios.getValueAt(n, 0).toString());
+            int idus = Integer.valueOf(tablaUsuarios.getValueAt(n, 0).toString());
             id.setText(cu.buscarLoginId(idus).getIdusuario().toString());
             txtRuc.setText(tablaUsuarios.getValueAt(n, 1).toString());
             txtNombre.setText(cu.buscarLoginId(idus).getPrimernombre());
@@ -1160,6 +1176,20 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void btnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevo1ActionPerformed
+        Object[] options = {"LISTA DE USUARIOS ACTIVOS","LISTA DE USUARIOS INACTIVOS"};
+        Object n = JOptionPane.showInputDialog(null, "QUE REPORTES DESEA VER?:\n\n", 
+                "Seleccione una opcion", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        b = new ReportesControlador();
+        if(n.equals("LISTA DE USUARIOS ACTIVOS")){
+            System.out.println("Ha seleccionado usuarios activos");
+            b.reporte("usuariosConMedidorActivos.jasper", "UsuariosMedidorActivos");
+        }else if(n.equals("LISTA DE USUARIOS INACTIVOS")){
+            b.reporte("usuariosConMedidorNoActivos.jasper", "UsuariosMedidorNoActivos");
+            System.out.println("Ha seleccionado usuarios inactivos");
+        }
+    }//GEN-LAST:event_btnNuevo1ActionPerformed
     private void setDatosMover(Usuarios usuario) {
 //        classMedidor cm = new classMedidor();
 //        classusuario cu = new classusuario();
@@ -1202,6 +1232,7 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
     private org.edisoncor.gui.button.ButtonNice btnEliminar;
     private org.edisoncor.gui.button.ButtonNice btnGuardar;
     private org.edisoncor.gui.button.ButtonNice btnNuevo;
+    private org.edisoncor.gui.button.ButtonNice btnNuevo1;
     private javax.swing.ButtonGroup busquedaGrupo;
     private org.edisoncor.gui.button.ButtonNice buttonNice6;
     private org.edisoncor.gui.comboBox.ComboBoxRect comboSector;

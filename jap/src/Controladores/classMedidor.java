@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -206,7 +207,49 @@ public class classMedidor {
     }
 
     public void cargarTablaMedidor(JTable tabla) {
-        Usuarios us = new Usuarios();
+        tabla.setDefaultRenderer(Object.class, new Render());
+        DefaultTableModel modelo = new DefaultTableModel(){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };    
+        modelo.addColumn("#");
+        modelo.addColumn("Cedula");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Apodo");
+        modelo.addColumn("estado");
+        modelo.addColumn("N° Medidor");
+        
+        modelo.addColumn("Modificar");
+        modelo.addColumn("Eliminar");
+        
+        JButton btn_modificar = new JButton("Modificar");
+        btn_modificar.setName("m");
+        JButton btn_eliminar = new JButton("Eliminar");
+        btn_eliminar.setName("e");
+
+        Object[] fila = new Object[9];
+        for (Medidor u : ListaOrdenada()) {
+            fila[0] = u.getIdmedidor();
+            fila[1] = u.getIdusuario().getRucci();
+            fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
+                    + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre();
+            fila[3] = u.getIdusuario().getApadosn();
+            fila[4] = u.getEstado();
+            fila[5] = u.getNummedidor();
+            
+            fila[6] = btn_modificar;
+            fila[7] = btn_eliminar;
+
+            //fila[6] = u.getIdusuario().getIdusuario();
+            //FrmMedidor.label.setText(u.getIdusuario().getIdusuario().toString());
+            modelo.addRow(fila);
+            tabla.setRowHeight(20);
+
+        }
+        tabla.setModel(modelo);
+        /*
+        
         DefaultTableModel modelo = new DefaultTableModel();
         tabla.setModel(modelo);
 //        TableRowSorter sorter = new TableRowSorter(modelo);
@@ -248,7 +291,7 @@ public class classMedidor {
 
         FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(45);
         FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(70);
-
+        */
     }
 
     public void cargarTablaApellidosNombres(String txt, JTable tabla) {

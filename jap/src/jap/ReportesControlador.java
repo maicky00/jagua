@@ -61,7 +61,7 @@ public class ReportesControlador {
         ReportesControlador b = new ReportesControlador();
 
         //b.reporte("usuarioMedidor.jasper","UsuariosConMedidor");
-        b.reporte("usuariosConMedidorActivos.jasper","UsuariosActivos");
+        //b.reporte("usuariosConMedidorActivos.jasper","UsuariosActivos");
         //b.facturaPlanificacion("numfact", "2", "pagoPlanificacion.jasper");
     }
 
