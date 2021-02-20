@@ -10,13 +10,16 @@ import Controladores.classDisenio;
 import Controladores.classMedidor;
 import Controladores.classusuario;
 import static Formularios.FrmPagosAsistemcia.lblfecha;
+import entidades.Medidor;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -39,6 +42,8 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     }
 
     ControlFormularios cf;
+    
+    int clic_tabla = 0;
 
     private void inicio() {
         limpiar();
@@ -46,7 +51,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         Dimension desktopSize = FrmPrincipal.jDesktopPane1.getSize();
         Dimension jInternalFrameSize = this.getSize();
         this.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, 4);
-        //cu.cargarTablaUsuario2(jTable1);.
+        
 
         cm.cargarTablaMedidor(jTable1);
         ocultar();
@@ -279,7 +284,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+                    .addComponent(mensaje, javax.swing.GroupLayout.DEFAULT_SIZE, 819, Short.MAX_VALUE)
                     .addContainerGap())
             );
             jPanel4Layout.setVerticalGroup(
@@ -461,11 +466,12 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel11)
                         .addComponent(txtPagado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap(143, Short.MAX_VALUE))
             );
 
             jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de usuarios existentes"));
 
+            jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
             jTable1.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                     {null, null, null, null},
@@ -477,6 +483,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     "Title 1", "Title 2", "Title 3", "Title 4"
                 }
             ));
+            jTable1.setRowHeight(25);
             jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
                     jTable1MouseClicked(evt);
@@ -525,15 +532,14 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     .addComponent(rdbApellidosN)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addGap(0, 175, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel7)
-                            .addGap(46, 46, 46)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1))
-                    .addGap(39, 39, 39))
+                    .addContainerGap())
             );
             jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -546,8 +552,8 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7))
                     .addGap(18, 18, 18)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addContainerGap())
             );
 
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -706,19 +712,20 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         try {
             int n = jTable1.getSelectedRow();
             int id = Integer.valueOf(jTable1.getValueAt(n, 0).toString());
+            Medidor med= cm.buscarMedidorIdUsuario(id);
+            
             lblIdmedidor.setText(jTable1.getValueAt(n, 0).toString());
             txtUsuarioCed.setText(jTable1.getValueAt(n, 1).toString());
             txtNombre.setText(jTable1.getValueAt(n, 2).toString());
-
-            txtMedidor.setText(cm.buscarMedidorId(id).getNummedidor().toString());
+            txtMedidor.setText(med.getNummedidor().toString());
 
             txtSerie.setText(jTable1.getValueAt(n, 4).toString());
             comboEstado.setSelectedItem(jTable1.getValueAt(n, 5).toString());
-            lblIdUsuario.setText(cm.buscarMedidorId(id).getIdusuario().getIdusuario().toString());
+            lblIdUsuario.setText(med.getIdusuario().getIdusuario().toString());
             txtUsuarioCed.setEnabled(false);
+            txtvalorConexion.setText(med.getValorporconexion().toString());
+            txtSaldo.setText(med.getSaldo().toString());
             
-            txtvalorConexion.setText(cm.buscarMedidorId(id).getValorporconexion().toString());
-            txtSaldo.setText(cm.buscarMedidorId(id).getSaldo().toString());
         } catch (Exception e) {
         }
 
@@ -726,20 +733,54 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         try {
+            /*
+            clic_tabla = this.jTable1.rowAtPoint(evt.getPoint());
+            int codigo = (int)jTable1.getValueAt(clic_tabla, 0);
+            System.out.println("codigo"+ codigo);
+            */
+            //EVENTOS DEL BOTON
+            int column = jTable1.getColumnModel().getColumnIndexAtX(evt.getX());
+            int row = evt.getY()/jTable1.getRowHeight();
+            
+            if(row < jTable1.getRowCount() && row >= 0 && column < jTable1.getColumnCount() && column >= 0){
+                Object value = jTable1.getValueAt(row, column);
+                if(value instanceof JButton){
+                    ((JButton)value).doClick();
+                    JButton boton = (JButton) value;
+                    
+                    if(boton.getName().equals("btnVer")){
+                        System.out.println("Click en el boton ver");
+                        //EVENTOS VER
+                    }
+                    if(boton.getName().equals("btnEditar")){
+                        System.out.println("Click en el boton Editar");
+                        //EVENTOS EDITAR
+                    }
+                    if(boton.getName().equals("btnEliminar")){
+                        JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
+                        System.out.println("Click en el boton eliminar");
+                        //EVENTOS ELIMINAR
+                    }
+                }
+            }
+            
+            
             int n = jTable1.getSelectedRow();
             int id = Integer.valueOf(jTable1.getValueAt(n, 0).toString());
+            Medidor med= cm.buscarMedidorIdUsuario(id);
+            
             lblIdmedidor.setText(jTable1.getValueAt(n, 0).toString());
             txtUsuarioCed.setText(jTable1.getValueAt(n, 1).toString());
             txtNombre.setText(jTable1.getValueAt(n, 2).toString());
-
-            txtMedidor.setText(cm.buscarMedidorId(id).getNummedidor().toString());
+            txtMedidor.setText(med.getNummedidor().toString());
 
             txtSerie.setText(jTable1.getValueAt(n, 4).toString());
             comboEstado.setSelectedItem(jTable1.getValueAt(n, 5).toString());
-            lblIdUsuario.setText(cm.buscarMedidorId(id).getIdusuario().getIdusuario().toString());
+            lblIdUsuario.setText(med.getIdusuario().getIdusuario().toString());
             txtUsuarioCed.setEnabled(false);
-            txtvalorConexion.setText(cm.buscarMedidorId(id).getValorporconexion().toString());
-            txtSaldo.setText(cm.buscarMedidorId(id).getSaldo().toString());
+            txtvalorConexion.setText(med.getValorporconexion().toString());
+            txtSaldo.setText(med.getSaldo().toString());
+            
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jTable1MouseClicked

@@ -143,17 +143,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 419, Short.MAX_VALUE)
+            .addGap(0, 415, Short.MAX_VALUE)
         );
+
+        jMenuBar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/clipboard.png"))); // NOI18N
         jMenu3.setText("Archivo");
+        jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jMenu3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jMenuItem13.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/arrow_left.png"))); // NOI18N
-        jMenuItem13.setText("Atras");
+        jMenuItem13.setText("Cerrar Sesión");
         jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem13ActionPerformed(evt);
@@ -165,10 +169,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/application_home.png"))); // NOI18N
         jMenu1.setText("Catalogos");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jMenu1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jMenuItem2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/group.png"))); // NOI18N
         jMenuItem2.setText("Usuarios");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -178,6 +184,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
+        jMenuItem3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/ipod.png"))); // NOI18N
         jMenuItem3.setText("Medidor");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -187,6 +194,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem3);
 
+        jMenuItem4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/keyboard_magnify.png"))); // NOI18N
         jMenuItem4.setText("Corte");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -196,6 +204,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
+        jMenuItem6.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/monitor.png"))); // NOI18N
         jMenuItem6.setText("Pago de Planificaciones");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -205,6 +214,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem6);
 
+        jMenuItem8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/money_dollar.png"))); // NOI18N
         jMenuItem8.setText("Factura");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +224,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem8);
 
+        jMenuItem17.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/folder_user.png"))); // NOI18N
         jMenuItem17.setText("Planificacion");
         jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
@@ -223,6 +234,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem17);
 
+        jMenuItem18.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/status_online.png"))); // NOI18N
         jMenuItem18.setText("Asistencia");
         jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
@@ -236,10 +248,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Nature_Icon_32.png"))); // NOI18N
         jMenu9.setText("Pesillo");
+        jMenu9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMenu9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu9.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jMenuItem5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/application_view_tile.png"))); // NOI18N
         jMenuItem5.setText("Planificacion pesillo");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -249,6 +263,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu9.add(jMenuItem5);
 
+        jMenuItem16.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/folder_user.png"))); // NOI18N
         jMenuItem16.setText("Asistencia Pesillo");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
@@ -258,6 +273,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu9.add(jMenuItem16);
 
+        jMenuItem20.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/coins.png"))); // NOI18N
         jMenuItem20.setText("Factura");
         jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
@@ -271,9 +287,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/settings.png"))); // NOI18N
         jMenu4.setText("Mantenimiento");
+        jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jMenuItem7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/monitor_add.png"))); // NOI18N
         jMenuItem7.setText("Tarifas");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
@@ -283,6 +301,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem7);
 
+        jMenuItem9.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/key.png"))); // NOI18N
         jMenuItem9.setText("Usuarios Login");
         jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
@@ -292,6 +311,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem9);
 
+        jMenuItem10.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/text_allcaps.png"))); // NOI18N
         jMenuItem10.setText("Datos Junta");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
@@ -301,6 +321,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem10);
 
+        jMenuItem14.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/application_cascade.png"))); // NOI18N
         jMenuItem14.setText("Registro de Consumos");
         jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
@@ -310,6 +331,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem14);
 
+        jMenuItem21.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/coins.png"))); // NOI18N
         jMenuItem21.setText("Multa");
         jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
@@ -323,9 +345,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/chart_bar.png"))); // NOI18N
         jMenu2.setText("Reportes");
+        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jMenuItem15.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/status_online.png"))); // NOI18N
         jMenuItem15.setText("Usuarios");
         jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
@@ -335,6 +359,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem15);
 
+        jMenuItem22.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/status_online.png"))); // NOI18N
         jMenuItem22.setText("Usuarios Activos");
         jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
@@ -344,6 +369,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem22);
 
+        jMenuItem1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/chart_pie.png"))); // NOI18N
         jMenuItem1.setText("Reportes");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -357,9 +383,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/book.png"))); // NOI18N
         jMenu5.setText("Manual");
+        jMenu5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jMenuItem11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/application_view_detail.png"))); // NOI18N
         jMenuItem11.setText("Abrir Manual");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
@@ -373,9 +401,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/help.png"))); // NOI18N
         jMenu6.setText("Ayuda");
+        jMenu6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jMenuItem12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem12.setText("Sporte Tecnico");
         jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -388,9 +418,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/text_align_justity.png"))); // NOI18N
         jMenu7.setText("Inventario");
+        jMenu7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jMenu7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jMenuItem19.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jMenuItem19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/application_view_detail.png"))); // NOI18N
         jMenuItem19.setText("Inventario de Articulos");
         jMenuItem19.addActionListener(new java.awt.event.ActionListener() {

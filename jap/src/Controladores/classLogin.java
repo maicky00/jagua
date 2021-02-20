@@ -133,6 +133,7 @@ public class classLogin {
 
         for (Login lg : loginJpacontrolador.findLoginEntities()) {
             if (lg.getUsuario().equals(nombreUsuario) && lg.getClave().equals(pasword)) {
+                //System.out.println("Login");
                 return lg;
             }
         }
@@ -145,16 +146,18 @@ public class classLogin {
             JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta!.",
                     "Error de Auntetificación", JOptionPane.ERROR_MESSAGE);
             return null;
-        } else if (BuscarUsu.getClave().equals(password) && BuscarUsu.getUsuario().equals(usuario)
-                && BuscarUsu.getEstado().equals("ACTIVO")) {
-            return BuscarUsu;
-        } else if (BuscarUsu.getClave().equals(password) && BuscarUsu.getUsuario().equals(usuario)
-                && BuscarUsu.getEstado().equals("INACTIVO")) {
-            JOptionPane.showMessageDialog(null, "Usuario Inactivo",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-            return null;
         }
-        return null;
+        else{
+            //System.out.println(BuscarUsu.getNombres());
+            if(BuscarUsu.getEstado().equals("ACTIVO")){
+                return BuscarUsu;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Usuario Inactivo",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+        }
     }
 
     public void cargarTablaLogin(JTable tabla) {
@@ -245,34 +248,6 @@ public class classLogin {
         return true;
     }
 
-//    public void BuscarCed(String txt, JTable tabla) {
-//        modelo = new DefaultTableModel();
-//        tabla.setModel(modelo);
-//        Object[] fila = new Object[8];
-//        modelo.addColumn("Nro");
-//        modelo.addColumn("Nombres");
-//        modelo.addColumn("Apellidos");
-//        modelo.addColumn("Cedula");
-//        modelo.addColumn("usuario");
-//        modelo.addColumn("Clave");
-//        modelo.addColumn("Tipo De Usuario");
-//        modelo.addColumn("Estado de Cuenta");
-//        diseñoTabla(tabla);
-//
-//        for (Login u : getLogin()) {
-//            if (u.buscarApellidos(u.elimiEspacio(txt))) {
-//                fila[0] = u.getIdlogin();
-//                fila[1] = u.getNombres();
-//                fila[2] = u.getApellidos();
-//                fila[3] = u.getCedula();
-//                fila[4] = u.getUsuario();
-//                fila[5] = u.getClave();
-//                fila[6] = u.getTipo();
-//                fila[7] = u.getEstado();
-//                modelo.addRow(fila);
-//            }
-//        }
-//    }
     public TableModel BuscarCed(String txt, JTable tabla) {
         DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
         dtm.setRowCount(0);
@@ -321,24 +296,4 @@ public class classLogin {
             }
         }
     }
-//    public TableModel BuscarApe(String txt, JTable tabla) {
-//        DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
-//        dtm.setRowCount(0);
-//        diseñoTabla(tabla);
-//        for (Login u : getLogin()) {
-//            if (u.buscarApellidos(u.elimiEspacio(txt))) {
-//                dtm.addRow(new Object[]{
-//                    u.getIdlogin(),
-//                    u.getNombres(),
-//                    u.getApellidos(),
-//                    u.getCedula(),
-//                    u.getUsuario(),
-//                    u.getClave(),
-//                    u.getTipo(),
-//                    u.getEstado()
-//                });
-//            }
-//        }
-//        return dtm;
-//    }
 }

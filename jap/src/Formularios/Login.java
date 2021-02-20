@@ -255,19 +255,15 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonAqua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAqua1ActionPerformed
-        // TODO add your handling code here:
-        FrmPrincipal fp = new FrmPrincipal();
         String usuario = txtusuario.getText();
         String password = new String(txtclave.getPassword());
+
         entidades.Login validarUsuario = cl.validarUsuario(usuario, password);
-        if (validarUsuario == null) {
-//            JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta!.",
-//                    "Error de Auntetificación", JOptionPane.ERROR_MESSAGE);
-        } else {
+        if (validarUsuario != null) {
+            FrmPrincipal fp = new FrmPrincipal();
             fp.show();
-            String usact = cl.validarUsuario(usuario, password).getApellidos() + "  "
-                    + cl.validarUsuario(usuario, password).getNombres();
-            FrmPrincipal.menuUsuarioActual.setText(usact);
+
+            FrmPrincipal.menuUsuarioActual.setText(validarUsuario.getNombres()+" " + validarUsuario.getApellidos());
             this.dispose();
         }
     }//GEN-LAST:event_buttonAqua1ActionPerformed
@@ -309,21 +305,18 @@ public class Login extends javax.swing.JFrame {
 
     private void txtclaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtclaveKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            FrmPrincipal fp = new FrmPrincipal();
+            
             String usuario = txtusuario.getText();
             String password = new String(txtclave.getPassword());
+            
             entidades.Login validarUsuario = cl.validarUsuario(usuario, password);
-            if (validarUsuario == null) {
-
-            } else {
+            if (validarUsuario != null) {
+                FrmPrincipal fp = new FrmPrincipal();
                 fp.show();
-                String usact = cl.validarUsuario(usuario, password).getApellidos() + "  "
-                        + cl.validarUsuario(usuario, password).getNombres();
-                FrmPrincipal.menuUsuarioActual.setText(usact);
+
+                FrmPrincipal.menuUsuarioActual.setText(validarUsuario.getNombres()+" " + validarUsuario.getApellidos());
                 this.dispose();
-
             }
-
         }
     }//GEN-LAST:event_txtclaveKeyPressed
 

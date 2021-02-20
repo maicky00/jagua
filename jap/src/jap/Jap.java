@@ -19,8 +19,9 @@ public class Jap {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       Login fl = new Login();
-        fl.show();
+        Login fl = new Login();
+        FrmPrincipal principal=new FrmPrincipal();
+        principal.show();
 
     }
 

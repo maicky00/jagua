@@ -17,6 +17,8 @@ import entidades.Usuarios;
 import entidadesCruds.MedidorJpaController;
 import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -196,6 +198,17 @@ public class classMedidor {
 //        }
 //        return n;
 //    }
+    //buscar medidor por idUsuario
+    public Medidor buscarMedidorIdUsuario(int idUsuario) {
+        for (Medidor dat : getMedidor()) {
+            
+            if (dat.getIdusuario().getIdusuario().equals(idUsuario)) {
+                return dat;
+            }
+        }
+        return null;
+    }
+    //buscar medidor por idMedidor
     public Medidor buscarMedidorId(int idMedidor) {
 
         for (Medidor dat : getMedidor()) {
@@ -213,24 +226,29 @@ public class classMedidor {
                 return false;
             }
         };    
-        modelo.addColumn("#");
+        modelo.addColumn("# Usuario");
         modelo.addColumn("Cedula");
         modelo.addColumn("Usuario");
         modelo.addColumn("Apodo");
         modelo.addColumn("estado");
         modelo.addColumn("N° Medidor");
         
-        modelo.addColumn("Modificar");
+        modelo.addColumn("Ver");
+        modelo.addColumn("Editar");
         modelo.addColumn("Eliminar");
         
-        JButton btn_modificar = new JButton("Modificar");
-        btn_modificar.setName("m");
+        JButton btn_ver = new JButton("Ver");
+        btn_ver.setName("btnVer");
+        
+        JButton btn_editar = new JButton("Editar");
+        btn_editar.setName("btnEditar");
+        
         JButton btn_eliminar = new JButton("Eliminar");
-        btn_eliminar.setName("e");
+        btn_eliminar.setName("btnEliminar");
 
         Object[] fila = new Object[9];
         for (Medidor u : ListaOrdenada()) {
-            fila[0] = u.getIdmedidor();
+            fila[0] = u.getIdusuario().getIdusuario();
             fila[1] = u.getIdusuario().getRucci();
             fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
                     + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre();
@@ -238,60 +256,38 @@ public class classMedidor {
             fila[4] = u.getEstado();
             fila[5] = u.getNummedidor();
             
-            fila[6] = btn_modificar;
-            fila[7] = btn_eliminar;
+            fila[6] = btn_ver;
+            fila[7] = btn_editar;
+            fila[8] = btn_eliminar;
 
             //fila[6] = u.getIdusuario().getIdusuario();
             //FrmMedidor.label.setText(u.getIdusuario().getIdusuario().toString());
             modelo.addRow(fila);
-            tabla.setRowHeight(20);
+            //tabla.setRowHeight(20);
 
         }
         tabla.setModel(modelo);
-        /*
-        
-        DefaultTableModel modelo = new DefaultTableModel();
-        tabla.setModel(modelo);
-//        TableRowSorter sorter = new TableRowSorter(modelo);
-//        tabla.setRowSorter(sorter);
-        Object[] fila = new Object[7];
-        //modelo.addColumn("Nro");
-        modelo.addColumn("#");
-        modelo.addColumn("Cedula");
-        modelo.addColumn("Usuario");
-        modelo.addColumn("Apodo");
-        modelo.addColumn("Serie");
-        modelo.addColumn("estado");
-        modelo.addColumn("N° Medidor");
-        for (Medidor u : ListaOrdenada()) {
-            fila[0] = u.getIdmedidor();
-            fila[1] = u.getIdusuario().getRucci();
-            fila[2] = u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-                    + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre();
-            fila[3] = u.getIdusuario().getApadosn();
-            fila[4] = u.getSerie();
-            fila[5] = u.getEstado();
-            fila[6] = u.getNummedidor();
 
-            //fila[6] = u.getIdusuario().getIdusuario();
-            //FrmMedidor.label.setText(u.getIdusuario().getIdusuario().toString());
-            modelo.addRow(fila);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(20);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(60);
 
-        }
-        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(80);
 
-        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMinWidth(60);
-        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(65);
-        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMinWidth(70);
-        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(85);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(70);
 
-        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(40);
-        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(45);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMinWidth(15);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(70);
 
-        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(45);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMinWidth(70);
         FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(70);
-        */
+
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(7).setMinWidth(70);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(70);
+        
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(8).setMinWidth(70);
+        FrmMedidor.jTable1.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(70);
+        
     }
 
     public void cargarTablaApellidosNombres(String txt, JTable tabla) {
