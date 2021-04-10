@@ -13,14 +13,18 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Tarifas;
 import entidades.Medidor;
+import entidades.Facturas;
+import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 public class DetallefacturaJpaController implements Serializable {
 
@@ -34,6 +38,9 @@ public class DetallefacturaJpaController implements Serializable {
     }
 
     public void create(Detallefactura detallefactura) {
+        if (detallefactura.getFacturasCollection() == null) {
+            detallefactura.setFacturasCollection(new ArrayList<Facturas>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -48,14 +55,29 @@ public class DetallefacturaJpaController implements Serializable {
                 idmedidor = em.getReference(idmedidor.getClass(), idmedidor.getIdmedidor());
                 detallefactura.setIdmedidor(idmedidor);
             }
+            Collection<Facturas> attachedFacturasCollection = new ArrayList<Facturas>();
+            for (Facturas facturasCollectionFacturasToAttach : detallefactura.getFacturasCollection()) {
+                facturasCollectionFacturasToAttach = em.getReference(facturasCollectionFacturasToAttach.getClass(), facturasCollectionFacturasToAttach.getIdfactura());
+                attachedFacturasCollection.add(facturasCollectionFacturasToAttach);
+            }
+            detallefactura.setFacturasCollection(attachedFacturasCollection);
             em.persist(detallefactura);
             if (idtarifas != null) {
-                idtarifas.getDetallefacturaList().add(detallefactura);
+                idtarifas.getDetallefacturaCollection().add(detallefactura);
                 idtarifas = em.merge(idtarifas);
             }
             if (idmedidor != null) {
-                idmedidor.getDetallefacturaList().add(detallefactura);
+                idmedidor.getDetallefacturaCollection().add(detallefactura);
                 idmedidor = em.merge(idmedidor);
+            }
+            for (Facturas facturasCollectionFacturas : detallefactura.getFacturasCollection()) {
+                Detallefactura oldIddetallefacOfFacturasCollectionFacturas = facturasCollectionFacturas.getIddetallefac();
+                facturasCollectionFacturas.setIddetallefac(detallefactura);
+                facturasCollectionFacturas = em.merge(facturasCollectionFacturas);
+                if (oldIddetallefacOfFacturasCollectionFacturas != null) {
+                    oldIddetallefacOfFacturasCollectionFacturas.getFacturasCollection().remove(facturasCollectionFacturas);
+                    oldIddetallefacOfFacturasCollectionFacturas = em.merge(oldIddetallefacOfFacturasCollectionFacturas);
+                }
             }
             em.getTransaction().commit();
         } finally {
@@ -65,7 +87,7 @@ public class DetallefacturaJpaController implements Serializable {
         }
     }
 
-    public void edit(Detallefactura detallefactura) throws NonexistentEntityException, Exception {
+    public void edit(Detallefactura detallefactura) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -75,6 +97,20 @@ public class DetallefacturaJpaController implements Serializable {
             Tarifas idtarifasNew = detallefactura.getIdtarifas();
             Medidor idmedidorOld = persistentDetallefactura.getIdmedidor();
             Medidor idmedidorNew = detallefactura.getIdmedidor();
+            Collection<Facturas> facturasCollectionOld = persistentDetallefactura.getFacturasCollection();
+            Collection<Facturas> facturasCollectionNew = detallefactura.getFacturasCollection();
+            List<String> illegalOrphanMessages = null;
+            for (Facturas facturasCollectionOldFacturas : facturasCollectionOld) {
+                if (!facturasCollectionNew.contains(facturasCollectionOldFacturas)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Facturas " + facturasCollectionOldFacturas + " since its iddetallefac field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             if (idtarifasNew != null) {
                 idtarifasNew = em.getReference(idtarifasNew.getClass(), idtarifasNew.getIdtarifas());
                 detallefactura.setIdtarifas(idtarifasNew);
@@ -83,22 +119,40 @@ public class DetallefacturaJpaController implements Serializable {
                 idmedidorNew = em.getReference(idmedidorNew.getClass(), idmedidorNew.getIdmedidor());
                 detallefactura.setIdmedidor(idmedidorNew);
             }
+            Collection<Facturas> attachedFacturasCollectionNew = new ArrayList<Facturas>();
+            for (Facturas facturasCollectionNewFacturasToAttach : facturasCollectionNew) {
+                facturasCollectionNewFacturasToAttach = em.getReference(facturasCollectionNewFacturasToAttach.getClass(), facturasCollectionNewFacturasToAttach.getIdfactura());
+                attachedFacturasCollectionNew.add(facturasCollectionNewFacturasToAttach);
+            }
+            facturasCollectionNew = attachedFacturasCollectionNew;
+            detallefactura.setFacturasCollection(facturasCollectionNew);
             detallefactura = em.merge(detallefactura);
             if (idtarifasOld != null && !idtarifasOld.equals(idtarifasNew)) {
-                idtarifasOld.getDetallefacturaList().remove(detallefactura);
+                idtarifasOld.getDetallefacturaCollection().remove(detallefactura);
                 idtarifasOld = em.merge(idtarifasOld);
             }
             if (idtarifasNew != null && !idtarifasNew.equals(idtarifasOld)) {
-                idtarifasNew.getDetallefacturaList().add(detallefactura);
+                idtarifasNew.getDetallefacturaCollection().add(detallefactura);
                 idtarifasNew = em.merge(idtarifasNew);
             }
             if (idmedidorOld != null && !idmedidorOld.equals(idmedidorNew)) {
-                idmedidorOld.getDetallefacturaList().remove(detallefactura);
+                idmedidorOld.getDetallefacturaCollection().remove(detallefactura);
                 idmedidorOld = em.merge(idmedidorOld);
             }
             if (idmedidorNew != null && !idmedidorNew.equals(idmedidorOld)) {
-                idmedidorNew.getDetallefacturaList().add(detallefactura);
+                idmedidorNew.getDetallefacturaCollection().add(detallefactura);
                 idmedidorNew = em.merge(idmedidorNew);
+            }
+            for (Facturas facturasCollectionNewFacturas : facturasCollectionNew) {
+                if (!facturasCollectionOld.contains(facturasCollectionNewFacturas)) {
+                    Detallefactura oldIddetallefacOfFacturasCollectionNewFacturas = facturasCollectionNewFacturas.getIddetallefac();
+                    facturasCollectionNewFacturas.setIddetallefac(detallefactura);
+                    facturasCollectionNewFacturas = em.merge(facturasCollectionNewFacturas);
+                    if (oldIddetallefacOfFacturasCollectionNewFacturas != null && !oldIddetallefacOfFacturasCollectionNewFacturas.equals(detallefactura)) {
+                        oldIddetallefacOfFacturasCollectionNewFacturas.getFacturasCollection().remove(facturasCollectionNewFacturas);
+                        oldIddetallefacOfFacturasCollectionNewFacturas = em.merge(oldIddetallefacOfFacturasCollectionNewFacturas);
+                    }
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -117,7 +171,7 @@ public class DetallefacturaJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -129,14 +183,25 @@ public class DetallefacturaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The detallefactura with id " + id + " no longer exists.", enfe);
             }
+            List<String> illegalOrphanMessages = null;
+            Collection<Facturas> facturasCollectionOrphanCheck = detallefactura.getFacturasCollection();
+            for (Facturas facturasCollectionOrphanCheckFacturas : facturasCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Detallefactura (" + detallefactura + ") cannot be destroyed since the Facturas " + facturasCollectionOrphanCheckFacturas + " in its facturasCollection field has a non-nullable iddetallefac field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             Tarifas idtarifas = detallefactura.getIdtarifas();
             if (idtarifas != null) {
-                idtarifas.getDetallefacturaList().remove(detallefactura);
+                idtarifas.getDetallefacturaCollection().remove(detallefactura);
                 idtarifas = em.merge(idtarifas);
             }
             Medidor idmedidor = detallefactura.getIdmedidor();
             if (idmedidor != null) {
-                idmedidor.getDetallefacturaList().remove(detallefactura);
+                idmedidor.getDetallefacturaCollection().remove(detallefactura);
                 idmedidor = em.merge(idmedidor);
             }
             em.remove(detallefactura);

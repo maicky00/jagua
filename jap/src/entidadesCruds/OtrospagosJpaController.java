@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 public class OtrospagosJpaController implements Serializable {
 
@@ -44,7 +44,7 @@ public class OtrospagosJpaController implements Serializable {
             }
             em.persist(otrospagos);
             if (idcorte != null) {
-                idcorte.getOtrospagosList().add(otrospagos);
+                idcorte.getOtrospagosCollection().add(otrospagos);
                 idcorte = em.merge(idcorte);
             }
             em.getTransaction().commit();
@@ -69,11 +69,11 @@ public class OtrospagosJpaController implements Serializable {
             }
             otrospagos = em.merge(otrospagos);
             if (idcorteOld != null && !idcorteOld.equals(idcorteNew)) {
-                idcorteOld.getOtrospagosList().remove(otrospagos);
+                idcorteOld.getOtrospagosCollection().remove(otrospagos);
                 idcorteOld = em.merge(idcorteOld);
             }
             if (idcorteNew != null && !idcorteNew.equals(idcorteOld)) {
-                idcorteNew.getOtrospagosList().add(otrospagos);
+                idcorteNew.getOtrospagosCollection().add(otrospagos);
                 idcorteNew = em.merge(idcorteNew);
             }
             em.getTransaction().commit();
@@ -107,7 +107,7 @@ public class OtrospagosJpaController implements Serializable {
             }
             Corte idcorte = otrospagos.getIdcorte();
             if (idcorte != null) {
-                idcorte.getOtrospagosList().remove(otrospagos);
+                idcorte.getOtrospagosCollection().remove(otrospagos);
                 idcorte = em.merge(idcorte);
             }
             em.remove(otrospagos);

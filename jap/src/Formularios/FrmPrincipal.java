@@ -113,6 +113,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
+        jMenu10 = new javax.swing.JMenu();
+        jMenuItem23 = new javax.swing.JMenuItem();
+        jMenuItem24 = new javax.swing.JMenuItem();
+        jMenuItem29 = new javax.swing.JMenuItem();
+        jMenuItem25 = new javax.swing.JMenuItem();
+        jMenu11 = new javax.swing.JMenu();
+        jMenuItem26 = new javax.swing.JMenuItem();
+        jMenuItem27 = new javax.swing.JMenuItem();
+        jMenuItem30 = new javax.swing.JMenuItem();
+        jMenuItem28 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -143,7 +153,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 415, Short.MAX_VALUE)
+            .addGap(0, 417, Short.MAX_VALUE)
         );
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -284,6 +294,104 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu9.add(jMenuItem20);
 
         jMenuBar1.add(jMenu9);
+
+        jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/aguacerro.png"))); // NOI18N
+        jMenu10.setText("Agua sobrante");
+        jMenu10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jMenu10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu10.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jMenuItem23.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuItem23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/monitor_add.png"))); // NOI18N
+        jMenuItem23.setText("Tarifa");
+        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem23ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem23);
+
+        jMenuItem24.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuItem24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/group.png"))); // NOI18N
+        jMenuItem24.setText("Usuarios");
+        jMenuItem24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem24ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem24);
+
+        jMenuItem29.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/application_cascade.png"))); // NOI18N
+        jMenuItem29.setText("Registro de Consumos");
+        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem29ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem29);
+
+        jMenuItem25.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuItem25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/coins.png"))); // NOI18N
+        jMenuItem25.setText("Factura");
+        jMenuItem25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem25ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem25);
+
+        jMenuBar1.add(jMenu10);
+
+        jMenu11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/toro.png"))); // NOI18N
+        jMenu11.setText("Ganaderia");
+        jMenu11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jMenu11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jMenu11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jMenu11.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jMenuItem26.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuItem26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/monitor_add.png"))); // NOI18N
+        jMenuItem26.setText("Tarifa");
+        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem26ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem26);
+
+        jMenuItem27.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuItem27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/group.png"))); // NOI18N
+        jMenuItem27.setText("Usuarios");
+        jMenuItem27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem27ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem27);
+
+        jMenuItem30.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuItem30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/application_cascade.png"))); // NOI18N
+        jMenuItem30.setText("Registro de Consumos");
+        jMenuItem30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem30ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem30);
+
+        jMenuItem28.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jMenuItem28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icon16x16/coins.png"))); // NOI18N
+        jMenuItem28.setText("Factura");
+        jMenuItem28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem28ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem28);
+
+        jMenuBar1.add(jMenu11);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/settings.png"))); // NOI18N
         jMenu4.setText("Mantenimiento");
@@ -636,6 +744,53 @@ public class FrmPrincipal extends javax.swing.JFrame {
         b.reporte("usuariosConMedidorActivos.jasper", "UsuariosActivos");
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
+    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
+        // TODO add your handling code here:
+        limpiarPanel();
+        FrmTarifassobrante us = new FrmTarifassobrante();
+        cf = new ControlFormularios();
+        cf.ControlaInstancia(us);
+    }//GEN-LAST:event_jMenuItem23ActionPerformed
+
+    private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
+        // TODO add your handling code here:
+        limpiarPanel();
+        FrmAguasobrante us = new FrmAguasobrante();
+        cf = new ControlFormularios();
+        cf.ControlaInstancia(us);
+    }//GEN-LAST:event_jMenuItem24ActionPerformed
+
+    private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
+        // TODO add your handling code here:
+        limpiarPanel();
+        FrmFacturaSobrante us = new FrmFacturaSobrante();
+        cf = new ControlFormularios();
+        cf.ControlaInstancia(us);
+    }//GEN-LAST:event_jMenuItem25ActionPerformed
+
+    private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem26ActionPerformed
+
+    private void jMenuItem27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem27ActionPerformed
+
+    private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem28ActionPerformed
+
+    private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
+        // TODO add your handling code here:
+        FrmIngresoMedidassobrante fim = new FrmIngresoMedidassobrante();
+        cf = new ControlFormularios();
+        cf.ControlaInstancia(fim);
+    }//GEN-LAST:event_jMenuItem29ActionPerformed
+
+    private void jMenuItem30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem30ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -675,6 +830,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -699,7 +856,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem22;
+    private javax.swing.JMenuItem jMenuItem23;
+    private javax.swing.JMenuItem jMenuItem24;
+    private javax.swing.JMenuItem jMenuItem25;
+    private javax.swing.JMenuItem jMenuItem26;
+    private javax.swing.JMenuItem jMenuItem27;
+    private javax.swing.JMenuItem jMenuItem28;
+    private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;

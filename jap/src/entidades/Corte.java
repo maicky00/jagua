@@ -6,9 +6,10 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "corte")
@@ -39,10 +40,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Corte.findByCorte", query = "SELECT c FROM Corte c WHERE c.corte = :corte"),
     @NamedQuery(name = "Corte.findByFecha", query = "SELECT c FROM Corte c WHERE c.fecha = :fecha"),
     @NamedQuery(name = "Corte.findByMulta", query = "SELECT c FROM Corte c WHERE c.multa = :multa"),
-    @NamedQuery(name = "Corte.findByMora", query = "SELECT c FROM Corte c WHERE c.mora = :mora")})
+    @NamedQuery(name = "Corte.findByMora", query = "SELECT c FROM Corte c WHERE c.mora = :mora"),
+    @NamedQuery(name = "Corte.findByPagado", query = "SELECT c FROM Corte c WHERE c.pagado = :pagado")})
 public class Corte implements Serializable {
-    @Column(name = "PAGADO")
-    private String pagado;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,11 +62,13 @@ public class Corte implements Serializable {
     private Float multa;
     @Column(name = "MORA")
     private Integer mora;
+    @Column(name = "PAGADO")
+    private String pagado;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcorte")
+    private Collection<Otrospagos> otrospagosCollection;
     @JoinColumn(name = "IDMEDIDOR", referencedColumnName = "IDMEDIDOR")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Medidor idmedidor;
-    @OneToMany(mappedBy = "idcorte")
-    private List<Otrospagos> otrospagosList;
 
     public Corte() {
     }
@@ -123,21 +125,29 @@ public class Corte implements Serializable {
         this.mora = mora;
     }
 
+    public String getPagado() {
+        return pagado;
+    }
+
+    public void setPagado(String pagado) {
+        this.pagado = pagado;
+    }
+
+    @XmlTransient
+    public Collection<Otrospagos> getOtrospagosCollection() {
+        return otrospagosCollection;
+    }
+
+    public void setOtrospagosCollection(Collection<Otrospagos> otrospagosCollection) {
+        this.otrospagosCollection = otrospagosCollection;
+    }
+
     public Medidor getIdmedidor() {
         return idmedidor;
     }
 
     public void setIdmedidor(Medidor idmedidor) {
         this.idmedidor = idmedidor;
-    }
-
-    @XmlTransient
-    public List<Otrospagos> getOtrospagosList() {
-        return otrospagosList;
-    }
-
-    public void setOtrospagosList(List<Otrospagos> otrospagosList) {
-        this.otrospagosList = otrospagosList;
     }
 
     @Override
@@ -163,14 +173,6 @@ public class Corte implements Serializable {
     @Override
     public String toString() {
         return "entidades.Corte[ idcorte=" + idcorte + " ]";
-    }
-
-    public String getPagado() {
-        return pagado;
-    }
-
-    public void setPagado(String pagado) {
-        this.pagado = pagado;
     }
     
 }

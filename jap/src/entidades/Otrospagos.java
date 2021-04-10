@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "otrospagos")
@@ -64,7 +64,7 @@ public class Otrospagos implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechapago;
     @JoinColumn(name = "IDCORTE", referencedColumnName = "IDCORTE")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Corte idcorte;
 
     public Otrospagos() {

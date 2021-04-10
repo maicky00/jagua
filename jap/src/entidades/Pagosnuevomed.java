@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "pagosnuevomed")
@@ -34,10 +34,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pagosnuevomed.findByIdnuevomed", query = "SELECT p FROM Pagosnuevomed p WHERE p.idnuevomed = :idnuevomed"),
     @NamedQuery(name = "Pagosnuevomed.findByObsercion", query = "SELECT p FROM Pagosnuevomed p WHERE p.obsercion = :obsercion"),
     @NamedQuery(name = "Pagosnuevomed.findByCantidadpagar", query = "SELECT p FROM Pagosnuevomed p WHERE p.cantidadpagar = :cantidadpagar"),
-    @NamedQuery(name = "Pagosnuevomed.findByFechapago", query = "SELECT p FROM Pagosnuevomed p WHERE p.fechapago = :fechapago")})
+    @NamedQuery(name = "Pagosnuevomed.findByFechapago", query = "SELECT p FROM Pagosnuevomed p WHERE p.fechapago = :fechapago"),
+    @NamedQuery(name = "Pagosnuevomed.findByNumfact", query = "SELECT p FROM Pagosnuevomed p WHERE p.numfact = :numfact")})
 public class Pagosnuevomed implements Serializable {
-    @Column(name = "NUMFACT")
-    private Integer numfact;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,8 +51,10 @@ public class Pagosnuevomed implements Serializable {
     @Column(name = "FECHAPAGO")
     @Temporal(TemporalType.DATE)
     private Date fechapago;
+    @Column(name = "NUMFACT")
+    private Integer numfact;
     @JoinColumn(name = "IDMEDIDOR", referencedColumnName = "IDMEDIDOR")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Medidor idmedidor;
 
     public Pagosnuevomed() {
@@ -95,6 +96,14 @@ public class Pagosnuevomed implements Serializable {
         this.fechapago = fechapago;
     }
 
+    public Integer getNumfact() {
+        return numfact;
+    }
+
+    public void setNumfact(Integer numfact) {
+        this.numfact = numfact;
+    }
+
     public Medidor getIdmedidor() {
         return idmedidor;
     }
@@ -126,14 +135,6 @@ public class Pagosnuevomed implements Serializable {
     @Override
     public String toString() {
         return "entidades.Pagosnuevomed[ idnuevomed=" + idnuevomed + " ]";
-    }
-
-    public Integer getNumfact() {
-        return numfact;
-    }
-
-    public void setNumfact(Integer numfact) {
-        this.numfact = numfact;
     }
     
 }

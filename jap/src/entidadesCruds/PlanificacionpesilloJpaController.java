@@ -12,15 +12,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Asistenciapesillo;
 import entidades.Planificacionpesillo;
+import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Marco
+ * @author Tech-Usuario
  */
 public class PlanificacionpesilloJpaController implements Serializable {
 
@@ -34,27 +36,27 @@ public class PlanificacionpesilloJpaController implements Serializable {
     }
 
     public void create(Planificacionpesillo planificacionpesillo) {
-        if (planificacionpesillo.getAsistenciapesilloList() == null) {
-            planificacionpesillo.setAsistenciapesilloList(new ArrayList<Asistenciapesillo>());
+        if (planificacionpesillo.getAsistenciapesilloCollection() == null) {
+            planificacionpesillo.setAsistenciapesilloCollection(new ArrayList<Asistenciapesillo>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Asistenciapesillo> attachedAsistenciapesilloList = new ArrayList<Asistenciapesillo>();
-            for (Asistenciapesillo asistenciapesilloListAsistenciapesilloToAttach : planificacionpesillo.getAsistenciapesilloList()) {
-                asistenciapesilloListAsistenciapesilloToAttach = em.getReference(asistenciapesilloListAsistenciapesilloToAttach.getClass(), asistenciapesilloListAsistenciapesilloToAttach.getIdasistenciapesillo());
-                attachedAsistenciapesilloList.add(asistenciapesilloListAsistenciapesilloToAttach);
+            Collection<Asistenciapesillo> attachedAsistenciapesilloCollection = new ArrayList<Asistenciapesillo>();
+            for (Asistenciapesillo asistenciapesilloCollectionAsistenciapesilloToAttach : planificacionpesillo.getAsistenciapesilloCollection()) {
+                asistenciapesilloCollectionAsistenciapesilloToAttach = em.getReference(asistenciapesilloCollectionAsistenciapesilloToAttach.getClass(), asistenciapesilloCollectionAsistenciapesilloToAttach.getIdasistenciapesillo());
+                attachedAsistenciapesilloCollection.add(asistenciapesilloCollectionAsistenciapesilloToAttach);
             }
-            planificacionpesillo.setAsistenciapesilloList(attachedAsistenciapesilloList);
+            planificacionpesillo.setAsistenciapesilloCollection(attachedAsistenciapesilloCollection);
             em.persist(planificacionpesillo);
-            for (Asistenciapesillo asistenciapesilloListAsistenciapesillo : planificacionpesillo.getAsistenciapesilloList()) {
-                Planificacionpesillo oldIdplanificacionpesilloOfAsistenciapesilloListAsistenciapesillo = asistenciapesilloListAsistenciapesillo.getIdplanificacionpesillo();
-                asistenciapesilloListAsistenciapesillo.setIdplanificacionpesillo(planificacionpesillo);
-                asistenciapesilloListAsistenciapesillo = em.merge(asistenciapesilloListAsistenciapesillo);
-                if (oldIdplanificacionpesilloOfAsistenciapesilloListAsistenciapesillo != null) {
-                    oldIdplanificacionpesilloOfAsistenciapesilloListAsistenciapesillo.getAsistenciapesilloList().remove(asistenciapesilloListAsistenciapesillo);
-                    oldIdplanificacionpesilloOfAsistenciapesilloListAsistenciapesillo = em.merge(oldIdplanificacionpesilloOfAsistenciapesilloListAsistenciapesillo);
+            for (Asistenciapesillo asistenciapesilloCollectionAsistenciapesillo : planificacionpesillo.getAsistenciapesilloCollection()) {
+                Planificacionpesillo oldIdplanificacionpesilloOfAsistenciapesilloCollectionAsistenciapesillo = asistenciapesilloCollectionAsistenciapesillo.getIdplanificacionpesillo();
+                asistenciapesilloCollectionAsistenciapesillo.setIdplanificacionpesillo(planificacionpesillo);
+                asistenciapesilloCollectionAsistenciapesillo = em.merge(asistenciapesilloCollectionAsistenciapesillo);
+                if (oldIdplanificacionpesilloOfAsistenciapesilloCollectionAsistenciapesillo != null) {
+                    oldIdplanificacionpesilloOfAsistenciapesilloCollectionAsistenciapesillo.getAsistenciapesilloCollection().remove(asistenciapesilloCollectionAsistenciapesillo);
+                    oldIdplanificacionpesilloOfAsistenciapesilloCollectionAsistenciapesillo = em.merge(oldIdplanificacionpesilloOfAsistenciapesilloCollectionAsistenciapesillo);
                 }
             }
             em.getTransaction().commit();
@@ -65,36 +67,42 @@ public class PlanificacionpesilloJpaController implements Serializable {
         }
     }
 
-    public void edit(Planificacionpesillo planificacionpesillo) throws NonexistentEntityException, Exception {
+    public void edit(Planificacionpesillo planificacionpesillo) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Planificacionpesillo persistentPlanificacionpesillo = em.find(Planificacionpesillo.class, planificacionpesillo.getIdplanificacionpesillo());
-            List<Asistenciapesillo> asistenciapesilloListOld = persistentPlanificacionpesillo.getAsistenciapesilloList();
-            List<Asistenciapesillo> asistenciapesilloListNew = planificacionpesillo.getAsistenciapesilloList();
-            List<Asistenciapesillo> attachedAsistenciapesilloListNew = new ArrayList<Asistenciapesillo>();
-            for (Asistenciapesillo asistenciapesilloListNewAsistenciapesilloToAttach : asistenciapesilloListNew) {
-                asistenciapesilloListNewAsistenciapesilloToAttach = em.getReference(asistenciapesilloListNewAsistenciapesilloToAttach.getClass(), asistenciapesilloListNewAsistenciapesilloToAttach.getIdasistenciapesillo());
-                attachedAsistenciapesilloListNew.add(asistenciapesilloListNewAsistenciapesilloToAttach);
-            }
-            asistenciapesilloListNew = attachedAsistenciapesilloListNew;
-            planificacionpesillo.setAsistenciapesilloList(asistenciapesilloListNew);
-            planificacionpesillo = em.merge(planificacionpesillo);
-            for (Asistenciapesillo asistenciapesilloListOldAsistenciapesillo : asistenciapesilloListOld) {
-                if (!asistenciapesilloListNew.contains(asistenciapesilloListOldAsistenciapesillo)) {
-                    asistenciapesilloListOldAsistenciapesillo.setIdplanificacionpesillo(null);
-                    asistenciapesilloListOldAsistenciapesillo = em.merge(asistenciapesilloListOldAsistenciapesillo);
+            Collection<Asistenciapesillo> asistenciapesilloCollectionOld = persistentPlanificacionpesillo.getAsistenciapesilloCollection();
+            Collection<Asistenciapesillo> asistenciapesilloCollectionNew = planificacionpesillo.getAsistenciapesilloCollection();
+            List<String> illegalOrphanMessages = null;
+            for (Asistenciapesillo asistenciapesilloCollectionOldAsistenciapesillo : asistenciapesilloCollectionOld) {
+                if (!asistenciapesilloCollectionNew.contains(asistenciapesilloCollectionOldAsistenciapesillo)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Asistenciapesillo " + asistenciapesilloCollectionOldAsistenciapesillo + " since its idplanificacionpesillo field is not nullable.");
                 }
             }
-            for (Asistenciapesillo asistenciapesilloListNewAsistenciapesillo : asistenciapesilloListNew) {
-                if (!asistenciapesilloListOld.contains(asistenciapesilloListNewAsistenciapesillo)) {
-                    Planificacionpesillo oldIdplanificacionpesilloOfAsistenciapesilloListNewAsistenciapesillo = asistenciapesilloListNewAsistenciapesillo.getIdplanificacionpesillo();
-                    asistenciapesilloListNewAsistenciapesillo.setIdplanificacionpesillo(planificacionpesillo);
-                    asistenciapesilloListNewAsistenciapesillo = em.merge(asistenciapesilloListNewAsistenciapesillo);
-                    if (oldIdplanificacionpesilloOfAsistenciapesilloListNewAsistenciapesillo != null && !oldIdplanificacionpesilloOfAsistenciapesilloListNewAsistenciapesillo.equals(planificacionpesillo)) {
-                        oldIdplanificacionpesilloOfAsistenciapesilloListNewAsistenciapesillo.getAsistenciapesilloList().remove(asistenciapesilloListNewAsistenciapesillo);
-                        oldIdplanificacionpesilloOfAsistenciapesilloListNewAsistenciapesillo = em.merge(oldIdplanificacionpesilloOfAsistenciapesilloListNewAsistenciapesillo);
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            Collection<Asistenciapesillo> attachedAsistenciapesilloCollectionNew = new ArrayList<Asistenciapesillo>();
+            for (Asistenciapesillo asistenciapesilloCollectionNewAsistenciapesilloToAttach : asistenciapesilloCollectionNew) {
+                asistenciapesilloCollectionNewAsistenciapesilloToAttach = em.getReference(asistenciapesilloCollectionNewAsistenciapesilloToAttach.getClass(), asistenciapesilloCollectionNewAsistenciapesilloToAttach.getIdasistenciapesillo());
+                attachedAsistenciapesilloCollectionNew.add(asistenciapesilloCollectionNewAsistenciapesilloToAttach);
+            }
+            asistenciapesilloCollectionNew = attachedAsistenciapesilloCollectionNew;
+            planificacionpesillo.setAsistenciapesilloCollection(asistenciapesilloCollectionNew);
+            planificacionpesillo = em.merge(planificacionpesillo);
+            for (Asistenciapesillo asistenciapesilloCollectionNewAsistenciapesillo : asistenciapesilloCollectionNew) {
+                if (!asistenciapesilloCollectionOld.contains(asistenciapesilloCollectionNewAsistenciapesillo)) {
+                    Planificacionpesillo oldIdplanificacionpesilloOfAsistenciapesilloCollectionNewAsistenciapesillo = asistenciapesilloCollectionNewAsistenciapesillo.getIdplanificacionpesillo();
+                    asistenciapesilloCollectionNewAsistenciapesillo.setIdplanificacionpesillo(planificacionpesillo);
+                    asistenciapesilloCollectionNewAsistenciapesillo = em.merge(asistenciapesilloCollectionNewAsistenciapesillo);
+                    if (oldIdplanificacionpesilloOfAsistenciapesilloCollectionNewAsistenciapesillo != null && !oldIdplanificacionpesilloOfAsistenciapesilloCollectionNewAsistenciapesillo.equals(planificacionpesillo)) {
+                        oldIdplanificacionpesilloOfAsistenciapesilloCollectionNewAsistenciapesillo.getAsistenciapesilloCollection().remove(asistenciapesilloCollectionNewAsistenciapesillo);
+                        oldIdplanificacionpesilloOfAsistenciapesilloCollectionNewAsistenciapesillo = em.merge(oldIdplanificacionpesilloOfAsistenciapesilloCollectionNewAsistenciapesillo);
                     }
                 }
             }
@@ -115,7 +123,7 @@ public class PlanificacionpesilloJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -127,10 +135,16 @@ public class PlanificacionpesilloJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The planificacionpesillo with id " + id + " no longer exists.", enfe);
             }
-            List<Asistenciapesillo> asistenciapesilloList = planificacionpesillo.getAsistenciapesilloList();
-            for (Asistenciapesillo asistenciapesilloListAsistenciapesillo : asistenciapesilloList) {
-                asistenciapesilloListAsistenciapesillo.setIdplanificacionpesillo(null);
-                asistenciapesilloListAsistenciapesillo = em.merge(asistenciapesilloListAsistenciapesillo);
+            List<String> illegalOrphanMessages = null;
+            Collection<Asistenciapesillo> asistenciapesilloCollectionOrphanCheck = planificacionpesillo.getAsistenciapesilloCollection();
+            for (Asistenciapesillo asistenciapesilloCollectionOrphanCheckAsistenciapesillo : asistenciapesilloCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Planificacionpesillo (" + planificacionpesillo + ") cannot be destroyed since the Asistenciapesillo " + asistenciapesilloCollectionOrphanCheckAsistenciapesillo + " in its asistenciapesilloCollection field has a non-nullable idplanificacionpesillo field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(planificacionpesillo);
             em.getTransaction().commit();

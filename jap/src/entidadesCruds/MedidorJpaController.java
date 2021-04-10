@@ -11,20 +11,23 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Usuarios;
-import entidades.Corte;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import entidades.Asistenciapesillo;
+import entidades.Corte;
 import entidades.Asistencia;
+import entidades.Pagosnuevomed;
 import entidades.Detallefactura;
 import entidades.Medidor;
-import entidades.Pagosnuevomed;
+import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 public class MedidorJpaController implements Serializable {
 
@@ -38,17 +41,23 @@ public class MedidorJpaController implements Serializable {
     }
 
     public void create(Medidor medidor) {
-        if (medidor.getCorteList() == null) {
-            medidor.setCorteList(new ArrayList<Corte>());
+        if (medidor.getUsuariosCollection() == null) {
+            medidor.setUsuariosCollection(new ArrayList<Usuarios>());
         }
-        if (medidor.getAsistenciaList() == null) {
-            medidor.setAsistenciaList(new ArrayList<Asistencia>());
+        if (medidor.getAsistenciapesilloCollection() == null) {
+            medidor.setAsistenciapesilloCollection(new ArrayList<Asistenciapesillo>());
         }
-        if (medidor.getDetallefacturaList() == null) {
-            medidor.setDetallefacturaList(new ArrayList<Detallefactura>());
+        if (medidor.getCorteCollection() == null) {
+            medidor.setCorteCollection(new ArrayList<Corte>());
         }
-        if (medidor.getPagosnuevomedList() == null) {
-            medidor.setPagosnuevomedList(new ArrayList<Pagosnuevomed>());
+        if (medidor.getAsistenciaCollection() == null) {
+            medidor.setAsistenciaCollection(new ArrayList<Asistencia>());
+        }
+        if (medidor.getPagosnuevomedCollection() == null) {
+            medidor.setPagosnuevomedCollection(new ArrayList<Pagosnuevomed>());
+        }
+        if (medidor.getDetallefacturaCollection() == null) {
+            medidor.setDetallefacturaCollection(new ArrayList<Detallefactura>());
         }
         EntityManager em = null;
         try {
@@ -59,69 +68,94 @@ public class MedidorJpaController implements Serializable {
                 idusuario = em.getReference(idusuario.getClass(), idusuario.getIdusuario());
                 medidor.setIdusuario(idusuario);
             }
-            List<Corte> attachedCorteList = new ArrayList<Corte>();
-            for (Corte corteListCorteToAttach : medidor.getCorteList()) {
-                corteListCorteToAttach = em.getReference(corteListCorteToAttach.getClass(), corteListCorteToAttach.getIdcorte());
-                attachedCorteList.add(corteListCorteToAttach);
+            Collection<Usuarios> attachedUsuariosCollection = new ArrayList<Usuarios>();
+            for (Usuarios usuariosCollectionUsuariosToAttach : medidor.getUsuariosCollection()) {
+                usuariosCollectionUsuariosToAttach = em.getReference(usuariosCollectionUsuariosToAttach.getClass(), usuariosCollectionUsuariosToAttach.getIdusuario());
+                attachedUsuariosCollection.add(usuariosCollectionUsuariosToAttach);
             }
-            medidor.setCorteList(attachedCorteList);
-            List<Asistencia> attachedAsistenciaList = new ArrayList<Asistencia>();
-            for (Asistencia asistenciaListAsistenciaToAttach : medidor.getAsistenciaList()) {
-                asistenciaListAsistenciaToAttach = em.getReference(asistenciaListAsistenciaToAttach.getClass(), asistenciaListAsistenciaToAttach.getIdasistencia());
-                attachedAsistenciaList.add(asistenciaListAsistenciaToAttach);
+            medidor.setUsuariosCollection(attachedUsuariosCollection);
+            Collection<Asistenciapesillo> attachedAsistenciapesilloCollection = new ArrayList<Asistenciapesillo>();
+            for (Asistenciapesillo asistenciapesilloCollectionAsistenciapesilloToAttach : medidor.getAsistenciapesilloCollection()) {
+                asistenciapesilloCollectionAsistenciapesilloToAttach = em.getReference(asistenciapesilloCollectionAsistenciapesilloToAttach.getClass(), asistenciapesilloCollectionAsistenciapesilloToAttach.getIdasistenciapesillo());
+                attachedAsistenciapesilloCollection.add(asistenciapesilloCollectionAsistenciapesilloToAttach);
             }
-            medidor.setAsistenciaList(attachedAsistenciaList);
-            List<Detallefactura> attachedDetallefacturaList = new ArrayList<Detallefactura>();
-            for (Detallefactura detallefacturaListDetallefacturaToAttach : medidor.getDetallefacturaList()) {
-                detallefacturaListDetallefacturaToAttach = em.getReference(detallefacturaListDetallefacturaToAttach.getClass(), detallefacturaListDetallefacturaToAttach.getIddetallefac());
-                attachedDetallefacturaList.add(detallefacturaListDetallefacturaToAttach);
+            medidor.setAsistenciapesilloCollection(attachedAsistenciapesilloCollection);
+            Collection<Corte> attachedCorteCollection = new ArrayList<Corte>();
+            for (Corte corteCollectionCorteToAttach : medidor.getCorteCollection()) {
+                corteCollectionCorteToAttach = em.getReference(corteCollectionCorteToAttach.getClass(), corteCollectionCorteToAttach.getIdcorte());
+                attachedCorteCollection.add(corteCollectionCorteToAttach);
             }
-            medidor.setDetallefacturaList(attachedDetallefacturaList);
-            List<Pagosnuevomed> attachedPagosnuevomedList = new ArrayList<Pagosnuevomed>();
-            for (Pagosnuevomed pagosnuevomedListPagosnuevomedToAttach : medidor.getPagosnuevomedList()) {
-                pagosnuevomedListPagosnuevomedToAttach = em.getReference(pagosnuevomedListPagosnuevomedToAttach.getClass(), pagosnuevomedListPagosnuevomedToAttach.getIdnuevomed());
-                attachedPagosnuevomedList.add(pagosnuevomedListPagosnuevomedToAttach);
+            medidor.setCorteCollection(attachedCorteCollection);
+            Collection<Asistencia> attachedAsistenciaCollection = new ArrayList<Asistencia>();
+            for (Asistencia asistenciaCollectionAsistenciaToAttach : medidor.getAsistenciaCollection()) {
+                asistenciaCollectionAsistenciaToAttach = em.getReference(asistenciaCollectionAsistenciaToAttach.getClass(), asistenciaCollectionAsistenciaToAttach.getIdasistencia());
+                attachedAsistenciaCollection.add(asistenciaCollectionAsistenciaToAttach);
             }
-            medidor.setPagosnuevomedList(attachedPagosnuevomedList);
+            medidor.setAsistenciaCollection(attachedAsistenciaCollection);
+            Collection<Pagosnuevomed> attachedPagosnuevomedCollection = new ArrayList<Pagosnuevomed>();
+            for (Pagosnuevomed pagosnuevomedCollectionPagosnuevomedToAttach : medidor.getPagosnuevomedCollection()) {
+                pagosnuevomedCollectionPagosnuevomedToAttach = em.getReference(pagosnuevomedCollectionPagosnuevomedToAttach.getClass(), pagosnuevomedCollectionPagosnuevomedToAttach.getIdnuevomed());
+                attachedPagosnuevomedCollection.add(pagosnuevomedCollectionPagosnuevomedToAttach);
+            }
+            medidor.setPagosnuevomedCollection(attachedPagosnuevomedCollection);
+            Collection<Detallefactura> attachedDetallefacturaCollection = new ArrayList<Detallefactura>();
+            for (Detallefactura detallefacturaCollectionDetallefacturaToAttach : medidor.getDetallefacturaCollection()) {
+                detallefacturaCollectionDetallefacturaToAttach = em.getReference(detallefacturaCollectionDetallefacturaToAttach.getClass(), detallefacturaCollectionDetallefacturaToAttach.getIddetallefac());
+                attachedDetallefacturaCollection.add(detallefacturaCollectionDetallefacturaToAttach);
+            }
+            medidor.setDetallefacturaCollection(attachedDetallefacturaCollection);
             em.persist(medidor);
             if (idusuario != null) {
-                idusuario.getMedidorList().add(medidor);
+                idusuario.getMedidorCollection().add(medidor);
                 idusuario = em.merge(idusuario);
             }
-            for (Corte corteListCorte : medidor.getCorteList()) {
-                Medidor oldIdmedidorOfCorteListCorte = corteListCorte.getIdmedidor();
-                corteListCorte.setIdmedidor(medidor);
-                corteListCorte = em.merge(corteListCorte);
-                if (oldIdmedidorOfCorteListCorte != null) {
-                    oldIdmedidorOfCorteListCorte.getCorteList().remove(corteListCorte);
-                    oldIdmedidorOfCorteListCorte = em.merge(oldIdmedidorOfCorteListCorte);
+            for (Usuarios usuariosCollectionUsuarios : medidor.getUsuariosCollection()) {
+                usuariosCollectionUsuarios.getMedidorCollection().add(medidor);
+                usuariosCollectionUsuarios = em.merge(usuariosCollectionUsuarios);
+            }
+            for (Asistenciapesillo asistenciapesilloCollectionAsistenciapesillo : medidor.getAsistenciapesilloCollection()) {
+                Medidor oldIdmedidorOfAsistenciapesilloCollectionAsistenciapesillo = asistenciapesilloCollectionAsistenciapesillo.getIdmedidor();
+                asistenciapesilloCollectionAsistenciapesillo.setIdmedidor(medidor);
+                asistenciapesilloCollectionAsistenciapesillo = em.merge(asistenciapesilloCollectionAsistenciapesillo);
+                if (oldIdmedidorOfAsistenciapesilloCollectionAsistenciapesillo != null) {
+                    oldIdmedidorOfAsistenciapesilloCollectionAsistenciapesillo.getAsistenciapesilloCollection().remove(asistenciapesilloCollectionAsistenciapesillo);
+                    oldIdmedidorOfAsistenciapesilloCollectionAsistenciapesillo = em.merge(oldIdmedidorOfAsistenciapesilloCollectionAsistenciapesillo);
                 }
             }
-            for (Asistencia asistenciaListAsistencia : medidor.getAsistenciaList()) {
-                Medidor oldIdmedidorOfAsistenciaListAsistencia = asistenciaListAsistencia.getIdmedidor();
-                asistenciaListAsistencia.setIdmedidor(medidor);
-                asistenciaListAsistencia = em.merge(asistenciaListAsistencia);
-                if (oldIdmedidorOfAsistenciaListAsistencia != null) {
-                    oldIdmedidorOfAsistenciaListAsistencia.getAsistenciaList().remove(asistenciaListAsistencia);
-                    oldIdmedidorOfAsistenciaListAsistencia = em.merge(oldIdmedidorOfAsistenciaListAsistencia);
+            for (Corte corteCollectionCorte : medidor.getCorteCollection()) {
+                Medidor oldIdmedidorOfCorteCollectionCorte = corteCollectionCorte.getIdmedidor();
+                corteCollectionCorte.setIdmedidor(medidor);
+                corteCollectionCorte = em.merge(corteCollectionCorte);
+                if (oldIdmedidorOfCorteCollectionCorte != null) {
+                    oldIdmedidorOfCorteCollectionCorte.getCorteCollection().remove(corteCollectionCorte);
+                    oldIdmedidorOfCorteCollectionCorte = em.merge(oldIdmedidorOfCorteCollectionCorte);
                 }
             }
-            for (Detallefactura detallefacturaListDetallefactura : medidor.getDetallefacturaList()) {
-                Medidor oldIdmedidorOfDetallefacturaListDetallefactura = detallefacturaListDetallefactura.getIdmedidor();
-                detallefacturaListDetallefactura.setIdmedidor(medidor);
-                detallefacturaListDetallefactura = em.merge(detallefacturaListDetallefactura);
-                if (oldIdmedidorOfDetallefacturaListDetallefactura != null) {
-                    oldIdmedidorOfDetallefacturaListDetallefactura.getDetallefacturaList().remove(detallefacturaListDetallefactura);
-                    oldIdmedidorOfDetallefacturaListDetallefactura = em.merge(oldIdmedidorOfDetallefacturaListDetallefactura);
+            for (Asistencia asistenciaCollectionAsistencia : medidor.getAsistenciaCollection()) {
+                Medidor oldIdmedidorOfAsistenciaCollectionAsistencia = asistenciaCollectionAsistencia.getIdmedidor();
+                asistenciaCollectionAsistencia.setIdmedidor(medidor);
+                asistenciaCollectionAsistencia = em.merge(asistenciaCollectionAsistencia);
+                if (oldIdmedidorOfAsistenciaCollectionAsistencia != null) {
+                    oldIdmedidorOfAsistenciaCollectionAsistencia.getAsistenciaCollection().remove(asistenciaCollectionAsistencia);
+                    oldIdmedidorOfAsistenciaCollectionAsistencia = em.merge(oldIdmedidorOfAsistenciaCollectionAsistencia);
                 }
             }
-            for (Pagosnuevomed pagosnuevomedListPagosnuevomed : medidor.getPagosnuevomedList()) {
-                Medidor oldIdmedidorOfPagosnuevomedListPagosnuevomed = pagosnuevomedListPagosnuevomed.getIdmedidor();
-                pagosnuevomedListPagosnuevomed.setIdmedidor(medidor);
-                pagosnuevomedListPagosnuevomed = em.merge(pagosnuevomedListPagosnuevomed);
-                if (oldIdmedidorOfPagosnuevomedListPagosnuevomed != null) {
-                    oldIdmedidorOfPagosnuevomedListPagosnuevomed.getPagosnuevomedList().remove(pagosnuevomedListPagosnuevomed);
-                    oldIdmedidorOfPagosnuevomedListPagosnuevomed = em.merge(oldIdmedidorOfPagosnuevomedListPagosnuevomed);
+            for (Pagosnuevomed pagosnuevomedCollectionPagosnuevomed : medidor.getPagosnuevomedCollection()) {
+                Medidor oldIdmedidorOfPagosnuevomedCollectionPagosnuevomed = pagosnuevomedCollectionPagosnuevomed.getIdmedidor();
+                pagosnuevomedCollectionPagosnuevomed.setIdmedidor(medidor);
+                pagosnuevomedCollectionPagosnuevomed = em.merge(pagosnuevomedCollectionPagosnuevomed);
+                if (oldIdmedidorOfPagosnuevomedCollectionPagosnuevomed != null) {
+                    oldIdmedidorOfPagosnuevomedCollectionPagosnuevomed.getPagosnuevomedCollection().remove(pagosnuevomedCollectionPagosnuevomed);
+                    oldIdmedidorOfPagosnuevomedCollectionPagosnuevomed = em.merge(oldIdmedidorOfPagosnuevomedCollectionPagosnuevomed);
+                }
+            }
+            for (Detallefactura detallefacturaCollectionDetallefactura : medidor.getDetallefacturaCollection()) {
+                Medidor oldIdmedidorOfDetallefacturaCollectionDetallefactura = detallefacturaCollectionDetallefactura.getIdmedidor();
+                detallefacturaCollectionDetallefactura.setIdmedidor(medidor);
+                detallefacturaCollectionDetallefactura = em.merge(detallefacturaCollectionDetallefactura);
+                if (oldIdmedidorOfDetallefacturaCollectionDetallefactura != null) {
+                    oldIdmedidorOfDetallefacturaCollectionDetallefactura.getDetallefacturaCollection().remove(detallefacturaCollectionDetallefactura);
+                    oldIdmedidorOfDetallefacturaCollectionDetallefactura = em.merge(oldIdmedidorOfDetallefacturaCollectionDetallefactura);
                 }
             }
             em.getTransaction().commit();
@@ -132,7 +166,7 @@ public class MedidorJpaController implements Serializable {
         }
     }
 
-    public void edit(Medidor medidor) throws NonexistentEntityException, Exception {
+    public void edit(Medidor medidor) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -140,120 +174,181 @@ public class MedidorJpaController implements Serializable {
             Medidor persistentMedidor = em.find(Medidor.class, medidor.getIdmedidor());
             Usuarios idusuarioOld = persistentMedidor.getIdusuario();
             Usuarios idusuarioNew = medidor.getIdusuario();
-            List<Corte> corteListOld = persistentMedidor.getCorteList();
-            List<Corte> corteListNew = medidor.getCorteList();
-            List<Asistencia> asistenciaListOld = persistentMedidor.getAsistenciaList();
-            List<Asistencia> asistenciaListNew = medidor.getAsistenciaList();
-            List<Detallefactura> detallefacturaListOld = persistentMedidor.getDetallefacturaList();
-            List<Detallefactura> detallefacturaListNew = medidor.getDetallefacturaList();
-            List<Pagosnuevomed> pagosnuevomedListOld = persistentMedidor.getPagosnuevomedList();
-            List<Pagosnuevomed> pagosnuevomedListNew = medidor.getPagosnuevomedList();
+            Collection<Usuarios> usuariosCollectionOld = persistentMedidor.getUsuariosCollection();
+            Collection<Usuarios> usuariosCollectionNew = medidor.getUsuariosCollection();
+            Collection<Asistenciapesillo> asistenciapesilloCollectionOld = persistentMedidor.getAsistenciapesilloCollection();
+            Collection<Asistenciapesillo> asistenciapesilloCollectionNew = medidor.getAsistenciapesilloCollection();
+            Collection<Corte> corteCollectionOld = persistentMedidor.getCorteCollection();
+            Collection<Corte> corteCollectionNew = medidor.getCorteCollection();
+            Collection<Asistencia> asistenciaCollectionOld = persistentMedidor.getAsistenciaCollection();
+            Collection<Asistencia> asistenciaCollectionNew = medidor.getAsistenciaCollection();
+            Collection<Pagosnuevomed> pagosnuevomedCollectionOld = persistentMedidor.getPagosnuevomedCollection();
+            Collection<Pagosnuevomed> pagosnuevomedCollectionNew = medidor.getPagosnuevomedCollection();
+            Collection<Detallefactura> detallefacturaCollectionOld = persistentMedidor.getDetallefacturaCollection();
+            Collection<Detallefactura> detallefacturaCollectionNew = medidor.getDetallefacturaCollection();
+            List<String> illegalOrphanMessages = null;
+            for (Asistenciapesillo asistenciapesilloCollectionOldAsistenciapesillo : asistenciapesilloCollectionOld) {
+                if (!asistenciapesilloCollectionNew.contains(asistenciapesilloCollectionOldAsistenciapesillo)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Asistenciapesillo " + asistenciapesilloCollectionOldAsistenciapesillo + " since its idmedidor field is not nullable.");
+                }
+            }
+            for (Corte corteCollectionOldCorte : corteCollectionOld) {
+                if (!corteCollectionNew.contains(corteCollectionOldCorte)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Corte " + corteCollectionOldCorte + " since its idmedidor field is not nullable.");
+                }
+            }
+            for (Asistencia asistenciaCollectionOldAsistencia : asistenciaCollectionOld) {
+                if (!asistenciaCollectionNew.contains(asistenciaCollectionOldAsistencia)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Asistencia " + asistenciaCollectionOldAsistencia + " since its idmedidor field is not nullable.");
+                }
+            }
+            for (Pagosnuevomed pagosnuevomedCollectionOldPagosnuevomed : pagosnuevomedCollectionOld) {
+                if (!pagosnuevomedCollectionNew.contains(pagosnuevomedCollectionOldPagosnuevomed)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Pagosnuevomed " + pagosnuevomedCollectionOldPagosnuevomed + " since its idmedidor field is not nullable.");
+                }
+            }
+            for (Detallefactura detallefacturaCollectionOldDetallefactura : detallefacturaCollectionOld) {
+                if (!detallefacturaCollectionNew.contains(detallefacturaCollectionOldDetallefactura)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Detallefactura " + detallefacturaCollectionOldDetallefactura + " since its idmedidor field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             if (idusuarioNew != null) {
                 idusuarioNew = em.getReference(idusuarioNew.getClass(), idusuarioNew.getIdusuario());
                 medidor.setIdusuario(idusuarioNew);
             }
-            List<Corte> attachedCorteListNew = new ArrayList<Corte>();
-            for (Corte corteListNewCorteToAttach : corteListNew) {
-                corteListNewCorteToAttach = em.getReference(corteListNewCorteToAttach.getClass(), corteListNewCorteToAttach.getIdcorte());
-                attachedCorteListNew.add(corteListNewCorteToAttach);
+            Collection<Usuarios> attachedUsuariosCollectionNew = new ArrayList<Usuarios>();
+            for (Usuarios usuariosCollectionNewUsuariosToAttach : usuariosCollectionNew) {
+                usuariosCollectionNewUsuariosToAttach = em.getReference(usuariosCollectionNewUsuariosToAttach.getClass(), usuariosCollectionNewUsuariosToAttach.getIdusuario());
+                attachedUsuariosCollectionNew.add(usuariosCollectionNewUsuariosToAttach);
             }
-            corteListNew = attachedCorteListNew;
-            medidor.setCorteList(corteListNew);
-            List<Asistencia> attachedAsistenciaListNew = new ArrayList<Asistencia>();
-            for (Asistencia asistenciaListNewAsistenciaToAttach : asistenciaListNew) {
-                asistenciaListNewAsistenciaToAttach = em.getReference(asistenciaListNewAsistenciaToAttach.getClass(), asistenciaListNewAsistenciaToAttach.getIdasistencia());
-                attachedAsistenciaListNew.add(asistenciaListNewAsistenciaToAttach);
+            usuariosCollectionNew = attachedUsuariosCollectionNew;
+            medidor.setUsuariosCollection(usuariosCollectionNew);
+            Collection<Asistenciapesillo> attachedAsistenciapesilloCollectionNew = new ArrayList<Asistenciapesillo>();
+            for (Asistenciapesillo asistenciapesilloCollectionNewAsistenciapesilloToAttach : asistenciapesilloCollectionNew) {
+                asistenciapesilloCollectionNewAsistenciapesilloToAttach = em.getReference(asistenciapesilloCollectionNewAsistenciapesilloToAttach.getClass(), asistenciapesilloCollectionNewAsistenciapesilloToAttach.getIdasistenciapesillo());
+                attachedAsistenciapesilloCollectionNew.add(asistenciapesilloCollectionNewAsistenciapesilloToAttach);
             }
-            asistenciaListNew = attachedAsistenciaListNew;
-            medidor.setAsistenciaList(asistenciaListNew);
-            List<Detallefactura> attachedDetallefacturaListNew = new ArrayList<Detallefactura>();
-            for (Detallefactura detallefacturaListNewDetallefacturaToAttach : detallefacturaListNew) {
-                detallefacturaListNewDetallefacturaToAttach = em.getReference(detallefacturaListNewDetallefacturaToAttach.getClass(), detallefacturaListNewDetallefacturaToAttach.getIddetallefac());
-                attachedDetallefacturaListNew.add(detallefacturaListNewDetallefacturaToAttach);
+            asistenciapesilloCollectionNew = attachedAsistenciapesilloCollectionNew;
+            medidor.setAsistenciapesilloCollection(asistenciapesilloCollectionNew);
+            Collection<Corte> attachedCorteCollectionNew = new ArrayList<Corte>();
+            for (Corte corteCollectionNewCorteToAttach : corteCollectionNew) {
+                corteCollectionNewCorteToAttach = em.getReference(corteCollectionNewCorteToAttach.getClass(), corteCollectionNewCorteToAttach.getIdcorte());
+                attachedCorteCollectionNew.add(corteCollectionNewCorteToAttach);
             }
-            detallefacturaListNew = attachedDetallefacturaListNew;
-            medidor.setDetallefacturaList(detallefacturaListNew);
-            List<Pagosnuevomed> attachedPagosnuevomedListNew = new ArrayList<Pagosnuevomed>();
-            for (Pagosnuevomed pagosnuevomedListNewPagosnuevomedToAttach : pagosnuevomedListNew) {
-                pagosnuevomedListNewPagosnuevomedToAttach = em.getReference(pagosnuevomedListNewPagosnuevomedToAttach.getClass(), pagosnuevomedListNewPagosnuevomedToAttach.getIdnuevomed());
-                attachedPagosnuevomedListNew.add(pagosnuevomedListNewPagosnuevomedToAttach);
+            corteCollectionNew = attachedCorteCollectionNew;
+            medidor.setCorteCollection(corteCollectionNew);
+            Collection<Asistencia> attachedAsistenciaCollectionNew = new ArrayList<Asistencia>();
+            for (Asistencia asistenciaCollectionNewAsistenciaToAttach : asistenciaCollectionNew) {
+                asistenciaCollectionNewAsistenciaToAttach = em.getReference(asistenciaCollectionNewAsistenciaToAttach.getClass(), asistenciaCollectionNewAsistenciaToAttach.getIdasistencia());
+                attachedAsistenciaCollectionNew.add(asistenciaCollectionNewAsistenciaToAttach);
             }
-            pagosnuevomedListNew = attachedPagosnuevomedListNew;
-            medidor.setPagosnuevomedList(pagosnuevomedListNew);
+            asistenciaCollectionNew = attachedAsistenciaCollectionNew;
+            medidor.setAsistenciaCollection(asistenciaCollectionNew);
+            Collection<Pagosnuevomed> attachedPagosnuevomedCollectionNew = new ArrayList<Pagosnuevomed>();
+            for (Pagosnuevomed pagosnuevomedCollectionNewPagosnuevomedToAttach : pagosnuevomedCollectionNew) {
+                pagosnuevomedCollectionNewPagosnuevomedToAttach = em.getReference(pagosnuevomedCollectionNewPagosnuevomedToAttach.getClass(), pagosnuevomedCollectionNewPagosnuevomedToAttach.getIdnuevomed());
+                attachedPagosnuevomedCollectionNew.add(pagosnuevomedCollectionNewPagosnuevomedToAttach);
+            }
+            pagosnuevomedCollectionNew = attachedPagosnuevomedCollectionNew;
+            medidor.setPagosnuevomedCollection(pagosnuevomedCollectionNew);
+            Collection<Detallefactura> attachedDetallefacturaCollectionNew = new ArrayList<Detallefactura>();
+            for (Detallefactura detallefacturaCollectionNewDetallefacturaToAttach : detallefacturaCollectionNew) {
+                detallefacturaCollectionNewDetallefacturaToAttach = em.getReference(detallefacturaCollectionNewDetallefacturaToAttach.getClass(), detallefacturaCollectionNewDetallefacturaToAttach.getIddetallefac());
+                attachedDetallefacturaCollectionNew.add(detallefacturaCollectionNewDetallefacturaToAttach);
+            }
+            detallefacturaCollectionNew = attachedDetallefacturaCollectionNew;
+            medidor.setDetallefacturaCollection(detallefacturaCollectionNew);
             medidor = em.merge(medidor);
             if (idusuarioOld != null && !idusuarioOld.equals(idusuarioNew)) {
-                idusuarioOld.getMedidorList().remove(medidor);
+                idusuarioOld.getMedidorCollection().remove(medidor);
                 idusuarioOld = em.merge(idusuarioOld);
             }
             if (idusuarioNew != null && !idusuarioNew.equals(idusuarioOld)) {
-                idusuarioNew.getMedidorList().add(medidor);
+                idusuarioNew.getMedidorCollection().add(medidor);
                 idusuarioNew = em.merge(idusuarioNew);
             }
-            for (Corte corteListOldCorte : corteListOld) {
-                if (!corteListNew.contains(corteListOldCorte)) {
-                    corteListOldCorte.setIdmedidor(null);
-                    corteListOldCorte = em.merge(corteListOldCorte);
+            for (Usuarios usuariosCollectionOldUsuarios : usuariosCollectionOld) {
+                if (!usuariosCollectionNew.contains(usuariosCollectionOldUsuarios)) {
+                    usuariosCollectionOldUsuarios.getMedidorCollection().remove(medidor);
+                    usuariosCollectionOldUsuarios = em.merge(usuariosCollectionOldUsuarios);
                 }
             }
-            for (Corte corteListNewCorte : corteListNew) {
-                if (!corteListOld.contains(corteListNewCorte)) {
-                    Medidor oldIdmedidorOfCorteListNewCorte = corteListNewCorte.getIdmedidor();
-                    corteListNewCorte.setIdmedidor(medidor);
-                    corteListNewCorte = em.merge(corteListNewCorte);
-                    if (oldIdmedidorOfCorteListNewCorte != null && !oldIdmedidorOfCorteListNewCorte.equals(medidor)) {
-                        oldIdmedidorOfCorteListNewCorte.getCorteList().remove(corteListNewCorte);
-                        oldIdmedidorOfCorteListNewCorte = em.merge(oldIdmedidorOfCorteListNewCorte);
+            for (Usuarios usuariosCollectionNewUsuarios : usuariosCollectionNew) {
+                if (!usuariosCollectionOld.contains(usuariosCollectionNewUsuarios)) {
+                    usuariosCollectionNewUsuarios.getMedidorCollection().add(medidor);
+                    usuariosCollectionNewUsuarios = em.merge(usuariosCollectionNewUsuarios);
+                }
+            }
+            for (Asistenciapesillo asistenciapesilloCollectionNewAsistenciapesillo : asistenciapesilloCollectionNew) {
+                if (!asistenciapesilloCollectionOld.contains(asistenciapesilloCollectionNewAsistenciapesillo)) {
+                    Medidor oldIdmedidorOfAsistenciapesilloCollectionNewAsistenciapesillo = asistenciapesilloCollectionNewAsistenciapesillo.getIdmedidor();
+                    asistenciapesilloCollectionNewAsistenciapesillo.setIdmedidor(medidor);
+                    asistenciapesilloCollectionNewAsistenciapesillo = em.merge(asistenciapesilloCollectionNewAsistenciapesillo);
+                    if (oldIdmedidorOfAsistenciapesilloCollectionNewAsistenciapesillo != null && !oldIdmedidorOfAsistenciapesilloCollectionNewAsistenciapesillo.equals(medidor)) {
+                        oldIdmedidorOfAsistenciapesilloCollectionNewAsistenciapesillo.getAsistenciapesilloCollection().remove(asistenciapesilloCollectionNewAsistenciapesillo);
+                        oldIdmedidorOfAsistenciapesilloCollectionNewAsistenciapesillo = em.merge(oldIdmedidorOfAsistenciapesilloCollectionNewAsistenciapesillo);
                     }
                 }
             }
-            for (Asistencia asistenciaListOldAsistencia : asistenciaListOld) {
-                if (!asistenciaListNew.contains(asistenciaListOldAsistencia)) {
-                    asistenciaListOldAsistencia.setIdmedidor(null);
-                    asistenciaListOldAsistencia = em.merge(asistenciaListOldAsistencia);
-                }
-            }
-            for (Asistencia asistenciaListNewAsistencia : asistenciaListNew) {
-                if (!asistenciaListOld.contains(asistenciaListNewAsistencia)) {
-                    Medidor oldIdmedidorOfAsistenciaListNewAsistencia = asistenciaListNewAsistencia.getIdmedidor();
-                    asistenciaListNewAsistencia.setIdmedidor(medidor);
-                    asistenciaListNewAsistencia = em.merge(asistenciaListNewAsistencia);
-                    if (oldIdmedidorOfAsistenciaListNewAsistencia != null && !oldIdmedidorOfAsistenciaListNewAsistencia.equals(medidor)) {
-                        oldIdmedidorOfAsistenciaListNewAsistencia.getAsistenciaList().remove(asistenciaListNewAsistencia);
-                        oldIdmedidorOfAsistenciaListNewAsistencia = em.merge(oldIdmedidorOfAsistenciaListNewAsistencia);
+            for (Corte corteCollectionNewCorte : corteCollectionNew) {
+                if (!corteCollectionOld.contains(corteCollectionNewCorte)) {
+                    Medidor oldIdmedidorOfCorteCollectionNewCorte = corteCollectionNewCorte.getIdmedidor();
+                    corteCollectionNewCorte.setIdmedidor(medidor);
+                    corteCollectionNewCorte = em.merge(corteCollectionNewCorte);
+                    if (oldIdmedidorOfCorteCollectionNewCorte != null && !oldIdmedidorOfCorteCollectionNewCorte.equals(medidor)) {
+                        oldIdmedidorOfCorteCollectionNewCorte.getCorteCollection().remove(corteCollectionNewCorte);
+                        oldIdmedidorOfCorteCollectionNewCorte = em.merge(oldIdmedidorOfCorteCollectionNewCorte);
                     }
                 }
             }
-            for (Detallefactura detallefacturaListOldDetallefactura : detallefacturaListOld) {
-                if (!detallefacturaListNew.contains(detallefacturaListOldDetallefactura)) {
-                    detallefacturaListOldDetallefactura.setIdmedidor(null);
-                    detallefacturaListOldDetallefactura = em.merge(detallefacturaListOldDetallefactura);
-                }
-            }
-            for (Detallefactura detallefacturaListNewDetallefactura : detallefacturaListNew) {
-                if (!detallefacturaListOld.contains(detallefacturaListNewDetallefactura)) {
-                    Medidor oldIdmedidorOfDetallefacturaListNewDetallefactura = detallefacturaListNewDetallefactura.getIdmedidor();
-                    detallefacturaListNewDetallefactura.setIdmedidor(medidor);
-                    detallefacturaListNewDetallefactura = em.merge(detallefacturaListNewDetallefactura);
-                    if (oldIdmedidorOfDetallefacturaListNewDetallefactura != null && !oldIdmedidorOfDetallefacturaListNewDetallefactura.equals(medidor)) {
-                        oldIdmedidorOfDetallefacturaListNewDetallefactura.getDetallefacturaList().remove(detallefacturaListNewDetallefactura);
-                        oldIdmedidorOfDetallefacturaListNewDetallefactura = em.merge(oldIdmedidorOfDetallefacturaListNewDetallefactura);
+            for (Asistencia asistenciaCollectionNewAsistencia : asistenciaCollectionNew) {
+                if (!asistenciaCollectionOld.contains(asistenciaCollectionNewAsistencia)) {
+                    Medidor oldIdmedidorOfAsistenciaCollectionNewAsistencia = asistenciaCollectionNewAsistencia.getIdmedidor();
+                    asistenciaCollectionNewAsistencia.setIdmedidor(medidor);
+                    asistenciaCollectionNewAsistencia = em.merge(asistenciaCollectionNewAsistencia);
+                    if (oldIdmedidorOfAsistenciaCollectionNewAsistencia != null && !oldIdmedidorOfAsistenciaCollectionNewAsistencia.equals(medidor)) {
+                        oldIdmedidorOfAsistenciaCollectionNewAsistencia.getAsistenciaCollection().remove(asistenciaCollectionNewAsistencia);
+                        oldIdmedidorOfAsistenciaCollectionNewAsistencia = em.merge(oldIdmedidorOfAsistenciaCollectionNewAsistencia);
                     }
                 }
             }
-            for (Pagosnuevomed pagosnuevomedListOldPagosnuevomed : pagosnuevomedListOld) {
-                if (!pagosnuevomedListNew.contains(pagosnuevomedListOldPagosnuevomed)) {
-                    pagosnuevomedListOldPagosnuevomed.setIdmedidor(null);
-                    pagosnuevomedListOldPagosnuevomed = em.merge(pagosnuevomedListOldPagosnuevomed);
+            for (Pagosnuevomed pagosnuevomedCollectionNewPagosnuevomed : pagosnuevomedCollectionNew) {
+                if (!pagosnuevomedCollectionOld.contains(pagosnuevomedCollectionNewPagosnuevomed)) {
+                    Medidor oldIdmedidorOfPagosnuevomedCollectionNewPagosnuevomed = pagosnuevomedCollectionNewPagosnuevomed.getIdmedidor();
+                    pagosnuevomedCollectionNewPagosnuevomed.setIdmedidor(medidor);
+                    pagosnuevomedCollectionNewPagosnuevomed = em.merge(pagosnuevomedCollectionNewPagosnuevomed);
+                    if (oldIdmedidorOfPagosnuevomedCollectionNewPagosnuevomed != null && !oldIdmedidorOfPagosnuevomedCollectionNewPagosnuevomed.equals(medidor)) {
+                        oldIdmedidorOfPagosnuevomedCollectionNewPagosnuevomed.getPagosnuevomedCollection().remove(pagosnuevomedCollectionNewPagosnuevomed);
+                        oldIdmedidorOfPagosnuevomedCollectionNewPagosnuevomed = em.merge(oldIdmedidorOfPagosnuevomedCollectionNewPagosnuevomed);
+                    }
                 }
             }
-            for (Pagosnuevomed pagosnuevomedListNewPagosnuevomed : pagosnuevomedListNew) {
-                if (!pagosnuevomedListOld.contains(pagosnuevomedListNewPagosnuevomed)) {
-                    Medidor oldIdmedidorOfPagosnuevomedListNewPagosnuevomed = pagosnuevomedListNewPagosnuevomed.getIdmedidor();
-                    pagosnuevomedListNewPagosnuevomed.setIdmedidor(medidor);
-                    pagosnuevomedListNewPagosnuevomed = em.merge(pagosnuevomedListNewPagosnuevomed);
-                    if (oldIdmedidorOfPagosnuevomedListNewPagosnuevomed != null && !oldIdmedidorOfPagosnuevomedListNewPagosnuevomed.equals(medidor)) {
-                        oldIdmedidorOfPagosnuevomedListNewPagosnuevomed.getPagosnuevomedList().remove(pagosnuevomedListNewPagosnuevomed);
-                        oldIdmedidorOfPagosnuevomedListNewPagosnuevomed = em.merge(oldIdmedidorOfPagosnuevomedListNewPagosnuevomed);
+            for (Detallefactura detallefacturaCollectionNewDetallefactura : detallefacturaCollectionNew) {
+                if (!detallefacturaCollectionOld.contains(detallefacturaCollectionNewDetallefactura)) {
+                    Medidor oldIdmedidorOfDetallefacturaCollectionNewDetallefactura = detallefacturaCollectionNewDetallefactura.getIdmedidor();
+                    detallefacturaCollectionNewDetallefactura.setIdmedidor(medidor);
+                    detallefacturaCollectionNewDetallefactura = em.merge(detallefacturaCollectionNewDetallefactura);
+                    if (oldIdmedidorOfDetallefacturaCollectionNewDetallefactura != null && !oldIdmedidorOfDetallefacturaCollectionNewDetallefactura.equals(medidor)) {
+                        oldIdmedidorOfDetallefacturaCollectionNewDetallefactura.getDetallefacturaCollection().remove(detallefacturaCollectionNewDetallefactura);
+                        oldIdmedidorOfDetallefacturaCollectionNewDetallefactura = em.merge(oldIdmedidorOfDetallefacturaCollectionNewDetallefactura);
                     }
                 }
             }
@@ -274,7 +369,7 @@ public class MedidorJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -286,30 +381,54 @@ public class MedidorJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The medidor with id " + id + " no longer exists.", enfe);
             }
+            List<String> illegalOrphanMessages = null;
+            Collection<Asistenciapesillo> asistenciapesilloCollectionOrphanCheck = medidor.getAsistenciapesilloCollection();
+            for (Asistenciapesillo asistenciapesilloCollectionOrphanCheckAsistenciapesillo : asistenciapesilloCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Medidor (" + medidor + ") cannot be destroyed since the Asistenciapesillo " + asistenciapesilloCollectionOrphanCheckAsistenciapesillo + " in its asistenciapesilloCollection field has a non-nullable idmedidor field.");
+            }
+            Collection<Corte> corteCollectionOrphanCheck = medidor.getCorteCollection();
+            for (Corte corteCollectionOrphanCheckCorte : corteCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Medidor (" + medidor + ") cannot be destroyed since the Corte " + corteCollectionOrphanCheckCorte + " in its corteCollection field has a non-nullable idmedidor field.");
+            }
+            Collection<Asistencia> asistenciaCollectionOrphanCheck = medidor.getAsistenciaCollection();
+            for (Asistencia asistenciaCollectionOrphanCheckAsistencia : asistenciaCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Medidor (" + medidor + ") cannot be destroyed since the Asistencia " + asistenciaCollectionOrphanCheckAsistencia + " in its asistenciaCollection field has a non-nullable idmedidor field.");
+            }
+            Collection<Pagosnuevomed> pagosnuevomedCollectionOrphanCheck = medidor.getPagosnuevomedCollection();
+            for (Pagosnuevomed pagosnuevomedCollectionOrphanCheckPagosnuevomed : pagosnuevomedCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Medidor (" + medidor + ") cannot be destroyed since the Pagosnuevomed " + pagosnuevomedCollectionOrphanCheckPagosnuevomed + " in its pagosnuevomedCollection field has a non-nullable idmedidor field.");
+            }
+            Collection<Detallefactura> detallefacturaCollectionOrphanCheck = medidor.getDetallefacturaCollection();
+            for (Detallefactura detallefacturaCollectionOrphanCheckDetallefactura : detallefacturaCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Medidor (" + medidor + ") cannot be destroyed since the Detallefactura " + detallefacturaCollectionOrphanCheckDetallefactura + " in its detallefacturaCollection field has a non-nullable idmedidor field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             Usuarios idusuario = medidor.getIdusuario();
             if (idusuario != null) {
-                idusuario.getMedidorList().remove(medidor);
+                idusuario.getMedidorCollection().remove(medidor);
                 idusuario = em.merge(idusuario);
             }
-            List<Corte> corteList = medidor.getCorteList();
-            for (Corte corteListCorte : corteList) {
-                corteListCorte.setIdmedidor(null);
-                corteListCorte = em.merge(corteListCorte);
-            }
-            List<Asistencia> asistenciaList = medidor.getAsistenciaList();
-            for (Asistencia asistenciaListAsistencia : asistenciaList) {
-                asistenciaListAsistencia.setIdmedidor(null);
-                asistenciaListAsistencia = em.merge(asistenciaListAsistencia);
-            }
-            List<Detallefactura> detallefacturaList = medidor.getDetallefacturaList();
-            for (Detallefactura detallefacturaListDetallefactura : detallefacturaList) {
-                detallefacturaListDetallefactura.setIdmedidor(null);
-                detallefacturaListDetallefactura = em.merge(detallefacturaListDetallefactura);
-            }
-            List<Pagosnuevomed> pagosnuevomedList = medidor.getPagosnuevomedList();
-            for (Pagosnuevomed pagosnuevomedListPagosnuevomed : pagosnuevomedList) {
-                pagosnuevomedListPagosnuevomed.setIdmedidor(null);
-                pagosnuevomedListPagosnuevomed = em.merge(pagosnuevomedListPagosnuevomed);
+            Collection<Usuarios> usuariosCollection = medidor.getUsuariosCollection();
+            for (Usuarios usuariosCollectionUsuarios : usuariosCollection) {
+                usuariosCollectionUsuarios.getMedidorCollection().remove(medidor);
+                usuariosCollectionUsuarios = em.merge(usuariosCollectionUsuarios);
             }
             em.remove(medidor);
             em.getTransaction().commit();

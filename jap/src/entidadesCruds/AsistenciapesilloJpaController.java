@@ -11,17 +11,20 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import entidades.Medidor;
 import entidades.Planificacionpesillo;
 import entidades.Pagopesillo;
+import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Marco
+ * @author Tech-Usuario
  */
 public class AsistenciapesilloJpaController implements Serializable {
 
@@ -35,36 +38,45 @@ public class AsistenciapesilloJpaController implements Serializable {
     }
 
     public void create(Asistenciapesillo asistenciapesillo) {
-        if (asistenciapesillo.getPagopesilloList() == null) {
-            asistenciapesillo.setPagopesilloList(new ArrayList<Pagopesillo>());
+        if (asistenciapesillo.getPagopesilloCollection() == null) {
+            asistenciapesillo.setPagopesilloCollection(new ArrayList<Pagopesillo>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Medidor idmedidor = asistenciapesillo.getIdmedidor();
+            if (idmedidor != null) {
+                idmedidor = em.getReference(idmedidor.getClass(), idmedidor.getIdmedidor());
+                asistenciapesillo.setIdmedidor(idmedidor);
+            }
             Planificacionpesillo idplanificacionpesillo = asistenciapesillo.getIdplanificacionpesillo();
             if (idplanificacionpesillo != null) {
                 idplanificacionpesillo = em.getReference(idplanificacionpesillo.getClass(), idplanificacionpesillo.getIdplanificacionpesillo());
                 asistenciapesillo.setIdplanificacionpesillo(idplanificacionpesillo);
             }
-            List<Pagopesillo> attachedPagopesilloList = new ArrayList<Pagopesillo>();
-            for (Pagopesillo pagopesilloListPagopesilloToAttach : asistenciapesillo.getPagopesilloList()) {
-                pagopesilloListPagopesilloToAttach = em.getReference(pagopesilloListPagopesilloToAttach.getClass(), pagopesilloListPagopesilloToAttach.getIdpagopesillo());
-                attachedPagopesilloList.add(pagopesilloListPagopesilloToAttach);
+            Collection<Pagopesillo> attachedPagopesilloCollection = new ArrayList<Pagopesillo>();
+            for (Pagopesillo pagopesilloCollectionPagopesilloToAttach : asistenciapesillo.getPagopesilloCollection()) {
+                pagopesilloCollectionPagopesilloToAttach = em.getReference(pagopesilloCollectionPagopesilloToAttach.getClass(), pagopesilloCollectionPagopesilloToAttach.getIdpagopesillo());
+                attachedPagopesilloCollection.add(pagopesilloCollectionPagopesilloToAttach);
             }
-            asistenciapesillo.setPagopesilloList(attachedPagopesilloList);
+            asistenciapesillo.setPagopesilloCollection(attachedPagopesilloCollection);
             em.persist(asistenciapesillo);
+            if (idmedidor != null) {
+                idmedidor.getAsistenciapesilloCollection().add(asistenciapesillo);
+                idmedidor = em.merge(idmedidor);
+            }
             if (idplanificacionpesillo != null) {
-                idplanificacionpesillo.getAsistenciapesilloList().add(asistenciapesillo);
+                idplanificacionpesillo.getAsistenciapesilloCollection().add(asistenciapesillo);
                 idplanificacionpesillo = em.merge(idplanificacionpesillo);
             }
-            for (Pagopesillo pagopesilloListPagopesillo : asistenciapesillo.getPagopesilloList()) {
-                Asistenciapesillo oldIdasistenciapesilloOfPagopesilloListPagopesillo = pagopesilloListPagopesillo.getIdasistenciapesillo();
-                pagopesilloListPagopesillo.setIdasistenciapesillo(asistenciapesillo);
-                pagopesilloListPagopesillo = em.merge(pagopesilloListPagopesillo);
-                if (oldIdasistenciapesilloOfPagopesilloListPagopesillo != null) {
-                    oldIdasistenciapesilloOfPagopesilloListPagopesillo.getPagopesilloList().remove(pagopesilloListPagopesillo);
-                    oldIdasistenciapesilloOfPagopesilloListPagopesillo = em.merge(oldIdasistenciapesilloOfPagopesilloListPagopesillo);
+            for (Pagopesillo pagopesilloCollectionPagopesillo : asistenciapesillo.getPagopesilloCollection()) {
+                Asistenciapesillo oldIdasistenciapesilloOfPagopesilloCollectionPagopesillo = pagopesilloCollectionPagopesillo.getIdasistenciapesillo();
+                pagopesilloCollectionPagopesillo.setIdasistenciapesillo(asistenciapesillo);
+                pagopesilloCollectionPagopesillo = em.merge(pagopesilloCollectionPagopesillo);
+                if (oldIdasistenciapesilloOfPagopesilloCollectionPagopesillo != null) {
+                    oldIdasistenciapesilloOfPagopesilloCollectionPagopesillo.getPagopesilloCollection().remove(pagopesilloCollectionPagopesillo);
+                    oldIdasistenciapesilloOfPagopesilloCollectionPagopesillo = em.merge(oldIdasistenciapesilloOfPagopesilloCollectionPagopesillo);
                 }
             }
             em.getTransaction().commit();
@@ -75,50 +87,70 @@ public class AsistenciapesilloJpaController implements Serializable {
         }
     }
 
-    public void edit(Asistenciapesillo asistenciapesillo) throws NonexistentEntityException, Exception {
+    public void edit(Asistenciapesillo asistenciapesillo) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Asistenciapesillo persistentAsistenciapesillo = em.find(Asistenciapesillo.class, asistenciapesillo.getIdasistenciapesillo());
+            Medidor idmedidorOld = persistentAsistenciapesillo.getIdmedidor();
+            Medidor idmedidorNew = asistenciapesillo.getIdmedidor();
             Planificacionpesillo idplanificacionpesilloOld = persistentAsistenciapesillo.getIdplanificacionpesillo();
             Planificacionpesillo idplanificacionpesilloNew = asistenciapesillo.getIdplanificacionpesillo();
-            List<Pagopesillo> pagopesilloListOld = persistentAsistenciapesillo.getPagopesilloList();
-            List<Pagopesillo> pagopesilloListNew = asistenciapesillo.getPagopesilloList();
+            Collection<Pagopesillo> pagopesilloCollectionOld = persistentAsistenciapesillo.getPagopesilloCollection();
+            Collection<Pagopesillo> pagopesilloCollectionNew = asistenciapesillo.getPagopesilloCollection();
+            List<String> illegalOrphanMessages = null;
+            for (Pagopesillo pagopesilloCollectionOldPagopesillo : pagopesilloCollectionOld) {
+                if (!pagopesilloCollectionNew.contains(pagopesilloCollectionOldPagopesillo)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Pagopesillo " + pagopesilloCollectionOldPagopesillo + " since its idasistenciapesillo field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            if (idmedidorNew != null) {
+                idmedidorNew = em.getReference(idmedidorNew.getClass(), idmedidorNew.getIdmedidor());
+                asistenciapesillo.setIdmedidor(idmedidorNew);
+            }
             if (idplanificacionpesilloNew != null) {
                 idplanificacionpesilloNew = em.getReference(idplanificacionpesilloNew.getClass(), idplanificacionpesilloNew.getIdplanificacionpesillo());
                 asistenciapesillo.setIdplanificacionpesillo(idplanificacionpesilloNew);
             }
-            List<Pagopesillo> attachedPagopesilloListNew = new ArrayList<Pagopesillo>();
-            for (Pagopesillo pagopesilloListNewPagopesilloToAttach : pagopesilloListNew) {
-                pagopesilloListNewPagopesilloToAttach = em.getReference(pagopesilloListNewPagopesilloToAttach.getClass(), pagopesilloListNewPagopesilloToAttach.getIdpagopesillo());
-                attachedPagopesilloListNew.add(pagopesilloListNewPagopesilloToAttach);
+            Collection<Pagopesillo> attachedPagopesilloCollectionNew = new ArrayList<Pagopesillo>();
+            for (Pagopesillo pagopesilloCollectionNewPagopesilloToAttach : pagopesilloCollectionNew) {
+                pagopesilloCollectionNewPagopesilloToAttach = em.getReference(pagopesilloCollectionNewPagopesilloToAttach.getClass(), pagopesilloCollectionNewPagopesilloToAttach.getIdpagopesillo());
+                attachedPagopesilloCollectionNew.add(pagopesilloCollectionNewPagopesilloToAttach);
             }
-            pagopesilloListNew = attachedPagopesilloListNew;
-            asistenciapesillo.setPagopesilloList(pagopesilloListNew);
+            pagopesilloCollectionNew = attachedPagopesilloCollectionNew;
+            asistenciapesillo.setPagopesilloCollection(pagopesilloCollectionNew);
             asistenciapesillo = em.merge(asistenciapesillo);
+            if (idmedidorOld != null && !idmedidorOld.equals(idmedidorNew)) {
+                idmedidorOld.getAsistenciapesilloCollection().remove(asistenciapesillo);
+                idmedidorOld = em.merge(idmedidorOld);
+            }
+            if (idmedidorNew != null && !idmedidorNew.equals(idmedidorOld)) {
+                idmedidorNew.getAsistenciapesilloCollection().add(asistenciapesillo);
+                idmedidorNew = em.merge(idmedidorNew);
+            }
             if (idplanificacionpesilloOld != null && !idplanificacionpesilloOld.equals(idplanificacionpesilloNew)) {
-                idplanificacionpesilloOld.getAsistenciapesilloList().remove(asistenciapesillo);
+                idplanificacionpesilloOld.getAsistenciapesilloCollection().remove(asistenciapesillo);
                 idplanificacionpesilloOld = em.merge(idplanificacionpesilloOld);
             }
             if (idplanificacionpesilloNew != null && !idplanificacionpesilloNew.equals(idplanificacionpesilloOld)) {
-                idplanificacionpesilloNew.getAsistenciapesilloList().add(asistenciapesillo);
+                idplanificacionpesilloNew.getAsistenciapesilloCollection().add(asistenciapesillo);
                 idplanificacionpesilloNew = em.merge(idplanificacionpesilloNew);
             }
-            for (Pagopesillo pagopesilloListOldPagopesillo : pagopesilloListOld) {
-                if (!pagopesilloListNew.contains(pagopesilloListOldPagopesillo)) {
-                    pagopesilloListOldPagopesillo.setIdasistenciapesillo(null);
-                    pagopesilloListOldPagopesillo = em.merge(pagopesilloListOldPagopesillo);
-                }
-            }
-            for (Pagopesillo pagopesilloListNewPagopesillo : pagopesilloListNew) {
-                if (!pagopesilloListOld.contains(pagopesilloListNewPagopesillo)) {
-                    Asistenciapesillo oldIdasistenciapesilloOfPagopesilloListNewPagopesillo = pagopesilloListNewPagopesillo.getIdasistenciapesillo();
-                    pagopesilloListNewPagopesillo.setIdasistenciapesillo(asistenciapesillo);
-                    pagopesilloListNewPagopesillo = em.merge(pagopesilloListNewPagopesillo);
-                    if (oldIdasistenciapesilloOfPagopesilloListNewPagopesillo != null && !oldIdasistenciapesilloOfPagopesilloListNewPagopesillo.equals(asistenciapesillo)) {
-                        oldIdasistenciapesilloOfPagopesilloListNewPagopesillo.getPagopesilloList().remove(pagopesilloListNewPagopesillo);
-                        oldIdasistenciapesilloOfPagopesilloListNewPagopesillo = em.merge(oldIdasistenciapesilloOfPagopesilloListNewPagopesillo);
+            for (Pagopesillo pagopesilloCollectionNewPagopesillo : pagopesilloCollectionNew) {
+                if (!pagopesilloCollectionOld.contains(pagopesilloCollectionNewPagopesillo)) {
+                    Asistenciapesillo oldIdasistenciapesilloOfPagopesilloCollectionNewPagopesillo = pagopesilloCollectionNewPagopesillo.getIdasistenciapesillo();
+                    pagopesilloCollectionNewPagopesillo.setIdasistenciapesillo(asistenciapesillo);
+                    pagopesilloCollectionNewPagopesillo = em.merge(pagopesilloCollectionNewPagopesillo);
+                    if (oldIdasistenciapesilloOfPagopesilloCollectionNewPagopesillo != null && !oldIdasistenciapesilloOfPagopesilloCollectionNewPagopesillo.equals(asistenciapesillo)) {
+                        oldIdasistenciapesilloOfPagopesilloCollectionNewPagopesillo.getPagopesilloCollection().remove(pagopesilloCollectionNewPagopesillo);
+                        oldIdasistenciapesilloOfPagopesilloCollectionNewPagopesillo = em.merge(oldIdasistenciapesilloOfPagopesilloCollectionNewPagopesillo);
                     }
                 }
             }
@@ -139,7 +171,7 @@ public class AsistenciapesilloJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -151,15 +183,26 @@ public class AsistenciapesilloJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The asistenciapesillo with id " + id + " no longer exists.", enfe);
             }
+            List<String> illegalOrphanMessages = null;
+            Collection<Pagopesillo> pagopesilloCollectionOrphanCheck = asistenciapesillo.getPagopesilloCollection();
+            for (Pagopesillo pagopesilloCollectionOrphanCheckPagopesillo : pagopesilloCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Asistenciapesillo (" + asistenciapesillo + ") cannot be destroyed since the Pagopesillo " + pagopesilloCollectionOrphanCheckPagopesillo + " in its pagopesilloCollection field has a non-nullable idasistenciapesillo field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            Medidor idmedidor = asistenciapesillo.getIdmedidor();
+            if (idmedidor != null) {
+                idmedidor.getAsistenciapesilloCollection().remove(asistenciapesillo);
+                idmedidor = em.merge(idmedidor);
+            }
             Planificacionpesillo idplanificacionpesillo = asistenciapesillo.getIdplanificacionpesillo();
             if (idplanificacionpesillo != null) {
-                idplanificacionpesillo.getAsistenciapesilloList().remove(asistenciapesillo);
+                idplanificacionpesillo.getAsistenciapesilloCollection().remove(asistenciapesillo);
                 idplanificacionpesillo = em.merge(idplanificacionpesillo);
-            }
-            List<Pagopesillo> pagopesilloList = asistenciapesillo.getPagopesilloList();
-            for (Pagopesillo pagopesilloListPagopesillo : pagopesilloList) {
-                pagopesilloListPagopesillo.setIdasistenciapesillo(null);
-                pagopesilloListPagopesillo = em.merge(pagopesilloListPagopesillo);
             }
             em.remove(asistenciapesillo);
             em.getTransaction().commit();

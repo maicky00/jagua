@@ -6,8 +6,9 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "institucion")
@@ -36,9 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Institucion.findByRuc", query = "SELECT i FROM Institucion i WHERE i.ruc = :ruc"),
     @NamedQuery(name = "Institucion.findByCelular", query = "SELECT i FROM Institucion i WHERE i.celular = :celular")})
 public class Institucion implements Serializable {
-    @Lob
-    @Column(name = "LOGO")
-    private byte[] logo;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,8 +57,11 @@ public class Institucion implements Serializable {
     private String ruc;
     @Column(name = "CELULAR")
     private String celular;
-    @OneToMany(mappedBy = "idinstitucion")
-    private List<Usuarios> usuariosList;
+    @Lob
+    @Column(name = "LOGO")
+    private byte[] logo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idinstitucion")
+    private Collection<Usuarios> usuariosCollection;
 
     public Institucion() {
     }
@@ -125,13 +126,21 @@ public class Institucion implements Serializable {
         this.celular = celular;
     }
 
-    @XmlTransient
-    public List<Usuarios> getUsuariosList() {
-        return usuariosList;
+    public byte[] getLogo() {
+        return logo;
     }
 
-    public void setUsuariosList(List<Usuarios> usuariosList) {
-        this.usuariosList = usuariosList;
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
+    }
+
+    @XmlTransient
+    public Collection<Usuarios> getUsuariosCollection() {
+        return usuariosCollection;
+    }
+
+    public void setUsuariosCollection(Collection<Usuarios> usuariosCollection) {
+        this.usuariosCollection = usuariosCollection;
     }
 
     @Override
@@ -157,14 +166,6 @@ public class Institucion implements Serializable {
     @Override
     public String toString() {
         return "entidades.Institucion[ idinstitucion=" + idinstitucion + " ]";
-    }
-
-    public byte[] getLogo() {
-        return logo;
-    }
-
-    public void setLogo(byte[] logo) {
-        this.logo = logo;
     }
     
 }

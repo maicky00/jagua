@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "otrosconceptos")
@@ -29,10 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Otrosconceptos.findById", query = "SELECT o FROM Otrosconceptos o WHERE o.id = :id"),
     @NamedQuery(name = "Otrosconceptos.findByDescripcion", query = "SELECT o FROM Otrosconceptos o WHERE o.descripcion = :descripcion"),
     @NamedQuery(name = "Otrosconceptos.findByCantidad", query = "SELECT o FROM Otrosconceptos o WHERE o.cantidad = :cantidad"),
-    @NamedQuery(name = "Otrosconceptos.findByTiempo", query = "SELECT o FROM Otrosconceptos o WHERE o.tiempo = :tiempo")})
+    @NamedQuery(name = "Otrosconceptos.findByTiempo", query = "SELECT o FROM Otrosconceptos o WHERE o.tiempo = :tiempo"),
+    @NamedQuery(name = "Otrosconceptos.findByActivo", query = "SELECT o FROM Otrosconceptos o WHERE o.activo = :activo")})
 public class Otrosconceptos implements Serializable {
-    @Column(name = "ACTIVO")
-    private String activo;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +45,8 @@ public class Otrosconceptos implements Serializable {
     private Float cantidad;
     @Column(name = "TIEMPO")
     private Integer tiempo;
+    @Column(name = "ACTIVO")
+    private String activo;
 
     public Otrosconceptos() {
     }
@@ -86,6 +87,14 @@ public class Otrosconceptos implements Serializable {
         this.tiempo = tiempo;
     }
 
+    public String getActivo() {
+        return activo;
+    }
+
+    public void setActivo(String activo) {
+        this.activo = activo;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -109,14 +118,6 @@ public class Otrosconceptos implements Serializable {
     @Override
     public String toString() {
         return "entidades.Otrosconceptos[ id=" + id + " ]";
-    }
-
-    public String getActivo() {
-        return activo;
-    }
-
-    public void setActivo(String activo) {
-        this.activo = activo;
     }
     
 }

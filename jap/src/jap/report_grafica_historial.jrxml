@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report_grafica_historial" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="dede96fc-609d-4ac4-a131-ee806b7552f1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="New Dataset 1" uuid="df638430-6207-433e-81f6-9b94a2d8f9bf">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     detallefactura.`IDDETALLEFAC` AS detallefactura_IDDETALLEFAC,
+     detallefactura.`IDTARIFAS` AS detallefactura_IDTARIFAS,
+     detallefactura.`IDMEDIDOR` AS detallefactura_IDMEDIDOR,
+     detallefactura.`ANIOMES` AS detallefactura_ANIOMES,
+     detallefactura.`MEDIDAANT` AS detallefactura_MEDIDAANT,
+     detallefactura.`MEDIDAACT` AS detallefactura_MEDIDAACT,
+     detallefactura.`CONSUMO` AS detallefactura_CONSUMO,
+     detallefactura.`MEDEXCEDIDO` AS detallefactura_MEDEXCEDIDO,
+     detallefactura.`TAREXCEDIDO` AS detallefactura_TAREXCEDIDO,
+     detallefactura.`SUBTOTAL` AS detallefactura_SUBTOTAL,
+     detallefactura.`TOTAL` AS detallefactura_TOTAL,
+     detallefactura.`OBSERVACION` AS detallefactura_OBSERVACION,
+     medidor.`IDMEDIDOR` AS medidor_IDMEDIDOR,
+     medidor.`IDUSUARIO` AS medidor_IDUSUARIO,
+     medidor.`SERIE` AS medidor_SERIE,
+     medidor.`NUMMEDIDOR` AS medidor_NUMMEDIDOR,
+     medidor.`ESTADO` AS medidor_ESTADO,
+     medidor.`VALORPORCONEXION` AS medidor_VALORPORCONEXION,
+     medidor.`PAGADO` AS medidor_PAGADO,
+     medidor.`SALDO` AS medidor_SALDO,
+     medidor.`FECHA` AS medidor_FECHA
+FROM
+     `medidor` medidor INNER JOIN `detallefactura` detallefactura ON medidor.`IDMEDIDOR` = detallefactura.`IDMEDIDOR`]]>
+		</queryString>
+		<field name="detallefactura_IDDETALLEFAC" class="java.lang.Integer"/>
+		<field name="detallefactura_IDTARIFAS" class="java.lang.Integer"/>
+		<field name="detallefactura_IDMEDIDOR" class="java.lang.Integer"/>
+		<field name="detallefactura_ANIOMES" class="java.lang.String"/>
+		<field name="detallefactura_MEDIDAANT" class="java.lang.Integer"/>
+		<field name="detallefactura_MEDIDAACT" class="java.lang.Integer"/>
+		<field name="detallefactura_CONSUMO" class="java.lang.Integer"/>
+		<field name="detallefactura_MEDEXCEDIDO" class="java.lang.Integer"/>
+		<field name="detallefactura_TAREXCEDIDO" class="java.lang.Float"/>
+		<field name="detallefactura_SUBTOTAL" class="java.lang.Float"/>
+		<field name="detallefactura_TOTAL" class="java.lang.Float"/>
+		<field name="detallefactura_OBSERVACION" class="java.lang.String"/>
+		<field name="medidor_IDMEDIDOR" class="java.lang.Integer"/>
+		<field name="medidor_IDUSUARIO" class="java.lang.Integer"/>
+		<field name="medidor_SERIE" class="java.lang.String"/>
+		<field name="medidor_NUMMEDIDOR" class="java.lang.Integer"/>
+		<field name="medidor_ESTADO" class="java.lang.String"/>
+		<field name="medidor_VALORPORCONEXION" class="java.lang.Float"/>
+		<field name="medidor_PAGADO" class="java.lang.String"/>
+		<field name="medidor_SALDO" class="java.lang.Float"/>
+		<field name="medidor_FECHA" class="java.sql.Date"/>
+	</subDataset>
+	<parameter name="NUMMEDIDOR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[(SELECT
+		
+     medidor.`NUMMEDIDOR` AS medidor_NUMMEDIDOR,
+     detallefactura.`IDDETALLEFAC` AS detallefactura_IDDETALLEFAC,
+     detallefactura.`CONSUMO` AS detallefactura_CONSUMO,
+     detallefactura.`ANIOMES` AS detallefactura_ANIOMES
+FROM
+     `medidor` medidor INNER JOIN `detallefactura` detallefactura ON medidor.`IDMEDIDOR` = detallefactura.`IDMEDIDOR`
+WHERE
+     medidor.`NUMMEDIDOR` = 3
+ORDER BY
+     detallefactura_IDDETALLEFAC DESC LIMIT 5)
+ORDER BY detallefactura_ANIOMES ASC]]>
+	</queryString>
+	<field name="medidor_NUMMEDIDOR" class="java.lang.Integer"/>
+	<field name="detallefactura_IDDETALLEFAC" class="java.lang.Integer"/>
+	<field name="detallefactura_CONSUMO" class="java.lang.Integer"/>
+	<field name="detallefactura_ANIOMES" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<summary>
+		<band height="105">
+			<barChart>
+				<chart>
+					<reportElement x="0" y="0" width="266" height="105" uuid="592400c8-c0c9-4aaf-8ec9-6db8904ab9ed"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Historial Consumo"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{detallefactura_ANIOMES}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{detallefactura_CONSUMO}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

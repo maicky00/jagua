@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 public class PagosasistenciaJpaController implements Serializable {
 
@@ -44,7 +44,7 @@ public class PagosasistenciaJpaController implements Serializable {
             }
             em.persist(pagosasistencia);
             if (idasistencia != null) {
-                idasistencia.getPagosasistenciaList().add(pagosasistencia);
+                idasistencia.getPagosasistenciaCollection().add(pagosasistencia);
                 idasistencia = em.merge(idasistencia);
             }
             em.getTransaction().commit();
@@ -69,11 +69,11 @@ public class PagosasistenciaJpaController implements Serializable {
             }
             pagosasistencia = em.merge(pagosasistencia);
             if (idasistenciaOld != null && !idasistenciaOld.equals(idasistenciaNew)) {
-                idasistenciaOld.getPagosasistenciaList().remove(pagosasistencia);
+                idasistenciaOld.getPagosasistenciaCollection().remove(pagosasistencia);
                 idasistenciaOld = em.merge(idasistenciaOld);
             }
             if (idasistenciaNew != null && !idasistenciaNew.equals(idasistenciaOld)) {
-                idasistenciaNew.getPagosasistenciaList().add(pagosasistencia);
+                idasistenciaNew.getPagosasistenciaCollection().add(pagosasistencia);
                 idasistenciaNew = em.merge(idasistenciaNew);
             }
             em.getTransaction().commit();
@@ -107,7 +107,7 @@ public class PagosasistenciaJpaController implements Serializable {
             }
             Asistencia idasistencia = pagosasistencia.getIdasistencia();
             if (idasistencia != null) {
-                idasistencia.getPagosasistenciaList().remove(pagosasistencia);
+                idasistencia.getPagosasistenciaCollection().remove(pagosasistencia);
                 idasistencia = em.merge(idasistencia);
             }
             em.remove(pagosasistencia);

@@ -5,20 +5,21 @@
  */
 package entidadesCruds;
 
-import entidades.Facturas;
-import entidadesCruds.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import entidades.Detallefactura;
+import entidades.Facturas;
+import entidadesCruds.exceptions.NonexistentEntityException;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 public class FacturasJpaController implements Serializable {
 
@@ -36,7 +37,16 @@ public class FacturasJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Detallefactura iddetallefac = facturas.getIddetallefac();
+            if (iddetallefac != null) {
+                iddetallefac = em.getReference(iddetallefac.getClass(), iddetallefac.getIddetallefac());
+                facturas.setIddetallefac(iddetallefac);
+            }
             em.persist(facturas);
+            if (iddetallefac != null) {
+                iddetallefac.getFacturasCollection().add(facturas);
+                iddetallefac = em.merge(iddetallefac);
+            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -50,7 +60,22 @@ public class FacturasJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Facturas persistentFacturas = em.find(Facturas.class, facturas.getIdfactura());
+            Detallefactura iddetallefacOld = persistentFacturas.getIddetallefac();
+            Detallefactura iddetallefacNew = facturas.getIddetallefac();
+            if (iddetallefacNew != null) {
+                iddetallefacNew = em.getReference(iddetallefacNew.getClass(), iddetallefacNew.getIddetallefac());
+                facturas.setIddetallefac(iddetallefacNew);
+            }
             facturas = em.merge(facturas);
+            if (iddetallefacOld != null && !iddetallefacOld.equals(iddetallefacNew)) {
+                iddetallefacOld.getFacturasCollection().remove(facturas);
+                iddetallefacOld = em.merge(iddetallefacOld);
+            }
+            if (iddetallefacNew != null && !iddetallefacNew.equals(iddetallefacOld)) {
+                iddetallefacNew.getFacturasCollection().add(facturas);
+                iddetallefacNew = em.merge(iddetallefacNew);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -79,6 +104,11 @@ public class FacturasJpaController implements Serializable {
                 facturas.getIdfactura();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The facturas with id " + id + " no longer exists.", enfe);
+            }
+            Detallefactura iddetallefac = facturas.getIddetallefac();
+            if (iddetallefac != null) {
+                iddetallefac.getFacturasCollection().remove(facturas);
+                iddetallefac = em.merge(iddetallefac);
             }
             em.remove(facturas);
             em.getTransaction().commit();

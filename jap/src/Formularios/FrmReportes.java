@@ -909,7 +909,7 @@ public class FrmReportes extends javax.swing.JInternalFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
         try {
-            rc.factura("id", jLabel1.getText(), "numfact", jLabel2.getText(), "verfacturageneral.jasper", "Consumos " + jDateChooser2.getDate(), "Num.Med " + jLabel1.getText() + " Fact." + jLabel2.getText());
+            rc.factura("id", jLabel1.getText(), "numfact", jLabel2.getText(), "verfacturageneral.jasper", "Consumos " + jDateChooser2.getDate(), "Num.Med " + jLabel1.getText() + " Fact." + jLabel2.getText(),null);
 
         } catch (Exception e) {
         }

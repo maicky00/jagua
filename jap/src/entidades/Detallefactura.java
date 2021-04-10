@@ -6,8 +6,9 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "detallefactura")
@@ -42,8 +43,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Detallefactura.findByTotal", query = "SELECT d FROM Detallefactura d WHERE d.total = :total"),
     @NamedQuery(name = "Detallefactura.findByObservacion", query = "SELECT d FROM Detallefactura d WHERE d.observacion = :observacion")})
 public class Detallefactura implements Serializable {
-    @OneToMany(mappedBy = "iddetallefac")
-    private List<Facturas> facturasList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -69,11 +68,13 @@ public class Detallefactura implements Serializable {
     private Float total;
     @Column(name = "OBSERVACION")
     private String observacion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "iddetallefac")
+    private Collection<Facturas> facturasCollection;
     @JoinColumn(name = "IDTARIFAS", referencedColumnName = "IDTARIFAS")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Tarifas idtarifas;
     @JoinColumn(name = "IDMEDIDOR", referencedColumnName = "IDMEDIDOR")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Medidor idmedidor;
 
     public Detallefactura() {
@@ -163,6 +164,15 @@ public class Detallefactura implements Serializable {
         this.observacion = observacion;
     }
 
+    @XmlTransient
+    public Collection<Facturas> getFacturasCollection() {
+        return facturasCollection;
+    }
+
+    public void setFacturasCollection(Collection<Facturas> facturasCollection) {
+        this.facturasCollection = facturasCollection;
+    }
+
     public Tarifas getIdtarifas() {
         return idtarifas;
     }
@@ -202,15 +212,6 @@ public class Detallefactura implements Serializable {
     @Override
     public String toString() {
         return "entidades.Detallefactura[ iddetallefac=" + iddetallefac + " ]";
-    }
-
-    @XmlTransient
-    public List<Facturas> getFacturasList() {
-        return facturasList;
-    }
-
-    public void setFacturasList(List<Facturas> facturasList) {
-        this.facturasList = facturasList;
     }
     
 }

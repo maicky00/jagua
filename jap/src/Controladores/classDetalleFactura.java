@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.ImageIcon;
@@ -46,6 +47,16 @@ public class classDetalleFactura {
     classMedidor cm;
     classTarifas ct = new classTarifas();
     DefaultTableModel mod;
+    
+    public List<Detallefactura> detallefacturaDatos ;
+    
+    EntityManager em = emf.createEntityManager();
+    
+    private static final String QUERY ="SELECT d FROM Detallefactura d WHERE d.aniomes= : aniomes";
+    public List<Detallefactura>	queryEmpleadoSalario(String aniomes) {
+      return em.createQuery(QUERY)
+                      .setParameter("aniomes", aniomes).getResultList();
+   }
     
     public List<Detallefactura> getDetallefactura() {
         return detallefacturaJpacontrolador.findDetallefacturaEntities();
@@ -123,7 +134,7 @@ public class classDetalleFactura {
         try {
             detallefacturaJpacontrolador.destroy(idetallefactura);
             JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
-        } catch (NonexistentEntityException ex) {
+        } catch (IllegalOrphanException ex) {
         }
         
     }
@@ -131,7 +142,9 @@ public class classDetalleFactura {
     public Detallefactura buscarIdDetallefactura(int idDetallefactura) {
         
         for (Detallefactura dat : getDetallefactura()) {
+            //System.out.println(dat);
             if (dat.getIddetallefac().equals(idDetallefactura)) {
+                //System.out.println(dat);
                 return dat;
             }
         }
@@ -262,50 +275,22 @@ public class classDetalleFactura {
         }
         return true;
     }
-
-//    public TableModel tablaMedidas(JTable tabla, String anioMes) {
-//
-//        DefaultTableModel dtm = (DefaultTableModel) tabla.getModel();
-//        dtm.setRowCount(0);
-//
-//        for (Detallefactura u : getDetallefactura()) {
-//            if (u.getObservacion().equals("NO") && u.getAniomes().equals(anioMes)) {
-//                dtm.addRow(new Object[]{
-//                    u.getIddetallefac(),
-//                    u.getAniomes(),
-//                    u.getIdusuario().getPrimerapellido() + "  " + u.getIdusuario().getSegundoapellido() + "  "
-//                    + u.getIdusuario().getPrimernombre() + "  " + u.getIdusuario().getSegundonombre(),
-//                    u.getIdusuario().getApadosn(),
-//                    u.getMedidaant(),
-//                    u.getMedidaact(),
-//                    u.getConsumo(),
-//                    u.getMedexcedido(),
-//                    u.getTarexcedido(),
-//                    u.getSubtotal(),
-//                    u.getTotal()
-//                });
-//            }
-//        }
-//        return dtm;
-//    }
-//    public List<Detallefactura> getbuscarDetalleFact(String anioMes) {
-//        try {
-//            classMedidor cm = new classMedidor();
-//            List<Detallefactura> datos = new ArrayList<Detallefactura>();
-////            List<Medidor> datos = new ArrayList<Medidor>();
-//            for (Medidor e : cm.getbuscarMedidor()) {
-//                datos.add(e);
-//            }
-//            return datos;
-//        } catch (Exception e) {
-//        }
-//        return null;
-//
-//    }
+    
+    
+    public List<Detallefactura> cargarBusquedaAnioMesDatos(String anioMes){
+        List<Detallefactura> detallelist = new ArrayList<>();
+        
+        for (Detallefactura u : getDetallefactura()) {
+            if (u.getAniomes().equals(anioMes)) {
+                detallelist.add(u);
+            }
+        }
+        return detallelist;
+    }
+    //modificado
     public void cargarBusquedaAnioMes(JTable tabla, String anioMes) {
         DefaultTableModel modelo = new DefaultTableModel();
         tabla.setModel(modelo);
-        Object[] fila = new Object[7];
         modelo.addColumn("N°");
         modelo.addColumn("Tarifa");
         modelo.addColumn("Num. Medidor");
@@ -313,17 +298,9 @@ public class classDetalleFactura {
         modelo.addColumn("Fecha Correspondiente");
         modelo.addColumn("Medida Anterior");
         modelo.addColumn("Medida Actual");
-        tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-        tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
-        tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
-        tabla.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(60);
-        tabla.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(90);
-        tabla.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(200);
-        tabla.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(170);
-        tabla.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(100);
-        tabla.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(100);
-
-//        Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
+        
+        //Medidor med=cm.medidorJpacontrolador.findMedidor(cm.buscarMedidorId(idMedidor));
+        Object[] fila = new Object[7];
         for (Detallefactura u : getDetallefactura()) {
             if (u.getAniomes().equals(anioMes)) {
                 fila[0] = u.getIddetallefac();
@@ -338,6 +315,15 @@ public class classDetalleFactura {
                 modelo.addRow(fila);
             }
         }
+        tabla.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+        tabla.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(50);
+        
+        tabla.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(60);
+        tabla.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(90);
+        tabla.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(200);
+        tabla.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(170);
+        tabla.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(100);
+        tabla.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(100);
     }
     
     public void tablaCorte(JTable tabla) {
@@ -378,6 +364,7 @@ public class classDetalleFactura {
     public ArrayList<Detallefactura> listaUltimosMeses(int idmed) {
         ArrayList<Detallefactura> datos = new ArrayList<Detallefactura>();
         ArrayList<Detallefactura> datos2 = new ArrayList<Detallefactura>();
+        ArrayList<Detallefactura> datos3 = new ArrayList<Detallefactura>();
         
         for (Detallefactura s : getDetallefactura()) {
             if (s.getIdmedidor().getIdmedidor() == idmed) {
@@ -385,16 +372,24 @@ public class classDetalleFactura {
             }
         }
         int cont = 0;
-        
         if (datos.size() < 5) {
             cont = datos.size();
         } else {
             cont = 5;
         }
+        //obtener ultimos 5 registros
+        int k=1;
         for (int j = 0; j < cont; j++) {
-            datos2.add(datos.get(j));
+            datos2.add(datos.get(datos.size()-k));
+            k++;
         }
-        return datos2;
+        //ordenar ascendentemente
+        int z=1;
+        for (int i = 0; i < datos2.size(); i++) {
+            datos3.add(datos2.get(datos2.size()-z));
+            z++;
+        }
+        return datos3;
     }
     
     public void graficador(int idMedidor) {
@@ -414,7 +409,7 @@ public class classDetalleFactura {
             FrmFactura.lblGrafico.setSize(400, 100);
             FrmFactura.lblGrafico.setIcon(new ImageIcon(graficoLinea));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error");
+            JOptionPane.showMessageDialog(null, "Error en graficador");
         }
     }
     

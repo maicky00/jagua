@@ -12,15 +12,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Detallefactura;
 import entidades.Tarifas;
+import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 public class TarifasJpaController implements Serializable {
 
@@ -34,27 +36,27 @@ public class TarifasJpaController implements Serializable {
     }
 
     public void create(Tarifas tarifas) {
-        if (tarifas.getDetallefacturaList() == null) {
-            tarifas.setDetallefacturaList(new ArrayList<Detallefactura>());
+        if (tarifas.getDetallefacturaCollection() == null) {
+            tarifas.setDetallefacturaCollection(new ArrayList<Detallefactura>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Detallefactura> attachedDetallefacturaList = new ArrayList<Detallefactura>();
-            for (Detallefactura detallefacturaListDetallefacturaToAttach : tarifas.getDetallefacturaList()) {
-                detallefacturaListDetallefacturaToAttach = em.getReference(detallefacturaListDetallefacturaToAttach.getClass(), detallefacturaListDetallefacturaToAttach.getIddetallefac());
-                attachedDetallefacturaList.add(detallefacturaListDetallefacturaToAttach);
+            Collection<Detallefactura> attachedDetallefacturaCollection = new ArrayList<Detallefactura>();
+            for (Detallefactura detallefacturaCollectionDetallefacturaToAttach : tarifas.getDetallefacturaCollection()) {
+                detallefacturaCollectionDetallefacturaToAttach = em.getReference(detallefacturaCollectionDetallefacturaToAttach.getClass(), detallefacturaCollectionDetallefacturaToAttach.getIddetallefac());
+                attachedDetallefacturaCollection.add(detallefacturaCollectionDetallefacturaToAttach);
             }
-            tarifas.setDetallefacturaList(attachedDetallefacturaList);
+            tarifas.setDetallefacturaCollection(attachedDetallefacturaCollection);
             em.persist(tarifas);
-            for (Detallefactura detallefacturaListDetallefactura : tarifas.getDetallefacturaList()) {
-                Tarifas oldIdtarifasOfDetallefacturaListDetallefactura = detallefacturaListDetallefactura.getIdtarifas();
-                detallefacturaListDetallefactura.setIdtarifas(tarifas);
-                detallefacturaListDetallefactura = em.merge(detallefacturaListDetallefactura);
-                if (oldIdtarifasOfDetallefacturaListDetallefactura != null) {
-                    oldIdtarifasOfDetallefacturaListDetallefactura.getDetallefacturaList().remove(detallefacturaListDetallefactura);
-                    oldIdtarifasOfDetallefacturaListDetallefactura = em.merge(oldIdtarifasOfDetallefacturaListDetallefactura);
+            for (Detallefactura detallefacturaCollectionDetallefactura : tarifas.getDetallefacturaCollection()) {
+                Tarifas oldIdtarifasOfDetallefacturaCollectionDetallefactura = detallefacturaCollectionDetallefactura.getIdtarifas();
+                detallefacturaCollectionDetallefactura.setIdtarifas(tarifas);
+                detallefacturaCollectionDetallefactura = em.merge(detallefacturaCollectionDetallefactura);
+                if (oldIdtarifasOfDetallefacturaCollectionDetallefactura != null) {
+                    oldIdtarifasOfDetallefacturaCollectionDetallefactura.getDetallefacturaCollection().remove(detallefacturaCollectionDetallefactura);
+                    oldIdtarifasOfDetallefacturaCollectionDetallefactura = em.merge(oldIdtarifasOfDetallefacturaCollectionDetallefactura);
                 }
             }
             em.getTransaction().commit();
@@ -65,36 +67,42 @@ public class TarifasJpaController implements Serializable {
         }
     }
 
-    public void edit(Tarifas tarifas) throws NonexistentEntityException, Exception {
+    public void edit(Tarifas tarifas) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Tarifas persistentTarifas = em.find(Tarifas.class, tarifas.getIdtarifas());
-            List<Detallefactura> detallefacturaListOld = persistentTarifas.getDetallefacturaList();
-            List<Detallefactura> detallefacturaListNew = tarifas.getDetallefacturaList();
-            List<Detallefactura> attachedDetallefacturaListNew = new ArrayList<Detallefactura>();
-            for (Detallefactura detallefacturaListNewDetallefacturaToAttach : detallefacturaListNew) {
-                detallefacturaListNewDetallefacturaToAttach = em.getReference(detallefacturaListNewDetallefacturaToAttach.getClass(), detallefacturaListNewDetallefacturaToAttach.getIddetallefac());
-                attachedDetallefacturaListNew.add(detallefacturaListNewDetallefacturaToAttach);
-            }
-            detallefacturaListNew = attachedDetallefacturaListNew;
-            tarifas.setDetallefacturaList(detallefacturaListNew);
-            tarifas = em.merge(tarifas);
-            for (Detallefactura detallefacturaListOldDetallefactura : detallefacturaListOld) {
-                if (!detallefacturaListNew.contains(detallefacturaListOldDetallefactura)) {
-                    detallefacturaListOldDetallefactura.setIdtarifas(null);
-                    detallefacturaListOldDetallefactura = em.merge(detallefacturaListOldDetallefactura);
+            Collection<Detallefactura> detallefacturaCollectionOld = persistentTarifas.getDetallefacturaCollection();
+            Collection<Detallefactura> detallefacturaCollectionNew = tarifas.getDetallefacturaCollection();
+            List<String> illegalOrphanMessages = null;
+            for (Detallefactura detallefacturaCollectionOldDetallefactura : detallefacturaCollectionOld) {
+                if (!detallefacturaCollectionNew.contains(detallefacturaCollectionOldDetallefactura)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Detallefactura " + detallefacturaCollectionOldDetallefactura + " since its idtarifas field is not nullable.");
                 }
             }
-            for (Detallefactura detallefacturaListNewDetallefactura : detallefacturaListNew) {
-                if (!detallefacturaListOld.contains(detallefacturaListNewDetallefactura)) {
-                    Tarifas oldIdtarifasOfDetallefacturaListNewDetallefactura = detallefacturaListNewDetallefactura.getIdtarifas();
-                    detallefacturaListNewDetallefactura.setIdtarifas(tarifas);
-                    detallefacturaListNewDetallefactura = em.merge(detallefacturaListNewDetallefactura);
-                    if (oldIdtarifasOfDetallefacturaListNewDetallefactura != null && !oldIdtarifasOfDetallefacturaListNewDetallefactura.equals(tarifas)) {
-                        oldIdtarifasOfDetallefacturaListNewDetallefactura.getDetallefacturaList().remove(detallefacturaListNewDetallefactura);
-                        oldIdtarifasOfDetallefacturaListNewDetallefactura = em.merge(oldIdtarifasOfDetallefacturaListNewDetallefactura);
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            Collection<Detallefactura> attachedDetallefacturaCollectionNew = new ArrayList<Detallefactura>();
+            for (Detallefactura detallefacturaCollectionNewDetallefacturaToAttach : detallefacturaCollectionNew) {
+                detallefacturaCollectionNewDetallefacturaToAttach = em.getReference(detallefacturaCollectionNewDetallefacturaToAttach.getClass(), detallefacturaCollectionNewDetallefacturaToAttach.getIddetallefac());
+                attachedDetallefacturaCollectionNew.add(detallefacturaCollectionNewDetallefacturaToAttach);
+            }
+            detallefacturaCollectionNew = attachedDetallefacturaCollectionNew;
+            tarifas.setDetallefacturaCollection(detallefacturaCollectionNew);
+            tarifas = em.merge(tarifas);
+            for (Detallefactura detallefacturaCollectionNewDetallefactura : detallefacturaCollectionNew) {
+                if (!detallefacturaCollectionOld.contains(detallefacturaCollectionNewDetallefactura)) {
+                    Tarifas oldIdtarifasOfDetallefacturaCollectionNewDetallefactura = detallefacturaCollectionNewDetallefactura.getIdtarifas();
+                    detallefacturaCollectionNewDetallefactura.setIdtarifas(tarifas);
+                    detallefacturaCollectionNewDetallefactura = em.merge(detallefacturaCollectionNewDetallefactura);
+                    if (oldIdtarifasOfDetallefacturaCollectionNewDetallefactura != null && !oldIdtarifasOfDetallefacturaCollectionNewDetallefactura.equals(tarifas)) {
+                        oldIdtarifasOfDetallefacturaCollectionNewDetallefactura.getDetallefacturaCollection().remove(detallefacturaCollectionNewDetallefactura);
+                        oldIdtarifasOfDetallefacturaCollectionNewDetallefactura = em.merge(oldIdtarifasOfDetallefacturaCollectionNewDetallefactura);
                     }
                 }
             }
@@ -115,7 +123,7 @@ public class TarifasJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -127,10 +135,16 @@ public class TarifasJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The tarifas with id " + id + " no longer exists.", enfe);
             }
-            List<Detallefactura> detallefacturaList = tarifas.getDetallefacturaList();
-            for (Detallefactura detallefacturaListDetallefactura : detallefacturaList) {
-                detallefacturaListDetallefactura.setIdtarifas(null);
-                detallefacturaListDetallefactura = em.merge(detallefacturaListDetallefactura);
+            List<String> illegalOrphanMessages = null;
+            Collection<Detallefactura> detallefacturaCollectionOrphanCheck = tarifas.getDetallefacturaCollection();
+            for (Detallefactura detallefacturaCollectionOrphanCheckDetallefactura : detallefacturaCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Tarifas (" + tarifas + ") cannot be destroyed since the Detallefactura " + detallefacturaCollectionOrphanCheckDetallefactura + " in its detallefacturaCollection field has a non-nullable idtarifas field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(tarifas);
             em.getTransaction().commit();

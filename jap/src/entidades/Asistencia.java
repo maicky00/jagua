@@ -6,8 +6,9 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "asistencia")
@@ -34,10 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Asistencia.findByIdasistencia", query = "SELECT a FROM Asistencia a WHERE a.idasistencia = :idasistencia"),
     @NamedQuery(name = "Asistencia.findByAsistencia", query = "SELECT a FROM Asistencia a WHERE a.asistencia = :asistencia"),
     @NamedQuery(name = "Asistencia.findByValormulta", query = "SELECT a FROM Asistencia a WHERE a.valormulta = :valormulta"),
-    @NamedQuery(name = "Asistencia.findByDescripcion", query = "SELECT a FROM Asistencia a WHERE a.descripcion = :descripcion")})
+    @NamedQuery(name = "Asistencia.findByDescripcion", query = "SELECT a FROM Asistencia a WHERE a.descripcion = :descripcion"),
+    @NamedQuery(name = "Asistencia.findByObsevacion", query = "SELECT a FROM Asistencia a WHERE a.obsevacion = :obsevacion")})
 public class Asistencia implements Serializable {
-    @Column(name = "OBSEVACION")
-    private String obsevacion;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,14 +51,16 @@ public class Asistencia implements Serializable {
     private Float valormulta;
     @Column(name = "DESCRIPCION")
     private String descripcion;
-    @JoinColumn(name = "IDMEDIDOR", referencedColumnName = "IDMEDIDOR")
-    @ManyToOne
-    private Medidor idmedidor;
+    @Column(name = "OBSEVACION")
+    private String obsevacion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idasistencia")
+    private Collection<Pagosasistencia> pagosasistenciaCollection;
     @JoinColumn(name = "IDPLANIFICACION", referencedColumnName = "IDPLANIFICACION")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Planificacion idplanificacion;
-    @OneToMany(mappedBy = "idasistencia")
-    private List<Pagosasistencia> pagosasistenciaList;
+    @JoinColumn(name = "IDMEDIDOR", referencedColumnName = "IDMEDIDOR")
+    @ManyToOne(optional = false)
+    private Medidor idmedidor;
 
     public Asistencia() {
     }
@@ -99,12 +101,21 @@ public class Asistencia implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Medidor getIdmedidor() {
-        return idmedidor;
+    public String getObsevacion() {
+        return obsevacion;
     }
 
-    public void setIdmedidor(Medidor idmedidor) {
-        this.idmedidor = idmedidor;
+    public void setObsevacion(String obsevacion) {
+        this.obsevacion = obsevacion;
+    }
+
+    @XmlTransient
+    public Collection<Pagosasistencia> getPagosasistenciaCollection() {
+        return pagosasistenciaCollection;
+    }
+
+    public void setPagosasistenciaCollection(Collection<Pagosasistencia> pagosasistenciaCollection) {
+        this.pagosasistenciaCollection = pagosasistenciaCollection;
     }
 
     public Planificacion getIdplanificacion() {
@@ -115,13 +126,12 @@ public class Asistencia implements Serializable {
         this.idplanificacion = idplanificacion;
     }
 
-    @XmlTransient
-    public List<Pagosasistencia> getPagosasistenciaList() {
-        return pagosasistenciaList;
+    public Medidor getIdmedidor() {
+        return idmedidor;
     }
 
-    public void setPagosasistenciaList(List<Pagosasistencia> pagosasistenciaList) {
-        this.pagosasistenciaList = pagosasistenciaList;
+    public void setIdmedidor(Medidor idmedidor) {
+        this.idmedidor = idmedidor;
     }
 
     @Override
@@ -147,14 +157,6 @@ public class Asistencia implements Serializable {
     @Override
     public String toString() {
         return "entidades.Asistencia[ idasistencia=" + idasistencia + " ]";
-    }
-
-    public String getObsevacion() {
-        return obsevacion;
-    }
-
-    public void setObsevacion(String obsevacion) {
-        this.obsevacion = obsevacion;
     }
     
 }

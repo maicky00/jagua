@@ -6,9 +6,10 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Marco
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "planificacionpesillo")
@@ -36,10 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Planificacionpesillo.findByIdplanificacionpesillo", query = "SELECT p FROM Planificacionpesillo p WHERE p.idplanificacionpesillo = :idplanificacionpesillo"),
     @NamedQuery(name = "Planificacionpesillo.findByLugar", query = "SELECT p FROM Planificacionpesillo p WHERE p.lugar = :lugar"),
     @NamedQuery(name = "Planificacionpesillo.findByFecha", query = "SELECT p FROM Planificacionpesillo p WHERE p.fecha = :fecha"),
-    @NamedQuery(name = "Planificacionpesillo.findByValormulta", query = "SELECT p FROM Planificacionpesillo p WHERE p.valormulta = :valormulta")})
+    @NamedQuery(name = "Planificacionpesillo.findByValormulta", query = "SELECT p FROM Planificacionpesillo p WHERE p.valormulta = :valormulta"),
+    @NamedQuery(name = "Planificacionpesillo.findByTipoplanpesillo", query = "SELECT p FROM Planificacionpesillo p WHERE p.tipoplanpesillo = :tipoplanpesillo")})
 public class Planificacionpesillo implements Serializable {
-    @Column(name = "TIPOPLANPESILLO")
-    private String tipoplanpesillo;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,8 +57,10 @@ public class Planificacionpesillo implements Serializable {
     @Lob
     @Column(name = "DESCRIPCION")
     private String descripcion;
-    @OneToMany(mappedBy = "idplanificacionpesillo")
-    private List<Asistenciapesillo> asistenciapesilloList;
+    @Column(name = "TIPOPLANPESILLO")
+    private String tipoplanpesillo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idplanificacionpesillo")
+    private Collection<Asistenciapesillo> asistenciapesilloCollection;
 
     public Planificacionpesillo() {
     }
@@ -107,13 +109,21 @@ public class Planificacionpesillo implements Serializable {
         this.descripcion = descripcion;
     }
 
-    @XmlTransient
-    public List<Asistenciapesillo> getAsistenciapesilloList() {
-        return asistenciapesilloList;
+    public String getTipoplanpesillo() {
+        return tipoplanpesillo;
     }
 
-    public void setAsistenciapesilloList(List<Asistenciapesillo> asistenciapesilloList) {
-        this.asistenciapesilloList = asistenciapesilloList;
+    public void setTipoplanpesillo(String tipoplanpesillo) {
+        this.tipoplanpesillo = tipoplanpesillo;
+    }
+
+    @XmlTransient
+    public Collection<Asistenciapesillo> getAsistenciapesilloCollection() {
+        return asistenciapesilloCollection;
+    }
+
+    public void setAsistenciapesilloCollection(Collection<Asistenciapesillo> asistenciapesilloCollection) {
+        this.asistenciapesilloCollection = asistenciapesilloCollection;
     }
 
     @Override
@@ -139,14 +149,6 @@ public class Planificacionpesillo implements Serializable {
     @Override
     public String toString() {
         return "entidades.Planificacionpesillo[ idplanificacionpesillo=" + idplanificacionpesillo + " ]";
-    }
-
-    public String getTipoplanpesillo() {
-        return tipoplanpesillo;
-    }
-
-    public void setTipoplanpesillo(String tipoplanpesillo) {
-        this.tipoplanpesillo = tipoplanpesillo;
     }
     
 }

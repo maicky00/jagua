@@ -6,8 +6,9 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "tarifas")
@@ -33,12 +34,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Tarifas.findByIdtarifas", query = "SELECT t FROM Tarifas t WHERE t.idtarifas = :idtarifas"),
     @NamedQuery(name = "Tarifas.findByBase", query = "SELECT t FROM Tarifas t WHERE t.base = :base"),
     @NamedQuery(name = "Tarifas.findByTarbase", query = "SELECT t FROM Tarifas t WHERE t.tarbase = :tarbase"),
-    @NamedQuery(name = "Tarifas.findByValorexceso", query = "SELECT t FROM Tarifas t WHERE t.valorexceso = :valorexceso")})
+    @NamedQuery(name = "Tarifas.findByValorexceso", query = "SELECT t FROM Tarifas t WHERE t.valorexceso = :valorexceso"),
+    @NamedQuery(name = "Tarifas.findByAlcantarrillado", query = "SELECT t FROM Tarifas t WHERE t.alcantarrillado = :alcantarrillado"),
+    @NamedQuery(name = "Tarifas.findByIva", query = "SELECT t FROM Tarifas t WHERE t.iva = :iva")})
 public class Tarifas implements Serializable {
-    @Column(name = "IVA")
-    private Float iva;
-    @Column(name = "ALCANTARRILLADO")
-    private Float alcantarrillado;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,8 +54,12 @@ public class Tarifas implements Serializable {
     private String descripcion;
     @Column(name = "VALOREXCESO")
     private Float valorexceso;
-    @OneToMany(mappedBy = "idtarifas")
-    private List<Detallefactura> detallefacturaList;
+    @Column(name = "ALCANTARRILLADO")
+    private Float alcantarrillado;
+    @Column(name = "IVA")
+    private Float iva;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtarifas")
+    private Collection<Detallefactura> detallefacturaCollection;
 
     public Tarifas() {
     }
@@ -105,13 +108,29 @@ public class Tarifas implements Serializable {
         this.valorexceso = valorexceso;
     }
 
-    @XmlTransient
-    public List<Detallefactura> getDetallefacturaList() {
-        return detallefacturaList;
+    public Float getAlcantarrillado() {
+        return alcantarrillado;
     }
 
-    public void setDetallefacturaList(List<Detallefactura> detallefacturaList) {
-        this.detallefacturaList = detallefacturaList;
+    public void setAlcantarrillado(Float alcantarrillado) {
+        this.alcantarrillado = alcantarrillado;
+    }
+
+    public Float getIva() {
+        return iva;
+    }
+
+    public void setIva(Float iva) {
+        this.iva = iva;
+    }
+
+    @XmlTransient
+    public Collection<Detallefactura> getDetallefacturaCollection() {
+        return detallefacturaCollection;
+    }
+
+    public void setDetallefacturaCollection(Collection<Detallefactura> detallefacturaCollection) {
+        this.detallefacturaCollection = detallefacturaCollection;
     }
 
     @Override
@@ -137,22 +156,6 @@ public class Tarifas implements Serializable {
     @Override
     public String toString() {
         return "entidades.Tarifas[ idtarifas=" + idtarifas + " ]";
-    }
-
-    public Float getAlcantarrillado() {
-        return alcantarrillado;
-    }
-
-    public void setAlcantarrillado(Float alcantarrillado) {
-        this.alcantarrillado = alcantarrillado;
-    }
-
-    public Float getIva() {
-        return iva;
-    }
-
-    public void setIva(Float iva) {
-        this.iva = iva;
     }
     
 }

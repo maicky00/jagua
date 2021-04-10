@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "pagosasistencia")
@@ -36,10 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Pagosasistencia.findByFechapago", query = "SELECT p FROM Pagosasistencia p WHERE p.fechapago = :fechapago"),
     @NamedQuery(name = "Pagosasistencia.findByNummingas", query = "SELECT p FROM Pagosasistencia p WHERE p.nummingas = :nummingas"),
     @NamedQuery(name = "Pagosasistencia.findByValormingas", query = "SELECT p FROM Pagosasistencia p WHERE p.valormingas = :valormingas"),
-    @NamedQuery(name = "Pagosasistencia.findByObservacion", query = "SELECT p FROM Pagosasistencia p WHERE p.observacion = :observacion")})
+    @NamedQuery(name = "Pagosasistencia.findByObservacion", query = "SELECT p FROM Pagosasistencia p WHERE p.observacion = :observacion"),
+    @NamedQuery(name = "Pagosasistencia.findByNumfactura", query = "SELECT p FROM Pagosasistencia p WHERE p.numfactura = :numfactura")})
 public class Pagosasistencia implements Serializable {
-    @Column(name = "NUMFACTURA")
-    private Integer numfactura;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,8 +58,10 @@ public class Pagosasistencia implements Serializable {
     @Lob
     @Column(name = "USUARIOACTUAL")
     private String usuarioactual;
+    @Column(name = "NUMFACTURA")
+    private Integer numfactura;
     @JoinColumn(name = "IDASISTENCIA", referencedColumnName = "IDASISTENCIA")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Asistencia idasistencia;
 
     public Pagosasistencia() {
@@ -118,6 +119,14 @@ public class Pagosasistencia implements Serializable {
         this.usuarioactual = usuarioactual;
     }
 
+    public Integer getNumfactura() {
+        return numfactura;
+    }
+
+    public void setNumfactura(Integer numfactura) {
+        this.numfactura = numfactura;
+    }
+
     public Asistencia getIdasistencia() {
         return idasistencia;
     }
@@ -149,14 +158,6 @@ public class Pagosasistencia implements Serializable {
     @Override
     public String toString() {
         return "entidades.Pagosasistencia[ idpagoasistencia=" + idpagoasistencia + " ]";
-    }
-
-    public Integer getNumfactura() {
-        return numfactura;
-    }
-
-    public void setNumfactura(Integer numfactura) {
-        this.numfactura = numfactura;
     }
     
 }

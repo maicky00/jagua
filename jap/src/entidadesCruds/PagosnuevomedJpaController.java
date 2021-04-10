@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 public class PagosnuevomedJpaController implements Serializable {
 
@@ -44,7 +44,7 @@ public class PagosnuevomedJpaController implements Serializable {
             }
             em.persist(pagosnuevomed);
             if (idmedidor != null) {
-                idmedidor.getPagosnuevomedList().add(pagosnuevomed);
+                idmedidor.getPagosnuevomedCollection().add(pagosnuevomed);
                 idmedidor = em.merge(idmedidor);
             }
             em.getTransaction().commit();
@@ -69,11 +69,11 @@ public class PagosnuevomedJpaController implements Serializable {
             }
             pagosnuevomed = em.merge(pagosnuevomed);
             if (idmedidorOld != null && !idmedidorOld.equals(idmedidorNew)) {
-                idmedidorOld.getPagosnuevomedList().remove(pagosnuevomed);
+                idmedidorOld.getPagosnuevomedCollection().remove(pagosnuevomed);
                 idmedidorOld = em.merge(idmedidorOld);
             }
             if (idmedidorNew != null && !idmedidorNew.equals(idmedidorOld)) {
-                idmedidorNew.getPagosnuevomedList().add(pagosnuevomed);
+                idmedidorNew.getPagosnuevomedCollection().add(pagosnuevomed);
                 idmedidorNew = em.merge(idmedidorNew);
             }
             em.getTransaction().commit();
@@ -107,7 +107,7 @@ public class PagosnuevomedJpaController implements Serializable {
             }
             Medidor idmedidor = pagosnuevomed.getIdmedidor();
             if (idmedidor != null) {
-                idmedidor.getPagosnuevomedList().remove(pagosnuevomed);
+                idmedidor.getPagosnuevomedCollection().remove(pagosnuevomed);
                 idmedidor = em.merge(idmedidor);
             }
             em.remove(pagosnuevomed);

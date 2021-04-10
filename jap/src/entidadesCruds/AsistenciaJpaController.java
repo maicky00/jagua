@@ -11,18 +11,20 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import entidades.Medidor;
 import entidades.Planificacion;
+import entidades.Medidor;
 import entidades.Pagosasistencia;
+import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 public class AsistenciaJpaController implements Serializable {
 
@@ -36,45 +38,45 @@ public class AsistenciaJpaController implements Serializable {
     }
 
     public void create(Asistencia asistencia) {
-        if (asistencia.getPagosasistenciaList() == null) {
-            asistencia.setPagosasistenciaList(new ArrayList<Pagosasistencia>());
+        if (asistencia.getPagosasistenciaCollection() == null) {
+            asistencia.setPagosasistenciaCollection(new ArrayList<Pagosasistencia>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Medidor idmedidor = asistencia.getIdmedidor();
-            if (idmedidor != null) {
-                idmedidor = em.getReference(idmedidor.getClass(), idmedidor.getIdmedidor());
-                asistencia.setIdmedidor(idmedidor);
-            }
             Planificacion idplanificacion = asistencia.getIdplanificacion();
             if (idplanificacion != null) {
                 idplanificacion = em.getReference(idplanificacion.getClass(), idplanificacion.getIdplanificacion());
                 asistencia.setIdplanificacion(idplanificacion);
             }
-            List<Pagosasistencia> attachedPagosasistenciaList = new ArrayList<Pagosasistencia>();
-            for (Pagosasistencia pagosasistenciaListPagosasistenciaToAttach : asistencia.getPagosasistenciaList()) {
-                pagosasistenciaListPagosasistenciaToAttach = em.getReference(pagosasistenciaListPagosasistenciaToAttach.getClass(), pagosasistenciaListPagosasistenciaToAttach.getIdpagoasistencia());
-                attachedPagosasistenciaList.add(pagosasistenciaListPagosasistenciaToAttach);
-            }
-            asistencia.setPagosasistenciaList(attachedPagosasistenciaList);
-            em.persist(asistencia);
+            Medidor idmedidor = asistencia.getIdmedidor();
             if (idmedidor != null) {
-                idmedidor.getAsistenciaList().add(asistencia);
-                idmedidor = em.merge(idmedidor);
+                idmedidor = em.getReference(idmedidor.getClass(), idmedidor.getIdmedidor());
+                asistencia.setIdmedidor(idmedidor);
             }
+            Collection<Pagosasistencia> attachedPagosasistenciaCollection = new ArrayList<Pagosasistencia>();
+            for (Pagosasistencia pagosasistenciaCollectionPagosasistenciaToAttach : asistencia.getPagosasistenciaCollection()) {
+                pagosasistenciaCollectionPagosasistenciaToAttach = em.getReference(pagosasistenciaCollectionPagosasistenciaToAttach.getClass(), pagosasistenciaCollectionPagosasistenciaToAttach.getIdpagoasistencia());
+                attachedPagosasistenciaCollection.add(pagosasistenciaCollectionPagosasistenciaToAttach);
+            }
+            asistencia.setPagosasistenciaCollection(attachedPagosasistenciaCollection);
+            em.persist(asistencia);
             if (idplanificacion != null) {
-                idplanificacion.getAsistenciaList().add(asistencia);
+                idplanificacion.getAsistenciaCollection().add(asistencia);
                 idplanificacion = em.merge(idplanificacion);
             }
-            for (Pagosasistencia pagosasistenciaListPagosasistencia : asistencia.getPagosasistenciaList()) {
-                Asistencia oldIdasistenciaOfPagosasistenciaListPagosasistencia = pagosasistenciaListPagosasistencia.getIdasistencia();
-                pagosasistenciaListPagosasistencia.setIdasistencia(asistencia);
-                pagosasistenciaListPagosasistencia = em.merge(pagosasistenciaListPagosasistencia);
-                if (oldIdasistenciaOfPagosasistenciaListPagosasistencia != null) {
-                    oldIdasistenciaOfPagosasistenciaListPagosasistencia.getPagosasistenciaList().remove(pagosasistenciaListPagosasistencia);
-                    oldIdasistenciaOfPagosasistenciaListPagosasistencia = em.merge(oldIdasistenciaOfPagosasistenciaListPagosasistencia);
+            if (idmedidor != null) {
+                idmedidor.getAsistenciaCollection().add(asistencia);
+                idmedidor = em.merge(idmedidor);
+            }
+            for (Pagosasistencia pagosasistenciaCollectionPagosasistencia : asistencia.getPagosasistenciaCollection()) {
+                Asistencia oldIdasistenciaOfPagosasistenciaCollectionPagosasistencia = pagosasistenciaCollectionPagosasistencia.getIdasistencia();
+                pagosasistenciaCollectionPagosasistencia.setIdasistencia(asistencia);
+                pagosasistenciaCollectionPagosasistencia = em.merge(pagosasistenciaCollectionPagosasistencia);
+                if (oldIdasistenciaOfPagosasistenciaCollectionPagosasistencia != null) {
+                    oldIdasistenciaOfPagosasistenciaCollectionPagosasistencia.getPagosasistenciaCollection().remove(pagosasistenciaCollectionPagosasistencia);
+                    oldIdasistenciaOfPagosasistenciaCollectionPagosasistencia = em.merge(oldIdasistenciaOfPagosasistenciaCollectionPagosasistencia);
                 }
             }
             em.getTransaction().commit();
@@ -85,64 +87,70 @@ public class AsistenciaJpaController implements Serializable {
         }
     }
 
-    public void edit(Asistencia asistencia) throws NonexistentEntityException, Exception {
+    public void edit(Asistencia asistencia) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Asistencia persistentAsistencia = em.find(Asistencia.class, asistencia.getIdasistencia());
-            Medidor idmedidorOld = persistentAsistencia.getIdmedidor();
-            Medidor idmedidorNew = asistencia.getIdmedidor();
             Planificacion idplanificacionOld = persistentAsistencia.getIdplanificacion();
             Planificacion idplanificacionNew = asistencia.getIdplanificacion();
-            List<Pagosasistencia> pagosasistenciaListOld = persistentAsistencia.getPagosasistenciaList();
-            List<Pagosasistencia> pagosasistenciaListNew = asistencia.getPagosasistenciaList();
-            if (idmedidorNew != null) {
-                idmedidorNew = em.getReference(idmedidorNew.getClass(), idmedidorNew.getIdmedidor());
-                asistencia.setIdmedidor(idmedidorNew);
+            Medidor idmedidorOld = persistentAsistencia.getIdmedidor();
+            Medidor idmedidorNew = asistencia.getIdmedidor();
+            Collection<Pagosasistencia> pagosasistenciaCollectionOld = persistentAsistencia.getPagosasistenciaCollection();
+            Collection<Pagosasistencia> pagosasistenciaCollectionNew = asistencia.getPagosasistenciaCollection();
+            List<String> illegalOrphanMessages = null;
+            for (Pagosasistencia pagosasistenciaCollectionOldPagosasistencia : pagosasistenciaCollectionOld) {
+                if (!pagosasistenciaCollectionNew.contains(pagosasistenciaCollectionOldPagosasistencia)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Pagosasistencia " + pagosasistenciaCollectionOldPagosasistencia + " since its idasistencia field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             if (idplanificacionNew != null) {
                 idplanificacionNew = em.getReference(idplanificacionNew.getClass(), idplanificacionNew.getIdplanificacion());
                 asistencia.setIdplanificacion(idplanificacionNew);
             }
-            List<Pagosasistencia> attachedPagosasistenciaListNew = new ArrayList<Pagosasistencia>();
-            for (Pagosasistencia pagosasistenciaListNewPagosasistenciaToAttach : pagosasistenciaListNew) {
-                pagosasistenciaListNewPagosasistenciaToAttach = em.getReference(pagosasistenciaListNewPagosasistenciaToAttach.getClass(), pagosasistenciaListNewPagosasistenciaToAttach.getIdpagoasistencia());
-                attachedPagosasistenciaListNew.add(pagosasistenciaListNewPagosasistenciaToAttach);
+            if (idmedidorNew != null) {
+                idmedidorNew = em.getReference(idmedidorNew.getClass(), idmedidorNew.getIdmedidor());
+                asistencia.setIdmedidor(idmedidorNew);
             }
-            pagosasistenciaListNew = attachedPagosasistenciaListNew;
-            asistencia.setPagosasistenciaList(pagosasistenciaListNew);
+            Collection<Pagosasistencia> attachedPagosasistenciaCollectionNew = new ArrayList<Pagosasistencia>();
+            for (Pagosasistencia pagosasistenciaCollectionNewPagosasistenciaToAttach : pagosasistenciaCollectionNew) {
+                pagosasistenciaCollectionNewPagosasistenciaToAttach = em.getReference(pagosasistenciaCollectionNewPagosasistenciaToAttach.getClass(), pagosasistenciaCollectionNewPagosasistenciaToAttach.getIdpagoasistencia());
+                attachedPagosasistenciaCollectionNew.add(pagosasistenciaCollectionNewPagosasistenciaToAttach);
+            }
+            pagosasistenciaCollectionNew = attachedPagosasistenciaCollectionNew;
+            asistencia.setPagosasistenciaCollection(pagosasistenciaCollectionNew);
             asistencia = em.merge(asistencia);
-            if (idmedidorOld != null && !idmedidorOld.equals(idmedidorNew)) {
-                idmedidorOld.getAsistenciaList().remove(asistencia);
-                idmedidorOld = em.merge(idmedidorOld);
-            }
-            if (idmedidorNew != null && !idmedidorNew.equals(idmedidorOld)) {
-                idmedidorNew.getAsistenciaList().add(asistencia);
-                idmedidorNew = em.merge(idmedidorNew);
-            }
             if (idplanificacionOld != null && !idplanificacionOld.equals(idplanificacionNew)) {
-                idplanificacionOld.getAsistenciaList().remove(asistencia);
+                idplanificacionOld.getAsistenciaCollection().remove(asistencia);
                 idplanificacionOld = em.merge(idplanificacionOld);
             }
             if (idplanificacionNew != null && !idplanificacionNew.equals(idplanificacionOld)) {
-                idplanificacionNew.getAsistenciaList().add(asistencia);
+                idplanificacionNew.getAsistenciaCollection().add(asistencia);
                 idplanificacionNew = em.merge(idplanificacionNew);
             }
-            for (Pagosasistencia pagosasistenciaListOldPagosasistencia : pagosasistenciaListOld) {
-                if (!pagosasistenciaListNew.contains(pagosasistenciaListOldPagosasistencia)) {
-                    pagosasistenciaListOldPagosasistencia.setIdasistencia(null);
-                    pagosasistenciaListOldPagosasistencia = em.merge(pagosasistenciaListOldPagosasistencia);
-                }
+            if (idmedidorOld != null && !idmedidorOld.equals(idmedidorNew)) {
+                idmedidorOld.getAsistenciaCollection().remove(asistencia);
+                idmedidorOld = em.merge(idmedidorOld);
             }
-            for (Pagosasistencia pagosasistenciaListNewPagosasistencia : pagosasistenciaListNew) {
-                if (!pagosasistenciaListOld.contains(pagosasistenciaListNewPagosasistencia)) {
-                    Asistencia oldIdasistenciaOfPagosasistenciaListNewPagosasistencia = pagosasistenciaListNewPagosasistencia.getIdasistencia();
-                    pagosasistenciaListNewPagosasistencia.setIdasistencia(asistencia);
-                    pagosasistenciaListNewPagosasistencia = em.merge(pagosasistenciaListNewPagosasistencia);
-                    if (oldIdasistenciaOfPagosasistenciaListNewPagosasistencia != null && !oldIdasistenciaOfPagosasistenciaListNewPagosasistencia.equals(asistencia)) {
-                        oldIdasistenciaOfPagosasistenciaListNewPagosasistencia.getPagosasistenciaList().remove(pagosasistenciaListNewPagosasistencia);
-                        oldIdasistenciaOfPagosasistenciaListNewPagosasistencia = em.merge(oldIdasistenciaOfPagosasistenciaListNewPagosasistencia);
+            if (idmedidorNew != null && !idmedidorNew.equals(idmedidorOld)) {
+                idmedidorNew.getAsistenciaCollection().add(asistencia);
+                idmedidorNew = em.merge(idmedidorNew);
+            }
+            for (Pagosasistencia pagosasistenciaCollectionNewPagosasistencia : pagosasistenciaCollectionNew) {
+                if (!pagosasistenciaCollectionOld.contains(pagosasistenciaCollectionNewPagosasistencia)) {
+                    Asistencia oldIdasistenciaOfPagosasistenciaCollectionNewPagosasistencia = pagosasistenciaCollectionNewPagosasistencia.getIdasistencia();
+                    pagosasistenciaCollectionNewPagosasistencia.setIdasistencia(asistencia);
+                    pagosasistenciaCollectionNewPagosasistencia = em.merge(pagosasistenciaCollectionNewPagosasistencia);
+                    if (oldIdasistenciaOfPagosasistenciaCollectionNewPagosasistencia != null && !oldIdasistenciaOfPagosasistenciaCollectionNewPagosasistencia.equals(asistencia)) {
+                        oldIdasistenciaOfPagosasistenciaCollectionNewPagosasistencia.getPagosasistenciaCollection().remove(pagosasistenciaCollectionNewPagosasistencia);
+                        oldIdasistenciaOfPagosasistenciaCollectionNewPagosasistencia = em.merge(oldIdasistenciaOfPagosasistenciaCollectionNewPagosasistencia);
                     }
                 }
             }
@@ -163,7 +171,7 @@ public class AsistenciaJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -175,20 +183,26 @@ public class AsistenciaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The asistencia with id " + id + " no longer exists.", enfe);
             }
-            Medidor idmedidor = asistencia.getIdmedidor();
-            if (idmedidor != null) {
-                idmedidor.getAsistenciaList().remove(asistencia);
-                idmedidor = em.merge(idmedidor);
+            List<String> illegalOrphanMessages = null;
+            Collection<Pagosasistencia> pagosasistenciaCollectionOrphanCheck = asistencia.getPagosasistenciaCollection();
+            for (Pagosasistencia pagosasistenciaCollectionOrphanCheckPagosasistencia : pagosasistenciaCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Asistencia (" + asistencia + ") cannot be destroyed since the Pagosasistencia " + pagosasistenciaCollectionOrphanCheckPagosasistencia + " in its pagosasistenciaCollection field has a non-nullable idasistencia field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             Planificacion idplanificacion = asistencia.getIdplanificacion();
             if (idplanificacion != null) {
-                idplanificacion.getAsistenciaList().remove(asistencia);
+                idplanificacion.getAsistenciaCollection().remove(asistencia);
                 idplanificacion = em.merge(idplanificacion);
             }
-            List<Pagosasistencia> pagosasistenciaList = asistencia.getPagosasistenciaList();
-            for (Pagosasistencia pagosasistenciaListPagosasistencia : pagosasistenciaList) {
-                pagosasistenciaListPagosasistencia.setIdasistencia(null);
-                pagosasistenciaListPagosasistencia = em.merge(pagosasistenciaListPagosasistencia);
+            Medidor idmedidor = asistencia.getIdmedidor();
+            if (idmedidor != null) {
+                idmedidor.getAsistenciaCollection().remove(asistencia);
+                idmedidor = em.merge(idmedidor);
             }
             em.remove(asistencia);
             em.getTransaction().commit();

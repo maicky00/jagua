@@ -107,7 +107,7 @@ public class classAsistenciaPesillo {
         return true;
     }
 
-    public void eliminarAsistenciaPesillo(int idAsistenciaPes) throws NonexistentEntityException {
+    public void eliminarAsistenciaPesillo(int idAsistenciaPes) throws NonexistentEntityException, IllegalOrphanException {
 
         asistenciapesilloJpaController.destroy(idAsistenciaPes);
         JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);

@@ -12,15 +12,17 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Usuarios;
+import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 public class InstitucionJpaController implements Serializable {
 
@@ -34,27 +36,27 @@ public class InstitucionJpaController implements Serializable {
     }
 
     public void create(Institucion institucion) {
-        if (institucion.getUsuariosList() == null) {
-            institucion.setUsuariosList(new ArrayList<Usuarios>());
+        if (institucion.getUsuariosCollection() == null) {
+            institucion.setUsuariosCollection(new ArrayList<Usuarios>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Usuarios> attachedUsuariosList = new ArrayList<Usuarios>();
-            for (Usuarios usuariosListUsuariosToAttach : institucion.getUsuariosList()) {
-                usuariosListUsuariosToAttach = em.getReference(usuariosListUsuariosToAttach.getClass(), usuariosListUsuariosToAttach.getIdusuario());
-                attachedUsuariosList.add(usuariosListUsuariosToAttach);
+            Collection<Usuarios> attachedUsuariosCollection = new ArrayList<Usuarios>();
+            for (Usuarios usuariosCollectionUsuariosToAttach : institucion.getUsuariosCollection()) {
+                usuariosCollectionUsuariosToAttach = em.getReference(usuariosCollectionUsuariosToAttach.getClass(), usuariosCollectionUsuariosToAttach.getIdusuario());
+                attachedUsuariosCollection.add(usuariosCollectionUsuariosToAttach);
             }
-            institucion.setUsuariosList(attachedUsuariosList);
+            institucion.setUsuariosCollection(attachedUsuariosCollection);
             em.persist(institucion);
-            for (Usuarios usuariosListUsuarios : institucion.getUsuariosList()) {
-                Institucion oldIdinstitucionOfUsuariosListUsuarios = usuariosListUsuarios.getIdinstitucion();
-                usuariosListUsuarios.setIdinstitucion(institucion);
-                usuariosListUsuarios = em.merge(usuariosListUsuarios);
-                if (oldIdinstitucionOfUsuariosListUsuarios != null) {
-                    oldIdinstitucionOfUsuariosListUsuarios.getUsuariosList().remove(usuariosListUsuarios);
-                    oldIdinstitucionOfUsuariosListUsuarios = em.merge(oldIdinstitucionOfUsuariosListUsuarios);
+            for (Usuarios usuariosCollectionUsuarios : institucion.getUsuariosCollection()) {
+                Institucion oldIdinstitucionOfUsuariosCollectionUsuarios = usuariosCollectionUsuarios.getIdinstitucion();
+                usuariosCollectionUsuarios.setIdinstitucion(institucion);
+                usuariosCollectionUsuarios = em.merge(usuariosCollectionUsuarios);
+                if (oldIdinstitucionOfUsuariosCollectionUsuarios != null) {
+                    oldIdinstitucionOfUsuariosCollectionUsuarios.getUsuariosCollection().remove(usuariosCollectionUsuarios);
+                    oldIdinstitucionOfUsuariosCollectionUsuarios = em.merge(oldIdinstitucionOfUsuariosCollectionUsuarios);
                 }
             }
             em.getTransaction().commit();
@@ -65,36 +67,42 @@ public class InstitucionJpaController implements Serializable {
         }
     }
 
-    public void edit(Institucion institucion) throws NonexistentEntityException, Exception {
+    public void edit(Institucion institucion) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Institucion persistentInstitucion = em.find(Institucion.class, institucion.getIdinstitucion());
-            List<Usuarios> usuariosListOld = persistentInstitucion.getUsuariosList();
-            List<Usuarios> usuariosListNew = institucion.getUsuariosList();
-            List<Usuarios> attachedUsuariosListNew = new ArrayList<Usuarios>();
-            for (Usuarios usuariosListNewUsuariosToAttach : usuariosListNew) {
-                usuariosListNewUsuariosToAttach = em.getReference(usuariosListNewUsuariosToAttach.getClass(), usuariosListNewUsuariosToAttach.getIdusuario());
-                attachedUsuariosListNew.add(usuariosListNewUsuariosToAttach);
-            }
-            usuariosListNew = attachedUsuariosListNew;
-            institucion.setUsuariosList(usuariosListNew);
-            institucion = em.merge(institucion);
-            for (Usuarios usuariosListOldUsuarios : usuariosListOld) {
-                if (!usuariosListNew.contains(usuariosListOldUsuarios)) {
-                    usuariosListOldUsuarios.setIdinstitucion(null);
-                    usuariosListOldUsuarios = em.merge(usuariosListOldUsuarios);
+            Collection<Usuarios> usuariosCollectionOld = persistentInstitucion.getUsuariosCollection();
+            Collection<Usuarios> usuariosCollectionNew = institucion.getUsuariosCollection();
+            List<String> illegalOrphanMessages = null;
+            for (Usuarios usuariosCollectionOldUsuarios : usuariosCollectionOld) {
+                if (!usuariosCollectionNew.contains(usuariosCollectionOldUsuarios)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Usuarios " + usuariosCollectionOldUsuarios + " since its idinstitucion field is not nullable.");
                 }
             }
-            for (Usuarios usuariosListNewUsuarios : usuariosListNew) {
-                if (!usuariosListOld.contains(usuariosListNewUsuarios)) {
-                    Institucion oldIdinstitucionOfUsuariosListNewUsuarios = usuariosListNewUsuarios.getIdinstitucion();
-                    usuariosListNewUsuarios.setIdinstitucion(institucion);
-                    usuariosListNewUsuarios = em.merge(usuariosListNewUsuarios);
-                    if (oldIdinstitucionOfUsuariosListNewUsuarios != null && !oldIdinstitucionOfUsuariosListNewUsuarios.equals(institucion)) {
-                        oldIdinstitucionOfUsuariosListNewUsuarios.getUsuariosList().remove(usuariosListNewUsuarios);
-                        oldIdinstitucionOfUsuariosListNewUsuarios = em.merge(oldIdinstitucionOfUsuariosListNewUsuarios);
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            Collection<Usuarios> attachedUsuariosCollectionNew = new ArrayList<Usuarios>();
+            for (Usuarios usuariosCollectionNewUsuariosToAttach : usuariosCollectionNew) {
+                usuariosCollectionNewUsuariosToAttach = em.getReference(usuariosCollectionNewUsuariosToAttach.getClass(), usuariosCollectionNewUsuariosToAttach.getIdusuario());
+                attachedUsuariosCollectionNew.add(usuariosCollectionNewUsuariosToAttach);
+            }
+            usuariosCollectionNew = attachedUsuariosCollectionNew;
+            institucion.setUsuariosCollection(usuariosCollectionNew);
+            institucion = em.merge(institucion);
+            for (Usuarios usuariosCollectionNewUsuarios : usuariosCollectionNew) {
+                if (!usuariosCollectionOld.contains(usuariosCollectionNewUsuarios)) {
+                    Institucion oldIdinstitucionOfUsuariosCollectionNewUsuarios = usuariosCollectionNewUsuarios.getIdinstitucion();
+                    usuariosCollectionNewUsuarios.setIdinstitucion(institucion);
+                    usuariosCollectionNewUsuarios = em.merge(usuariosCollectionNewUsuarios);
+                    if (oldIdinstitucionOfUsuariosCollectionNewUsuarios != null && !oldIdinstitucionOfUsuariosCollectionNewUsuarios.equals(institucion)) {
+                        oldIdinstitucionOfUsuariosCollectionNewUsuarios.getUsuariosCollection().remove(usuariosCollectionNewUsuarios);
+                        oldIdinstitucionOfUsuariosCollectionNewUsuarios = em.merge(oldIdinstitucionOfUsuariosCollectionNewUsuarios);
                     }
                 }
             }
@@ -115,7 +123,7 @@ public class InstitucionJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -127,10 +135,16 @@ public class InstitucionJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The institucion with id " + id + " no longer exists.", enfe);
             }
-            List<Usuarios> usuariosList = institucion.getUsuariosList();
-            for (Usuarios usuariosListUsuarios : usuariosList) {
-                usuariosListUsuarios.setIdinstitucion(null);
-                usuariosListUsuarios = em.merge(usuariosListUsuarios);
+            List<String> illegalOrphanMessages = null;
+            Collection<Usuarios> usuariosCollectionOrphanCheck = institucion.getUsuariosCollection();
+            for (Usuarios usuariosCollectionOrphanCheckUsuarios : usuariosCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Institucion (" + institucion + ") cannot be destroyed since the Usuarios " + usuariosCollectionOrphanCheckUsuarios + " in its usuariosCollection field has a non-nullable idinstitucion field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(institucion);
             em.getTransaction().commit();

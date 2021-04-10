@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 public class LoginJpaController implements Serializable {
 

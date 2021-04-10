@@ -98,7 +98,7 @@ public class ReportesControlador {
 
     }
 
-    public void factura(String bddVar, String numfact, String bddVar1, String id, String archivo, String carpeta, String nom) {
+    public void factura(String bddVar, String numfact, String bddVar1, String id, String archivo, String carpeta, String nom, String NUMMEDIDOR) {
         try {
             JasperReport reporte = null;
             URL in1 = null;
@@ -112,6 +112,7 @@ public class ReportesControlador {
             Map parametro = new HashMap();
             parametro.put(bddVar1, id);
             parametro.put(bddVar, numfact);
+            parametro.put("NUMMEDIDOR", NUMMEDIDOR);
             parametro.put("SUBREPORT_DIR", "" + in1);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametro, con.getCon());

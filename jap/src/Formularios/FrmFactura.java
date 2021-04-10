@@ -17,7 +17,10 @@ import Controladores.classOtrosConceptos;
 import Controladores.classOtrosPagos;
 import Controladores.classPagosNuevoMed;
 import Controladores.classusuario;
+import entidades.Corte;
+import entidades.Detallefactura;
 import entidades.Facturas;
+import entidades.Medidor;
 import jap.ReportesControlador;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -64,6 +67,10 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     classCorte cc = new classCorte();
     classOtrosConceptos coc = new classOtrosConceptos();
     classHistorialfactura chf = new classHistorialfactura();
+    
+    Medidor medidor=new Medidor();
+    Corte corte=new Corte();
+    Detallefactura detallefactura = new Detallefactura();
 
     public FrmFactura() {
         initComponents();
@@ -227,16 +234,21 @@ public class FrmFactura extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel10))
-                            .addComponent(lblInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblInstitucion1)
-                        .addGap(0, 6, Short.MAX_VALUE))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addComponent(jLabel10))
+                                    .addComponent(lblInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblInstitucion1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -266,6 +278,11 @@ public class FrmFactura extends javax.swing.JInternalFrame {
 
         txtnumMedidor.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
         txtnumMedidor.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        txtnumMedidor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtnumMedidorKeyPressed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 102));
@@ -577,14 +594,24 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         try {
 
             limpiar();
-            if (cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getEstado().equals("INACTIVO")) {
+            int numMed = Integer.valueOf(txtnumMedidor.getText());
+            
+            medidor = cm.buscarMedidorNumM(numMed);
+            int multasporpagar = ca.buscarMultaPagado(numMed);
+            corte = cc.buscarMedNum(numMed);
+            detallefactura = cdf.buscarNumMedDetallefactura(numMed);
+            boolean verificarcortes = cc.verificarOtrPagos(numMed);
+            
+            if (medidor.getEstado().equals("INACTIVO")) {
                 JOptionPane.showMessageDialog(null, "Usuario INACTIVO!.",
                         "INFORMACION", JOptionPane.ERROR_MESSAGE);
 
             } else {
-                if (ca.buscarMultaPagado(Integer.valueOf(txtnumMedidor.getText())) > 0) {
+                //multas por pagar - formulario
+                if (multasporpagar > 0) {
                     int i = JOptionPane.showConfirmDialog(this, "¿Tiene Multas Pendientes\n Ver Detalles?", "Confirmar", JOptionPane.YES_NO_OPTION);
                     if (i == 0) {
+                        //abrir formulario pagar
                         FrmPagosAsistemcia pago = new FrmPagosAsistemcia();
                         cf = new ControlFormularios();
                         cf.ControlaInstancia(pago);
@@ -592,23 +619,23 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                         pago.pagar();
                     }
                 }
-                if (cc.verificarOtrPagos(Integer.valueOf(txtnumMedidor.getText())) == true) {
-                    int numM = Integer.valueOf(txtnumMedidor.getText());
+                //buscar multa por cortes
+                if (verificarcortes == true) {
                     txtIdCorte.setVisible(true);
                     txtMultaReconexion.setVisible(true);
-                    txtMultaReconexion.setText(cc.buscarMedNum(numM).getObservacion());
-                    txtIdCorte.setText(cc.buscarMedNum(numM).getMulta().toString());
+                    txtMultaReconexion.setText(corte.getObservacion());
+                    txtIdCorte.setText(corte.getMulta().toString());
                 }
-                if (cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() > 0) {
+                if (medidor.getSaldo() > 0) {
                     comboPagos.removeAllItems();
                     comboPagos.setVisible(true);
                     jLabel9.setVisible(true);
-                    for (int i = 0; i < cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo() + 1; i++) {
+                    for (int i = 0; i < medidor.getSaldo() + 1; i++) {
                         comboPagos.addItem(i + ".0");
                     }
-                    lbldescNuevoMed.setText("Cuotas Pagadas: " + cpnm.numCuotas(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdmedidor()) + " Saldo Faltantate por Conexion: "
-                            + cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo().toString());
-//            txtPagoNuevoMed.setText(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo().toString());
+                    lbldescNuevoMed.setText("Cuotas Pagadas: " + cpnm.numCuotas(medidor.getIdmedidor()) + " Saldo Faltantate por nueva Conexion: "
+                            + medidor.getSaldo().toString());
+//                  txtPagoNuevoMed.setText(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo().toString());
                 } else {
                     lbldescNuevoMed.setText("");
                     comboPagos.setVisible(false);
@@ -616,21 +643,20 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                     comboPagos.removeAllItems();
                     comboPagos.addItem(0);
                 }
-                if (cdf.buscarNumMedDetallefactura(Integer.valueOf(txtnumMedidor.getText())).equals(null)) {
+                if (detallefactura.equals(null)) {
                 } else {
                     jLabel2.setText(String.valueOf(cft.numFactura() + 1));
-                    int numMed = Integer.valueOf(txtnumMedidor.getText());
-                    String ruc = cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getRucci();
-                    String client = cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getPrimerapellido() + " "
-                            + cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getSegundoapellido() + " "
-                            + cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getPrimernombre() + " "
-                            + cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getSegundonombre() + " ";
-                    String direccioN = cdf.buscarNumMedDetallefactura(numMed).getIdmedidor().getIdusuario().getDireccion();
+                    String ruc = detallefactura.getIdmedidor().getIdusuario().getRucci();
+                    String client = detallefactura.getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                            + detallefactura.getIdmedidor().getIdusuario().getSegundoapellido() + " "
+                            + detallefactura.getIdmedidor().getIdusuario().getPrimernombre() + " "
+                            + detallefactura.getIdmedidor().getIdusuario().getSegundonombre() + " ";
+                    String direccioN = detallefactura.getIdmedidor().getIdusuario().getDireccion();
                     txtRuc.setText(ruc);
                     txtCliente.setText(client);
                     cdf.tablaDetalles(jTable1, numMed);
                     txtdireccion.setText(direccioN);
-                    cdf.graficador(cm.buscarMedidorNumM(Integer.valueOf(numMed)).getIdmedidor());
+                    cdf.graficador(medidor.getIdmedidor());
 
                 }
             }
@@ -639,7 +665,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-               String usActual = FrmPrincipal.menuUsuarioActual.getText();
+        String usActual = FrmPrincipal.menuUsuarioActual.getText();
 
         int i = JOptionPane.showConfirmDialog(this, "¿REAlIZAR TRANSACCION?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
@@ -683,7 +709,7 @@ public class FrmFactura extends javax.swing.JInternalFrame {
                     chf.guardarHistorial(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdusuario().getIdusuario(), numFact, fechaActual);
                     JOptionPane.showMessageDialog(null, "Pago Realizado Corectamente", "Información", 1);
                     String idr = "" + cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getIdusuario().getIdusuario();
-                    b.factura("id", idr, "numfact", String.valueOf(numFact), "verfacturageneral.jasper", "Consumos " + lblfecha.getText(), "Num.Med " + txtnumMedidor.getText() + " Fact." + numFact);
+                    b.factura("id", idr, "numfact", String.valueOf(numFact), "verfacturageneral.jasper", "Consumos " + lblfecha.getText(), "Num.Med " + txtnumMedidor.getText() + " Fact." + numFact,txtnumMedidor.getText());
 //                    b.facturaImprimir("id", idr, "numfact", String.valueOf(numFact), "facturageneral.jasper");
 
                 } else {
@@ -739,6 +765,84 @@ public class FrmFactura extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_comboPagosActionPerformed
+
+    private void txtnumMedidorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnumMedidorKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            try {
+
+                limpiar();
+                int numMed = Integer.valueOf(txtnumMedidor.getText());
+
+                medidor = cm.buscarMedidorNumM(numMed);
+                int multasporpagar = ca.buscarMultaPagado(numMed);
+                corte = cc.buscarMedNum(numMed);
+                detallefactura = cdf.buscarNumMedDetallefactura(numMed);
+                boolean verificarcortes = cc.verificarOtrPagos(numMed);
+
+                if (medidor.getEstado().equals("INACTIVO")) {
+                    JOptionPane.showMessageDialog(null, "Usuario INACTIVO!.",
+                            "INFORMACION", JOptionPane.ERROR_MESSAGE);
+
+                } else {
+                    //multas por pagar - formulario
+                    if (multasporpagar > 0) {
+                        int i = JOptionPane.showConfirmDialog(this, "¿Tiene Multas Pendientes\n Ver Detalles?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                        if (i == 0) {
+                            //abrir formulario pagar
+                            FrmPagosAsistemcia pago = new FrmPagosAsistemcia();
+                            cf = new ControlFormularios();
+                            cf.ControlaInstancia(pago);
+                            FrmPagosAsistemcia.txtnumMedidor.setText(txtnumMedidor.getText());
+                            pago.pagar();
+                        }
+                    }
+                    //buscar multa por cortes
+                    if (verificarcortes == true) {
+                        txtIdCorte.setVisible(true);
+                        txtMultaReconexion.setVisible(true);
+                        txtMultaReconexion.setText(corte.getObservacion());
+                        txtIdCorte.setText(corte.getMulta().toString());
+                    }
+                    if (medidor.getSaldo() > 0) {
+                        comboPagos.removeAllItems();
+                        comboPagos.setVisible(true);
+                        jLabel9.setVisible(true);
+                        for (int i = 0; i < medidor.getSaldo() + 1; i++) {
+                            comboPagos.addItem(i + ".0");
+                        }
+                        lbldescNuevoMed.setText("Cuotas Pagadas: " + cpnm.numCuotas(medidor.getIdmedidor()) + " Saldo Faltantate por nueva Conexion: "
+                                + medidor.getSaldo().toString());
+//                  txtPagoNuevoMed.setText(cm.buscarMedidorNumM(Integer.valueOf(txtnumMedidor.getText())).getSaldo().toString());
+                    } else {
+                        lbldescNuevoMed.setText("");
+                        comboPagos.setVisible(false);
+                        jLabel9.setVisible(false);
+                        comboPagos.removeAllItems();
+                        comboPagos.addItem(0);
+                    }
+                    if (detallefactura.equals(null)) {
+                    } else {
+                        jLabel2.setText(String.valueOf(cft.numFactura() + 1));
+                        String ruc = detallefactura.getIdmedidor().getIdusuario().getRucci();
+                        String client = detallefactura.getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                                + detallefactura.getIdmedidor().getIdusuario().getSegundoapellido() + " "
+                                + detallefactura.getIdmedidor().getIdusuario().getPrimernombre() + " "
+                                + detallefactura.getIdmedidor().getIdusuario().getSegundonombre() + " ";
+                        String direccioN = detallefactura.getIdmedidor().getIdusuario().getDireccion();
+                        txtRuc.setText(ruc);
+                        txtCliente.setText(client);
+                        cdf.tablaDetalles(jTable1, numMed);
+                        txtdireccion.setText(direccioN);
+                        cdf.graficador(medidor.getIdmedidor());
+
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Error: "+ e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_txtnumMedidorKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

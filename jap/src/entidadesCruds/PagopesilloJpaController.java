@@ -19,7 +19,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Marco
+ * @author Tech-Usuario
  */
 public class PagopesilloJpaController implements Serializable {
 
@@ -44,7 +44,7 @@ public class PagopesilloJpaController implements Serializable {
             }
             em.persist(pagopesillo);
             if (idasistenciapesillo != null) {
-                idasistenciapesillo.getPagopesilloList().add(pagopesillo);
+                idasistenciapesillo.getPagopesilloCollection().add(pagopesillo);
                 idasistenciapesillo = em.merge(idasistenciapesillo);
             }
             em.getTransaction().commit();
@@ -69,11 +69,11 @@ public class PagopesilloJpaController implements Serializable {
             }
             pagopesillo = em.merge(pagopesillo);
             if (idasistenciapesilloOld != null && !idasistenciapesilloOld.equals(idasistenciapesilloNew)) {
-                idasistenciapesilloOld.getPagopesilloList().remove(pagopesillo);
+                idasistenciapesilloOld.getPagopesilloCollection().remove(pagopesillo);
                 idasistenciapesilloOld = em.merge(idasistenciapesilloOld);
             }
             if (idasistenciapesilloNew != null && !idasistenciapesilloNew.equals(idasistenciapesilloOld)) {
-                idasistenciapesilloNew.getPagopesilloList().add(pagopesillo);
+                idasistenciapesilloNew.getPagopesilloCollection().add(pagopesillo);
                 idasistenciapesilloNew = em.merge(idasistenciapesilloNew);
             }
             em.getTransaction().commit();
@@ -107,7 +107,7 @@ public class PagopesilloJpaController implements Serializable {
             }
             Asistenciapesillo idasistenciapesillo = pagopesillo.getIdasistenciapesillo();
             if (idasistenciapesillo != null) {
-                idasistenciapesillo.getPagopesilloList().remove(pagopesillo);
+                idasistenciapesillo.getPagopesilloCollection().remove(pagopesillo);
                 idasistenciapesillo = em.merge(idasistenciapesillo);
             }
             em.remove(pagopesillo);

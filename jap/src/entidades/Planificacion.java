@@ -6,9 +6,10 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "planificacion")
@@ -58,8 +59,8 @@ public class Planificacion implements Serializable {
     @Lob
     @Column(name = "DESCRIPCION")
     private String descripcion;
-    @OneToMany(mappedBy = "idplanificacion")
-    private List<Asistencia> asistenciaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idplanificacion")
+    private Collection<Asistencia> asistenciaCollection;
 
     public Planificacion() {
     }
@@ -117,12 +118,12 @@ public class Planificacion implements Serializable {
     }
 
     @XmlTransient
-    public List<Asistencia> getAsistenciaList() {
-        return asistenciaList;
+    public Collection<Asistencia> getAsistenciaCollection() {
+        return asistenciaCollection;
     }
 
-    public void setAsistenciaList(List<Asistencia> asistenciaList) {
-        this.asistenciaList = asistenciaList;
+    public void setAsistenciaCollection(Collection<Asistencia> asistenciaCollection) {
+        this.asistenciaCollection = asistenciaCollection;
     }
 
     @Override

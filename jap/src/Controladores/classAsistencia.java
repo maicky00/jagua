@@ -120,7 +120,7 @@ public class classAsistencia {
         return true;
     }
 
-    public void eliminarAsistencia(int idAsistencia) throws NonexistentEntityException {
+    public void eliminarAsistencia(int idAsistencia) throws NonexistentEntityException, IllegalOrphanException {
 
         asistenciaJpacontrolador.destroy(idAsistencia);
         JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
@@ -146,7 +146,8 @@ public class classAsistencia {
         }
         return null;
     }
-
+    
+    //sumar multas no pagadas
     public int buscarMultaPagado(int idNumMed) {
         int i = 0;
         for (Asistencia dat : getAsistencia()) {

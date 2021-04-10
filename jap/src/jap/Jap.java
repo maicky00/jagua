@@ -5,9 +5,13 @@
  */
 package jap;
 
+import Controladores.classusuario;
 import Formularios.FrmLogin;
 import Formularios.Login;
 import Formularios.FrmPrincipal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -22,7 +26,9 @@ public class Jap {
         Login fl = new Login();
         FrmPrincipal principal=new FrmPrincipal();
         principal.show();
-
+        
+        classusuario cu=new classusuario();
+        //cu.actualizarUsuarioEstadomedidor();
     }
 
 }

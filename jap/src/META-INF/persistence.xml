@@ -2,25 +2,33 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="japPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>entidades.Asistencia</class>
-    <class>entidades.Corte</class>
-    <class>entidades.Detallefactura</class>
-    <class>entidades.Facturas</class>
-    <class>entidades.Institucion</class>
     <class>entidades.Inventario</class>
-    <class>entidades.Login</class>
-    <class>entidades.Medidor</class>
-    <class>entidades.Otrospagos</class>
-    <class>entidades.Pagosasistencia</class>
-    <class>entidades.Planificacion</class>
-    <class>entidades.Tarifas</class>
-    <class>entidades.Usuarios</class>
-    <class>entidades.Pagosnuevomed</class>
-    <class>entidades.Asistenciapesillo</class>
+    <class>entidades.Facturassobrante</class>
     <class>entidades.Pagopesillo</class>
-    <class>entidades.Planificacionpesillo</class>
+    <class>entidades.Facturasganaderia</class>
+    <class>entidades.Otrospagos</class>
+    <class>entidades.Tarifas</class>
+    <class>entidades.Detallefacturasobrante</class>
     <class>entidades.Otrosconceptos</class>
+    <class>entidades.Detallefactura</class>
+    <class>entidades.Aguaganaderia</class>
+    <class>entidades.Detallefacturaganaderia</class>
+    <class>entidades.Pagosasistencia</class>
+    <class>entidades.Corte</class>
+    <class>entidades.Facturas</class>
+    <class>entidades.Tarifasganaderia</class>
+    <class>entidades.Planificacionpesillo</class>
+    <class>entidades.Usuarios</class>
+    <class>entidades.Tarifassobrante</class>
+    <class>entidades.Medidor</class>
+    <class>entidades.Asistencia</class>
+    <class>entidades.Asistenciapesillo</class>
+    <class>entidades.Pagosnuevomed</class>
     <class>entidades.Historialfactura</class>
+    <class>entidades.Planificacion</class>
+    <class>entidades.Login</class>
+    <class>entidades.Institucion</class>
+    <class>entidades.Aguasobrante</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistemaagua2?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

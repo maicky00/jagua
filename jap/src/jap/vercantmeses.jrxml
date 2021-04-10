@@ -137,30 +137,30 @@ where facturas.`NUMFACTURA`=$P{numfact}]]>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<summary>
-		<band height="69" splitType="Stretch">
+		<band height="25" splitType="Stretch">
 			<textField>
-				<reportElement x="252" y="10" width="100" height="20" uuid="6a1517c7-9fd0-4359-be5e-877083d3437b"/>
+				<reportElement x="277" y="5" width="100" height="20" uuid="6a1517c7-9fd0-4359-be5e-877083d3437b"/>
 				<textElement>
 					<font fontName="Serif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{consumo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="88" y="29" width="100" height="20" uuid="2b465957-2284-4518-9993-611394372bad"/>
+				<reportElement x="84" y="3" width="100" height="20" uuid="2b465957-2284-4518-9993-611394372bad"/>
 				<textElement>
 					<font fontName="Serif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{cantidadmeses}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="Column header" x="172" y="12" width="80" height="15" forecolor="#000000" uuid="913d5484-7c1c-476a-825f-a1b73401002a"/>
+				<reportElement style="Column header" x="197" y="7" width="80" height="15" forecolor="#000000" uuid="913d5484-7c1c-476a-825f-a1b73401002a"/>
 				<textElement>
 					<font fontName="Serif" size="8"/>
 				</textElement>
 				<text><![CDATA[CONSUMO M3:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="8" y="31" width="80" height="15" forecolor="#000000" uuid="1f610365-5f94-457f-a482-eaa006652068"/>
+				<reportElement style="Column header" x="4" y="5" width="80" height="15" forecolor="#000000" uuid="1f610365-5f94-457f-a482-eaa006652068"/>
 				<textElement>
 					<font fontName="Serif" size="8"/>
 				</textElement>

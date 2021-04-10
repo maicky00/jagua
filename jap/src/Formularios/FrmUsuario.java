@@ -933,16 +933,16 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
 
             }
             
-            txtRuc.setText(tablaUsuarios.getValueAt(n, 1).toString());
+            txtRuc.setText(tablaUsuarios.getValueAt(n, 2).toString());
             txtNombre.setText(us.getPrimernombre());
             txtNombre2.setText(us.getSegundonombre());
             txtApellido.setText(us.getPrimerapellido());
             txtApellido2.setText(us.getSegundoapellido());
-            txtApodo.setText(tablaUsuarios.getValueAt(n, 3).toString());
+            txtApodo.setText(tablaUsuarios.getValueAt(n, 4).toString());
             txtDir.setText(us.getDireccion());
             txtTelefono.setText(us.getTelefono());
-            txtCelular.setText(tablaUsuarios.getValueAt(n, 4).toString());
-            comboSector.setSelectedItem(tablaUsuarios.getValueAt(n, 5).toString());
+            txtCelular.setText(us.getCelular());
+            comboSector.setSelectedItem(tablaUsuarios.getValueAt(n, 6).toString());
             txtReferencia.setText(us.getReferencia());
             txtObservar.setText(us.getObservacion());
 
@@ -958,16 +958,16 @@ public class FrmUsuario extends javax.swing.JInternalFrame {
             us=cu.buscarLoginId(idus);
             
             id.setText(us.getIdusuario().toString());
-            txtRuc.setText(tablaUsuarios.getValueAt(n, 1).toString());
+            txtRuc.setText(tablaUsuarios.getValueAt(n, 2).toString());
             txtNombre.setText(us.getPrimernombre());
             txtNombre2.setText(us.getSegundonombre());
             txtApellido.setText(us.getPrimerapellido());
             txtApellido2.setText(us.getSegundoapellido());
-            txtApodo.setText(tablaUsuarios.getValueAt(n, 3).toString());
+            txtApodo.setText(tablaUsuarios.getValueAt(n, 4).toString());
             txtDir.setText(us.getDireccion());
             txtTelefono.setText(us.getTelefono());
-            txtCelular.setText(tablaUsuarios.getValueAt(n, 4).toString());
-            comboSector.setSelectedItem(tablaUsuarios.getValueAt(n, 5).toString());
+            txtCelular.setText(us.getCelular());
+            comboSector.setSelectedItem(tablaUsuarios.getValueAt(n, 6).toString());
             txtReferencia.setText(us.getReferencia());
             txtObservar.setText(us.getObservacion());
 

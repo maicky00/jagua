@@ -13,15 +13,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Medidor;
 import entidades.Otrospagos;
+import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 public class CorteJpaController implements Serializable {
 
@@ -35,8 +37,8 @@ public class CorteJpaController implements Serializable {
     }
 
     public void create(Corte corte) {
-        if (corte.getOtrospagosList() == null) {
-            corte.setOtrospagosList(new ArrayList<Otrospagos>());
+        if (corte.getOtrospagosCollection() == null) {
+            corte.setOtrospagosCollection(new ArrayList<Otrospagos>());
         }
         EntityManager em = null;
         try {
@@ -47,24 +49,24 @@ public class CorteJpaController implements Serializable {
                 idmedidor = em.getReference(idmedidor.getClass(), idmedidor.getIdmedidor());
                 corte.setIdmedidor(idmedidor);
             }
-            List<Otrospagos> attachedOtrospagosList = new ArrayList<Otrospagos>();
-            for (Otrospagos otrospagosListOtrospagosToAttach : corte.getOtrospagosList()) {
-                otrospagosListOtrospagosToAttach = em.getReference(otrospagosListOtrospagosToAttach.getClass(), otrospagosListOtrospagosToAttach.getIdotpagos());
-                attachedOtrospagosList.add(otrospagosListOtrospagosToAttach);
+            Collection<Otrospagos> attachedOtrospagosCollection = new ArrayList<Otrospagos>();
+            for (Otrospagos otrospagosCollectionOtrospagosToAttach : corte.getOtrospagosCollection()) {
+                otrospagosCollectionOtrospagosToAttach = em.getReference(otrospagosCollectionOtrospagosToAttach.getClass(), otrospagosCollectionOtrospagosToAttach.getIdotpagos());
+                attachedOtrospagosCollection.add(otrospagosCollectionOtrospagosToAttach);
             }
-            corte.setOtrospagosList(attachedOtrospagosList);
+            corte.setOtrospagosCollection(attachedOtrospagosCollection);
             em.persist(corte);
             if (idmedidor != null) {
-                idmedidor.getCorteList().add(corte);
+                idmedidor.getCorteCollection().add(corte);
                 idmedidor = em.merge(idmedidor);
             }
-            for (Otrospagos otrospagosListOtrospagos : corte.getOtrospagosList()) {
-                Corte oldIdcorteOfOtrospagosListOtrospagos = otrospagosListOtrospagos.getIdcorte();
-                otrospagosListOtrospagos.setIdcorte(corte);
-                otrospagosListOtrospagos = em.merge(otrospagosListOtrospagos);
-                if (oldIdcorteOfOtrospagosListOtrospagos != null) {
-                    oldIdcorteOfOtrospagosListOtrospagos.getOtrospagosList().remove(otrospagosListOtrospagos);
-                    oldIdcorteOfOtrospagosListOtrospagos = em.merge(oldIdcorteOfOtrospagosListOtrospagos);
+            for (Otrospagos otrospagosCollectionOtrospagos : corte.getOtrospagosCollection()) {
+                Corte oldIdcorteOfOtrospagosCollectionOtrospagos = otrospagosCollectionOtrospagos.getIdcorte();
+                otrospagosCollectionOtrospagos.setIdcorte(corte);
+                otrospagosCollectionOtrospagos = em.merge(otrospagosCollectionOtrospagos);
+                if (oldIdcorteOfOtrospagosCollectionOtrospagos != null) {
+                    oldIdcorteOfOtrospagosCollectionOtrospagos.getOtrospagosCollection().remove(otrospagosCollectionOtrospagos);
+                    oldIdcorteOfOtrospagosCollectionOtrospagos = em.merge(oldIdcorteOfOtrospagosCollectionOtrospagos);
                 }
             }
             em.getTransaction().commit();
@@ -75,7 +77,7 @@ public class CorteJpaController implements Serializable {
         }
     }
 
-    public void edit(Corte corte) throws NonexistentEntityException, Exception {
+    public void edit(Corte corte) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -83,42 +85,48 @@ public class CorteJpaController implements Serializable {
             Corte persistentCorte = em.find(Corte.class, corte.getIdcorte());
             Medidor idmedidorOld = persistentCorte.getIdmedidor();
             Medidor idmedidorNew = corte.getIdmedidor();
-            List<Otrospagos> otrospagosListOld = persistentCorte.getOtrospagosList();
-            List<Otrospagos> otrospagosListNew = corte.getOtrospagosList();
+            Collection<Otrospagos> otrospagosCollectionOld = persistentCorte.getOtrospagosCollection();
+            Collection<Otrospagos> otrospagosCollectionNew = corte.getOtrospagosCollection();
+            List<String> illegalOrphanMessages = null;
+            for (Otrospagos otrospagosCollectionOldOtrospagos : otrospagosCollectionOld) {
+                if (!otrospagosCollectionNew.contains(otrospagosCollectionOldOtrospagos)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Otrospagos " + otrospagosCollectionOldOtrospagos + " since its idcorte field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             if (idmedidorNew != null) {
                 idmedidorNew = em.getReference(idmedidorNew.getClass(), idmedidorNew.getIdmedidor());
                 corte.setIdmedidor(idmedidorNew);
             }
-            List<Otrospagos> attachedOtrospagosListNew = new ArrayList<Otrospagos>();
-            for (Otrospagos otrospagosListNewOtrospagosToAttach : otrospagosListNew) {
-                otrospagosListNewOtrospagosToAttach = em.getReference(otrospagosListNewOtrospagosToAttach.getClass(), otrospagosListNewOtrospagosToAttach.getIdotpagos());
-                attachedOtrospagosListNew.add(otrospagosListNewOtrospagosToAttach);
+            Collection<Otrospagos> attachedOtrospagosCollectionNew = new ArrayList<Otrospagos>();
+            for (Otrospagos otrospagosCollectionNewOtrospagosToAttach : otrospagosCollectionNew) {
+                otrospagosCollectionNewOtrospagosToAttach = em.getReference(otrospagosCollectionNewOtrospagosToAttach.getClass(), otrospagosCollectionNewOtrospagosToAttach.getIdotpagos());
+                attachedOtrospagosCollectionNew.add(otrospagosCollectionNewOtrospagosToAttach);
             }
-            otrospagosListNew = attachedOtrospagosListNew;
-            corte.setOtrospagosList(otrospagosListNew);
+            otrospagosCollectionNew = attachedOtrospagosCollectionNew;
+            corte.setOtrospagosCollection(otrospagosCollectionNew);
             corte = em.merge(corte);
             if (idmedidorOld != null && !idmedidorOld.equals(idmedidorNew)) {
-                idmedidorOld.getCorteList().remove(corte);
+                idmedidorOld.getCorteCollection().remove(corte);
                 idmedidorOld = em.merge(idmedidorOld);
             }
             if (idmedidorNew != null && !idmedidorNew.equals(idmedidorOld)) {
-                idmedidorNew.getCorteList().add(corte);
+                idmedidorNew.getCorteCollection().add(corte);
                 idmedidorNew = em.merge(idmedidorNew);
             }
-            for (Otrospagos otrospagosListOldOtrospagos : otrospagosListOld) {
-                if (!otrospagosListNew.contains(otrospagosListOldOtrospagos)) {
-                    otrospagosListOldOtrospagos.setIdcorte(null);
-                    otrospagosListOldOtrospagos = em.merge(otrospagosListOldOtrospagos);
-                }
-            }
-            for (Otrospagos otrospagosListNewOtrospagos : otrospagosListNew) {
-                if (!otrospagosListOld.contains(otrospagosListNewOtrospagos)) {
-                    Corte oldIdcorteOfOtrospagosListNewOtrospagos = otrospagosListNewOtrospagos.getIdcorte();
-                    otrospagosListNewOtrospagos.setIdcorte(corte);
-                    otrospagosListNewOtrospagos = em.merge(otrospagosListNewOtrospagos);
-                    if (oldIdcorteOfOtrospagosListNewOtrospagos != null && !oldIdcorteOfOtrospagosListNewOtrospagos.equals(corte)) {
-                        oldIdcorteOfOtrospagosListNewOtrospagos.getOtrospagosList().remove(otrospagosListNewOtrospagos);
-                        oldIdcorteOfOtrospagosListNewOtrospagos = em.merge(oldIdcorteOfOtrospagosListNewOtrospagos);
+            for (Otrospagos otrospagosCollectionNewOtrospagos : otrospagosCollectionNew) {
+                if (!otrospagosCollectionOld.contains(otrospagosCollectionNewOtrospagos)) {
+                    Corte oldIdcorteOfOtrospagosCollectionNewOtrospagos = otrospagosCollectionNewOtrospagos.getIdcorte();
+                    otrospagosCollectionNewOtrospagos.setIdcorte(corte);
+                    otrospagosCollectionNewOtrospagos = em.merge(otrospagosCollectionNewOtrospagos);
+                    if (oldIdcorteOfOtrospagosCollectionNewOtrospagos != null && !oldIdcorteOfOtrospagosCollectionNewOtrospagos.equals(corte)) {
+                        oldIdcorteOfOtrospagosCollectionNewOtrospagos.getOtrospagosCollection().remove(otrospagosCollectionNewOtrospagos);
+                        oldIdcorteOfOtrospagosCollectionNewOtrospagos = em.merge(oldIdcorteOfOtrospagosCollectionNewOtrospagos);
                     }
                 }
             }
@@ -139,7 +147,7 @@ public class CorteJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -151,15 +159,21 @@ public class CorteJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The corte with id " + id + " no longer exists.", enfe);
             }
+            List<String> illegalOrphanMessages = null;
+            Collection<Otrospagos> otrospagosCollectionOrphanCheck = corte.getOtrospagosCollection();
+            for (Otrospagos otrospagosCollectionOrphanCheckOtrospagos : otrospagosCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Corte (" + corte + ") cannot be destroyed since the Otrospagos " + otrospagosCollectionOrphanCheckOtrospagos + " in its otrospagosCollection field has a non-nullable idcorte field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
             Medidor idmedidor = corte.getIdmedidor();
             if (idmedidor != null) {
-                idmedidor.getCorteList().remove(corte);
+                idmedidor.getCorteCollection().remove(corte);
                 idmedidor = em.merge(idmedidor);
-            }
-            List<Otrospagos> otrospagosList = corte.getOtrospagosList();
-            for (Otrospagos otrospagosListOtrospagos : otrospagosList) {
-                otrospagosListOtrospagos.setIdcorte(null);
-                otrospagosListOtrospagos = em.merge(otrospagosListOtrospagos);
             }
             em.remove(corte);
             em.getTransaction().commit();

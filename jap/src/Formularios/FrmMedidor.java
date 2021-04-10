@@ -63,6 +63,9 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
         txtPagado.setVisible(false);
         lblIdmedidor.setVisible(false);
         jLabel1.setVisible(false);
+        jLabel13.setVisible(false);
+        txtSaldo.setVisible(false);
+        jLabel12.setVisible(false);
         lblIdUsuario.setToolTipText(classDisenio.txthtml("Numero de usuario, formulario usuario"));
         txtUsuarioCed.setToolTipText(classDisenio.txthtml("Numero de cedula del usuario"));
         txtNombre.setToolTipText(classDisenio.txthtml("Nombre del usuario"));
@@ -679,7 +682,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
     private void txtUsuarioCedKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioCedKeyTyped
 
         if (txtUsuarioCed.getText().equals("")) {
-            FrmBusqueda bu = new FrmBusqueda();
+            FrmListaUsuarioSinMedidor bu = new FrmListaUsuarioSinMedidor();
             bu.setVisible(true);
         }
     }//GEN-LAST:event_txtUsuarioCedKeyTyped
@@ -755,6 +758,7 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
                     if(boton.getName().equals("btnEditar")){
                         System.out.println("Click en el boton Editar");
                         //EVENTOS EDITAR
+                         mostrar();
                     }
                     if(boton.getName().equals("btnEliminar")){
                         JOptionPane.showConfirmDialog(null, "Desea eliminar este registro", "Confirmar", JOptionPane.OK_CANCEL_OPTION);
@@ -770,11 +774,11 @@ public class FrmMedidor extends javax.swing.JInternalFrame {
             Medidor med= cm.buscarMedidorIdUsuario(id);
             
             lblIdmedidor.setText(jTable1.getValueAt(n, 0).toString());
-            txtUsuarioCed.setText(jTable1.getValueAt(n, 1).toString());
-            txtNombre.setText(jTable1.getValueAt(n, 2).toString());
+            txtUsuarioCed.setText(jTable1.getValueAt(n, 2).toString());
+            txtNombre.setText(jTable1.getValueAt(n, 3).toString());
             txtMedidor.setText(med.getNummedidor().toString());
 
-            txtSerie.setText(jTable1.getValueAt(n, 4).toString());
+            txtSerie.setText(med.getSerie().toString());
             comboEstado.setSelectedItem(jTable1.getValueAt(n, 5).toString());
             lblIdUsuario.setText(med.getIdusuario().getIdusuario().toString());
             txtUsuarioCed.setEnabled(false);

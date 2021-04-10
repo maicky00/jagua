@@ -12,15 +12,17 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entidades.Asistencia;
 import entidades.Planificacion;
+import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 public class PlanificacionJpaController implements Serializable {
 
@@ -34,27 +36,27 @@ public class PlanificacionJpaController implements Serializable {
     }
 
     public void create(Planificacion planificacion) {
-        if (planificacion.getAsistenciaList() == null) {
-            planificacion.setAsistenciaList(new ArrayList<Asistencia>());
+        if (planificacion.getAsistenciaCollection() == null) {
+            planificacion.setAsistenciaCollection(new ArrayList<Asistencia>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Asistencia> attachedAsistenciaList = new ArrayList<Asistencia>();
-            for (Asistencia asistenciaListAsistenciaToAttach : planificacion.getAsistenciaList()) {
-                asistenciaListAsistenciaToAttach = em.getReference(asistenciaListAsistenciaToAttach.getClass(), asistenciaListAsistenciaToAttach.getIdasistencia());
-                attachedAsistenciaList.add(asistenciaListAsistenciaToAttach);
+            Collection<Asistencia> attachedAsistenciaCollection = new ArrayList<Asistencia>();
+            for (Asistencia asistenciaCollectionAsistenciaToAttach : planificacion.getAsistenciaCollection()) {
+                asistenciaCollectionAsistenciaToAttach = em.getReference(asistenciaCollectionAsistenciaToAttach.getClass(), asistenciaCollectionAsistenciaToAttach.getIdasistencia());
+                attachedAsistenciaCollection.add(asistenciaCollectionAsistenciaToAttach);
             }
-            planificacion.setAsistenciaList(attachedAsistenciaList);
+            planificacion.setAsistenciaCollection(attachedAsistenciaCollection);
             em.persist(planificacion);
-            for (Asistencia asistenciaListAsistencia : planificacion.getAsistenciaList()) {
-                Planificacion oldIdplanificacionOfAsistenciaListAsistencia = asistenciaListAsistencia.getIdplanificacion();
-                asistenciaListAsistencia.setIdplanificacion(planificacion);
-                asistenciaListAsistencia = em.merge(asistenciaListAsistencia);
-                if (oldIdplanificacionOfAsistenciaListAsistencia != null) {
-                    oldIdplanificacionOfAsistenciaListAsistencia.getAsistenciaList().remove(asistenciaListAsistencia);
-                    oldIdplanificacionOfAsistenciaListAsistencia = em.merge(oldIdplanificacionOfAsistenciaListAsistencia);
+            for (Asistencia asistenciaCollectionAsistencia : planificacion.getAsistenciaCollection()) {
+                Planificacion oldIdplanificacionOfAsistenciaCollectionAsistencia = asistenciaCollectionAsistencia.getIdplanificacion();
+                asistenciaCollectionAsistencia.setIdplanificacion(planificacion);
+                asistenciaCollectionAsistencia = em.merge(asistenciaCollectionAsistencia);
+                if (oldIdplanificacionOfAsistenciaCollectionAsistencia != null) {
+                    oldIdplanificacionOfAsistenciaCollectionAsistencia.getAsistenciaCollection().remove(asistenciaCollectionAsistencia);
+                    oldIdplanificacionOfAsistenciaCollectionAsistencia = em.merge(oldIdplanificacionOfAsistenciaCollectionAsistencia);
                 }
             }
             em.getTransaction().commit();
@@ -65,36 +67,42 @@ public class PlanificacionJpaController implements Serializable {
         }
     }
 
-    public void edit(Planificacion planificacion) throws NonexistentEntityException, Exception {
+    public void edit(Planificacion planificacion) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Planificacion persistentPlanificacion = em.find(Planificacion.class, planificacion.getIdplanificacion());
-            List<Asistencia> asistenciaListOld = persistentPlanificacion.getAsistenciaList();
-            List<Asistencia> asistenciaListNew = planificacion.getAsistenciaList();
-            List<Asistencia> attachedAsistenciaListNew = new ArrayList<Asistencia>();
-            for (Asistencia asistenciaListNewAsistenciaToAttach : asistenciaListNew) {
-                asistenciaListNewAsistenciaToAttach = em.getReference(asistenciaListNewAsistenciaToAttach.getClass(), asistenciaListNewAsistenciaToAttach.getIdasistencia());
-                attachedAsistenciaListNew.add(asistenciaListNewAsistenciaToAttach);
-            }
-            asistenciaListNew = attachedAsistenciaListNew;
-            planificacion.setAsistenciaList(asistenciaListNew);
-            planificacion = em.merge(planificacion);
-            for (Asistencia asistenciaListOldAsistencia : asistenciaListOld) {
-                if (!asistenciaListNew.contains(asistenciaListOldAsistencia)) {
-                    asistenciaListOldAsistencia.setIdplanificacion(null);
-                    asistenciaListOldAsistencia = em.merge(asistenciaListOldAsistencia);
+            Collection<Asistencia> asistenciaCollectionOld = persistentPlanificacion.getAsistenciaCollection();
+            Collection<Asistencia> asistenciaCollectionNew = planificacion.getAsistenciaCollection();
+            List<String> illegalOrphanMessages = null;
+            for (Asistencia asistenciaCollectionOldAsistencia : asistenciaCollectionOld) {
+                if (!asistenciaCollectionNew.contains(asistenciaCollectionOldAsistencia)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Asistencia " + asistenciaCollectionOldAsistencia + " since its idplanificacion field is not nullable.");
                 }
             }
-            for (Asistencia asistenciaListNewAsistencia : asistenciaListNew) {
-                if (!asistenciaListOld.contains(asistenciaListNewAsistencia)) {
-                    Planificacion oldIdplanificacionOfAsistenciaListNewAsistencia = asistenciaListNewAsistencia.getIdplanificacion();
-                    asistenciaListNewAsistencia.setIdplanificacion(planificacion);
-                    asistenciaListNewAsistencia = em.merge(asistenciaListNewAsistencia);
-                    if (oldIdplanificacionOfAsistenciaListNewAsistencia != null && !oldIdplanificacionOfAsistenciaListNewAsistencia.equals(planificacion)) {
-                        oldIdplanificacionOfAsistenciaListNewAsistencia.getAsistenciaList().remove(asistenciaListNewAsistencia);
-                        oldIdplanificacionOfAsistenciaListNewAsistencia = em.merge(oldIdplanificacionOfAsistenciaListNewAsistencia);
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            Collection<Asistencia> attachedAsistenciaCollectionNew = new ArrayList<Asistencia>();
+            for (Asistencia asistenciaCollectionNewAsistenciaToAttach : asistenciaCollectionNew) {
+                asistenciaCollectionNewAsistenciaToAttach = em.getReference(asistenciaCollectionNewAsistenciaToAttach.getClass(), asistenciaCollectionNewAsistenciaToAttach.getIdasistencia());
+                attachedAsistenciaCollectionNew.add(asistenciaCollectionNewAsistenciaToAttach);
+            }
+            asistenciaCollectionNew = attachedAsistenciaCollectionNew;
+            planificacion.setAsistenciaCollection(asistenciaCollectionNew);
+            planificacion = em.merge(planificacion);
+            for (Asistencia asistenciaCollectionNewAsistencia : asistenciaCollectionNew) {
+                if (!asistenciaCollectionOld.contains(asistenciaCollectionNewAsistencia)) {
+                    Planificacion oldIdplanificacionOfAsistenciaCollectionNewAsistencia = asistenciaCollectionNewAsistencia.getIdplanificacion();
+                    asistenciaCollectionNewAsistencia.setIdplanificacion(planificacion);
+                    asistenciaCollectionNewAsistencia = em.merge(asistenciaCollectionNewAsistencia);
+                    if (oldIdplanificacionOfAsistenciaCollectionNewAsistencia != null && !oldIdplanificacionOfAsistenciaCollectionNewAsistencia.equals(planificacion)) {
+                        oldIdplanificacionOfAsistenciaCollectionNewAsistencia.getAsistenciaCollection().remove(asistenciaCollectionNewAsistencia);
+                        oldIdplanificacionOfAsistenciaCollectionNewAsistencia = em.merge(oldIdplanificacionOfAsistenciaCollectionNewAsistencia);
                     }
                 }
             }
@@ -115,7 +123,7 @@ public class PlanificacionJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -127,10 +135,16 @@ public class PlanificacionJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The planificacion with id " + id + " no longer exists.", enfe);
             }
-            List<Asistencia> asistenciaList = planificacion.getAsistenciaList();
-            for (Asistencia asistenciaListAsistencia : asistenciaList) {
-                asistenciaListAsistencia.setIdplanificacion(null);
-                asistenciaListAsistencia = em.merge(asistenciaListAsistencia);
+            List<String> illegalOrphanMessages = null;
+            Collection<Asistencia> asistenciaCollectionOrphanCheck = planificacion.getAsistenciaCollection();
+            for (Asistencia asistenciaCollectionOrphanCheckAsistencia : asistenciaCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Planificacion (" + planificacion + ") cannot be destroyed since the Asistencia " + asistenciaCollectionOrphanCheckAsistencia + " in its asistenciaCollection field has a non-nullable idplanificacion field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(planificacion);
             em.getTransaction().commit();

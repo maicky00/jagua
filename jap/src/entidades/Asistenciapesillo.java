@@ -6,8 +6,9 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Marco
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "asistenciapesillo")
@@ -53,13 +54,13 @@ public class Asistenciapesillo implements Serializable {
     @Column(name = "OBSERVACION")
     private String observacion;
     @JoinColumn(name = "IDMEDIDOR", referencedColumnName = "IDMEDIDOR")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Medidor idmedidor;
     @JoinColumn(name = "IDPLANIFICACIONPESILLO", referencedColumnName = "IDPLANIFICACIONPESILLO")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Planificacionpesillo idplanificacionpesillo;
-    @OneToMany(mappedBy = "idasistenciapesillo")
-    private List<Pagopesillo> pagopesilloList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idasistenciapesillo")
+    private Collection<Pagopesillo> pagopesilloCollection;
 
     public Asistenciapesillo() {
     }
@@ -125,12 +126,12 @@ public class Asistenciapesillo implements Serializable {
     }
 
     @XmlTransient
-    public List<Pagopesillo> getPagopesilloList() {
-        return pagopesilloList;
+    public Collection<Pagopesillo> getPagopesilloCollection() {
+        return pagopesilloCollection;
     }
 
-    public void setPagopesilloList(List<Pagopesillo> pagopesilloList) {
-        this.pagopesilloList = pagopesilloList;
+    public void setPagopesilloCollection(Collection<Pagopesillo> pagopesilloCollection) {
+        this.pagopesilloCollection = pagopesilloCollection;
     }
 
     @Override

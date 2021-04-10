@@ -6,26 +6,32 @@
 package entidades;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "usuarios")
@@ -40,14 +46,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuarios.findBySegundoapellido", query = "SELECT u FROM Usuarios u WHERE u.segundoapellido = :segundoapellido"),
     @NamedQuery(name = "Usuarios.findByApadosn", query = "SELECT u FROM Usuarios u WHERE u.apadosn = :apadosn"),
     @NamedQuery(name = "Usuarios.findByTelefono", query = "SELECT u FROM Usuarios u WHERE u.telefono = :telefono"),
-    @NamedQuery(name = "Usuarios.findByCelular", query = "SELECT u FROM Usuarios u WHERE u.celular = :celular")})
+    @NamedQuery(name = "Usuarios.findByCelular", query = "SELECT u FROM Usuarios u WHERE u.celular = :celular"),
+    @NamedQuery(name = "Usuarios.findByEstado", query = "SELECT u FROM Usuarios u WHERE u.estado = :estado"),
+    @NamedQuery(name = "Usuarios.findByVisto", query = "SELECT u FROM Usuarios u WHERE u.visto = :visto"),
+    @NamedQuery(name = "Usuarios.findByEstadoMedidor", query = "SELECT u FROM Usuarios u WHERE u.estadoMedidor = :estadoMedidor"),
+    @NamedQuery(name = "Usuarios.findByNummedidor", query = "SELECT u FROM Usuarios u WHERE u.nummedidor = :nummedidor"),
+    @NamedQuery(name = "Usuarios.findByCreatedAt", query = "SELECT u FROM Usuarios u WHERE u.createdAt = :createdAt"),
+    @NamedQuery(name = "Usuarios.findByUpdatedAt", query = "SELECT u FROM Usuarios u WHERE u.updatedAt = :updatedAt")})
 public class Usuarios implements Serializable {
-    @Lob
-    @Column(name = "FOTO")
-    private byte[] foto;
-    @OneToMany(mappedBy = "idusuario")
-    private List<Medidor> medidorList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,11 +86,39 @@ public class Usuarios implements Serializable {
     @Column(name = "REFERENCIA")
     private String referencia;
     @Lob
+    @Column(name = "FOTO")
+    private byte[] foto;
+    @Lob
     @Column(name = "OBSERVACION")
     private String observacion;
+    @Column(name = "ESTADO")
+    private String estado;
+    @Column(name = "VISTO")
+    private String visto;
+    @Column(name = "ESTADO_MEDIDOR")
+    private String estadoMedidor;
+    @Column(name = "NUMMEDIDOR")
+    private String nummedidor;
+    @Column(name = "CREATED_AT")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+    @Column(name = "UPDATED_AT")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+    @JoinTable(name = "usuarios_medidor", joinColumns = {
+        @JoinColumn(name = "Usuarios_IDUSUARIO", referencedColumnName = "IDUSUARIO")}, inverseJoinColumns = {
+        @JoinColumn(name = "medidorList_IDMEDIDOR", referencedColumnName = "IDMEDIDOR")})
+    @ManyToMany
+    private Collection<Medidor> medidorCollection;
+    @OneToMany(mappedBy = "idusuario")
+    private Collection<Aguasobrante> aguasobranteCollection;
     @JoinColumn(name = "IDINSTITUCION", referencedColumnName = "IDINSTITUCION")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Institucion idinstitucion;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
+    private Collection<Medidor> medidorCollection1;
+    @OneToMany(mappedBy = "idusuario")
+    private Collection<Aguaganaderia> aguaganaderiaCollection;
 
     public Usuarios() {
     }
@@ -189,6 +223,13 @@ public class Usuarios implements Serializable {
         this.referencia = referencia;
     }
 
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
+    }
 
     public String getObservacion() {
         return observacion;
@@ -198,12 +239,96 @@ public class Usuarios implements Serializable {
         this.observacion = observacion;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getVisto() {
+        return visto;
+    }
+
+    public void setVisto(String visto) {
+        this.visto = visto;
+    }
+
+    public String getEstadoMedidor() {
+        return estadoMedidor;
+    }
+
+    public void setEstadoMedidor(String estadoMedidor) {
+        this.estadoMedidor = estadoMedidor;
+    }
+
+    public String getNummedidor() {
+        return nummedidor;
+    }
+
+    public void setNummedidor(String nummedidor) {
+        this.nummedidor = nummedidor;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @XmlTransient
+    public Collection<Medidor> getMedidorCollection() {
+        return medidorCollection;
+    }
+
+    public void setMedidorCollection(Collection<Medidor> medidorCollection) {
+        this.medidorCollection = medidorCollection;
+    }
+
+    @XmlTransient
+    public Collection<Aguasobrante> getAguasobranteCollection() {
+        return aguasobranteCollection;
+    }
+
+    public void setAguasobranteCollection(Collection<Aguasobrante> aguasobranteCollection) {
+        this.aguasobranteCollection = aguasobranteCollection;
+    }
+
     public Institucion getIdinstitucion() {
         return idinstitucion;
     }
 
     public void setIdinstitucion(Institucion idinstitucion) {
         this.idinstitucion = idinstitucion;
+    }
+
+    @XmlTransient
+    public Collection<Medidor> getMedidorCollection1() {
+        return medidorCollection1;
+    }
+
+    public void setMedidorCollection1(Collection<Medidor> medidorCollection1) {
+        this.medidorCollection1 = medidorCollection1;
+    }
+
+    @XmlTransient
+    public Collection<Aguaganaderia> getAguaganaderiaCollection() {
+        return aguaganaderiaCollection;
+    }
+
+    public void setAguaganaderiaCollection(Collection<Aguaganaderia> aguaganaderiaCollection) {
+        this.aguaganaderiaCollection = aguaganaderiaCollection;
     }
 
     @Override
@@ -230,8 +355,8 @@ public class Usuarios implements Serializable {
     public String toString() {
         return "entidades.Usuarios[ idusuario=" + idusuario + " ]";
     }
-
-    public String elimiEspacio(String m) {
+    
+     public String elimiEspacio(String m) {
         String a[] = m.split(" ");
         String s = "";
         for (int i = 0; i < a.length; i++) {
@@ -266,23 +391,5 @@ public class Usuarios implements Serializable {
             }
         }
         return true;
-    }
-
-
-    @XmlTransient
-    public List<Medidor> getMedidorList() {
-        return medidorList;
-    }
-
-    public void setMedidorList(List<Medidor> medidorList) {
-        this.medidorList = medidorList;
-    }
-
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
     }
 }

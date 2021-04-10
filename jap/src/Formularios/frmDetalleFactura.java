@@ -12,11 +12,14 @@ import Controladores.classMoverRegistros;
 import Controladores.classTarifas;
 import Controladores.classusuario;
 import static Formularios.FrmMedidor.jTable1;
+import entidades.Detallefactura;
 import entidades.Medidor;
 import entidades.Tarifas;
 import entidades.Usuarios;
 import java.awt.Dimension;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,6 +34,9 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
     classMedidor cm = new classMedidor();
     classTarifas ct = new classTarifas();
     classDetalleFactura cdt = new classDetalleFactura();
+    
+    Detallefactura detallefact = new Detallefactura();
+    //agregar lista de registrados el consumo
 
     public frmDetalleFactura() {
         initComponents();
@@ -885,25 +891,34 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
             limpiar();
             int n = jTable1.getSelectedRow();
             int idDetalle = Integer.valueOf(jTable1.getValueAt(n, 0).toString());
-            lblIdDetalle.setText(cdt.buscarIdDetallefactura(idDetalle).getIddetallefac().toString());
-            txtnumMedidor.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getNummedidor().toString());
-            txtrucCi.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getRucci().toString());
-            txtUsuario.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getPrimernombre() + " "
-                    + cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getSegundonombre() + " "
-                    + cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getPrimerapellido() + " "
-                    + cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getSegundoapellido());
-            txtApodo.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getApadosn());
-            txtSerie.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getSerie());
-            txtEstado.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getEstado());
-            txtalcanta.setText(cdt.buscarIdDetallefactura(idDetalle).getIdtarifas().getAlcantarrillado().toString());
-            txtmedAnterior.setText(cdt.buscarIdDetallefactura(idDetalle).getMedidaant().toString());
-            txtmedAct.setText(cdt.buscarIdDetallefactura(idDetalle).getMedidaact().toString());
-            txtconsumoag.setText(cdt.buscarIdDetallefactura(idDetalle).getConsumo().toString());
-            txtMedExcedido.setText(cdt.buscarIdDetallefactura(idDetalle).getMedexcedido().toString());
-            txtTarexcedido.setText(cdt.buscarIdDetallefactura(idDetalle).getTarexcedido().toString());
-            txtSubTotal.setText(cdt.buscarIdDetallefactura(idDetalle).getSubtotal().toString());
-            txtTotal.setText(cdt.buscarIdDetallefactura(idDetalle).getTotal().toString());
-            combopagado.setSelectedItem(cdt.buscarIdDetallefactura(idDetalle).getObservacion());
+            
+            detallefact=cdt.buscarIdDetallefactura(idDetalle);
+            //System.out.println(detallefact.getIdmedidor().getFecha());
+            lblIdDetalle.setText(detallefact.getIddetallefac().toString());
+            
+            //cdt.cargarBusquedaAnioMesDatos(jTable1.getValueAt(n, 0).toString(),idDetalle);
+            txtnumMedidor.setText(detallefact.getIdmedidor().getNummedidor().toString());
+            txtrucCi.setText(detallefact.getIdmedidor().getIdusuario().getRucci());
+            
+            
+            
+            txtUsuario.setText(detallefact.getIdmedidor().getIdusuario().getPrimernombre() + " "
+                    + detallefact.getIdmedidor().getIdusuario().getSegundonombre() + " "
+                    + detallefact.getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                    + detallefact.getIdmedidor().getIdusuario().getSegundoapellido());
+            txtApodo.setText(detallefact.getIdmedidor().getIdusuario().getApadosn());
+            txtSerie.setText(detallefact.getIdmedidor().getSerie());
+            txtEstado.setText(detallefact.getIdmedidor().getEstado());
+            txtalcanta.setText(detallefact.getIdtarifas().getAlcantarrillado().toString());
+            txtmedAnterior.setText(detallefact.getMedidaant().toString());
+            txtmedAct.setText(detallefact.getMedidaact().toString());
+            txtconsumoag.setText(detallefact.getConsumo().toString());
+            txtMedExcedido.setText(detallefact.getMedexcedido().toString());
+            txtTarexcedido.setText(detallefact.getTarexcedido().toString());
+            txtSubTotal.setText(detallefact.getSubtotal().toString());
+            txtTotal.setText(detallefact.getTotal().toString());
+            
+            combopagado.setSelectedItem(detallefact.getObservacion());
 
         } catch (Exception e) {
         }
@@ -914,25 +929,30 @@ public class frmDetalleFactura extends javax.swing.JInternalFrame {
         try {
             int n = jTable1.getSelectedRow();
             int idDetalle = Integer.valueOf(jTable1.getValueAt(n, 0).toString());
-            lblIdDetalle.setText(cdt.buscarIdDetallefactura(idDetalle).getIddetallefac().toString());
-            txtnumMedidor.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getNummedidor().toString());
-            txtrucCi.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getRucci().toString());
-            txtUsuario.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getPrimernombre() + " "
-                    + cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getSegundonombre() + " "
-                    + cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getPrimerapellido() + " "
-                    + cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getSegundoapellido());
-            txtApodo.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getIdusuario().getApadosn());
-            txtSerie.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getSerie());
-            txtEstado.setText(cdt.buscarIdDetallefactura(idDetalle).getIdmedidor().getEstado());
-            txtalcanta.setText(cdt.buscarIdDetallefactura(idDetalle).getIdtarifas().getAlcantarrillado().toString());
-            txtmedAnterior.setText(cdt.buscarIdDetallefactura(idDetalle).getMedidaant().toString());
-            txtmedAct.setText(cdt.buscarIdDetallefactura(idDetalle).getMedidaact().toString());
-            txtconsumoag.setText(cdt.buscarIdDetallefactura(idDetalle).getConsumo().toString());
-            txtMedExcedido.setText(cdt.buscarIdDetallefactura(idDetalle).getMedexcedido().toString());
-            txtTarexcedido.setText(cdt.buscarIdDetallefactura(idDetalle).getTarexcedido().toString());
-            txtSubTotal.setText(cdt.buscarIdDetallefactura(idDetalle).getSubtotal().toString());
-            txtTotal.setText(cdt.buscarIdDetallefactura(idDetalle).getTotal().toString());
-            combopagado.setSelectedItem(cdt.buscarIdDetallefactura(idDetalle).getObservacion());
+            detallefact=cdt.buscarIdDetallefactura(idDetalle);
+            
+            
+            
+            lblIdDetalle.setText(detallefact.getIddetallefac().toString());
+            
+            txtnumMedidor.setText(detallefact.getIdmedidor().getNummedidor().toString());
+            txtrucCi.setText(detallefact.getIdmedidor().getIdusuario().getRucci());
+            txtUsuario.setText(detallefact.getIdmedidor().getIdusuario().getPrimernombre() + " "
+                    + detallefact.getIdmedidor().getIdusuario().getSegundonombre() + " "
+                    + detallefact.getIdmedidor().getIdusuario().getPrimerapellido() + " "
+                    + detallefact.getIdmedidor().getIdusuario().getSegundoapellido());
+            txtApodo.setText(detallefact.getIdmedidor().getIdusuario().getApadosn());
+            txtSerie.setText(detallefact.getIdmedidor().getSerie());
+            txtEstado.setText(detallefact.getIdmedidor().getEstado());
+            txtalcanta.setText(detallefact.getIdtarifas().getAlcantarrillado().toString());
+            txtmedAnterior.setText(detallefact.getMedidaant().toString());
+            txtmedAct.setText(detallefact.getMedidaact().toString());
+            txtconsumoag.setText(detallefact.getConsumo().toString());
+            txtMedExcedido.setText(detallefact.getMedexcedido().toString());
+            txtTarexcedido.setText(detallefact.getTarexcedido().toString());
+            txtSubTotal.setText(detallefact.getSubtotal().toString());
+            txtTotal.setText(detallefact.getTotal().toString());
+            combopagado.setSelectedItem(detallefact.getObservacion());
 
         } catch (Exception e) {
         }

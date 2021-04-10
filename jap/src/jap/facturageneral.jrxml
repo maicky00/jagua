@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="913bd417-c9dc-49e2-ad77-becf59f9de89">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="15"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -14,6 +14,9 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NUMMEDIDOR" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
@@ -85,37 +88,37 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="152" splitType="Stretch">
+		<band height="135" splitType="Stretch">
 			<textField>
-				<reportElement style="Detail" isPrintRepeatedValues="false" x="424" y="78" width="84" height="15" backcolor="#FFFFFF" uuid="b9653cc6-b67f-4a14-9a17-f8f0043e72cf"/>
+				<reportElement style="Detail" isPrintRepeatedValues="false" x="453" y="33" width="84" height="15" backcolor="#FFFFFF" uuid="b9653cc6-b67f-4a14-9a17-f8f0043e72cf"/>
 				<textElement>
 					<font fontName="SansSerif" size="9" isBold="false" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_RUCCI}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="145" y="126" width="262" height="15" uuid="2fb65adc-5c06-4129-ad5a-82122226c24a"/>
+				<reportElement style="Detail" x="189" y="103" width="262" height="15" uuid="2fb65adc-5c06-4129-ad5a-82122226c24a"/>
 				<textElement>
 					<font fontName="SansSerif" size="9" isBold="false" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{usuarios_DIRECCION}+" Sector: "+$F{usuarios_SECTOR}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="424" y="94" width="84" height="15" uuid="795e80dd-9de2-4528-8278-5be4d0bf450c"/>
+				<reportElement x="453" y="49" width="84" height="15" uuid="795e80dd-9de2-4528-8278-5be4d0bf450c"/>
 				<textElement>
 					<font fontName="SansSerif" size="9" isBold="false" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{medidor_NUMMEDIDOR}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="145" y="79" width="178" height="15" uuid="eb2a9ffd-22fa-4fd3-9279-481ea25e218a"/>
+				<reportElement x="189" y="64" width="178" height="15" uuid="eb2a9ffd-22fa-4fd3-9279-481ea25e218a"/>
 				<textElement>
 					<font fontName="SansSerif" size="9" isBold="false" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="145" y="112" width="264" height="15" uuid="102c46a4-fc14-47bf-ab62-0ffa8b57e633"/>
+				<reportElement style="Detail" x="189" y="89" width="264" height="15" uuid="102c46a4-fc14-47bf-ab62-0ffa8b57e633"/>
 				<textElement>
 					<font fontName="SansSerif" size="9" isBold="false" isItalic="false"/>
 				</textElement>
@@ -156,7 +159,7 @@ WHERE
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "facturaotrospagos.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="42" y="47" width="226" height="86" uuid="62bcacff-45a8-42cb-826d-0fb6b8642877"/>
+				<reportElement x="54" y="47" width="226" height="86" uuid="62bcacff-45a8-42cb-826d-0fb6b8642877"/>
 				<subreportParameter name="numfact">
 					<subreportParameterExpression><![CDATA[$P{numfact}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -164,7 +167,7 @@ WHERE
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "detmeses.jasper"]]></subreportExpression>
 			</subreport>
 			<subreport>
-				<reportElement x="45" y="0" width="323" height="46" uuid="b019f5b6-94f8-42ad-8d3c-3d53505806ec"/>
+				<reportElement x="57" y="0" width="323" height="46" uuid="b019f5b6-94f8-42ad-8d3c-3d53505806ec"/>
 				<subreportParameter name="numfact">
 					<subreportParameterExpression><![CDATA[$P{numfact}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -174,7 +177,7 @@ WHERE
 		</band>
 	</detail>
 	<summary>
-		<band height="33" splitType="Stretch">
+		<band height="108" splitType="Stretch">
 			<textField>
 				<reportElement x="437" y="0" width="100" height="20" uuid="984abda1-6b52-41b3-ba2f-8041840902e6"/>
 				<textElement>
@@ -182,6 +185,11 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA[$V{totalgeneral}]]></textFieldExpression>
 			</textField>
+			<subreport>
+				<reportElement x="38" y="0" width="223" height="75" uuid="e8385464-e7e0-4549-b744-496825a5f853"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "report_grafica_historial.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</summary>
 </jasperReport>

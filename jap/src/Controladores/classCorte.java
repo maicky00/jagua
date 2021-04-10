@@ -14,6 +14,8 @@ import entidadesCruds.exceptions.IllegalOrphanException;
 import entidadesCruds.exceptions.NonexistentEntityException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
@@ -110,8 +112,12 @@ public class classCorte {
 
     public void eliminarCorte(int id) throws NonexistentEntityException {
 
-        corteJpacontrolador.destroy(id);
-        JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
+        try {
+            corteJpacontrolador.destroy(id);
+            JOptionPane.showMessageDialog(null, "Se Elimino exitosamente", "Información", 1);
+        } catch (IllegalOrphanException ex) {
+            Logger.getLogger(classCorte.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -155,7 +161,8 @@ public class classCorte {
         }
         return null;
     }
-
+    
+    //sumar cortes
     public boolean verificarOtrPagos(int idnumMed) {
 
         for (Corte dat : getCorte()) {

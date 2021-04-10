@@ -128,7 +128,10 @@ public class FrmIngresoMedidas extends javax.swing.JInternalFrame {
             frmDetalleFactura.lblanio.setText(String.valueOf(chsAnio.getYear()));
             frmDetalleFactura.lblmes.setText(String.valueOf(mchMes.getMonth() + 1));
             f.setMaximum(true);
+            //datos registrados el consumo
             cdf.cargarBusquedaAnioMes(frmDetalleFactura.jTable1, anioMes);
+            //cdf.cargarBusquedaAnioMesDatos(anioMes);
+            //datos sin registrar consumo
             cdf.cargarTablaMedidorDetalle(tabla, anioMes,cdf.listaMed(anioMes));
 
             this.dispose();

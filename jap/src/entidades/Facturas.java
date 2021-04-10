@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author JC-PC
+ * @author Tech-Usuario
  */
 @Entity
 @Table(name = "facturas")
@@ -61,7 +61,7 @@ public class Facturas implements Serializable {
     @Column(name = "USUARIOACTUAL")
     private String usuarioactual;
     @JoinColumn(name = "IDDETALLEFAC", referencedColumnName = "IDDETALLEFAC")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Detallefactura iddetallefac;
 
     public Facturas() {
